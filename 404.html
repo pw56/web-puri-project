@@ -36,12 +36,37 @@
       margin-top: 2vw;
       font-weight: 400;
     }
+    .back-button {
+      margin-top: 3vw;
+      display: inline-block;
+      background: #ffffff;
+      color: #ff87c5;
+      font-size: 2vw;
+      font-family: 'Hachi Maru Pop', cursive, sans-serif;
+      padding: 1vw 4vw;
+      border: none;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: background 0.2s, color 0.2s;
+      cursor: pointer;
+    }
+    .back-button:hover,
+    .back-button:active {
+      background: #ffe6f4;
+      color: #ff4fa3;
+    }
     @media (max-width: 600px) {
       .error-code {
         font-size: 18vw;
       }
       .error-message {
         font-size: 6vw;
+      }
+      .back-button {
+        font-size: 5vw;
+        padding: 2vw 10vw;
       }
     }
   </style>
@@ -50,6 +75,7 @@
   <div>
     <div class="error-code">404</div>
     <div class="error-message">お探しのページは見つかりませんでした。</div>
+    <a href="https://www.google.com" class="back-button">トップページに戻る</a>
   </div>
 </body>
 </html>
