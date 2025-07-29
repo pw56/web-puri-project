@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>404 Not Found</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google Fonts: Hachi Maru Pop -->
+  <link href="https://fonts.googleapis.com/css?family=Hachi+Maru+Pop&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: #ff87c5;
+      color: #ffffff;
+      font-family: 'Hachi Maru Pop', cursive, sans-serif;
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      min-height: 100vh;
+    }
+    .error-code {
+      font-size: 12vw;
+      font-weight: bold;
+      margin: 0;
+      line-height: 1;
+    }
+    .error-message {
+      font-size: 4vw;
+      margin-top: 2vw;
+      font-weight: 400;
+    }
+    @media (max-width: 600px) {
+      .error-code {
+        font-size: 18vw;
+      }
+      .error-message {
+        font-size: 6vw;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <div class="error-code">404</div>
+    <div class="error-message">お探しのページは見つかりませんでした。</div>
+  </div>
+</body>
+</html>
