@@ -3,63 +3,64 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+  width: 100vw;
+  overflow: hidden;
+  background: #ff87c5;
+  color: #fff;
+  font-family: 'Hachi Maru Pop', cursive, sans-serif;
 }
 
 body {
-  background: #ff87c5;
-  color: #ffffff;
-  font-family: 'Hachi Maru Pop', cursive, sans-serif;
-  min-height: 100vh;
+  min-height: 100dvh;
+  /* モバイルの正しい高さを確保 */
   min-width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
+  position: relative;
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100vw;
-  max-width: 100vw;
-  height: 100vh;
-  max-height: 100vh;
-  padding: 4vw 4vw;
-  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 95vw;
+  width: 100%;
   text-align: center;
+  padding: 2vw 2vw 3vw 2vw;
+  box-sizing: border-box;
+  background: transparent;
 }
 
 .title {
-  font-size: clamp(2rem, 8vw, 4.5rem);
+  font-size: clamp(1.8rem, 9vw, 4rem);
   font-weight: bold;
-  margin-bottom: 2vw;
+  margin-bottom: 3vw;
   letter-spacing: 0.08em;
-  word-break: break-all;
-  line-height: 1.1;
-  max-width: 95vw;
+  word-break: break-word;
   overflow-wrap: break-word;
   white-space: normal;
+  max-width: 95vw;
+  line-height: 1.1;
+  box-sizing: border-box;
 }
 
 .desc {
-  font-size: clamp(1rem, 3.5vw, 2rem);
+  font-size: clamp(1rem, 3.8vw, 1.7rem);
   margin-bottom: 3vw;
-  line-height: 1.7;
+  line-height: 1.6;
   max-width: 600px;
   width: 90vw;
   word-break: break-word;
   overflow-wrap: break-word;
   white-space: normal;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .nav-link {
-  margin-top: 2vw;
   display: inline-block;
   background: #ffffff;
   color: #ff87c5;
-  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-size: clamp(1rem, 2.6vw, 1.4rem);
   font-family: 'Hachi Maru Pop', cursive, sans-serif;
   padding: 1vw 4vw;
   border: none;
@@ -69,6 +70,7 @@ body {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: background 0.2s, color 0.2s;
   cursor: pointer;
+  margin-top: 2vw;
 }
 
 .nav-link:hover,
@@ -79,7 +81,7 @@ body {
 
 @media (max-width: 600px) {
   .container {
-    padding: 6vw 2vw;
+    padding: 5vw 2vw 8vw 2vw;
   }
 
   .desc {
