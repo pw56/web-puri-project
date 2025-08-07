@@ -1,28 +1,43 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="ja">
+<head>
 
 
-    <!--タブの表示-->
-    <title>プリアプリ</title>
-    <link rel="icon" href="src/image/icon.png">
+  <!--ページ情報-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <!--タブの表示-->
+  <title>プリアプリ</title>
+  <link rel="icon" href="src/image/icon.png">
+  
+  
+  <!--ライブラリのインポート-->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+  
+  
+  <!--外部読み込み-->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&display=swap">
+  <link rel="stylesheet" href="src/style/style.css">
+  <script async src="src/script/detection.js"></script>
+  <script defer src="src/script/main.js"></script>
+  
 
-
-    <!--ライブラリのインポート-->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
-
-
-    <!--外部読み込み-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&display=swap">
-    <link rel="stylesheet" href="src/style/style.css">
-    <script async src="src/script/detection.js"></script>
-    <script defer src="src/script/main.js"></script>
-
-
-  </head>
-  <body>
-    Hello world.
-  </body>
+</head>
+<body>
+  <div>
+    <div class="title">Web Puri Project</div>
+    <div class="desc">
+      Web Puri Project へようこそ！<br>
+      このプロジェクトは、AIや画像処理などの最新技術を使ったWebアプリケーションです。<br>
+      <br>
+      かわいらしい配色と手書き風フォントで、誰でも楽しく使える体験を目指しています。<br>
+      下のボタンからスタートしてみましょう！
+    </div>
+    <a href="main.html" class="nav-link">はじめる</a>
+  </div>
+</body>
 </html>
