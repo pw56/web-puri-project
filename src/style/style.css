@@ -9,28 +9,49 @@ body {
   background: #ff87c5;
   color: #ffffff;
   font-family: 'Hachi Maru Pop', cursive, sans-serif;
-  height: 100vh;
-  width: 100vw;
+  min-height: 100vh;
+  min-width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  max-width: 100vw;
+  height: 100vh;
+  max-height: 100vh;
+  padding: 4vw 4vw;
+  box-sizing: border-box;
   text-align: center;
-  min-height: 100vh;
 }
 
 .title {
-  font-size: 7vw;
+  font-size: clamp(2rem, 8vw, 4.5rem);
   font-weight: bold;
   margin-bottom: 2vw;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
+  word-break: break-all;
+  line-height: 1.1;
+  max-width: 95vw;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 
 .desc {
-  font-size: 3vw;
+  font-size: clamp(1rem, 3.5vw, 2rem);
   margin-bottom: 3vw;
   line-height: 1.7;
-  max-width: 800px;
+  max-width: 600px;
+  width: 90vw;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 
 .nav-link {
@@ -38,7 +59,7 @@ body {
   display: inline-block;
   background: #ffffff;
   color: #ff87c5;
-  font-size: 2vw;
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
   font-family: 'Hachi Maru Pop', cursive, sans-serif;
   padding: 1vw 4vw;
   border: none;
@@ -57,16 +78,12 @@ body {
 }
 
 @media (max-width: 600px) {
-  .title {
-    font-size: 12vw;
+  .container {
+    padding: 6vw 2vw;
   }
 
   .desc {
-    font-size: 5vw;
-  }
-
-  .nav-link {
-    font-size: 5vw;
-    padding: 2vw 10vw;
+    max-width: 98vw;
+    width: 98vw;
   }
 }
