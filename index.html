@@ -1,26 +1,94 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-
-  
-  <!--タブの表示-->
-  <title>プリアプリ</title>
+  <meta charset="UTF-8">
+  <title>Web Puri Project</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Hachi+Maru+Pop&display=swap" rel="stylesheet">
   <link rel="icon" href="src/image/icon.png">
-  
-  
-  <!--ライブラリのインポート-->
-  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
-  
-  
-  <!--外部読み込み-->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&display=swap">
-  <link rel="stylesheet" href="src/style/style.css">
-  <script async src="src/script/detection.js"></script>
-  <script defer src="src/script/main.js"></script>
-  
-
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      width: 100vw;
+      overflow: hidden;
+      background: #ff87c5;
+      color: #fff;
+      font-family: 'Hachi Maru Pop', cursive, sans-serif;
+    }
+    body {
+      min-height: 100dvh; /* モバイルの正しい高さを確保 */
+      min-width: 100vw;
+      position: relative;
+    }
+    .container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: 95vw;
+      width: 100%;
+      text-align: center;
+      padding: 2vw 2vw 3vw 2vw;
+      box-sizing: border-box;
+      background: transparent;
+    }
+    .title {
+      font-size: clamp(1.8rem, 9vw, 4rem);
+      font-weight: bold;
+      margin-bottom: 3vw;
+      letter-spacing: 0.08em;
+      word-break: break-word;
+      overflow-wrap: break-word;
+      white-space: normal;
+      max-width: 95vw;
+      line-height: 1.1;
+      box-sizing: border-box;
+    }
+    .desc {
+      font-size: clamp(1rem, 3.8vw, 1.7rem);
+      margin-bottom: 3vw;
+      line-height: 1.6;
+      max-width: 600px;
+      width: 90vw;
+      word-break: break-word;
+      overflow-wrap: break-word;
+      white-space: normal;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .nav-link {
+      display: inline-block;
+      background: #ffffff;
+      color: #ff87c5;
+      font-size: clamp(1rem, 2.6vw, 1.4rem);
+      font-family: 'Hachi Maru Pop', cursive, sans-serif;
+      padding: 1vw 4vw;
+      border: none;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: background 0.2s, color 0.2s;
+      cursor: pointer;
+      margin-top: 2vw;
+    }
+    .nav-link:hover,
+    .nav-link:active {
+      background: #ffe6f4;
+      color: #ff4fa3;
+    }
+    @media (max-width: 600px) {
+      .container {
+        padding: 5vw 2vw 8vw 2vw;
+      }
+      .desc {
+        max-width: 98vw;
+        width: 98vw;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="container">
