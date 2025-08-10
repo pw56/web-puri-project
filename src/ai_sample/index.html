@@ -13,30 +13,32 @@
             theme: {
                 extend: {
                     colors: {
-                        background: 'hsl(var(--background))',
-                        foreground: 'hsl(var(--foreground))',
-                        card: 'hsl(var(--card))',
-                        'card-foreground': 'hsl(var(--card-foreground))',
-                        popover: 'hsl(var(--popover))',
-                        'popover-foreground': 'hsl(var(--popover-foreground))',
-                        primary: 'hsl(var(--primary))',
-                        'primary-foreground': 'hsl(var(--primary-foreground))',
-                        secondary: 'hsl(var(--secondary))',
-                        'secondary-foreground': 'hsl(var(--secondary-foreground))',
-                        muted: 'hsl(var(--muted))',
-                        'muted-foreground': 'hsl(var(--muted-foreground))',
-                        accent: 'hsl(var(--accent))',
-                        'accent-foreground': 'hsl(var(--accent-foreground))',
-                        destructive: 'hsl(var(--destructive))',
-                        'destructive-foreground': 'hsl(var(--destructive-foreground))',
-                        border: 'hsl(var(--border))',
-                        input: 'hsl(var(--input))',
-                        ring: 'hsl(var(--ring))',
+                        background: 'var(--background)',
+                        foreground: 'var(--foreground)',
+                        card: 'var(--card)',
+                        'card-foreground': 'var(--card-foreground)',
+                        popover: 'var(--popover)',
+                        'popover-foreground': 'var(--popover-foreground)',
+                        primary: 'var(--primary)',
+                        'primary-foreground': 'var(--primary-foreground)',
+                        secondary: 'var(--secondary)',
+                        'secondary-foreground': 'var(--secondary-foreground)',
+                        muted: 'var(--muted)',
+                        'muted-foreground': 'var(--muted-foreground)',
+                        accent: 'var(--accent)',
+                        'accent-foreground': 'var(--accent-foreground)',
+                        destructive: 'var(--destructive)',
+                        'destructive-foreground': 'var(--destructive-foreground)',
+                        border: 'var(--border)',
+                        input: 'var(--input)',
+                        'input-background': 'var(--input-background)',
+                        ring: 'var(--ring)',
                     },
                     borderRadius: {
                         lg: 'var(--radius)',
                         md: 'calc(var(--radius) - 2px)',
                         sm: 'calc(var(--radius) - 4px)',
+                        xl: 'calc(var(--radius) + 4px)',
                     },
                 }
             }
@@ -44,30 +46,67 @@
     </script>
     <style>
         :root {
-            --background: 0 0% 100%;
-            --foreground: 222.2 84% 4.9%;
-            --card: 0 0% 100%;
-            --card-foreground: 222.2 84% 4.9%;
-            --popover: 0 0% 100%;
-            --popover-foreground: 222.2 84% 4.9%;
-            --primary: 222.2 47.4% 11.2%;
-            --primary-foreground: 210 40% 98%;
-            --secondary: 210 40% 96%;
-            --secondary-foreground: 222.2 47.4% 11.2%;
-            --muted: 210 40% 96%;
-            --muted-foreground: 215.4 16.3% 46.9%;
-            --accent: 210 40% 96%;
-            --accent-foreground: 222.2 47.4% 11.2%;
-            --destructive: 0 84.2% 60.2%;
-            --destructive-foreground: 210 40% 98%;
-            --border: 214.3 31.8% 91.4%;
-            --input: 214.3 31.8% 91.4%;
-            --ring: 222.2 84% 4.9%;
-            --radius: 0.5rem;
+            --font-size: 14px;
+            --text-xs: 0.75rem;
+            --text-sm: 0.875rem;
+            --text-base: 1rem;
+            --text-lg: 1.125rem;
+            --text-xl: 1.25rem;
+            --text-2xl: 1.5rem;
+            --text-3xl: 1.875rem;
+            --text-4xl: 2.25rem;
+            --background: #ffffff;
+            --foreground: oklch(0.145 0 0);
+            --card: #ffffff;
+            --card-foreground: oklch(0.145 0 0);
+            --popover: oklch(1 0 0);
+            --popover-foreground: oklch(0.145 0 0);
+            --primary: #030213;
+            --primary-foreground: oklch(1 0 0);
+            --secondary: oklch(0.95 0.0058 264.53);
+            --secondary-foreground: #030213;
+            --muted: #ececf0;
+            --muted-foreground: #717182;
+            --accent: #e9ebef;
+            --accent-foreground: #030213;
+            --destructive: #d4183d;
+            --destructive-foreground: #ffffff;
+            --border: rgba(0, 0, 0, 0.1);
+            --input: transparent;
+            --input-background: #f3f3f5;
+            --switch-background: #cbced4;
+            --font-weight-medium: 500;
+            --font-weight-normal: 400;
+            --ring: oklch(0.708 0 0);
+            --radius: 0.625rem;
+        }
+
+        .dark {
+            --background: oklch(0.145 0 0);
+            --foreground: oklch(0.985 0 0);
+            --card: oklch(0.145 0 0);
+            --card-foreground: oklch(0.985 0 0);
+            --popover: oklch(0.145 0 0);
+            --popover-foreground: oklch(0.985 0 0);
+            --primary: oklch(0.985 0 0);
+            --primary-foreground: oklch(0.205 0 0);
+            --secondary: oklch(0.269 0 0);
+            --secondary-foreground: oklch(0.985 0 0);
+            --muted: oklch(0.269 0 0);
+            --muted-foreground: oklch(0.708 0 0);
+            --accent: oklch(0.269 0 0);
+            --accent-foreground: oklch(0.985 0 0);
+            --destructive: oklch(0.396 0.141 25.723);
+            --destructive-foreground: oklch(0.637 0.237 25.331);
+            --border: oklch(0.269 0 0);
+            --input: oklch(0.269 0 0);
+            --ring: oklch(0.439 0 0);
         }
 
         body {
             font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            background-color: var(--background);
+            color: var(--foreground);
         }
 
         .lucide {
@@ -81,6 +120,25 @@
             stroke-linejoin: round;
         }
 
+        /* Typography */
+        h1 {
+            font-size: var(--text-2xl);
+            font-weight: var(--font-weight-medium);
+            line-height: 1.5;
+        }
+
+        h2 {
+            font-size: var(--text-xl);
+            font-weight: var(--font-weight-medium);
+            line-height: 1.5;
+        }
+
+        h3 {
+            font-size: var(--text-lg);
+            font-weight: var(--font-weight-medium);
+            line-height: 1.5;
+        }
+
         /* Custom range slider styles */
         input[type="range"] {
             -webkit-appearance: none;
@@ -90,7 +148,7 @@
         }
 
         input[type="range"]::-webkit-slider-track {
-            background: hsl(var(--secondary));
+            background: var(--secondary);
             height: 6px;
             border-radius: 3px;
         }
@@ -101,12 +159,12 @@
             height: 18px;
             width: 18px;
             border-radius: 50%;
-            background: hsl(var(--primary));
+            background: var(--primary);
             cursor: pointer;
         }
 
         input[type="range"]::-moz-range-track {
-            background: hsl(var(--secondary));
+            background: var(--secondary);
             height: 6px;
             border-radius: 3px;
         }
@@ -116,7 +174,7 @@
             height: 18px;
             width: 18px;
             border-radius: 50%;
-            background: hsl(var(--primary));
+            background: var(--primary);
             cursor: pointer;
         }
     </style>
@@ -244,19 +302,6 @@
                 <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
                 <line x1="10" x2="10" y1="11" y2="17"/>
                 <line x1="14" x2="14" y1="11" y2="17"/>
-            </svg>
-        );
-
-        const Settings = () => (
-            <svg className="lucide" viewBox="0 0 24 24">
-                <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
-                <circle cx="12" cy="12" r="3"/>
-            </svg>
-        );
-
-        const Shield = () => (
-            <svg className="lucide" viewBox="0 0 24 24">
-                <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
             </svg>
         );
 
@@ -391,17 +436,15 @@
             );
         };
 
-        // Main Components
+        // PurikuraCamera Component
         const PurikuraCamera = ({ onPhotoCapture }) => {
             const videoRef = useRef(null);
             const canvasRef = useRef(null);
             const streamRef = useRef(null);
-            const fileInputRef = useRef(null);
             
             const [isStreaming, setIsStreaming] = useState(false);
             const [isLoading, setIsLoading] = useState(false);
             const [error, setError] = useState(null);
-            const [permissionStatus, setPermissionStatus] = useState(null);
             const [capturedPhotos, setCapturedPhotos] = useState([]);
             const [selectedFilter, setSelectedFilter] = useState({ id: 'none', name: 'なし', style: '' });
             const [selectedFrame, setSelectedFrame] = useState({ id: 'none', name: 'なし', style: '', borderStyle: '' });
@@ -422,19 +465,6 @@
                 { id: 'cute', name: 'キュート', style: 'border-purple-300', borderStyle: 'border-8 rounded-full' }
             ];
 
-            const checkCameraPermission = async () => {
-                try {
-                    if ('permissions' in navigator) {
-                        const permission = await navigator.permissions.query({ name: 'camera' });
-                        setPermissionStatus(permission.state);
-                        return permission.state;
-                    }
-                } catch (err) {
-                    console.log('Permission API not supported:', err);
-                }
-                return null;
-            };
-
             const stopCamera = useCallback(() => {
                 if (streamRef.current) {
                     streamRef.current.getTracks().forEach(track => track.stop());
@@ -448,7 +478,6 @@
                 setError(null);
                 
                 try {
-                    const permission = await checkCameraPermission();
                     stopCamera();
 
                     const constraints = {
@@ -469,7 +498,6 @@
                         videoRef.current.addEventListener('loadedmetadata', () => {
                             setIsStreaming(true);
                             setIsLoading(false);
-                            setPermissionStatus('granted');
                         }, { once: true });
 
                         videoRef.current.addEventListener('error', (e) => {
@@ -487,8 +515,7 @@
                     let errorMessage = 'カメラの起動に失敗しました。';
                     
                     if (err.name === 'NotAllowedError') {
-                        setPermissionStatus('denied');
-                        errorMessage = 'カメラの使用が許可されていません。';
+                        errorMessage = 'カメラの使用が許可されていません。ブラウザの設定からカメラのアクセスを許可してください。';
                     } else if (err.name === 'NotFoundError') {
                         errorMessage = 'カメラが見つかりません。デバイスにカメラが接続されているか確認してください。';
                     } else if (err.name === 'NotSupportedError') {
@@ -540,28 +567,6 @@
                 setTimeout(() => setIsCapturing(false), 300);
             }, [selectedFilter, isStreaming, onPhotoCapture]);
 
-            const handleFileUpload = (event) => {
-                const file = event.target.files?.[0];
-                if (!file || !file.type.startsWith('image/')) return;
-
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    const dataUrl = e.target?.result;
-                    const newPhoto = {
-                        id: Date.now().toString(),
-                        dataUrl,
-                        timestamp: Date.now()
-                    };
-                    
-                    setCapturedPhotos(prev => [newPhoto, ...prev]);
-                    
-                    if (onPhotoCapture) {
-                        onPhotoCapture(dataUrl);
-                    }
-                };
-                reader.readAsDataURL(file);
-            };
-
             const downloadPhoto = (photo) => {
                 const link = document.createElement('a');
                 link.download = `purikura-${photo.timestamp}.png`;
@@ -569,99 +574,25 @@
                 link.click();
             };
 
-            const openPermissionSettings = () => {
-                const instructions = `
-カメラの権限を有効にする手順:
-
-Chrome:
-1. アドレスバーの左にあるカメラアイコンをクリック
-2. "許可" を選択
-3. ページをリロード
-
-Firefox:
-1. アドレスバーの左にあるカメラアイコンをクリック
-2. "許可する" を選択  
-3. ページをリロード
-
-Safari:
-1. Safari > 設定 > Webサイト > カメラ
-2. このサイトを "許可" に設定
-3. ページをリロード
-                `;
-                
-                alert(instructions);
-            };
-
             useEffect(() => {
-                checkCameraPermission();
                 return () => stopCamera();
             }, [stopCamera]);
-
-            const renderPermissionDeniedError = () => (
-                <Alert className="mb-6 border-orange-200 bg-orange-50">
-                    <Shield />
-                    <AlertDescription className="text-orange-800">
-                        <div className="space-y-3">
-                            <p>カメラの使用が許可されていません。プリクラを撮影するにはカメラのアクセスが必要です。</p>
-                            
-                            <div className="bg-white p-3 rounded border">
-                                <h4 className="font-medium mb-2">📱 カメラ権限を有効にする方法:</h4>
-                                <ul className="text-sm space-y-1 list-disc list-inside">
-                                    <li>アドレスバーの左にあるカメラアイコン 🎥 をクリック</li>
-                                    <li>「許可」または「Allow」を選択</li>
-                                    <li>ページをリロードしてください</li>
-                                </ul>
-                            </div>
-                            
-                            <div className="flex gap-2 flex-wrap">
-                                <Button 
-                                    onClick={openPermissionSettings}
-                                    size="sm" 
-                                    variant="outline"
-                                    className="bg-white"
-                                >
-                                    <Settings className="h-4 w-4 mr-1" />
-                                    設定方法を見る
-                                </Button>
-                                <Button 
-                                    onClick={() => window.location.reload()}
-                                    size="sm" 
-                                    variant="outline"
-                                    className="bg-white"
-                                >
-                                    <RefreshCw className="h-4 w-4 mr-1" />
-                                    ページをリロード
-                                </Button>
-                                <Button 
-                                    onClick={() => fileInputRef.current?.click()}
-                                    size="sm" 
-                                    className="bg-pink-500 hover:bg-pink-600 text-white"
-                                >
-                                    📂 ファイルから選択
-                                </Button>
-                            </div>
-                        </div>
-                    </AlertDescription>
-                </Alert>
-            );
 
             return (
                 <div className="max-w-6xl mx-auto">
                     <div className="text-center mb-6">
-                        <h1 className="text-4xl mb-2 bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent font-bold">
+                        <h1 className="mb-2 bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent font-bold text-4xl">
                             ✨ プリクラ ✨
                         </h1>
-                        <p className="text-gray-600">可愛い写真を撮ろう！</p>
+                        <p className="text-muted-foreground">可愛い写真を撮ろう！</p>
                     </div>
 
-                    {permissionStatus === 'denied' ? (
-                        renderPermissionDeniedError()
-                    ) : error && (
+                    {error && (
                         <Alert className="mb-6 border-red-200 bg-red-50">
                             <AlertCircle />
                             <AlertDescription className="text-red-800">
                                 {error}
-                                <div className="mt-2 flex gap-2">
+                                <div className="mt-2">
                                     <Button 
                                         onClick={startCamera} 
                                         size="sm" 
@@ -670,13 +601,6 @@ Safari:
                                     >
                                         <RefreshCw className="h-4 w-4 mr-1" />
                                         再試行
-                                    </Button>
-                                    <Button 
-                                        onClick={() => fileInputRef.current?.click()}
-                                        size="sm" 
-                                        className="bg-pink-500 hover:bg-pink-600 text-white"
-                                    >
-                                        📂 ファイルから選択
                                     </Button>
                                 </div>
                             </AlertDescription>
@@ -688,31 +612,17 @@ Safari:
                             <Card className="p-6 bg-white/80 backdrop-blur-sm border-pink-200">
                                 <div className="relative">
                                     <div className={`relative overflow-hidden rounded-2xl ${selectedFrame.borderStyle} ${selectedFrame.style} bg-gray-900 aspect-[4/3]`}>
-                                        {!isStreaming && !isLoading && !error && permissionStatus !== 'denied' && (
+                                        {!isStreaming && !isLoading && !error && (
                                             <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
                                                 <Camera className="h-16 w-16 mb-4 text-white/60" />
-                                                <p className="text-white/80 mb-4 text-center px-4">
-                                                    {permissionStatus === 'prompt' ? 
-                                                        'カメラの使用を許可してください' : 
-                                                        'カメラを起動してください'
-                                                    }
-                                                </p>
-                                                <div className="flex gap-3">
-                                                    <Button 
-                                                        onClick={startCamera}
-                                                        className="bg-pink-500 hover:bg-pink-600"
-                                                    >
-                                                        <Play className="h-4 w-4 mr-2" />
-                                                        カメラ起動
-                                                    </Button>
-                                                    <Button 
-                                                        onClick={() => fileInputRef.current?.click()}
-                                                        variant="outline"
-                                                        className="bg-white/10 text-white border-white/20 hover:bg-white/20"
-                                                    >
-                                                        📂 ファイル選択
-                                                    </Button>
-                                                </div>
+                                                <p className="text-white/80 mb-4">カメラを起動してください</p>
+                                                <Button 
+                                                    onClick={startCamera}
+                                                    className="bg-pink-500 hover:bg-pink-600"
+                                                >
+                                                    <Play className="h-4 w-4 mr-2" />
+                                                    カメラ起動
+                                                </Button>
                                             </div>
                                         )}
                                         
@@ -744,25 +654,15 @@ Safari:
 
                                     <div className="flex justify-center mt-6">
                                         {!isStreaming ? (
-                                            <div className="flex gap-4">
-                                                <Button
-                                                    onClick={startCamera}
-                                                    disabled={isLoading || permissionStatus === 'denied'}
-                                                    size="lg"
-                                                    className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white rounded-full px-8 py-4 text-lg shadow-lg"
-                                                >
-                                                    <Camera className="mr-2 h-6 w-6" />
-                                                    {isLoading ? 'カメラ起動中...' : 'カメラ起動'}
-                                                </Button>
-                                                <Button
-                                                    onClick={() => fileInputRef.current?.click()}
-                                                    variant="outline"
-                                                    size="lg"
-                                                    className="rounded-full px-6 py-4"
-                                                >
-                                                    📂 ファイル選択
-                                                </Button>
-                                            </div>
+                                            <Button
+                                                onClick={startCamera}
+                                                disabled={isLoading}
+                                                size="lg"
+                                                className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white rounded-full px-8 py-4 text-lg shadow-lg"
+                                            >
+                                                <Camera className="mr-2 h-6 w-6" />
+                                                {isLoading ? 'カメラ起動中...' : 'カメラ起動'}
+                                            </Button>
                                         ) : (
                                             <div className="flex gap-4">
                                                 <Button
@@ -837,19 +737,11 @@ Safari:
 
                         <div className="space-y-4">
                             <Card className="p-4 bg-white/80 backdrop-blur-sm border-pink-200">
-                                <h3 className="text-lg font-medium mb-4 text-center">撮影した写真</h3>
+                                <h3 className="mb-4 text-center">撮影した写真</h3>
                                 {capturedPhotos.length === 0 ? (
-                                    <div className="text-center text-gray-500 py-8">
+                                    <div className="text-center text-muted-foreground py-8">
                                         <Camera className="h-12 w-12 mx-auto mb-2 text-pink-300" />
-                                        <p className="mb-3">まだ写真がありません</p>
-                                        <Button 
-                                            onClick={() => fileInputRef.current?.click()}
-                                            size="sm"
-                                            variant="outline"
-                                            className="text-pink-600 border-pink-200"
-                                        >
-                                            📂 ファイルから追加
-                                        </Button>
+                                        まだ写真がありません
                                     </div>
                                 ) : (
                                     <div className="space-y-3 max-h-96 overflow-y-auto">
@@ -884,19 +776,12 @@ Safari:
                         </div>
                     </div>
 
-                    <input
-                        ref={fileInputRef}
-                        type="file"
-                        accept="image/*"
-                        onChange={handleFileUpload}
-                        className="hidden"
-                    />
-
                     <canvas ref={canvasRef} className="hidden" />
                 </div>
             );
         };
 
+        // PurikuraDecorator Component
         const PurikuraDecorator = ({ imageUrl, onSave }) => {
             const canvasRef = useRef(null);
             const [textElements, setTextElements] = useState([]);
@@ -1235,6 +1120,11 @@ Safari:
                         });
                     } catch (err) {
                         console.log('Share failed:', err);
+                        try {
+                            await navigator.clipboard.writeText('プリクラ写真をシェアしました！');
+                        } catch (clipErr) {
+                            console.log('Clipboard failed:', clipErr);
+                        }
                     }
                 } else {
                     try {
@@ -1268,7 +1158,7 @@ Safari:
                                             戻る
                                         </Button>
                                     )}
-                                    <h1 className="text-2xl bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent font-bold">
+                                    <h1 className="bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent font-bold text-2xl">
                                         ✨ プリクラ ✨
                                     </h1>
                                 </div>
@@ -1303,8 +1193,8 @@ Safari:
                         {mode === 'decorator' && selectedPhoto && (
                             <div className="max-w-6xl mx-auto">
                                 <div className="text-center mb-6">
-                                    <h2 className="text-2xl font-medium mb-2">デコレーション</h2>
-                                    <p className="text-gray-600">可愛くデコレーションしよう！</p>
+                                    <h2 className="mb-2">デコレーション</h2>
+                                    <p className="text-muted-foreground">可愛くデコレーションしよう！</p>
                                 </div>
                                 <PurikuraDecorator
                                     imageUrl={selectedPhoto}
@@ -1316,15 +1206,15 @@ Safari:
                         {mode === 'gallery' && (
                             <div className="max-w-6xl mx-auto">
                                 <div className="text-center mb-6">
-                                    <h2 className="text-2xl font-medium mb-2">ギャラリー</h2>
-                                    <p className="text-gray-600">撮影した写真一覧 ({savedPhotos.length}枚)</p>
+                                    <h2 className="mb-2">ギャラリー</h2>
+                                    <p className="text-muted-foreground">撮影した写真一覧 ({savedPhotos.length}枚)</p>
                                 </div>
 
                                 {savedPhotos.length === 0 ? (
                                     <Card className="p-12 text-center bg-white/80 backdrop-blur-sm border-pink-200">
                                         <Camera className="h-16 w-16 mx-auto mb-4 text-pink-300" />
-                                        <h3 className="text-xl font-medium mb-2">まだ写真がありません</h3>
-                                        <p className="text-gray-600 mb-4">
+                                        <h3 className="mb-2">まだ写真がありません</h3>
+                                        <p className="text-muted-foreground mb-4">
                                             撮影ボタンから可愛い写真を撮ってみよう！
                                         </p>
                                         <Button 
@@ -1363,7 +1253,7 @@ Safari:
                                                         )}
                                                     </div>
                                                     
-                                                    <div className="text-sm text-gray-500 text-center">
+                                                    <div className="text-sm text-muted-foreground text-center">
                                                         {new Date(photo.timestamp).toLocaleString('ja-JP')}
                                                     </div>
                                                     
