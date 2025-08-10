@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ プリクラ ✨</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(to bottom right, #fce7f3, #f3e8ff, #dbeafe);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .title h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(to right, #ec4899, #9333ea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .title p {
+            color: #6b7280;
+            font-size: 1rem;
+        }
+
+        .main-content {
+            display: flex;
+            justify-content: center;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border: 4px solid #fbb6ce;
+        }
+
+        .camera-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .video-container {
+            position: relative;
+            width: 320px;
+            height: 240px;
+        }
+
+        #video {
+            width: 100%;
+            height: 100%;
+            background: #e5e7eb;
+            border-radius: 0.5rem;
+            object-fit: cover;
+            transform: scaleX(-1);
+        }
+
+        .camera-placeholder {
+            width: 320px;
+            height: 240px;
+            background: linear-gradient(to bottom right, #fbb6ce, #c084fc);
+            border-radius: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #6b7280;
+        }
+
+        .camera-icon {
+            width: 3rem;
+            height: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .button {
+            background: #ec4899;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color 0.2s;
+        }
+
+        .button:hover {
+            background: #db2777;
+        }
+
+        .button.outline {
+            background: transparent;
+            color: #6b7280;
+            border: 1px solid #d1d5db;
+        }
+
+        .button.outline:hover {
+            background: #f9fafb;
+        }
+
+        .button.purple {
+            background: #8b5cf6;
+        }
+
+        .button.purple:hover {
+            background: #7c3aed;
+        }
+
+        .button.yellow {
+            background: #eab308;
+        }
+
+        .button.yellow:hover {
+            background: #ca8a04;
+        }
+
+        .button.green {
+            background: #22c55e;
+        }
+
+        .button.green:hover {
+            background: #16a34a;
+        }
+
+        .button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .canvas-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        #canvas {
+            border: 4px solid #f9a8d4;
+            border-radius: 0.5rem;
+            background: white;
+        }
+
+        .panel {
+            background: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 2px solid;
+            max-width: 400px;
+        }
+
+        .panel.filter {
+            border-color: #c084fc;
+        }
+
+        .panel.sticker {
+            border-color: #fcd34d;
+        }
+
+        .panel.text {
+            border-color: #86efac;
+        }
+
+        .panel h3 {
+            text-align: center;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .panel.filter h3 {
+            color: #8b5cf6;
+        }
+
+        .panel.sticker h3 {
+            color: #eab308;
+        }
+
+        .panel.text h3 {
+            color: #22c55e;
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+
+        .filter-button {
+            padding: 0.5rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-button.active {
+            background: #6b7280;
+            color: white;
+        }
+
+        .filter-button.pink {
+            background: #fbb6ce;
+        }
+
+        .filter-button.orange {
+            background: #fed7aa;
+        }
+
+        .filter-button.yellow {
+            background: #fef3c7;
+        }
+
+        .sticker-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 0.25rem;
+            max-width: 320px;
+        }
+
+        .sticker-button {
+            background: transparent;
+            border: none;
+            padding: 0.5rem;
+            height: 3rem;
+            cursor: pointer;
+            border-radius: 0.375rem;
+            font-size: 1.5rem;
+            transition: background-color 0.2s;
+        }
+
+        .sticker-button:hover {
+            background: #fef3c7;
+        }
+
+        .text-editor {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .input {
+            padding: 0.75rem;
+            border: 1px solid #86efac;
+            border-radius: 0.375rem;
+            font-size: 1rem;
+        }
+
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 0.25rem;
+        }
+
+        .color-button {
+            width: 2rem;
+            height: 2rem;
+            border: 2px solid #d1d5db;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .color-button.active {
+            border-color: #374151;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .tip {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .tip p {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        @media (max-width: 640px) {
+            .card {
+                padding: 1rem;
+            }
+
+            .video-container {
+                width: 280px;
+                height: 210px;
+            }
+
+            .camera-placeholder {
+                width: 280px;
+                height: 210px;
+            }
+
+            .title h1 {
+                font-size: 2rem;
+            }
+
+            .button-group {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">
+            <h1>✨ プリクラ ✨</h1>
+            <p>かわいい写真を撮って、デコレーションしよう！</p>
+        </div>
+
+        <div class="main-content">
+            <div class="card">
+                <!-- カメラビュー -->
+                <div id="camera-view" class="camera-container">
+                    <div class="video-container">
+                        <video id="video" class="hidden" autoplay playsinline muted></video>
+                        <div id="camera-placeholder" class="camera-placeholder">
+                            <svg class="camera-icon" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M3 4a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 14.846 4.632 17 6.414 17H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 6H6.28l-.31-1.243A1 1 0 005 4H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/>
+                            </svg>
+                            <p>カメラを起動してください</p>
+                        </div>
+                    </div>
+                    <canvas id="capture-canvas" class="hidden"></canvas>
+                    <div class="button-group">
+                        <button id="start-camera" class="button">
+                            📷 カメラ起動
+                        </button>
+                        <button id="take-photo" class="button hidden">
+                            📸 撮影
+                        </button>
+                        <button id="stop-camera" class="button outline hidden">
+                            🔄 リセット
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 編集ビュー -->
+                <div id="editor-view" class="canvas-container hidden">
+                    <canvas id="canvas" width="400" height="300"></canvas>
+                    
+                    <div class="button-group">
+                        <button id="filter-btn" class="button purple">
+                            🎨 フィルター
+                        </button>
+                        <button id="sticker-btn" class="button yellow">
+                            😊 ステッカー
+                        </button>
+                        <button id="text-btn" class="button green">
+                            📝 テキスト
+                        </button>
+                    </div>
+
+                    <!-- フィルターパネル -->
+                    <div id="filter-panel" class="panel filter hidden">
+                        <h3>フィルターを選択</h3>
+                        <div class="filter-grid">
+                            <button class="filter-button active" data-filter="none">なし</button>
+                            <button class="filter-button pink" data-filter="pink">ピンク</button>
+                            <button class="filter-button orange" data-filter="vintage">ビンテージ</button>
+                            <button class="filter-button yellow" data-filter="bright">ブライト</button>
+                        </div>
+                    </div>
+
+                    <!-- ステッカーパネル -->
+                    <div id="sticker-panel" class="panel sticker hidden">
+                        <h3>ステッカーを選択</h3>
+                        <div class="sticker-grid">
+                            <button class="sticker-button" data-sticker="💕">💕</button>
+                            <button class="sticker-button" data-sticker="✨">✨</button>
+                            <button class="sticker-button" data-sticker="🌟">🌟</button>
+                            <button class="sticker-button" data-sticker="💖">💖</button>
+                            <button class="sticker-button" data-sticker="🎀">🎀</button>
+                            <button class="sticker-button" data-sticker="🌸">🌸</button>
+                            <button class="sticker-button" data-sticker="🦄">🦄</button>
+                            <button class="sticker-button" data-sticker="🌈">🌈</button>
+                            <button class="sticker-button" data-sticker="💫">💫</button>
+                            <button class="sticker-button" data-sticker="🎉">🎉</button>
+                            <button class="sticker-button" data-sticker="🎊">🎊</button>
+                            <button class="sticker-button" data-sticker="💝">💝</button>
+                            <button class="sticker-button" data-sticker="🌺">🌺</button>
+                            <button class="sticker-button" data-sticker="🦋">🦋</button>
+                            <button class="sticker-button" data-sticker="🌙">🌙</button>
+                            <button class="sticker-button" data-sticker="⭐">⭐</button>
+                            <button class="sticker-button" data-sticker="💎">💎</button>
+                            <button class="sticker-button" data-sticker="👑">👑</button>
+                            <button class="sticker-button" data-sticker="🎈">🎈</button>
+                            <button class="sticker-button" data-sticker="🍓">🍓</button>
+                            <button class="sticker-button" data-sticker="🍰">🍰</button>
+                            <button class="sticker-button" data-sticker="🧁">🧁</button>
+                            <button class="sticker-button" data-sticker="🍭">🍭</button>
+                            <button class="sticker-button" data-sticker="🎯">🎯</button>
+                        </div>
+                    </div>
+
+                    <!-- テキストパネル -->
+                    <div id="text-panel" class="panel text hidden">
+                        <h3>テキストを追加</h3>
+                        <div class="text-editor">
+                            <input id="text-input" class="input" type="text" placeholder="テキストを入力...">
+                            <div>
+                                <p style="margin-bottom: 0.5rem;">色を選択:</p>
+                                <div class="color-grid">
+                                    <button class="color-button active" data-color="#FF69B4" style="background-color: #FF69B4;"></button>
+                                    <button class="color-button" data-color="#FF1493" style="background-color: #FF1493;"></button>
+                                    <button class="color-button" data-color="#FF6347" style="background-color: #FF6347;"></button>
+                                    <button class="color-button" data-color="#FF4500" style="background-color: #FF4500;"></button>
+                                    <button class="color-button" data-color="#32CD32" style="background-color: #32CD32;"></button>
+                                    <button class="color-button" data-color="#00CED1" style="background-color: #00CED1;"></button>
+                                    <button class="color-button" data-color="#1E90FF" style="background-color: #1E90FF;"></button>
+                                    <button class="color-button" data-color="#9370DB" style="background-color: #9370DB;"></button>
+                                    <button class="color-button" data-color="#FFD700" style="background-color: #FFD700;"></button>
+                                    <button class="color-button" data-color="#FF69B4" style="background-color: #FF69B4;"></button>
+                                    <button class="color-button" data-color="#FFFFFF" style="background-color: #FFFFFF;"></button>
+                                    <button class="color-button" data-color="#000000" style="background-color: #000000;"></button>
+                                </div>
+                            </div>
+                            <button id="add-text" class="button green" style="width: 100%;">テキスト追加</button>
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button id="download" class="button">
+                            💾 保存
+                        </button>
+                        <button id="reset" class="button outline">
+                            🔄 最初から
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tip">
+            <p>💡 カメラを許可して、素敵な写真を撮影しよう！</p>
+        </div>
+    </div>
+
+    <script>
+        class PurikuraApp {
+            constructor() {
+                this.video = document.getElementById('video');
+                this.canvas = document.getElementById('canvas');
+                this.captureCanvas = document.getElementById('capture-canvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.captureCtx = this.captureCanvas.getContext('2d');
+                
+                this.stream = null;
+                this.photoDataUrl = null;
+                this.currentFilter = 'none';
+                this.stickers = [];
+                this.textElements = [];
+                this.selectedColor = '#FF69B4';
+                
+                this.initEventListeners();
+            }
+
+            initEventListeners() {
+                // カメラ関連
+                document.getElementById('start-camera').addEventListener('click', () => this.startCamera());
+                document.getElementById('take-photo').addEventListener('click', () => this.takePhoto());
+                document.getElementById('stop-camera').addEventListener('click', () => this.stopCamera());
+
+                // パネル表示
+                document.getElementById('filter-btn').addEventListener('click', () => this.togglePanel('filter'));
+                document.getElementById('sticker-btn').addEventListener('click', () => this.togglePanel('sticker'));
+                document.getElementById('text-btn').addEventListener('click', () => this.togglePanel('text'));
+
+                // フィルター
+                document.querySelectorAll('[data-filter]').forEach(btn => {
+                    btn.addEventListener('click', (e) => this.setFilter(e.target.dataset.filter));
+                });
+
+                // ステッカー
+                document.querySelectorAll('[data-sticker]').forEach(btn => {
+                    btn.addEventListener('click', (e) => this.addSticker(e.target.dataset.sticker));
+                });
+
+                // テキスト
+                document.querySelectorAll('[data-color]').forEach(btn => {
+                    btn.addEventListener('click', (e) => this.setColor(e.target.dataset.color));
+                });
+                document.getElementById('add-text').addEventListener('click', () => this.addText());
+
+                // その他
+                document.getElementById('download').addEventListener('click', () => this.downloadPhoto());
+                document.getElementById('reset').addEventListener('click', () => this.reset());
+            }
+
+            async startCamera() {
+                try {
+                    this.stream = await navigator.mediaDevices.getUserMedia({
+                        video: { facingMode: 'user' }
+                    });
+                    
+                    this.video.srcObject = this.stream;
+                    this.video.classList.remove('hidden');
+                    document.getElementById('camera-placeholder').classList.add('hidden');
+                    document.getElementById('start-camera').classList.add('hidden');
+                    document.getElementById('take-photo').classList.remove('hidden');
+                    document.getElementById('stop-camera').classList.remove('hidden');
+                } catch (error) {
+                    console.error('カメラの起動に失敗しました:', error);
+                    alert('カメラにアクセスできません。カメラの使用を許可してください。');
+                }
+            }
+
+            stopCamera() {
+                if (this.stream) {
+                    this.stream.getTracks().forEach(track => track.stop());
+                    this.stream = null;
+                }
+                
+                this.video.classList.add('hidden');
+                document.getElementById('camera-placeholder').classList.remove('hidden');
+                document.getElementById('start-camera').classList.remove('hidden');
+                document.getElementById('take-photo').classList.add('hidden');
+                document.getElementById('stop-camera').classList.add('hidden');
+            }
+
+            takePhoto() {
+                this.captureCanvas.width = this.video.videoWidth;
+                this.captureCanvas.height = this.video.videoHeight;
+
+                // 左右反転して撮影
+                this.captureCtx.scale(-1, 1);
+                this.captureCtx.drawImage(this.video, -this.captureCanvas.width, 0, this.captureCanvas.width, this.captureCanvas.height);
+                
+                this.photoDataUrl = this.captureCanvas.toDataURL('image/png');
+                this.stopCamera();
+                this.showEditor();
+            }
+
+            showEditor() {
+                document.getElementById('camera-view').classList.add('hidden');
+                document.getElementById('editor-view').classList.remove('hidden');
+                this.redrawCanvas();
+            }
+
+            redrawCanvas() {
+                if (!this.photoDataUrl) return;
+
+                const img = new Image();
+                img.onload = () => {
+                    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                    this.ctx.drawImage(img, 0, 0, this.canvas.width, this.canvas.height);
+                    
+                    this.applyFilter();
+                    this.drawStickers();
+                    this.drawTexts();
+                };
+                img.src = this.photoDataUrl;
+            }
+
+            applyFilter() {
+                if (this.currentFilter === 'none') return;
+                
+                const imageData = this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height);
+                const data = imageData.data;
+                
+                for (let i = 0; i < data.length; i += 4) {
+                    switch (this.currentFilter) {
+                        case 'pink':
+                            data[i] = Math.min(255, data[i] + 30);     // Red
+                            data[i + 2] = Math.min(255, data[i + 2] + 30); // Blue
+                            break;
+                        case 'vintage':
+                            data[i] = Math.min(255, data[i] * 1.2);
+                            data[i + 1] = Math.min(255, data[i + 1] * 1.1);
+                            data[i + 2] = Math.min(255, data[i + 2] * 0.8);
+                            break;
+                        case 'bright':
+                            data[i] = Math.min(255, data[i] * 1.3);
+                            data[i + 1] = Math.min(255, data[i + 1] * 1.3);
+                            data[i + 2] = Math.min(255, data[i + 2] * 1.3);
+                            break;
+                    }
+                }
+                
+                this.ctx.putImageData(imageData, 0, 0);
+            }
+
+            drawStickers() {
+                this.stickers.forEach(sticker => {
+                    this.ctx.font = `${sticker.size}px Arial`;
+                    this.ctx.fillText(sticker.emoji, sticker.x, sticker.y);
+                });
+            }
+
+            drawTexts() {
+                this.textElements.forEach(textEl => {
+                    this.ctx.fillStyle = textEl.color;
+                    this.ctx.font = `bold ${textEl.size}px Arial`;
+                    this.ctx.strokeStyle = '#fff';
+                    this.ctx.lineWidth = 2;
+                    this.ctx.strokeText(textEl.text, textEl.x, textEl.y);
+                    this.ctx.fillText(textEl.text, textEl.x, textEl.y);
+                });
+            }
+
+            togglePanel(panelName) {
+                const panels = ['filter', 'sticker', 'text'];
+                panels.forEach(name => {
+                    const panel = document.getElementById(`${name}-panel`);
+                    if (name === panelName) {
+                        panel.classList.toggle('hidden');
+                    } else {
+                        panel.classList.add('hidden');
+                    }
+                });
+            }
+
+            setFilter(filter) {
+                this.currentFilter = filter;
+                
+                // UIの更新
+                document.querySelectorAll('[data-filter]').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                document.querySelector(`[data-filter="${filter}"]`).classList.add('active');
+                
+                this.redrawCanvas();
+            }
+
+            addSticker(emoji) {
+                const sticker = {
+                    id: Date.now().toString(),
+                    emoji: emoji,
+                    x: Math.random() * 300,
+                    y: Math.random() * 200 + 50,
+                    size: 30
+                };
+                this.stickers.push(sticker);
+                this.redrawCanvas();
+            }
+
+            setColor(color) {
+                this.selectedColor = color;
+                
+                // UIの更新
+                document.querySelectorAll('[data-color]').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                document.querySelector(`[data-color="${color}"]`).classList.add('active');
+            }
+
+            addText() {
+                const textInput = document.getElementById('text-input');
+                const text = textInput.value.trim();
+                
+                if (!text) return;
+                
+                const textElement = {
+                    id: Date.now().toString(),
+                    text: text,
+                    x: Math.random() * 200 + 50,
+                    y: Math.random() * 150 + 50,
+                    color: this.selectedColor,
+                    size: 20
+                };
+                
+                this.textElements.push(textElement);
+                textInput.value = '';
+                this.redrawCanvas();
+            }
+
+            downloadPhoto() {
+                const link = document.createElement('a');
+                link.download = `purikura_${Date.now()}.png`;
+                link.href = this.canvas.toDataURL();
+                link.click();
+            }
+
+            reset() {
+                this.photoDataUrl = null;
+                this.stickers = [];
+                this.textElements = [];
+                this.currentFilter = 'none';
+                
+                document.getElementById('camera-view').classList.remove('hidden');
+                document.getElementById('editor-view').classList.add('hidden');
+                
+                // パネルを閉じる
+                document.querySelectorAll('.panel').forEach(panel => {
+                    panel.classList.add('hidden');
+                });
+                
+                // フィルターをリセット
+                document.querySelectorAll('[data-filter]').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                document.querySelector('[data-filter="none"]').classList.add('active');
+            }
+        }
+
+        // アプリケーション初期化
+        document.addEventListener('DOMContentLoaded', () => {
+            new PurikuraApp();
+        });
+    </script>
+</body>
+</html>
