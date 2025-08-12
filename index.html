@@ -18,7 +18,7 @@
       font-family: 'Hachi Maru Pop', cursive, sans-serif;
     }
     body {
-      min-height: 100dvh; /* モバイルの正しい高さを確保 */
+      min-height: 100dvh;
       min-width: 100vw;
       position: relative;
     }
@@ -58,6 +58,14 @@
       margin-left: auto;
       margin-right: auto;
     }
+    .share-heading {
+      font-size: 1.1rem;
+      color: #ffe6f4;
+      margin-bottom: 1.5vw;
+      margin-top: 1vw;
+      font-family: 'Hachi Maru Pop', cursive, sans-serif;
+      letter-spacing: 0.02em;
+    }
     .nav-link {
       display: inline-block;
       background: #ffffff;
@@ -73,11 +81,63 @@
       transition: background 0.2s, color 0.2s;
       cursor: pointer;
       margin-top: 2vw;
+      margin-bottom: 2vw;
     }
     .nav-link:hover,
     .nav-link:active {
       background: #ffe6f4;
       color: #ff4fa3;
+    }
+    .share-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 2vw;
+      margin-top: 1vw;
+      flex-wrap: wrap;
+    }
+    .share-btn-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0 0.5vw;
+    }
+    .share-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      color: #ff87c5;
+      border: none;
+      border-radius: 50%;
+      width: 56px;
+      height: 56px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      padding: 0;
+      position: relative;
+    }
+    .share-btn:hover, .share-btn:active {
+      background: #ffe6f4;
+      color: #ff4fa3;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+    }
+    .share-btn img {
+      width: 28px;
+      height: 28px;
+      display: block;
+      margin: auto;
+    }
+    .share-label {
+      font-size: 0.7rem;
+      color: #ffffff; /* ←ここを修正 */
+      margin-top: 0.45em;
+      font-family: 'Hachi Maru Pop', cursive, sans-serif;
+      text-align: center;
+      white-space: nowrap;
+      display: block;
+      width: 100%;
     }
     @media (max-width: 600px) {
       .container {
@@ -86,6 +146,17 @@
       .desc {
         max-width: 98vw;
         width: 98vw;
+      }
+      .share-buttons {
+        gap: 4vw;
+      }
+      .share-btn {
+        width: 44px;
+        height: 44px;
+      }
+      .share-btn img {
+        width: 22px;
+        height: 22px;
       }
     }
   </style>
@@ -100,6 +171,58 @@
       下のボタンからスタートしてみましょう！
     </div>
     <a href="src/sample.html" class="nav-link">はじめる(仮)</a>
+    <div class="share-heading">このページを共有する</div>
+    <div class="share-buttons">
+      <!-- X(Twitter) -->
+      <div class="share-btn-wrap">
+        <a
+          class="share-btn"
+          href="https://x.com/intent/tweet?url={このページのURL}&text={タイトルや説明文を指定するプロパティ・説明文をここに記載してください}"
+          target="_blank" rel="noopener" title="X (旧Twitter)で共有"
+        >
+          <img src="hoge.png" alt="X(Twitter)">
+        </a>
+        <span class="share-label">X</span>
+      </div>
+      <!-- Instagram -->
+      <div class="share-btn-wrap">
+        <a
+          class="share-btn"
+          href="https://www.instagram.com/?url={このページのURL}&text={Instagram用説明文をここに記載してください}"
+          target="_blank" rel="noopener" title="Instagramで紹介"
+        >
+          <img src="hoge.png" alt="Instagram">
+        </a>
+        <span class="share-label">Instagram</span>
+      </div>
+      <!-- LINE -->
+      <div class="share-btn-wrap">
+        <a
+          class="share-btn"
+          href="https://social-plugins.line.me/lineit/share?url={このページのURL}"
+          target="_blank" rel="noopener" title="LINEで共有"
+        >
+          <img src="hoge.png" alt="LINE">
+        </a>
+        <span class="share-label">LINE</span>
+      </div>
+      <!-- Email -->
+      <div class="share-btn-wrap">
+        <a
+          class="share-btn"
+          href="mailto:?subject={タイトルや説明文を指定するプロパティ・説明文をここに記載してください}&body={このページのURL}"
+          title="メールで共有"
+        >
+          <img src="hoge.png" alt="メール">
+        </a>
+        <span class="share-label">メール</span>
+      </div>
+    </div>
+    <div style="font-size:0.7rem; color:#ffe6f4; margin-top:0.7em;">
+      ※各サービスへのシェア時のタイトルや説明文は、<br>
+      「タイトルや説明文を指定するプロパティ・説明文をここに記載してください」となっています。<br>
+      共有機能実装の際は適切な値に置き換えて下さい。
+    </div>
   </div>
 </body>
 </html>
