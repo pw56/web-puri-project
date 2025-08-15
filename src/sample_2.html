@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ プリクラ - Kawaii Photo Booth ✨</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #fce4ec, #e1bee7, #f8bbd9);
+            padding: 16px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 448px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(to right, #ec4899, #a855f7, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 1.125rem;
+            color: #db2777;
+            animation: bounce 2s infinite;
+        }
+
+        .decoration {
+            position: absolute;
+            font-size: 2rem;
+        }
+
+        .decoration.top-right {
+            top: -8px;
+            right: -16px;
+            animation: spin 3s linear infinite;
+        }
+
+        .decoration.top-left {
+            top: -12px;
+            left: -16px;
+            animation: pulse 2s infinite;
+        }
+
+        .sparkle {
+            position: absolute;
+            pointer-events: none;
+            animation: pulse 2s infinite;
+            z-index: 1;
+        }
+
+        .main-section {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: 0 25px 25px rgba(0,0,0,0.15);
+            border: 4px solid #f9a8d4;
+            margin-bottom: 16px;
+        }
+
+        .button {
+            width: 100%;
+            height: 56px;
+            border: none;
+            border-radius: 28px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .button:hover {
+            transform: scale(1.05);
+        }
+
+        .button-primary {
+            background: linear-gradient(to right, #f472b6, #a855f7);
+            color: white;
+            margin-bottom: 16px;
+        }
+
+        .button-primary:hover {
+            background: linear-gradient(to right, #ec4899, #9333ea);
+        }
+
+        .button-secondary {
+            background: linear-gradient(to right, #a855f7, #f472b6);
+            color: white;
+        }
+
+        .button-secondary:hover {
+            background: linear-gradient(to right, #9333ea, #ec4899);
+        }
+
+        .button-outline {
+            background: rgba(255, 255, 255, 0.9);
+            color: #374151;
+            border: 2px solid #f9a8d4;
+        }
+
+        .button-outline:hover {
+            background: white;
+        }
+
+        .button-small {
+            height: 48px;
+            padding: 0 16px;
+            border-radius: 16px;
+        }
+
+        .button-mode {
+            height: 48px;
+            border-radius: 16px;
+            flex: 1;
+        }
+
+        .button-mode.active {
+            background: linear-gradient(to right, #f472b6, #a855f7);
+            color: white;
+        }
+
+        .button-mode.inactive {
+            background: rgba(255, 255, 255, 0.8);
+            color: #db2777;
+            border: 2px solid #f9a8d4;
+        }
+
+        .video-container {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 4px solid #f472b6;
+            box-shadow: 0 25px 25px rgba(0,0,0,0.15);
+            margin-bottom: 16px;
+        }
+
+        #video {
+            width: 100%;
+            display: block;
+            transform: scaleX(-1);
+            filter: brightness(1.2) contrast(0.9) saturate(1.1);
+        }
+
+        .canvas-container {
+            position: relative;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 24px;
+            padding: 16px;
+            box-shadow: 0 25px 25px rgba(0,0,0,0.15);
+            border: 4px solid #f9a8d4;
+            margin-bottom: 16px;
+        }
+
+        #canvas {
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border: 2px solid #fce4ec;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        #canvas:hover {
+            border-color: #f472b6;
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .stamp-panel, .frame-panel, .text-panel {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 16px;
+        }
+
+        .stamp-categories {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .stamp-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
+        }
+
+        .stamp-item {
+            text-align: center;
+            font-size: 2rem;
+            padding: 8px;
+            background: #fce4ec;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .stamp-item:hover {
+            background: #f8bbd9;
+        }
+
+        .frame-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .frame-button {
+            height: 48px;
+            background: linear-gradient(to right, #f9a8d4, #e879f9);
+            color: #831843;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .frame-button:hover {
+            background: linear-gradient(to right, #f472b6, #d946ef);
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #f9a8d4;
+            border-radius: 12px;
+            font-size: 1rem;
+            margin-bottom: 12px;
+            background: white;
+        }
+
+        .text-input:focus {
+            outline: none;
+            border-color: #ec4899;
+        }
+
+        .color-palette {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .color-button {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid #d1d5db;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .color-button.active {
+            border-color: #374151;
+            border-width: 3px;
+        }
+
+        .instruction {
+            text-align: center;
+            font-size: 0.875rem;
+            color: #db2777;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 24px;
+            padding: 8px 16px;
+            margin-bottom: 16px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .guide {
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 16px;
+            padding: 16px;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #db2777;
+            margin-top: 32px;
+        }
+
+        .guide-title {
+            font-weight: bold;
+            color: #be185d;
+            margin-bottom: 8px;
+        }
+
+        .guide-icons {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 8px;
+            font-size: 1.125rem;
+        }
+
+        .guide-icons span {
+            animation: bounce 2s infinite;
+        }
+
+        .guide-icons span:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .guide-icons span:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .guide-icons span:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .gap-3 {
+            gap: 12px;
+        }
+
+        .flex-1 {
+            flex: 1;
+        }
+
+        /* Animations */
+        @keyframes bounce {
+            0%, 20%, 53%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40%, 43% {
+                transform: translateY(-10px);
+            }
+            70% {
+                transform: translateY(-5px);
+            }
+            90% {
+                transform: translateY(-2px);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .container {
+                padding: 8px;
+            }
+            
+            .title {
+                font-size: 2rem;
+            }
+            
+            .main-section {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1 class="title">✨ プリクラ ✨</h1>
+            <div class="subtitle">💕 Kawaii Photo Booth 💕</div>
+            <div class="decoration top-right">🦄</div>
+            <div class="decoration top-left">🌈</div>
+        </div>
+
+        <!-- Initial Screen -->
+        <div id="initial-screen">
+            <div class="main-section">
+                <button id="start-camera" class="button button-primary">
+                    📸 セルフィー撮影 ✨
+                </button>
+                <button id="select-file" class="button button-secondary">
+                    🌈 ギャラリーから選択 💖
+                </button>
+                <input type="file" id="file-input" accept="image/*" style="display: none;">
+            </div>
+        </div>
+
+        <!-- Camera Screen -->
+        <div id="camera-screen" class="hidden">
+            <div class="video-container">
+                <video id="video" autoplay playsinline></video>
+                <div class="decoration" style="position: absolute; top: 16px; right: 16px; font-size: 3rem; animation: bounce 2s infinite;">💕</div>
+                <div class="decoration" style="position: absolute; bottom: 16px; left: 16px; font-size: 3rem; animation: pulse 2s infinite;">✨</div>
+            </div>
+            <div class="flex gap-3">
+                <button id="capture-photo" class="button button-primary flex-1">
+                    📸 かわいく撮影 💖
+                </button>
+                <button id="cancel-camera" class="button button-outline button-small">
+                    キャンセル
+                </button>
+            </div>
+        </div>
+
+        <!-- Edit Screen -->
+        <div id="edit-screen" class="hidden">
+            <div class="canvas-container">
+                <canvas id="canvas"></canvas>
+                <div class="decoration" style="position: absolute; top: 8px; right: 8px; font-size: 2rem; animation: spin 3s linear infinite;">⭐</div>
+                <div class="decoration" style="position: absolute; bottom: 8px; left: 8px; font-size: 2rem; animation: bounce 2s infinite;">💖</div>
+            </div>
+
+            <!-- Mode Controls -->
+            <div class="controls">
+                <button id="stamp-mode" class="button button-mode active">
+                    😊 スタンプ
+                </button>
+                <button id="text-mode" class="button button-mode inactive">
+                    ✏️ 文字
+                </button>
+                <button id="frame-mode" class="button buffer-mode inactive">
+                    ✨ フレーム
+                </button>
+            </div>
+
+            <!-- Stamp Panel -->
+            <div id="stamp-panel" class="stamp-panel">
+                <div class="stamp-categories">
+                    <button class="stamp-category active" data-category="cute">🦄</button>
+                    <button class="stamp-category" data-category="heart">💕</button>
+                    <button class="stamp-category" data-category="star">⭐</button>
+                    <button class="stamp-category" data-category="emoji">😍</button>
+                </div>
+                <div id="stamp-grid" class="stamp-grid">
+                    <!-- Stamps will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Frame Panel -->
+            <div id="frame-panel" class="frame-panel hidden">
+                <div class="frame-grid">
+                    <button class="frame-button" data-frame="hearts">ハート</button>
+                    <button class="frame-button" data-frame="stars">スター</button>
+                    <button class="frame-button" data-frame="rainbow">レインボー</button>
+                    <button class="frame-button" data-frame="sparkles">キラキラ</button>
+                </div>
+            </div>
+
+            <!-- Text Panel -->
+            <div id="text-panel" class="text-panel hidden">
+                <input type="text" id="text-input" class="text-input" placeholder="かわいいメッセージを入力 💖">
+                <div class="color-palette">
+                    <div class="color-button active" data-color="#FF1493" style="background-color: #FF1493;"></div>
+                    <div class="color-button" data-color="#FF69B4" style="background-color: #FF69B4;"></div>
+                    <div class="color-button" data-color="#DDA0DD" style="background-color: #DDA0DD;"></div>
+                    <div class="color-button" data-color="#9370DB" style="background-color: #9370DB;"></div>
+                    <div class="color-button" data-color="#4169E1" style="background-color: #4169E1;"></div>
+                    <div class="color-button" data-color="#00CED1" style="background-color: #00CED1;"></div>
+                </div>
+                <p style="text-align: center; font-size: 0.875rem; color: #db2777;">
+                    💕 色を選んで画像をタップしてね 💕
+                </p>
+            </div>
+
+            <div id="instruction" class="instruction">
+                ✨ 画像をタップしてスタンプ追加 ✨
+            </div>
+
+            <div class="action-buttons">
+                <button id="download-image" class="button button-primary flex-1">
+                    💾 かわいく保存 ✨
+                </button>
+                <button id="reset-app" class="button button-outline button-small">
+                    🔄 最初から
+                </button>
+            </div>
+        </div>
+
+        <!-- Guide -->
+        <div class="guide">
+            <p class="guide-title">💖 使い方ガイド 💖</p>
+            <p>📸 セルフィーまたはギャラリーから画像を選択</p>
+            <p>✨ スタンプ・文字・フレームでデコレーション</p>
+            <p>💾 完成したらかわいく保存してシェア！</p>
+            <div class="guide-icons">
+                <span>🦄</span>
+                <span>💖</span>
+                <span>🌈</span>
+                <span>✨</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // アプリケーションの状態
+        let currentMode = 'stamp';
+        let selectedStampCategory = 'cute';
+        let textColor = '#FF1493';
+        let capturedImage = null;
+        let isAddingText = false;
+
+        // スタンプカテゴリー
+        const stampCategories = {
+            cute: ['🦄', '🌈', '💖', '🎀', '👑', '🦋', '🌸', '🍓', '🧸', '🎪', '🎭', '🎨'],
+            heart: ['💕', '💖', '💗', '💓', '💝', '💘', '💌', '❤️', '🧡', '💛', '💚', '💙'],
+            star: ['⭐', '🌟', '✨', '💫', '🌠', '⚡', '🔆', '🌞', '🌙', '☄️', '🎆', '🎇'],
+            emoji: ['😍', '🥰', '😘', '😊', '🤗', '😋', '🤩', '😎', '🥳', '🦄', '👸', '🌺']
+        };
+
+        // DOM要素の取得
+        const initialScreen = document.getElementById('initial-screen');
+        const cameraScreen = document.getElementById('camera-screen');
+        const editScreen = document.getElementById('edit-screen');
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const fileInput = document.getElementById('file-input');
+        const textInput = document.getElementById('text-input');
+        const stampPanel = document.getElementById('stamp-panel');
+        const framePanel = document.getElementById('frame-panel');
+        const textPanel = document.getElementById('text-panel');
+        const instruction = document.getElementById('instruction');
+
+        // キラキラエフェクトの生成
+        function generateSparkles() {
+            const existingSparkles = document.querySelectorAll('.sparkle');
+            existingSparkles.forEach(sparkle => sparkle.remove());
+
+            for (let i = 0; i < 15; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.textContent = '✨';
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 100 + '%';
+                sparkle.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                sparkle.style.animationDelay = Math.random() * 2 + 's';
+                sparkle.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                document.body.appendChild(sparkle);
+            }
+        }
+
+        // スタンプグリッドの生成
+        function populateStampGrid() {
+            const stampGrid = document.getElementById('stamp-grid');
+            stampGrid.innerHTML = '';
+            
+            stampCategories[selectedStampCategory].forEach(stamp => {
+                const stampItem = document.createElement('div');
+                stampItem.className = 'stamp-item';
+                stampItem.textContent = stamp;
+                stampGrid.appendChild(stampItem);
+            });
+        }
+
+        // 画面表示の切り替え
+        function showScreen(screenName) {
+            [initialScreen, cameraScreen, editScreen].forEach(screen => {
+                screen.classList.add('hidden');
+            });
+            
+            if (screenName === 'initial') initialScreen.classList.remove('hidden');
+            else if (screenName === 'camera') cameraScreen.classList.remove('hidden');
+            else if (screenName === 'edit') editScreen.classList.remove('hidden');
+        }
+
+        // カメラの開始
+        async function startCamera() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { facingMode: 'user' }
+                });
+                video.srcObject = stream;
+                showScreen('camera');
+            } catch (error) {
+                console.error('カメラのアクセスに失敗しました:', error);
+                alert('カメラにアクセスできませんでした。ファイルから画像を選択してください。');
+            }
+        }
+
+        // カメラの停止
+        function stopCamera() {
+            if (video.srcObject) {
+                const stream = video.srcObject;
+                stream.getTracks().forEach(track => track.stop());
+                video.srcObject = null;
+            }
+        }
+
+        // 写真の撮影
+        function capturePhoto() {
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            
+            // プリクラ風の美白エフェクト
+            ctx.filter = 'brightness(1.2) contrast(0.9) saturate(1.1)';
+            ctx.drawImage(video, 0, 0);
+            ctx.filter = 'none';
+            
+            capturedImage = canvas.toDataURL('image/png');
+            stopCamera();
+            showScreen('edit');
+        }
+
+        // ファイルからの画像読み込み
+        function handleFileInput(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.onload = function() {
+                        canvas.width = img.width;
+                        canvas.height = img.height;
+                        ctx.filter = 'brightness(1.2) contrast(0.9) saturate(1.1)';
+                        ctx.drawImage(img, 0, 0);
+                        ctx.filter = 'none';
+                        capturedImage = canvas.toDataURL('image/png');
+                        showScreen('edit');
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // モードの切り替え
+        function switchMode(mode) {
+            currentMode = mode;
+            
+            // ボタンの状態更新
+            document.querySelectorAll('.button-mode').forEach(btn => {
+                btn.classList.remove('active');
+                btn.classList.add('inactive');
+            });
+            document.getElementById(mode + '-mode').classList.add('active');
+            document.getElementById(mode + '-mode').classList.remove('inactive');
+            
+            // パネルの表示切り替え
+            [stampPanel, framePanel, textPanel].forEach(panel => {
+                panel.classList.add('hidden');
+            });
+            
+            if (mode === 'stamp') {
+                stampPanel.classList.remove('hidden');
+                instruction.textContent = '✨ 画像をタップしてスタンプ追加 ✨';
+            } else if (mode === 'text') {
+                textPanel.classList.remove('hidden');
+                isAddingText = true;
+                instruction.textContent = '💖 文字を入力してから画像をタップ 💖';
+            } else if (mode === 'frame') {
+                framePanel.classList.remove('hidden');
+                instruction.textContent = '🌈 お気に入りのフレームを選んでね 🌈';
+            }
+        }
+
+        // フレームの追加
+        function addFrame(frameStyle) {
+            const width = canvas.width;
+            const height = canvas.height;
+
+            switch (frameStyle) {
+                case 'hearts':
+                    ctx.font = '30px Arial';
+                    for (let i = 0; i < width; i += 50) {
+                        ctx.fillText('💖', i, 30);
+                        ctx.fillText('💖', i, height - 10);
+                    }
+                    for (let i = 0; i < height; i += 50) {
+                        ctx.fillText('💖', 10, i);
+                        ctx.fillText('💖', width - 30, i);
+                    }
+                    break;
+                case 'stars':
+                    ctx.font = '25px Arial';
+                    for (let i = 0; i < width; i += 40) {
+                        ctx.fillText('⭐', i, 25);
+                        ctx.fillText('⭐', i, height - 5);
+                    }
+                    for (let i = 0; i < height; i += 40) {
+                        ctx.fillText('⭐', 5, i);
+                        ctx.fillText('⭐', width - 25, i);
+                    }
+                    break;
+                case 'rainbow':
+                    const gradient = ctx.createLinearGradient(0, 0, width, 0);
+                    gradient.addColorStop(0, '#ff0000');
+                    gradient.addColorStop(0.16, '#ff8000');
+                    gradient.addColorStop(0.33, '#ffff00');
+                    gradient.addColorStop(0.5, '#00ff00');
+                    gradient.addColorStop(0.66, '#0080ff');
+                    gradient.addColorStop(0.83, '#8000ff');
+                    gradient.addColorStop(1, '#ff0080');
+                    
+                    ctx.strokeStyle = gradient;
+                    ctx.lineWidth = 15;
+                    ctx.strokeRect(7, 7, width - 14, height - 14);
+                    break;
+                case 'sparkles':
+                    ctx.font = '20px Arial';
+                    for (let i = 0; i < 50; i++) {
+                        const x = Math.random() * width;
+                        const y = Math.random() * height;
+                        if (x < 50 || x > width - 50 || y < 50 || y > height - 50) {
+                            ctx.fillText('✨', x, y);
+                        }
+                    }
+                    break;
+            }
+
+            capturedImage = canvas.toDataURL('image/png');
+        }
+
+        // キャンバスでのクリック/タッチ処理
+        function handleCanvasInteraction(event) {
+            const rect = canvas.getBoundingClientRect();
+            const clientX = event.clientX || (event.touches && event.touches[0].clientX);
+            const clientY = event.clientY || (event.touches && event.touches[0].clientY);
+            
+            const x = (clientX - rect.left) * (canvas.width / rect.width);
+            const y = (clientY - rect.top) * (canvas.height / rect.height);
+
+            if (currentMode === 'stamp') {
+                const stamps = stampCategories[selectedStampCategory];
+                const randomStamp = stamps[Math.floor(Math.random() * stamps.length)];
+                ctx.font = '50px Arial';
+                ctx.fillText(randomStamp, x - 25, y + 25);
+            } else if (currentMode === 'text' && textInput.value.trim()) {
+                // プリクラ風の手書き風文字
+                ctx.font = 'bold 28px Comic Sans MS, cursive';
+                ctx.fillStyle = textColor;
+                ctx.strokeStyle = '#FFFFFF';
+                ctx.lineWidth = 4;
+                ctx.strokeText(textInput.value, x, y);
+                ctx.fillText(textInput.value, x, y);
+                
+                // キラキラエフェクトを文字の周りに追加
+                for (let i = 0; i < 5; i++) {
+                    const offsetX = (Math.random() - 0.5) * 60;
+                    const offsetY = (Math.random() - 0.5) * 60;
+                    ctx.font = '16px Arial';
+                    ctx.fillText('✨', x + offsetX, y + offsetY);
+                }
+                
+                textInput.value = '';
+                isAddingText = false;
+            }
+
+            capturedImage = canvas.toDataURL('image/png');
+        }
+
+        // 画像のダウンロード
+        function downloadImage() {
+            if (capturedImage) {
+                const link = document.createElement('a');
+                link.download = `purikura-${Date.now()}.png`;
+                link.href = capturedImage;
+                link.click();
+            }
+        }
+
+        // アプリのリセット
+        function resetApp() {
+            capturedImage = null;
+            isAddingText = false;
+            textInput.value = '';
+            currentMode = 'stamp';
+            selectedStampCategory = 'cute';
+            stopCamera();
+            showScreen('initial');
+        }
+
+        // イベントリスナーの設定
+        document.getElementById('start-camera').addEventListener('click', startCamera);
+        document.getElementById('select-file').addEventListener('click', () => fileInput.click());
+        document.getElementById('capture-photo').addEventListener('click', capturePhoto);
+        document.getElementById('cancel-camera').addEventListener('click', () => {
+            stopCamera();
+            showScreen('initial');
+        });
+        document.getElementById('download-image').addEventListener('click', downloadImage);
+        document.getElementById('reset-app').addEventListener('click', resetApp);
+
+        fileInput.addEventListener('change', handleFileInput);
+
+        // モード切り替えボタン
+        document.getElementById('stamp-mode').addEventListener('click', () => switchMode('stamp'));
+        document.getElementById('text-mode').addEventListener('click', () => switchMode('text'));
+        document.getElementById('frame-mode').addEventListener('click', () => switchMode('frame'));
+
+        // スタンプカテゴリー選択
+        document.querySelectorAll('.stamp-category').forEach(btn => {
+            btn.addEventListener('click', function() {
+                selectedStampCategory = this.dataset.category;
+                document.querySelectorAll('.stamp-category').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                populateStampGrid();
+            });
+        });
+
+        // フレームボタン
+        document.querySelectorAll('.frame-button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                addFrame(this.dataset.frame);
+            });
+        });
+
+        // カラーパレット
+        document.querySelectorAll('.color-button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                textColor = this.dataset.color;
+                document.querySelectorAll('.color-button').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // キャンバスのクリック/タッチイベント
+        canvas.addEventListener('click', handleCanvasInteraction);
+        canvas.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            handleCanvasInteraction(e);
+        });
+
+        // テキスト入力のEnterキー
+        textInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && this.value.trim()) {
+                isAddingText = false;
+            }
+        });
+
+        // 初期化
+        generateSparkles();
+        populateStampGrid();
+        setInterval(generateSparkles, 5000);
+    </script>
+</body>
+</html>
