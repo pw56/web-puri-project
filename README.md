@@ -7,7 +7,7 @@
 ・HTML  
 ・CSS  
 ・JavaScript  
-・React
+・React  
 ・WebGL  
 ・WebAssembly  
 ・TensorFlow  
