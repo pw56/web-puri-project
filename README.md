@@ -3,19 +3,19 @@
 ## 概要
 このリポジトリはプリ機をWebアプリとして動かすことを目的に作成されました。
 
-## 使用技術  
-- React  
-- TensorFlow.js  
-- WebGL  
-- Web Worker  
-- WebAssembly
-
 ## 使用プログラミング言語
 - HTML  
 - CSS  
 - JavaScript  
 - TypeScript  
 - C言語
+
+## 使用技術  
+- React  
+- TensorFlow.js  
+- WebGL  
+- Web Worker  
+- WebAssembly
 
 ## 開発環境
 - マシン:
