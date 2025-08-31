@@ -1,0 +1,72 @@
+<web-page>
+  
+  <start>
+    <button>写真を撮影</button>
+    <button>写真をアップロード</button>
+  </start>
+
+  <shoot>
+    <video name="camera"></video>
+    <button name="shoot">撮影</button>
+    <button name="retry">撮り直し</button>
+  </shoot>
+
+  <edit>
+    <result>
+      <canvas name="photo"></canvas>
+      <canvas name="drawing"></canvas>
+    </result>
+    <function>
+      <face>
+        <range name="eye" min="0" max="10"></range>
+        <range name="nose" min="0" max="10"></range>
+        <range name="mouth" min="0" max="10"></range>
+        <range name="contour" min="0" max="10"></range>
+        <range name="skin" min="0" max="10"></range>
+      </face>
+
+      <pen>
+        <select>
+          <option name="pen">ペン</option>
+          <option name="marker">マーカー</option>
+          <option name="crayon">クレヨン</option>
+        </select>
+        <range name="width" min="0" max="10">太さ</range>
+      </pen>
+
+      <background>
+        <option name="example-1">
+          <image></image>
+        </option>
+        <option name="example-2">
+          <image></image>
+        </option>
+        <option name="example-3">
+          <image></image>
+        </option>
+      </background>
+
+      <filter>
+        <option name="example-hot">
+          <image></image>
+          <text>Example hot</text>
+        </option>
+        <option name="example-dry">
+          <image></image>
+          <text>Example film</text>
+        </option>
+        <option name="example-mono">
+          <image></image>
+          <text>Example mono</text>
+        </option>
+      </filter>
+    </function>
+  </edit>
+
+  <output>
+    <image name="preview"></image>
+    <button name="download"></button>
+    <button name="share"></button>
+  </output>
+  
+</web-page>
