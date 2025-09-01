@@ -16,6 +16,8 @@
 - WebGL  
 - Web Worker  
 - WebAssembly
+- Web Share API
+- Web Storage
 
 ## 開発環境
 - マシン:
