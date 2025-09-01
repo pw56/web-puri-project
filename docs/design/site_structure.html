@@ -3,24 +3,34 @@
   <start>
     <image></image>
     <text name="title">🩷Webプリ🩵</text>
-    <button name="shooting_mode">プリモードで撮影</button>
-    <button name="shooting_mode">写真を撮影</button>
-    <button name="upload_mode">写真をアップロード</button>
+    <button name="puri_shooting">プリモードで撮影</button>
+    <button name="shooting">写真を撮影</button>
+    <button name="upload">写真をアップロード</button>
   </start>
 
   <shoot>
     <video name="camera"></video>
     <image name="check"></image>
     <button name="shoot">撮影</button>
+    <button name="switch">
+      <image name="camera_switch_icon"></image>
+    </button>
     <button name="retry">撮り直し</button>
   </shoot>
 
-  <shoot>
+  <puri-shoot>
     <video name="camera"></video>
+    <pose>
+      <image name="example"></image>
+      <text name="message"></text>
+    </pose>
+    <countdown>
+      <text name="number"></text>
+      <object name="progress"></object>
+    </countdown>
     <image name="check"></image>
-    <button name="shoot">撮影</button>
     <button name="retry">撮り直し</button>
-  </shoot>
+  </puri-shoot>
 
   <edit>
     <result>
