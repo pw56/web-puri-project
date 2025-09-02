@@ -10,13 +10,14 @@
 - TypeScript  
 - C言語
 
-## 使用技術  
+## 使用技術・ライブラリ  
 - React  
 - WebGL  
 - Web Worker  
 - WebAssembly
 - Web Share API
 - Web Storage
+- PWA
 - COCO-SSD (TensorFlow.js)
 - Face Landmarks Detection (TensorFlow.js)
 
