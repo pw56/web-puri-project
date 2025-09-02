@@ -12,12 +12,13 @@
 
 ## 使用技術  
 - React  
-- TensorFlow.js  
 - WebGL  
 - Web Worker  
 - WebAssembly
 - Web Share API
 - Web Storage
+- COCO-SSD (TensorFlow.js)
+- Face Landmarks Detection (TensorFlow.js)
 
 ## 開発環境
 - マシン:
