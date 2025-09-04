@@ -37,7 +37,7 @@
 > > 
 > > 例:  
 > > ```javascript
-> > ImageData(), //第1引数
+> > ImageData, //第1引数
 > > [x, y, width, height] //第2引数
 > > ```
 > 
