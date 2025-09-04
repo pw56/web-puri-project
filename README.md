@@ -18,6 +18,7 @@
 - Web Share API
 - Web Storage
 - PWA
+- ServiceWorker
 - COCO-SSD (TensorFlow.js)
 - Face Landmarks Detection (TensorFlow.js)
 
