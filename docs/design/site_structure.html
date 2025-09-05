@@ -3,7 +3,7 @@
   <start>
     <image></image>
     <text name="title">🩷Webプリ🩵</text>
-    <button name="puri_shooting">プリモードで撮影</button>
+    <button name="puri-shooting">プリモードで撮影</button>
     <button name="shooting">写真を撮影</button>
     <button name="upload">写真をアップロード</button>
   </start>
@@ -13,7 +13,7 @@
     <image name="check"></image>
     <button name="shoot">撮影</button>
     <button name="switch">
-      <image name="camera_switch_icon"></image>
+      <image name="camera-switch-icon"></image>
     </button>
     <button name="retry">撮り直し</button>
   </shoot>
@@ -36,6 +36,7 @@
   <!--ここ(edit)から。このページ構造とマークダウン作って。Codespacesのtreeの方がタイパいい。おやすみ。 2025/09/01 21:52-->
   <edit>
     <result>
+      <image name="background"></image>
       <canvas name="photo"></canvas>
       <canvas name="drawing"></canvas>
     </result>
@@ -44,8 +45,11 @@
         <range name="eye" min="0" max="10"></range>
         <range name="nose" min="0" max="10"></range>
         <range name="mouth" min="0" max="10"></range>
+        <range name="eyebags" min="0" max="10"></range>
+        <range name="eyebrows" min="0" max="10"></range>
         <range name="contour" min="0" max="10"></range>
-        <range name="skin" min="0" max="10"></range>
+        <range name="skin-beauty" min="0" max="10"></range>
+        <range name="skin-clear" min="0" max="10"></range>
       </face>
 
       <pen>
