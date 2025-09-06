@@ -23,7 +23,7 @@
 ## Face (クラス)
 - 概要
 > 入力された顔の情報を保持、抽出するためのクラス。
-> 抽出処理にはTensorFlow.jsのFace Landmarks Detectionモデルを使用する。
+> 抽出処理にはTensorFlow.jsのCOCO-SSD、Face Landmarks DetectionモデルとMediaPipe Face Meshモジュール、MediaPipeのSelfie Segmentationモデルのgeneralモデルを使用する。
 
 > ### コンストラクタ
 > - 概要
@@ -31,8 +31,8 @@
 > > パーツの右(right)、左(left)は検出対象の顔、つまり本人の視点からの判断にする。
 > > インスタンス生成時にWeb Workerを立ち上げ、Face Landmarks Detectionモデルで顔のパーツを検出しておく。
 > > 涙袋はFace Landmarks Detectionモデルの実行完了後に同じWeb Workerで目元の明暗の境界から検出する。
-> > 人物の体全体はインスタンス生成時にFace Landmarks Detectionモデルとは別のWeb Workerを立ち上げ、MediaPipe Selfie Segmentationモデルで処理する。
-> > 体全体の境界の情報は今後の処理の精度に大きく影響するので、可能な限り微細化する。
+> > 人物の抽出はインスタンス生成時に顔のパーツ検出とは別のWeb Workerを立ち上げて行う。
+> > 人物の抽出は、MediaPipe Selfie Segmentationモデルで検出された人物の画像から、WebGLの"selfie-segmentation.glsl"で人物の縁を配列に変換する。
 > > 体全体の境界線を除く、顔の全てのランドマークの検出後に別のWeb Workerを立ち上げ、パーツごとの周囲との色の変化(周囲との数値の比較で突出した部分)や座標分布の変化予測(微分積分など)などから境界線を微細化し、座標情報の精度を上げる。
 > > 元の画像のバウンディングボックスの範囲を、別の画像として一時プライベート変数に保存して高速化し、機械学習モデルで処理する際に使用。
 > > 検出されたパーツの座標は、バウンディングボックス内の座標から元の画像の座標に変換し、プライベート変数に保存して高速化。
