@@ -547,14 +547,14 @@
     </div>
 
     <script>
-        // アプリケーションの状態
+        //  アプリケーションの状態
         let currentMode = 'stamp';
         let selectedStampCategory = 'cute';
         let textColor = '#FF1493';
         let capturedImage = null;
         let isAddingText = false;
 
-        // スタンプカテゴリー
+        //  スタンプカテゴリー
         const stampCategories = {
             cute: ['🦄', '🌈', '💖', '🎀', '👑', '🦋', '🌸', '🍓', '🧸', '🎪', '🎭', '🎨'],
             heart: ['💕', '💖', '💗', '💓', '💝', '💘', '💌', '❤️', '🧡', '💛', '💚', '💙'],
@@ -562,7 +562,7 @@
             emoji: ['😍', '🥰', '😘', '😊', '🤗', '😋', '🤩', '😎', '🥳', '🦄', '👸', '🌺']
         };
 
-        // DOM要素の取得
+        //  DOM要素の取得
         const initialScreen = document.getElementById('initial-screen');
         const cameraScreen = document.getElementById('camera-screen');
         const editScreen = document.getElementById('edit-screen');
@@ -576,7 +576,7 @@
         const textPanel = document.getElementById('text-panel');
         const instruction = document.getElementById('instruction');
 
-        // キラキラエフェクトの生成
+        //  キラキラエフェクトの生成
         function generateSparkles() {
             const existingSparkles = document.querySelectorAll('.sparkle');
             existingSparkles.forEach(sparkle => sparkle.remove());
@@ -594,7 +594,7 @@
             }
         }
 
-        // スタンプグリッドの生成
+        //  スタンプグリッドの生成
         function populateStampGrid() {
             const stampGrid = document.getElementById('stamp-grid');
             stampGrid.innerHTML = '';
@@ -607,7 +607,7 @@
             });
         }
 
-        // 画面表示の切り替え
+        //  画面表示の切り替え
         function showScreen(screenName) {
             [initialScreen, cameraScreen, editScreen].forEach(screen => {
                 screen.classList.add('hidden');
@@ -618,7 +618,7 @@
             else if (screenName === 'edit') editScreen.classList.remove('hidden');
         }
 
-        // カメラの開始
+        //  カメラの開始
         async function startCamera() {
             try {
                 const stream = await navigator.mediaDevices.getUserMedia({ 
@@ -632,7 +632,7 @@
             }
         }
 
-        // カメラの停止
+        //  カメラの停止
         function stopCamera() {
             if (video.srcObject) {
                 const stream = video.srcObject;
@@ -641,12 +641,12 @@
             }
         }
 
-        // 写真の撮影
+        //  写真の撮影
         function capturePhoto() {
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
             
-            // プリクラ風の美白エフェクト
+            //  プリクラ風の美白エフェクト
             ctx.filter = 'brightness(1.2) contrast(0.9) saturate(1.1)';
             ctx.drawImage(video, 0, 0);
             ctx.filter = 'none';
@@ -656,7 +656,7 @@
             showScreen('edit');
         }
 
-        // ファイルからの画像読み込み
+        //  ファイルからの画像読み込み
         function handleFileInput(event) {
             const file = event.target.files[0];
             if (file) {
@@ -678,11 +678,11 @@
             }
         }
 
-        // モードの切り替え
+        //  モードの切り替え
         function switchMode(mode) {
             currentMode = mode;
             
-            // ボタンの状態更新
+            //  ボタンの状態更新
             document.querySelectorAll('.button-mode').forEach(btn => {
                 btn.classList.remove('active');
                 btn.classList.add('inactive');
@@ -690,7 +690,7 @@
             document.getElementById(mode + '-mode').classList.add('active');
             document.getElementById(mode + '-mode').classList.remove('inactive');
             
-            // パネルの表示切り替え
+            //  パネルの表示切り替え
             [stampPanel, framePanel, textPanel].forEach(panel => {
                 panel.classList.add('hidden');
             });
@@ -708,7 +708,7 @@
             }
         }
 
-        // フレームの追加
+        //  フレームの追加
         function addFrame(frameStyle) {
             const width = canvas.width;
             const height = canvas.height;
@@ -765,7 +765,7 @@
             capturedImage = canvas.toDataURL('image/png');
         }
 
-        // キャンバスでのクリック/タッチ処理
+        //  キャンバスでのクリック/タッチ処理
         function handleCanvasInteraction(event) {
             const rect = canvas.getBoundingClientRect();
             const clientX = event.clientX || (event.touches && event.touches[0].clientX);
@@ -780,7 +780,7 @@
                 ctx.font = '50px Arial';
                 ctx.fillText(randomStamp, x - 25, y + 25);
             } else if (currentMode === 'text' && textInput.value.trim()) {
-                // プリクラ風の手書き風文字
+                //  プリクラ風の手書き風文字
                 ctx.font = 'bold 28px Comic Sans MS, cursive';
                 ctx.fillStyle = textColor;
                 ctx.strokeStyle = '#FFFFFF';
@@ -788,7 +788,7 @@
                 ctx.strokeText(textInput.value, x, y);
                 ctx.fillText(textInput.value, x, y);
                 
-                // キラキラエフェクトを文字の周りに追加
+                //  キラキラエフェクトを文字の周りに追加
                 for (let i = 0; i < 5; i++) {
                     const offsetX = (Math.random() - 0.5) * 60;
                     const offsetY = (Math.random() - 0.5) * 60;
@@ -803,7 +803,7 @@
             capturedImage = canvas.toDataURL('image/png');
         }
 
-        // 画像のダウンロード
+        //  画像のダウンロード
         function downloadImage() {
             if (capturedImage) {
                 const link = document.createElement('a');
@@ -813,7 +813,7 @@
             }
         }
 
-        // アプリのリセット
+        //  アプリのリセット
         function resetApp() {
             capturedImage = null;
             isAddingText = false;
@@ -824,7 +824,7 @@
             showScreen('initial');
         }
 
-        // イベントリスナーの設定
+        //  イベントリスナーの設定
         document.getElementById('start-camera').addEventListener('click', startCamera);
         document.getElementById('select-file').addEventListener('click', () => fileInput.click());
         document.getElementById('capture-photo').addEventListener('click', capturePhoto);
@@ -837,12 +837,12 @@
 
         fileInput.addEventListener('change', handleFileInput);
 
-        // モード切り替えボタン
+        //  モード切り替えボタン
         document.getElementById('stamp-mode').addEventListener('click', () => switchMode('stamp'));
         document.getElementById('text-mode').addEventListener('click', () => switchMode('text'));
         document.getElementById('frame-mode').addEventListener('click', () => switchMode('frame'));
 
-        // スタンプカテゴリー選択
+        //  スタンプカテゴリー選択
         document.querySelectorAll('.stamp-category').forEach(btn => {
             btn.addEventListener('click', function() {
                 selectedStampCategory = this.dataset.category;
@@ -852,14 +852,14 @@
             });
         });
 
-        // フレームボタン
+        //  フレームボタン
         document.querySelectorAll('.frame-button').forEach(btn => {
             btn.addEventListener('click', function() {
                 addFrame(this.dataset.frame);
             });
         });
 
-        // カラーパレット
+        //  カラーパレット
         document.querySelectorAll('.color-button').forEach(btn => {
             btn.addEventListener('click', function() {
                 textColor = this.dataset.color;
@@ -868,21 +868,21 @@
             });
         });
 
-        // キャンバスのクリック/タッチイベント
+        //  キャンバスのクリック/タッチイベント
         canvas.addEventListener('click', handleCanvasInteraction);
         canvas.addEventListener('touchstart', function(e) {
             e.preventDefault();
             handleCanvasInteraction(e);
         });
 
-        // テキスト入力のEnterキー
+        //  テキスト入力のEnterキー
         textInput.addEventListener('keypress', function(e) {
             if (e.key === 'Enter' && this.value.trim()) {
                 isAddingText = false;
             }
         });
 
-        // 初期化
+        //  初期化
         generateSparkles();
         populateStampGrid();
         setInterval(generateSparkles, 5000);

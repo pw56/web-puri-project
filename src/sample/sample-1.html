@@ -490,33 +490,33 @@
             }
 
             initEventListeners() {
-                // カメラ関連
+                //  カメラ関連
                 document.getElementById('start-camera').addEventListener('click', () => this.startCamera());
                 document.getElementById('take-photo').addEventListener('click', () => this.takePhoto());
                 document.getElementById('stop-camera').addEventListener('click', () => this.stopCamera());
 
-                // パネル表示
+                //  パネル表示
                 document.getElementById('filter-btn').addEventListener('click', () => this.togglePanel('filter'));
                 document.getElementById('sticker-btn').addEventListener('click', () => this.togglePanel('sticker'));
                 document.getElementById('text-btn').addEventListener('click', () => this.togglePanel('text'));
 
-                // フィルター
+                //  フィルター
                 document.querySelectorAll('[data-filter]').forEach(btn => {
                     btn.addEventListener('click', (e) => this.setFilter(e.target.dataset.filter));
                 });
 
-                // ステッカー
+                //  ステッカー
                 document.querySelectorAll('[data-sticker]').forEach(btn => {
                     btn.addEventListener('click', (e) => this.addSticker(e.target.dataset.sticker));
                 });
 
-                // テキスト
+                //  テキスト
                 document.querySelectorAll('[data-color]').forEach(btn => {
                     btn.addEventListener('click', (e) => this.setColor(e.target.dataset.color));
                 });
                 document.getElementById('add-text').addEventListener('click', () => this.addText());
 
-                // その他
+                //  その他
                 document.getElementById('download').addEventListener('click', () => this.downloadPhoto());
                 document.getElementById('reset').addEventListener('click', () => this.reset());
             }
@@ -556,7 +556,7 @@
                 this.captureCanvas.width = this.video.videoWidth;
                 this.captureCanvas.height = this.video.videoHeight;
 
-                // 左右反転して撮影
+                //  左右反転して撮影
                 this.captureCtx.scale(-1, 1);
                 this.captureCtx.drawImage(this.video, -this.captureCanvas.width, 0, this.captureCanvas.width, this.captureCanvas.height);
                 
@@ -595,8 +595,8 @@
                 for (let i = 0; i < data.length; i += 4) {
                     switch (this.currentFilter) {
                         case 'pink':
-                            data[i] = Math.min(255, data[i] + 30);     // Red
-                            data[i + 2] = Math.min(255, data[i + 2] + 30); // Blue
+                            data[i] = Math.min(255, data[i] + 30);     //  Red
+                            data[i + 2] = Math.min(255, data[i + 2] + 30); //  Blue
                             break;
                         case 'vintage':
                             data[i] = Math.min(255, data[i] * 1.2);
@@ -647,7 +647,7 @@
             setFilter(filter) {
                 this.currentFilter = filter;
                 
-                // UIの更新
+                //  UIの更新
                 document.querySelectorAll('[data-filter]').forEach(btn => {
                     btn.classList.remove('active');
                 });
@@ -671,7 +671,7 @@
             setColor(color) {
                 this.selectedColor = color;
                 
-                // UIの更新
+                //  UIの更新
                 document.querySelectorAll('[data-color]').forEach(btn => {
                     btn.classList.remove('active');
                 });
@@ -714,12 +714,12 @@
                 document.getElementById('camera-view').classList.remove('hidden');
                 document.getElementById('editor-view').classList.add('hidden');
                 
-                // パネルを閉じる
+                //  パネルを閉じる
                 document.querySelectorAll('.panel').forEach(panel => {
                     panel.classList.add('hidden');
                 });
                 
-                // フィルターをリセット
+                //  フィルターをリセット
                 document.querySelectorAll('[data-filter]').forEach(btn => {
                     btn.classList.remove('active');
                 });
@@ -727,7 +727,7 @@
             }
         }
 
-        // アプリケーション初期化
+        //  アプリケーション初期化
         document.addEventListener('DOMContentLoaded', () => {
             new PurikuraApp();
         });
