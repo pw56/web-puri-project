@@ -23,6 +23,11 @@
 - Face Landmarks Detection (TensorFlow.js)
 - MediaPipe Selfie Segmentation (TensorFlow.js)
 
+## ファイル構成
+```
+root
+```
+
 ## 開発環境
 - マシン:
 > **Chromebook**  

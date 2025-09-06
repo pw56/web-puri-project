@@ -700,7 +700,7 @@
 
             downloadPhoto() {
                 const link = document.createElement('a');
-                link.download = `purikura_${Date.now()}.png`;
+                link.download = `purikura-${Date.now()}.png`;
                 link.href = this.canvas.toDataURL();
                 link.click();
             }
