@@ -42,12 +42,13 @@ root
 > **WebAssembly:** Emscripten
 
 - コーディングAI:
-> **GPT-4.1**  
-> **Claude Sonnet 3.5**  
-> **Claude 4 Sonnet**
+> **Gemini 2.5 Pro**  
+> **GPT-5**  
+> **Microsoft Copilot**
 
 - デザイン:
-> **Figma Make**
+> **Figma**
+> **GPT-5**
 
 - テスト環境:
 > **Chrome OS - Google Chrome 138.0.7204.221 (Official Build) （64 ビット）**  
