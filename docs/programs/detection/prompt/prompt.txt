@@ -1,4 +1,4 @@
-これらの仕様書から以下の出力ファイルでライブラリを作成してください。
+これらの仕様書から以下の出力形式でライブラリを作成してください。
 全ての仕様を満たすまで推論を繰り返してください。
 また依存するライブラリは、HTML中に埋め込まれた以下のコードで既にインポートされているものとします。
 
@@ -9,6 +9,6 @@ HTMLコード:
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh"></script> <!--MediaPipe Face Meshモジュール-->
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation@0.1/selfie_segmentation.js"></script><!--MediaPipe Selfie Segmentationモデル-->
 
-出力ファイル:
+出力形式:
 ・detection.js
 ・selfie-segmentation.glsl
