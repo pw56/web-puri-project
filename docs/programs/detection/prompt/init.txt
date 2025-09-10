@@ -1,0 +1,15 @@
+今からあなたには、これらの仕様書からライブラリを作成してもらいます。
+全ての仕様を満たすまで推論を繰り返してください。
+また依存するライブラリは、HTML中に埋め込まれた以下のコードで既にインポートされているものとします。
+後ほど追加の指示を出すので、それまでコードを生成せず、仕様書を読み要求や仕様などを理解しておいてください。
+
+HTMLコード:
+https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0 TensorFlow バージョン指定 4.22.0
+https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd TensorFlow COCO-SSDモデル
+https://cdn.jsdelivr.net/npm/@tensorflow-models/face-landmarks-detection TensorFlow Face Landmarks Detectionモデル
+https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh MediaPipe Face Meshモジュール
+https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation@0.1/selfie_segmentation.jsMediaPipe Selfie Segmentationモデル
+
+出力形式:
+・detection.js
+・selfie-segmentation.glsl
