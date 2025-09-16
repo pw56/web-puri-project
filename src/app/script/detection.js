@@ -1,5 +1,3 @@
-// detection.js
-
 // COCO-SSDモデルのインスタンスをグローバルスコープで保持し、初回ロード後に再利用します
 let cocoSsdModel = null;
 
@@ -52,8 +50,6 @@ async function detectFaces(imageData) {
     return [];
   }
 }
-
-// detection.js
 
 class Face {
   // --- プライベートプロパティ ---

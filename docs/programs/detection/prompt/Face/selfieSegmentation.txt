@@ -1,5 +1,6 @@
-先程の仕様書から以下の出力形式で、ライブラリの"Face"クラスの"selfieSegmentation"メソッドと、それに使用される.glslを作成してください。
+先程の仕様書から以下の出力形式で、ライブラリの"Face"クラスの"selfieSegmentation"メソッドと、それに使用される"selfie-segmentation.glsl"を作成してください。
 全ての仕様を満たすまで推論を繰り返してください。
 
 出力形式:
 ・"selfieSegmentation"メソッドのコード
+・selfie-segmentation.glsl
