@@ -2,8 +2,8 @@
 
 情報:
 ・ページの完成イメージのスクリーンショット(screenshot.gif)
-・ページの動作や構造の仕様書(start.md)
+・ページの動作や構造の仕様書(puri-shoot.md)
 ・素材のファイル(.png, .svg)
 
 出力ファイル:
-・start.tsx
+・puri-shoot.tsx
