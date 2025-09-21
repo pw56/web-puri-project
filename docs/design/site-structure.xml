@@ -1,62 +1,62 @@
-<web-page>
+<WebPage>
   
-  <start>
+  <Start>
     <title>
-      <image name="sample-1"></image>
-      <image name="sample-2"></image>
-      <object name="heart-1"></object>
-      <object name="heart-2"></object>
+      <image name="sample-1"/>
+      <image name="sample-2"/>
+      <object name="heart-1"/>
+      <object name="heart-2"/>
       <text name="title-name">Webプリ</text>
     </title>
     <button name="shooting">撮影</button>
     <button name="puri-shooting">プリモード</button>
     <button name="upload">アップロード</button>
-  </start>
+  </Start>
 
-  <shoot>
-    <video name="camera"></video>
-    <image name="check"></image>
-    <button name="shoot"></button>
+  <QuantitySelection></QuantitySelection>
+
+  <Shoot>
+    <video name="camera"/>
+    <image name="check"/>
+    <button name="shoot"/>
     <button name="switch">
-      <image name="camera-switch-icon"></image>
+      <image name="camera-switch-icon"/>
     </button>
     <button name="retry">撮り直し</button>
-  </shoot>
+  </Shoot>
 
-  <quantity-selection></quantity-selection>
-
-  <puri-shoot>
-    <video name="camera"></video>
+  <PuriShoot>
+    <video name="camera"/>
     <pose>
-      <image name="example"></image>
-      <text name="message"></text>
+      <image name="example"/>
+      <text name="message"/>
     </pose>
     <countdown>
-      <text name="number"></text>
-      <object name="progress"></object>
+      <text name="number"/>
+      <object name="progress"/>
     </countdown>
-    <image name="check"></image>
+    <image name="check"/>
     <button name="retry">撮り直し</button>
-  </puri-shoot>
-
+  </PuriShoot>
 
   <!--ここ(edit)から。このページ構造とマークダウン作って。Codespacesのtreeの方がタイパいい。おやすみ。 2025/09/01 21:52-->
-  <edit>
+  <Edit>
     <result>
-      <canvas name="background"></canvas>
-      <canvas name="photo"></canvas>
-      <canvas name="drawing"></canvas>
+      <canvas name="background"/>
+      <canvas name="photo"/>
+      <canvas name="drawing"/>
     </result>
+
     <function>
       <face>
-        <range name="eye" min="0" max="10"></range>
-        <range name="nose" min="0" max="10"></range>
-        <range name="mouth" min="0" max="10"></range>
-        <range name="eyebags" min="0" max="10"></range>
-        <range name="eyebrows" min="0" max="10"></range>
-        <range name="contour" min="0" max="10"></range>
-        <range name="skin-beauty" min="0" max="10"></range>
-        <range name="skin-clear" min="0" max="10"></range>
+        <range name="eye" min="0" max="10"/>
+        <range name="nose" min="0" max="10"/>
+        <range name="mouth" min="0" max="10"/>
+        <range name="eyebags" min="0" max="10"/>
+        <range name="eyebrows" min="0" max="10"/>
+        <range name="contour" min="0" max="10"/>
+        <range name="skin-beauty" min="0" max="10"/>
+        <range name="skin-clear" min="0" max="10"/>
       </face>
 
       <pen>
@@ -70,38 +70,38 @@
 
       <background>
         <option name="example-1">
-          <image></image>
+          <image/>
         </option>
         <option name="example-2">
-          <image></image>
+          <image/>
         </option>
         <option name="example-3">
-          <image></image>
+          <image/>
         </option>
       </background>
 
       <filter>
         <option name="example-hot">
-          <image></image>
+          <image/>
           <text>Example hot</text>
         </option>
         <option name="example-dry">
-          <image></image>
+          <image/>
           <text>Example film</text>
         </option>
         <option name="example-mono">
-          <image></image>
+          <image/>
           <text>Example mono</text>
         </option>
       </filter>
     </function>
-  </edit>
+  </Edit>
 
-  <output>
-    <image name="preview"></image>
+  <Output>
+    <image name="preview"/>
     <button name="download">ダウンロード</button>
     <button name="share">シェアする</button>
-    <button name="restart">もう一度</button>
-  </output>
+    <button name="restart">終わる</button>
+  </Output>
   
-</web-page>
+</WebPage>
