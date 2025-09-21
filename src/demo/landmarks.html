@@ -3,228 +3,160 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Face Landmarks - パーツ枠表示デモ（修正版）</title>
+  <title>Face Landmarks - TensorFlow.js + MediaPipe GPU</title>
   <style>
-    html,body{height:100%;margin:0;font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial}
-    #container{position:relative;max-width:960px;margin:18px auto}
-    video{width:100%;height:auto;border-radius:8px;background:#000}
-    canvas{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
-    .info{margin:8px 0;font-size:13px;color:#333}
-    .controls{display:flex;gap:8px;margin-bottom:8px;align-items:center}
-    button{padding:8px 12px;border-radius:6px;border:1px solid #ccc;background:#fff;cursor:pointer}
+    html,body { height:100%; margin:0; background:#111; display:flex; align-items:center; justify-content:center; }
+    #container { position:relative; width: 100%; max-width: 960px; }
+    video { display:none; } /* 生映像は canvas 上に描画するので非表示 */
+    canvas { width:100%; height:auto; display:block; background:#000; border-radius:8px; }
+    #status { color:#ddd; font-family:monospace; margin-top:8px; }
   </style>
 </head>
 <body>
   <div id="container">
-    <div class="controls">
-      <button id="startBtn">カメラ開始</button>
-      <button id="stopBtn" disabled>停止</button>
-      <div class="info">検出中は顔の各パーツに赤い枠線を表示します。複数顔対応。</div>
-    </div>
-    <div style="position:relative">
-      <video id="video" playsinline autoplay muted></video>
-      <canvas id="overlay"></canvas>
-    </div>
+    <video id="video" autoplay playsinline></video>
+    <canvas id="output"></canvas>
+    <div id="status">初期化中...</div>
   </div>
 
-  <!-- ランタイムは非モジュールで読み込む実装に変更しました。ブラウザ互換性を向上させます。 -->
-  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.11.0/dist/tf.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl@4.11.0/dist/tf-backend-webgl.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/face-landmarks-detection@1.0.3/dist/face-landmarks-detection.min.js"></script>
+  <!-- 必須の依存ライブラリ -->
+  <!-- 1. tfjs-core -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0"></script>
+  <!-- 2. tfjs-backend-webgl -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl@4.22.0"></script>
+  <!-- 3. MediaPipe FaceMesh -->
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js"></script>
+  <!-- 4. Face Landmarks Detection (UMD) -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/face-landmarks-detection/dist/face-landmarks-detection.js"></script>
 
-  <script>
-    (async () => {
-      const video = document.getElementById('video');
-      const canvas = document.getElementById('overlay');
-      const ctx = canvas.getContext('2d');
-      const startBtn = document.getElementById('startBtn');
-      const stopBtn = document.getElementById('stopBtn');
+  <script type="module">
+  window.addEventListener('load', function () {
+  (async () => {
+    const statusEl = document.getElementById('status');
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('output');
+    const ctx = canvas.getContext('2d', { willReadFrequently: false });
 
-      let stream = null;
-      let model = null;
-      let rafId = null;
+    // 解像度設定（希望する最大幅）
+    const targetWidth = 960;
+    const maxFaces = 6;
 
-      function log(...args){ console.log('[FLD]', ...args); }
+    // WebGL バックエンドを選択して初期化
+    await tf.setBackend('webgl');
+    await tf.ready();
 
-      async function setupCamera() {
-        stream = await navigator.mediaDevices.getUserMedia({ video: { width: 1280, height: 720 }, audio: false });
-        video.srcObject = stream;
-
-        // Wait until metadata is loaded so videoWidth/videoHeight are available
-        await new Promise((resolve) => {
-          if (video.readyState >= 2) return resolve();
-          video.onloadedmetadata = () => resolve();
-        });
-
-        // Start playback if not already
-        try { await video.play(); } catch(e) { /* autoplay policy */ }
-
-        resizeCanvasToVideo();
-      }
-
-      function resizeCanvasToVideo() {
-        const vw = video.videoWidth || video.clientWidth || 640;
-        const vh = video.videoHeight || video.clientHeight || 480;
-        // canvas drawing coordinate space uses video intrinsic resolution
-        canvas.width = vw;
-        canvas.height = vh;
-        // but scale canvas visually to the displayed video element size
-        canvas.style.width = video.clientWidth + 'px';
-        canvas.style.height = video.clientHeight + 'px';
-      }
-
-      function toPoint2(p){
-        // Accept formats: [x,y,...], {x,y}, Float32Array, etc.
-        if (!p) return [0,0];
-        if (Array.isArray(p)) return [p[0], p[1]];
-        if (p.x !== undefined && p.y !== undefined) return [p.x, p.y];
-        if (p[0] !== undefined && p[1] !== undefined) return [p[0], p[1]];
-        return [0,0];
-      }
-
-      function drawPath(points, closePath = false){
-        if (!points || points.length === 0) return;
-        ctx.beginPath();
-        const [x0,y0] = toPoint2(points[0]);
-        ctx.moveTo(x0, y0);
-        for (let i = 1; i < points.length; i++){
-          const [x,y] = toPoint2(points[i]);
-          ctx.lineTo(x,y);
-        }
-        if (closePath) ctx.closePath();
-        ctx.stroke();
-      }
-
-      function drawFaceAnnotations(annotations){
-        if (!annotations) return;
-        ctx.lineWidth = Math.max(1, Math.round(canvas.width * 0.0025));
-        ctx.strokeStyle = 'red';
-        ctx.fillStyle = 'rgba(255,0,0,0.05)';
-
-        // draw each annotation
-        for (const name in annotations){
-          const pts = annotations[name];
-          if (!pts || pts.length === 0) continue;
-
-          // convert to 2D points
-          const pts2 = pts.map(p => toPoint2(p));
-
-          // choose whether to close path for typical facial regions
-          const closedNames = new Set([
-            'lipsUpperOuter','lipsLowerOuter','lipsUpperInner','lipsLowerInner',
-            'leftEyeUpper0','leftEyeLower0','leftEyeUpper1','leftEyeLower1',
-            'rightEyeUpper0','rightEyeLower0','rightEyeUpper1','rightEyeLower1',
-            'leftEyebrowUpper','leftEyebrowLower','rightEyebrowUpper','rightEyebrowLower',
-            'faceOval'
-          ]);
-
-          if (closedNames.has(name)){
-            ctx.beginPath();
-            ctx.moveTo(pts2[0][0], pts2[0][1]);
-            for (let i = 1; i < pts2.length; i++) ctx.lineTo(pts2[i][0], pts2[i][1]);
-            ctx.closePath();
-            ctx.stroke();
-          } else {
-            drawPath(pts2, false);
-          }
-        }
-      }
-
-      async function loadModel(){
-        // Ensure WebGL backend for performance
-        try {
-          await tf.setBackend('webgl');
-        } catch(e){ log('setBackend error', e); }
-        await tf.ready();
-
-        // Load MediaPipe Face Mesh via the face-landmarks-detection wrapper
-        model = await faceLandmarksDetection.load(
-          faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh,
-          {
-            runtime: 'mediapipe',
-            solutionPath: 'https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh'
-          }
-        );
-        log('モデル読み込み完了');
-      }
-
-      async function detectLoop(){
-        if (!model) return;
-        if (video.readyState < 2){
-          rafId = requestAnimationFrame(detectLoop);
-          return;
-        }
-
-        // estimate faces
-        let predictions = [];
-        try{
-          predictions = await model.estimateFaces({input: video, returnTensors: false, flipHorizontal: false});
-        } catch(err){
-          console.error('estimateFaces error', err);
-        }
-
-        // clear canvas
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        // draw results
-        for (const pred of predictions){
-          // draw bounding box
-          if (pred.boundingBox){
-            const topLeft = toPoint2(pred.boundingBox.topLeft);
-            const bottomRight = toPoint2(pred.boundingBox.bottomRight);
-            const x = topLeft[0], y = topLeft[1];
-            const w = bottomRight[0] - x, h = bottomRight[1] - y;
-            ctx.lineWidth = Math.max(1, Math.round(canvas.width * 0.002));
-            ctx.strokeStyle = 'rgba(255,0,0,0.6)';
-            ctx.strokeRect(x, y, w, h);
-          }
-
-          if (pred.annotations){
-            drawFaceAnnotations(pred.annotations);
-          } else if (pred.scaledMesh){
-            ctx.lineWidth = 1;
-            ctx.strokeStyle = 'red';
-            drawPath(pred.scaledMesh.map(p => [p[0], p[1]]));
-          }
-        }
-
-        rafId = requestAnimationFrame(detectLoop);
-      }
-
-      startBtn.addEventListener('click', async () => {
-        startBtn.disabled = true;
-        try {
-          await setupCamera();
-          if (!model) await loadModel();
-          stopBtn.disabled = false;
-          detectLoop();
-        } catch (e) {
-          console.error(e);
-          startBtn.disabled = false;
-          alert('カメラにアクセスできません。許可を確認してください。');
-        }
+    statusEl.textContent = 'カメラ取得中...';
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: 'user', width: { ideal: targetWidth }, height: { ideal: 720 } },
+        audio: false
       });
+      video.srcObject = stream;
+    } catch (e) {
+      statusEl.textContent = 'カメラを開けません: ' + e.message;
+      throw e;
+    }
 
-      stopBtn.addEventListener('click', () => {
-        stopBtn.disabled = true;
-        startBtn.disabled = false;
-        if (rafId) cancelAnimationFrame(rafId);
-        rafId = null;
-        if (stream) {
-          stream.getTracks().forEach(t => t.stop());
-          stream = null;
+    // video のメタデータ読み込み待ち（サイズ確定）
+    await new Promise(resolve => {
+      if (video.readyState >= 2) return resolve();
+      video.onloadedmetadata = () => resolve();
+    });
+
+    // 高DPI対応
+    const dpr = Math.max(1, window.devicePixelRatio || 1);
+    canvas.width = Math.round(video.videoWidth * dpr);
+    canvas.height = Math.round(video.videoHeight * dpr);
+    canvas.style.width = video.videoWidth + 'px';
+    canvas.style.height = video.videoHeight + 'px';
+    ctx.scale(dpr, dpr);
+
+    // モデル読み込み: MediaPipe runtime（GPU を内部で利用）
+    statusEl.textContent = 'モデル読み込み中...';
+    const model = await faceLandmarksDetection.createDetector(
+      faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh,
+      {
+        runtime: 'mediapipe',
+        solutionPath: 'https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh',
+        maxFaces: maxFaces,
+        enableSmoothing: true,
+        shouldLoadIrisModel: true
+      }
+    );
+
+    statusEl.textContent = '検出開始';
+    video.play();
+
+    // 描画パラメータ
+    const landmarkRadius = 10; // px
+    const landmarkColor = '#FF0000';
+
+    // メインループ
+    async function renderLoop() {
+      if (video.paused || video.ended) {
+        requestAnimationFrame(renderLoop);
+        return;
+      }
+
+      // ビデオフレームをキャンバスに描画（下地）
+      ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
+      ctx.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+
+      // 推論（非ブロッキングにしたい場合は別処理だがここはシンプルかつ確実）
+      let predictions = [];
+      try { // ここで多分バージョンの違い(最新版の仕様に変更) 2025/09/19 13:36
+        predictions = await model.estimateFaces({input: video, returnTensors: false, flipHorizontal: true});
+      } catch (err) {
+        // 推論エラーは無視して次フレームへ
+        console.warn('estimateFaces error', err);
+      }
+
+      // 各顔ごとにランドマークを描画
+      ctx.save();
+      ctx.fillStyle = landmarkColor;
+      ctx.strokeStyle = landmarkColor;
+      ctx.lineWidth = 1;
+
+      for (const p of predictions) {
+        // p.scaledMesh は [x, y, z] の配列群
+        const mesh = p.scaledMesh || p.mesh || [];
+
+        for (let i = 0; i < mesh.length; i++) {
+          const kp = mesh[i];
+          // MediaPipe の座標はすでにピクセル座標の場合が多いが、
+          // 確実を期して video のサイズにマッピングする。
+          const x = kp[0];
+          const y = kp[1];
+
+          // 円を描く
+          ctx.beginPath();
+          ctx.arc(x, y, landmarkRadius, 0, Math.PI * 2);
+          ctx.fill();
         }
-        if (video) {
-          video.pause();
-          video.srcObject = null;
-        }
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-      });
+      }
+      ctx.restore();
 
-      // keep canvas sized to video when layout changes
-      new ResizeObserver(resizeCanvasToVideo).observe(video);
+      requestAnimationFrame(renderLoop);
+    }
 
-    })();
+    requestAnimationFrame(renderLoop);
+
+    // ウィンドウリサイズでキャンバスサイズ更新（単純再設定）
+    window.addEventListener('resize', () => {
+      const newDpr = Math.max(1, window.devicePixelRatio || 1);
+      canvas.width = Math.round(video.videoWidth * newDpr);
+      canvas.height = Math.round(video.videoHeight * newDpr);
+      canvas.style.width = video.videoWidth + 'px';
+      canvas.style.height = video.videoHeight + 'px';
+      ctx.setTransform(newDpr, 0, 0, newDpr, 0, 0);
+    });
+
+  })().catch(err => {
+    console.error(err);
+    const s = document.getElementById('status');
+    if (s) s.textContent = 'エラー: ' + (err && err.message ? err.message : err);
+  });
+  });
   </script>
 </body>
 </html>
