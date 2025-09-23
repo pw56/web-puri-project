@@ -6,49 +6,50 @@
       <Image name="sample-2"/>
       <Object name="heart-1"/>
       <Object name="heart-2"/>
-      <Text name="title-name">Webプリ</Text>
+      <Text name="title-name" type="plane">Webプリ</Text>
     </Title>
-    <Button name="shooting">撮影</Button>
-    <Button name="puri-shooting">プリモード</Button>
-    <Button name="upload">アップロード</Button>
+    <Button name="shooting" type="button-1">撮影</Button>
+    <Button name="puri-shooting" type="button-1">プリモード</Button>
+    <Button name="upload" type="button-3">アップロード</Button>
   </Start>
 
   <QuantitySelection>
-    <Text name="page-title">枚数選択</Text>
+    <Text name="page-title" type="plane">枚数選択</Text>
     <Quantity>
-      <Text name="count"></Text>
+      <Text name="count" type="value"></Text>
       <Button>
-        <Image name="add"/>
+        <Image name="add" src=""/>
       </Button>
       <Button>
-        <Image name="subtract"/>
+        <Image name="subtract" src=""/>
       </Button>
     </Quantity>
-    <Button name="start">撮影を始める</Button>
+    <Button name="start" type="button-1">撮影を始める</Button>
   </QuantitySelection>
 
   <Shoot>
     <Video name="camera"/>
     <Image name="check"/>
-    <Button name="shoot"/>
-    <Button name="switch">
-      <Image name="camera-switch-icon"/>
+    <Button name="shoot" type="button-2"/>
+    <Button name="switch" type="button-2">
+      <Image name="camera-switch-icon" src=""/>
     </Button>
-    <Button name="retry">撮り直し</Button>
+    <Button name="retry" type="button-1">撮り直し</Button>
   </Shoot>
 
   <PuriShoot>
     <Video name="camera"/>
     <Pose>
       <Image name="example"/>
-      <Text name="message"/>
+      <Text name="message" type="plane"/>
     </Pose>
     <Countdown>
-      <Text name="number"/>
       <Object name="progress"/>
+      <Object name="background"/>
+      <Text name="number" type="plane"/>
     </Countdown>
-    <Image name="check"/>
-    <Button name="retry">撮り直し</Button>
+    <Image name="check" src=""/>
+    <Button name="retry" type="button-1">撮り直し</Button>
   </PuriShoot>
 
   <!--ここ(edit)から。このページ構造とマークダウン作って。Codespacesのtreeの方がタイパいい。おやすみ。 2025/09/01 21:52-->
@@ -95,28 +96,30 @@
       </Background>
 
       <Filter>
-        <Option name="example-hot">
-          <Image/>
-          <Text>Example hot</Text>
-        </Option>
-        <Option name="example-dry">
-          <Image/>
-          <Text>Example film</Text>
-        </Option>
-        <Option name="example-mono">
-          <Image/>
-          <Text>Example mono</Text>
-        </Option>
+        <Select>
+          <Option name="example-hot">
+            <Image/>
+            <Text>Example hot</Text>
+          </Option>
+          <Option name="example-dry">
+            <Image/>
+            <Text>Example film</Text>
+          </Option>
+          <Option name="example-mono">
+            <Image/>
+            <Text>Example mono</Text>
+          </Option>
+        </Select>
       </Filter>
     </Function>
   </Edit>
 
   <Output>
     <Image name="preview"/>
-    <Button name="download">ダウンロード</Button>
-    <Button name="share">シェアする</Button>
-    <Button name="print">プリント</Button>
-    <Button name="end">終わる</Button>
+    <Button name="download" type="button-1">ダウンロード</Button>
+    <Button name="share" type="button-1">シェアする</Button>
+    <Button name="print" type="button-1">プリント</Button>
+    <Button name="end" type="button-1">終わる</Button>
   </Output>
   
 </WebPage>

@@ -1,9 +1,9 @@
 これらのデータ・情報から以下のファイルを作成しなさい。
 
 情報:
-・ページの完成イメージのスクリーンショット(screenshot.gif)
+・ページの完成イメージのスクリーンショット(screenshot.png)
 ・ページの動作や構造の仕様書(start.md)
-・素材のファイル(.png, .svg)
+・素材のファイル(sample-1.png, sample-2.png, heart-1.svg, heart-2.svg)
 
 出力ファイル:
 ・start.tsx
