@@ -1,0 +1,107 @@
+<WebPage>
+  
+  <Start>
+    <title>
+      <image name="sample-1"/>
+      <image name="sample-2"/>
+      <object name="heart-1"/>
+      <object name="heart-2"/>
+      <text name="title-name">Webプリ</text>
+    </title>
+    <button name="shooting">撮影</button>
+    <button name="puri-shooting">プリモード</button>
+    <button name="upload">アップロード</button>
+  </Start>
+
+  <QuantitySelection></QuantitySelection>
+
+  <Shoot>
+    <video name="camera"/>
+    <image name="check"/>
+    <button name="shoot"/>
+    <button name="switch">
+      <image name="camera-switch-icon"/>
+    </button>
+    <button name="retry">撮り直し</button>
+  </Shoot>
+
+  <PuriShoot>
+    <video name="camera"/>
+    <pose>
+      <image name="example"/>
+      <text name="message"/>
+    </pose>
+    <countdown>
+      <text name="number"/>
+      <object name="progress"/>
+    </countdown>
+    <image name="check"/>
+    <button name="retry">撮り直し</button>
+  </PuriShoot>
+
+  <!--ここ(edit)から。このページ構造とマークダウン作って。Codespacesのtreeの方がタイパいい。おやすみ。 2025/09/01 21:52-->
+  <Edit>
+    <result>
+      <canvas name="background"/>
+      <canvas name="photo"/>
+      <canvas name="drawing"/>
+    </result>
+
+    <function>
+      <face>
+        <range name="eye" min="0" max="10"/>
+        <range name="nose" min="0" max="10"/>
+        <range name="mouth" min="0" max="10"/>
+        <range name="eyebags" min="0" max="10"/>
+        <range name="eyebrows" min="0" max="10"/>
+        <range name="contour" min="0" max="10"/>
+        <range name="skin-beauty" min="0" max="10"/>
+        <range name="skin-clear" min="0" max="10"/>
+      </face>
+
+      <pen>
+        <select>
+          <option name="pen">ペン</option>
+          <option name="marker">マーカー</option>
+          <option name="crayon">クレヨン</option>
+        </select>
+        <range name="width" min="0" max="10">太さ</range>
+      </pen>
+
+      <background>
+        <option name="example-1">
+          <image/>
+        </option>
+        <option name="example-2">
+          <image/>
+        </option>
+        <option name="example-3">
+          <image/>
+        </option>
+      </background>
+
+      <filter>
+        <option name="example-hot">
+          <image/>
+          <text>Example hot</text>
+        </option>
+        <option name="example-dry">
+          <image/>
+          <text>Example film</text>
+        </option>
+        <option name="example-mono">
+          <image/>
+          <text>Example mono</text>
+        </option>
+      </filter>
+    </function>
+  </Edit>
+
+  <Output>
+    <image name="preview"/>
+    <button name="shere">保存・シェアする</button>
+    <button name="print">プリント</button>
+    <button name="end">終わる</button>
+  </Output>
+  
+</WebPage>

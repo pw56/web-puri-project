@@ -101,7 +101,8 @@
     <image name="preview"/>
     <button name="download">ダウンロード</button>
     <button name="share">シェアする</button>
-    <button name="restart">終わる</button>
+    <button name="print">プリント</button>
+    <button name="end">終わる</button>
   </Output>
   
 </WebPage>
