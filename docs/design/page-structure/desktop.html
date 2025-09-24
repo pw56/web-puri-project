@@ -17,33 +17,41 @@
     <Text name="page-title" type="plane">枚数選択</Text>
     <Quantity>
       <Text name="count" type="value"></Text>
-      <Button name="add" type="button-2" image=""></Button>
-      <Button name="subtract" type="button-2" image=""></Button>
+      <Button name="add" type="button-1" image=""></Button>
+      <Button name="subtract" type="button-1" image=""></Button>
     </Quantity>
     <Button name="start" type="button-1">撮影を始める</Button>
   </QuantitySelection>
 
   <Shoot>
-    <Video name="camera"/>
-    <Image name="check"/>
-    <Button name="shoot" type="button-2"/>
-    <Button name="switch" type="button-1" image="camera-switch.svg"/>
-    <Button name="retry" type="button-1">撮り直し</Button>
+    <Text name="n番目"/>
+    <Shooting>
+      <Video name="camera"/>
+      <Button name="shoot" type="button-2"/>
+      <Button name="switch" type="button-1" image="camera-switch.svg"/>
+    </Shooting>
+    <Checking>
+      <Image name="check"/>
+      <Button name="retry" type="button-1">撮り直し</Button>
+    </Checking>
   </Shoot>
 
   <PuriShoot>
-    <Video name="camera"/>
-    <Pose>
-      <Image name="example"/>
-      <Text name="message" type="plane"/>
-    </Pose>
-    <Countdown>
-      <Object name="progress"/>
-      <Object name="background"/>
-      <Text name="number" type="plane"/>
-    </Countdown>
-    <Image name="check" src=""/>
-    <Button name="retry" type="button-1">撮り直し</Button>
+    <Shooting>
+      <Video name="camera"/>
+      <Pose>
+        <Image name="example" image=""/>
+        <Text name="message" type="plane"/>
+      </Pose>
+      <Countdown>
+        <Object name="background-circle"/>
+        <Text name="number" type="plane"/>
+      </Countdown>
+    </Shooting>
+    <Checking>
+      <Image name="check" src=""/>
+      <Button name="retry" type="button-1">撮り直し</Button>
+    </Checking>
   </PuriShoot>
 
   <!--ここ(edit)から。このページ構造とマークダウン作って。Codespacesのtreeの方がタイパいい。おやすみ。 2025/09/01 21:52-->
@@ -68,41 +76,27 @@
 
       <Pen>
         <Select>
-          <Option name="pen">ペン</Option>
-          <Option name="marker">マーカー</Option>
-          <Option name="crayon">クレヨン</Option>
+          <Option name="pen" image="" text="ペン"></Option>
+          <Option name="marker" image="" text="マーカー"></Option>
+          <Option name="crayon" image="" text="クレヨン"></Option>
+          <Option name="neon" image="" text="ネオン"></Option>
         </Select>
         <Range name="width" min="0" max="10">太さ</range>
       </Pen>
 
       <Background>
         <Select>
-          <Option name="example-1">
-            <Image/>
-          </Option>
-          <Option name="example-2">
-            <Image/>
-          </Option>
-          <Option name="example-3">
-            <Image/>
-          </Option>
+          <Option name="example-1" image="" text=""/>
+          <Option name="example-2" image="" text=""/>
+          <Option name="example-3" image="" text=""/>
         </Select>
       </Background>
 
       <Filter>
         <Select>
-          <Option name="example-hot">
-            <Image/>
-            <Text>Example hot</Text>
-          </Option>
-          <Option name="example-dry">
-            <Image/>
-            <Text>Example film</Text>
-          </Option>
-          <Option name="example-mono">
-            <Image/>
-            <Text>Example mono</Text>
-          </Option>
+          <Option name="example-hot" image="" text="Example hot"/>
+          <Option name="example-dry" image="" text="Example dry"/>
+          <Option name="example-mono" image="" text="Example mono"/>
         </Select>
       </Filter>
     </Function>
