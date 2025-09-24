@@ -10,19 +10,15 @@
     </Title>
     <Button name="shooting" type="button-1">撮影</Button>
     <Button name="puri-shooting" type="button-1">プリモード</Button>
-    <Button name="upload" type="button-3">アップロード</Button>
+    <Button name="upload" type="button-1">アップロード</Button>
   </Start>
 
   <QuantitySelection>
     <Text name="page-title" type="plane">枚数選択</Text>
     <Quantity>
       <Text name="count" type="value"></Text>
-      <Button>
-        <Image name="add" src=""/>
-      </Button>
-      <Button>
-        <Image name="subtract" src=""/>
-      </Button>
+      <Button name="add" type="button-2" image=""></Button>
+      <Button name="subtract" type="button-2" image=""></Button>
     </Quantity>
     <Button name="start" type="button-1">撮影を始める</Button>
   </QuantitySelection>
@@ -31,9 +27,7 @@
     <Video name="camera"/>
     <Image name="check"/>
     <Button name="shoot" type="button-2"/>
-    <Button name="switch" type="button-2">
-      <Image name="camera-switch-icon" src=""/>
-    </Button>
+    <Button name="switch" type="button-1" image="camera-switch.svg"/>
     <Button name="retry" type="button-1">撮り直し</Button>
   </Shoot>
 
