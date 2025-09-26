@@ -20,7 +20,7 @@
       <Button name="add" type="button-1" image=""></Button>
       <Button name="subtract" type="button-1" image=""></Button>
     </Quantity>
-    <Button name="start" type="button-1">撮影を始める</Button>
+    <Button name="start-shooting" type="button-1">撮影を始める</Button>
   </QuantitySelection>
 
   <Shoot>

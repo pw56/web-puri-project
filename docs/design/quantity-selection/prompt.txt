@@ -3,7 +3,7 @@
 情報:
 ・ページの完成イメージのスクリーンショット(screenshot.png)
 ・ページの動作や構造の仕様書(quantity-selection.md)
-・素材のファイル(.png, .svg)
+・素材のファイル(add.svg, subtract.svg)
 
 出力ファイル:
 ・quantity-selection.tsx
