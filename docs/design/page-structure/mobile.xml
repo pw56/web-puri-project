@@ -1,107 +1,113 @@
 <WebPage>
   
   <Start>
-    <title>
-      <image name="sample-1"/>
-      <image name="sample-2"/>
-      <object name="heart-1"/>
-      <object name="heart-2"/>
-      <text name="title-name">Webプリ</text>
-    </title>
-    <button name="shooting">撮影</button>
-    <button name="puri-shooting">プリモード</button>
-    <button name="upload">アップロード</button>
+    <Title>
+      <Image name="sample-1"/>
+      <Image name="sample-2"/>
+      <Object name="heart-1"/>
+      <Object name="heart-2"/>
+      <Text name="title-name" type="plane">Webプリ</Text>
+    </Title>
+    <Button name="shooting" type="button-1">撮影</Button>
+    <Button name="puri-shooting" type="button-1">プリモード</Button>
+    <Button name="upload" type="button-1">アップロード</Button>
   </Start>
 
-  <QuantitySelection></QuantitySelection>
+  <QuantitySelection>
+    <Text name="page-title" type="plane">枚数選択</Text>
+    <Quantity>
+      <Text name="count" type="value"></Text>
+      <Button name="add" type="button-1" image=""></Button>
+      <Button name="subtract" type="button-1" image=""></Button>
+    </Quantity>
+    <Button name="start-shooting" type="button-1">撮影を始める</Button>
+  </QuantitySelection>
 
   <Shoot>
-    <video name="camera"/>
-    <image name="check"/>
-    <button name="shoot"/>
-    <button name="switch">
-      <image name="camera-switch-icon"/>
-    </button>
-    <button name="retry">撮り直し</button>
+    <Text name="n番目"/>
+    <Shooting>
+      <Video name="camera"/>
+      <Button name="shoot" type="button-2"/>
+      <Button name="switch" type="button-1" image="camera-switch.svg"/>
+    </Shooting>
+    <Checking>
+      <Image name="check"/>
+      <Button name="retry" type="button-1">撮り直し</Button>
+    </Checking>
   </Shoot>
 
   <PuriShoot>
-    <video name="camera"/>
-    <pose>
-      <image name="example"/>
-      <text name="message"/>
-    </pose>
-    <countdown>
-      <text name="number"/>
-      <object name="progress"/>
-    </countdown>
-    <image name="check"/>
-    <button name="retry">撮り直し</button>
+    <Shooting>
+      <Video name="camera"/>
+      <Pose>
+        <Image name="example" image=""/>
+        <Text name="message" type="plane"/>
+      </Pose>
+      <Countdown>
+        <Object name="background-circle"/>
+        <Text name="number" type="plane"/>
+      </Countdown>
+    </Shooting>
+    <Checking>
+      <Image name="check" src=""/>
+      <Button name="retry" type="button-1">撮り直し</Button>
+    </Checking>
   </PuriShoot>
 
   <!--ここ(edit)から。このページ構造とマークダウン作って。Codespacesのtreeの方がタイパいい。おやすみ。 2025/09/01 21:52-->
   <Edit>
-    <result>
-      <canvas name="background"/>
-      <canvas name="photo"/>
-      <canvas name="drawing"/>
-    </result>
+    <Result>
+      <Canvas name="background"/>
+      <Canvas name="photo"/>
+      <Canvas name="drawing"/>
+    </Result>
 
-    <function>
-      <face>
-        <range name="eye" min="0" max="10"/>
-        <range name="nose" min="0" max="10"/>
-        <range name="mouth" min="0" max="10"/>
-        <range name="eyebags" min="0" max="10"/>
-        <range name="eyebrows" min="0" max="10"/>
-        <range name="contour" min="0" max="10"/>
-        <range name="skin-beauty" min="0" max="10"/>
-        <range name="skin-clear" min="0" max="10"/>
-      </face>
+    <Function>
+      <Face>
+        <Range name="eye" min="0" max="10"/>
+        <Range name="nose" min="0" max="10"/>
+        <Range name="mouth" min="0" max="10"/>
+        <Range name="eyebags" min="0" max="10"/>
+        <Range name="eyebrows" min="0" max="10"/>
+        <Range name="contour" min="0" max="10"/>
+        <Range name="skin-beauty" min="0" max="10"/>
+        <Range name="skin-clear" min="0" max="10"/>
+      </Face>
 
-      <pen>
-        <select>
-          <option name="pen">ペン</option>
-          <option name="marker">マーカー</option>
-          <option name="crayon">クレヨン</option>
-        </select>
-        <range name="width" min="0" max="10">太さ</range>
-      </pen>
+      <Pen>
+        <Select>
+          <Option name="pen" image="" text="ペン"></Option>
+          <Option name="marker" image="" text="マーカー"></Option>
+          <Option name="crayon" image="" text="クレヨン"></Option>
+          <Option name="neon" image="" text="ネオン"></Option>
+        </Select>
+        <Range name="width" min="0" max="10">太さ</range>
+      </Pen>
 
-      <background>
-        <option name="example-1">
-          <image/>
-        </option>
-        <option name="example-2">
-          <image/>
-        </option>
-        <option name="example-3">
-          <image/>
-        </option>
-      </background>
+      <Background>
+        <Select>
+          <Option name="example-1" image="" text=""/>
+          <Option name="example-2" image="" text=""/>
+          <Option name="example-3" image="" text=""/>
+        </Select>
+      </Background>
 
-      <filter>
-        <option name="example-hot">
-          <image/>
-          <text>Example hot</text>
-        </option>
-        <option name="example-dry">
-          <image/>
-          <text>Example film</text>
-        </option>
-        <option name="example-mono">
-          <image/>
-          <text>Example mono</text>
-        </option>
-      </filter>
-    </function>
+      <Filter>
+        <Select>
+          <Option name="example-hot" image="" text="Example hot"/>
+          <Option name="example-dry" image="" text="Example dry"/>
+          <Option name="example-mono" image="" text="Example mono"/>
+        </Select>
+      </Filter>
+    </Function>
   </Edit>
 
   <Output>
-    <image name="preview"/>
-    <button name="shere">保存・シェアする</button>
-    <button name="print">プリント</button>
-    <button name="end">終わる</button>
+    <Image name="preview"/>
+    <Button name="download" type="button-1">ダウンロード</Button>
+    <Button name="share" type="button-1">シェアする</Button>
+    <Button name="print" type="button-1">プリント</Button>
+    <Button name="end" type="button-1">終わる</Button>
   </Output>
   
 </WebPage>
