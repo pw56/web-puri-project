@@ -104,8 +104,7 @@
 
   <Output>
     <Image name="preview"/>
-    <Button name="download" type="button-1">ダウンロード</Button>
-    <Button name="share" type="button-1">シェアする</Button>
+    <Button name="share" type="button-1">保存・シェアする</Button>
     <Button name="print" type="button-1">プリント</Button>
     <Button name="end" type="button-1">終わる</Button>
   </Output>
