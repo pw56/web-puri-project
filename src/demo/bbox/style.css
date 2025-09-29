@@ -1,0 +1,13 @@
+html,
+body {
+    margin: 0;
+    height: 100%;
+    background: #111;
+}
+
+canvas {
+    display: block;
+    margin: auto;
+    height: 100%;
+    transform: scaleX(-1);
+}
