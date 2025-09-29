@@ -30,7 +30,7 @@ async function createFaceLandmarker() {
         },
         outputFaceBlendshapes: true,
         runningMode,
-        numFaces: 1
+        numFaces: 10
     });
     demosSection.classList.remove("invisible");
 }
