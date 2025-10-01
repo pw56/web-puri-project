@@ -24,7 +24,7 @@
   </QuantitySelection>
 
   <Shoot>
-    <Text name="n番目"/>
+    <Text name="n枚目"/>
     <Shooting>
       <Video name="camera"/>
       <Button name="shoot" type="button-2"/>
