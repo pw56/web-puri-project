@@ -36,8 +36,7 @@ root
 > **GitHub Codespaces 2-core**
 
 - エディタ:
-> **Visual Studio Code**  
-> **Cursor**
+> **Visual Studio Code**
 
 - コンパイラ:
 > **React:** React Compiler  
