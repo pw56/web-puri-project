@@ -278,4 +278,155 @@ isFaceTouched(coordinate) {
   // 交差した回数が奇数回なら内側、偶数回なら外側となります
   return isInside;
 }
+
+/**
+ * [プライベートメソッド]
+ * WebGLとGLSLシェーダーを用いて、セグメンテーションマスクから人物と背景の境界線を高速に抽出し、
+ * 座標の配列として返します。
+ * この処理はOffscreenCanvas上で行われ、DOMに影響を与えません。
+ *
+ * @param {ImageData} mask - 人物領域が示されたセグメンテーションマスクのImageDataオブジェクト。
+ * @returns {Promise<Array<[number, number]>>} 検出された境界線の座標 `[x, y]` の配列。
+ * @throws {Error} WebGLの初期化や処理に失敗した場合。
+ */
+async #selfieSegmentation(mask) {
+  const { width, height } = mask;
+
+  // 1. OffscreenCanvasを使用してWebGLコンテキストをセットアップします
+  const canvas = new OffscreenCanvas(width, height);
+  const gl = canvas.getContext('webgl');
+  if (!gl) {
+    throw new Error('WebGLコンテキストの初期化に失敗しました。');
+  }
+
+  // 2. GLSLシェーダーコードをコンパイルし、WebGLプログラムを作成します
+  // (シェーダーコードは'selfie-segmentation.glsl'ファイルから読み込まれる想定です)
+  const vertexShader = this.#createShader(gl, gl.VERTEX_SHADER, selfieSegmentationVertexShaderSource);
+  const fragmentShader = this.#createShader(gl, gl.FRAGMENT_SHADER, selfieSegmentationFragmentShaderSource);
+  const program = this.#createProgram(gl, vertexShader, fragmentShader);
+
+  // 3. 画面全体を覆う四角形(ポリゴン)の頂点データを準備します
+  const positionBuffer = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+    -1, -1,   1, -1,   -1, 1,
+    -1, 1,    1, -1,   1, 1,
+  ]), gl.STATIC_DRAW);
+
+  // 4. 頂点シェーダーの属性(attribute)とバッファを結びつけます
+  const positionLocation = gl.getAttribLocation(program, 'a_position');
+  gl.enableVertexAttribArray(positionLocation);
+  gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+
+  // 5. 入力マスク画像をテクスチャとしてGPUにアップロードします
+  const texture = gl.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D, texture);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, mask);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+
+  // 6. プログラムを使用し、Uniform変数を設定します
+  gl.useProgram(program);
+  gl.uniform2f(gl.getUniformLocation(program, 'u_textureSize'), width, height);
+
+  // 7. レンダリングを実行します (ここでシェーダーが全ピクセルに対して実行されます)
+  gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+  // 8. レンダリング結果(境界線が白く描画された画像)をGPUから読み出します
+  const pixels = new Uint8Array(width * height * 4);
+  gl.readPixels(0, 0, width, height, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
+
+  // 9. ピクセルデータを走査し、白いピクセル(境界線)の座標を抽出します
+  const boundaryCoordinates = [];
+  for (let y = 0; y < height; y++) {
+    for (let x = 0; x < width; x++) {
+      const red = pixels[(y * width + x) * 4];
+      if (red === 255) {
+        // Y座標を上下反転させ、通常の画像座標系に変換します
+        boundaryCoordinates.push([x, height - 1 - y]);
+      }
+    }
+  }
+
+  return boundaryCoordinates;
+}
+
+/**
+ * [プライベートヘルパー] WebGLシェーダーをコンパイルします。
+ */
+#createShader(gl, type, source) {
+  const shader = gl.createShader(type);
+  gl.shaderSource(shader, source);
+  gl.compileShader(shader);
+  if (gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+    return shader;
+  }
+  console.error('シェーダーのコンパイルに失敗しました:', gl.getShaderInfoLog(shader));
+  gl.deleteShader(shader);
+}
+
+/**
+ * [プライベートヘルパー] WebGLプログラムをリンクします。
+ */
+#createProgram(gl, vertexShader, fragmentShader) {
+  const program = gl.createProgram();
+  gl.attachShader(program, vertexShader);
+  gl.attachShader(program, fragmentShader);
+  gl.linkProgram(program);
+  if (gl.getProgramParameter(program, gl.LINK_STATUS)) {
+    return program;
+  }
+  console.error('プログラムのリンクに失敗しました:', gl.getProgramInfoLog(program));
+  gl.deleteProgram(program);
+}
+
+/**
+ * 検出された体全体の、背景との境界線の座標の配列を返します。
+ * このデータは人物のセグメンテーション結果から生成されます。
+ *
+ * @returns {Array<[number, number]>} 検出された体全体の境界線の座標 `[x, y]` が格納された配列。
+ * @throws {Error} 検出処理がまだ完了していない場合、または体の検出に失敗した場合にスローされます。
+ */
+body() {
+  // ガード節: まず、全ての非同期処理が完了しているかを確認します。
+  // 完了していない場合、まだ結果は利用できないため例外をスローします。
+  if (!this.#isProcessed) {
+    throw new Error('顔と体の検出処理が完了していません。hasProcessed()で完了を確認してください。');
+  }
+
+  // ガード節: 次に、体の輪郭の検出に成功したかを確認します。
+  // プライベートプロパティが false の場合、処理は完了したものの検出に失敗したことを示します。
+  if (this.#bodyCoords === false) {
+    throw new Error('体の輪郭の検出に失敗しました。');
+  }
+
+  // 上記のチェックを通過した場合、有効なデータが存在するため、
+  // プライベートプロパティに保存されている値を返します。
+  return this.#bodyCoords;
+}
+
+/**
+ * 検出された顔の輪郭の座標の配列を返します。
+ * このデータは顔のランドマーク検出モデルから生成されます。
+ *
+ * @returns {Array<[number, number, number]>} 検出された顔の輪郭の座標 `[x, y, z]` が格納された配列。
+ * @throws {Error} 検出処理がまだ完了していない場合、または顔の輪郭の検出に失敗した場合にスローされます。
+ */
+contour() {
+  // ガード節: まず、全ての非同期処理が完了しているかを確認します。
+  if (!this.#isProcessed) {
+    throw new Error('顔の検出処理が完了していません。hasProcessed()で完了を確認してください。');
+  }
+
+  // ガード節: 次に、顔の輪郭の検出に成功したかを確認します。
+  // プライベートプロパティが false の場合、処理は完了したものの検出に失敗したことを示します。
+  if (this.#contourCoords === false) {
+    throw new Error('顔の輪郭の検出に失敗しました。');
+  }
+
+  // 上記のチェックを通過した場合、有効なデータが存在するため、
+  // プライベートプロパティに保存されている値を返します。
+  return this.#contourCoords;
+}
 }
