@@ -47,7 +47,7 @@ root
 > **Microsoft Copilot**
 
 - デザイン:
-> **Figma**
+> **Figma**  
 > **GPT-5**
 
 - テスト環境:
