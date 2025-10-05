@@ -13,7 +13,7 @@
       "purpose": "any maskable"
     },
     {
-      "src": "../assets/logo/icon-512x512.png",
+      "src": "../assets/logo/icon-square.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
