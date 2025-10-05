@@ -1,0 +1,27 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #FFFFFF;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+canvas {
+  display: block;
+  background: #FFFFFF;
+}
+
+#person-count {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: skyblue;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 6px 12px;
+  border-bottom-right-radius: 8px;
+  z-index: 10;
+}
