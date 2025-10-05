@@ -7,7 +7,9 @@
 - HTML  
 - CSS  
 - JavaScript  
-- TypeScript  
+- TypeScript
+- JSX
+- GLSL  
 - C言語
 
 ## 使用技術・ライブラリ  
