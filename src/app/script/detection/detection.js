@@ -211,7 +211,7 @@ export class Face {
  * @returns {{x: number, y: number, z: number}} 顔の軸ごと(X, Y, Z)の傾きの角度(-180° ~ 180°)を持つオブジェクト。
  * @throws {Error} 検出処理がまだ完了していない場合、または顔の傾きの検出に失敗した場合にスローされます。
  */
-faceAngle() {
+  faceAngle() {
   // ガード節: まず、全ての非同期処理が完了しているかを確認します
   // 完了していない場合、まだ結果は利用できないため例外をスローします
   if (!this.#isProcessed) {

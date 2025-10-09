@@ -1,3 +1,8 @@
+import "detection/detection.js";
+import "editing/editing.js";
+import "output/output.js";
+import "preserve/version.js";
+
 // オフライン対応
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
