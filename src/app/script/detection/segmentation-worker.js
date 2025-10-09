@@ -6,7 +6,7 @@
 // 必要なライブラリをWorkerのスコープにインポートします
 // TensorFlow.jsは、MediaPipeのバックエンドとして利用される可能性があるため含めています
 importScripts(
-  'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js',
+  'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0',
   'https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation@0.1/selfie_segmentation.js'
 );
 

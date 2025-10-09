@@ -5,9 +5,9 @@
 
 // 必要なライブラリをWorkerのスコープにインポートします
 importScripts(
-  'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js',
-  'https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js',
-  'https://cdn.jsdelivr.net/npm/@tensorflow-models/face-landmarks-detection/dist/face-landmarks-detection.js'
+  'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0',
+  'https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh',
+  'https://cdn.jsdelivr.net/npm/@tensorflow-models/face-landmarks-detection'
 );
 
 // モデルのインスタンスをWorkerスコープで保持し、再利用します
