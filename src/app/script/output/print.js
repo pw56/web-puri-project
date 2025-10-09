@@ -1,4 +1,4 @@
-function printElement(element) {
+export function printElement(element) {
   if (!element) return;
 
   const iframe = document.createElement('iframe');
@@ -16,7 +16,7 @@ function printElement(element) {
   doc.write(`
     <html>
       <head>
-        <title>印刷</title>
+        <title>Printing</title>
         <style>
           body { margin: 0; padding: 20px; font-family: sans-serif; }
         </style>

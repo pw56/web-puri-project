@@ -1,4 +1,4 @@
-function versionManager() {
+export function versionManager() {
   const STORAGE_KEY = "lastVisitedVersion";
   const PREVIOUS_VERSION = localStorage.getItem(STORAGE_KEY);
 

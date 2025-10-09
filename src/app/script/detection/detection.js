@@ -8,7 +8,7 @@ let cocoSsdModel = null;
  * * @param {ImageData} imageData - 検出対象となる画像(ImageDataオブジェクト)。
  * @returns {Promise<Face[]>} 検出された顔のFaceクラスインスタンスが格納された配列。
  */
-async function detectFaces(imageData) {
+export async function detectFaces(imageData) {
   // ガード節: imageDataが無効な場合は、エラーをコンソールに出力し、空の配列を返します
   if (!imageData || typeof imageData.width !== 'number' || typeof imageData.height !== 'number') {
     console.error('Error: detectFacesに無効なImageDataオブジェクトが渡されました。');
@@ -51,7 +51,7 @@ async function detectFaces(imageData) {
   }
 }
 
-class Face {
+export class Face {
   // --- プライベートプロパティ ---
 
   // 入力された元画像と顔のバウンディングボックス
