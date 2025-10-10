@@ -529,4 +529,29 @@ eyebrows() {
   // プライベートプロパティに保存されている値を返します。
   return this.#eyebrowsCoords;
 }
+
+  /**
+ * 左右の涙袋の縁（涙袋と肌の境目）の座標を、"left"と"right"のキーを持つオブジェクトとして返します。
+ * 'left'と'right'は、本人（検出対象）視点での左右を示します。
+ * このデータは、顔のランドマーク検出後に実行される独自の画像処理によって生成されます。
+ *
+ * @returns {{left: Array<[number, number, number]>, right: Array<[number, number, number]>}} 左右の涙袋の縁の座標 `[x, y, z]` が格納された配列を持つオブジェクト。
+ * @throws {Error} 検出処理がまだ完了していない場合、または涙袋の検出に失敗した場合にスローされます。
+ */
+eyebags() {
+  // ガード節: まず、全ての非同期処理が完了しているかを確認します。
+  if (!this.#isProcessed) {
+    throw new Error('顔の検出処理が完了していません。hasProcessed()で完了を確認してください。');
+  }
+
+  // ガード節: 次に、涙袋の検出に成功したかを確認します。
+  // プライベートプロパティが false の場合、処理は完了したものの検出に失敗したことを示します。
+  if (this.#eyebagsCoords === false) {
+    throw new Error('涙袋の検出に失敗しました。');
+  }
+
+  // 上記のチェックを通過した場合、有効なデータが存在するため、
+  // プライベートプロパティに保存されている値を返します。
+  return this.#eyebagsCoords;
+}
 }
