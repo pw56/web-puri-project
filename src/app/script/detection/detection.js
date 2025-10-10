@@ -435,4 +435,98 @@ export class Face {
     // プライベートプロパティに保存されている値を返します。
     return this.#contourCoords;
   }
+
+  /**
+ * 左右の目の縁（目と肌の境目）の座標を、"left"と"right"のキーを持つオブジェクトとして返します。
+ * 'left'と'right'は、本人（検出対象）視点での左右を示します。
+ *
+ * @returns {{left: Array<[number, number, number]>, right: Array<[number, number, number]>}} 左右の目の縁の座標 `[x, y, z]` が格納された配列を持つオブジェクト。
+ * @throws {Error} 検出処理がまだ完了していない場合、または目の検出に失敗した場合にスローされます。
+ */
+eyes() {
+  // ガード節: まず、全ての非同期処理が完了しているかを確認します。
+  if (!this.#isProcessed) {
+    throw new Error('顔の検出処理が完了していません。hasProcessed()で完了を確認してください。');
+  }
+
+  // ガード節: 次に、目の検出に成功したかを確認します。
+  // プライベートプロパティが false の場合、処理は完了したものの検出に失敗したことを示します。
+  if (this.#eyesCoords === false) {
+    throw new Error('目の検出に失敗しました。');
+  }
+
+  // 上記のチェックを通過した場合、有効なデータが存在するため、
+  // プライベートプロパティに保存されている値を返します。
+  return this.#eyesCoords;
+}
+
+  /**
+ * 肌と鼻の境界線の座標の配列を返します。
+ *
+ * @returns {Array<[number, number, number]>} 鼻の縁（鼻と肌の境目）の座標 `[x, y, z]` が格納された配列。
+ * @throws {Error} 検出処理がまだ完了していない場合、または鼻の検出に失敗した場合にスローされます。
+ */
+nose() {
+  // ガード節: まず、全ての非同期処理が完了しているかを確認します。
+  if (!this.#isProcessed) {
+    throw new Error('顔の検出処理が完了していません。hasProcessed()で完了を確認してください。');
+  }
+
+  // ガード節: 次に、鼻の検出に成功したかを確認します。
+  // プライベートプロパティが false の場合、処理は完了したものの検出に失敗したことを示します。
+  if (this.#noseCoords === false) {
+    throw new Error('鼻の検出に失敗しました。');
+  }
+
+  // 上記のチェックを通過した場合、有効なデータが存在するため、
+  // プライベートプロパティに保存されている値を返します。
+  return this.#noseCoords;
+}
+
+  /**
+ * 肌と口の境界線の座標の配列を返します。
+ *
+ * @returns {Array<[number, number, number]>} 口の縁（口と肌の境目）の座標 `[x, y, z]` が格納された配列。
+ * @throws {Error} 検出処理がまだ完了していない場合、または口の検出に失敗した場合にスローされます。
+ */
+mouth() {
+  // ガード節: まず、全ての非同期処理が完了しているかを確認します。
+  if (!this.#isProcessed) {
+    throw new Error('顔の検出処理が完了していません。hasProcessed()で完了を確認してください。');
+  }
+
+  // ガード節: 次に、口の検出に成功したかを確認します。
+  // プライベートプロパティが false の場合、処理は完了したものの検出に失敗したことを示します。
+  if (this.#mouthCoords === false) {
+    throw new Error('口の検出に失敗しました。');
+  }
+
+  // 上記のチェックを通過した場合、有効なデータが存在するため、
+  // プライベートプロパティに保存されている値を返します。
+  return this.#mouthCoords;
+}
+
+  /**
+ * 左右の眉毛の上下を含めた全体の縁（眉毛と肌の境目）の座標を、"left"と"right"のキーを持つオブジェクトとして返します。
+ * 'left'と'right'は、本人（検出対象）視点での左右を示します。
+ *
+ * @returns {{left: Array<[number, number, number]>, right: Array<[number, number, number]>}} 左右の眉毛の縁の座標 `[x, y, z]` が格納された配列を持つオブジェクト。
+ * @throws {Error} 検出処理がまだ完了していない場合、または眉毛の検出に失敗した場合にスローされます。
+ */
+eyebrows() {
+  // ガード節: まず、全ての非同期処理が完了しているかを確認します。
+  if (!this.#isProcessed) {
+    throw new Error('顔の検出処理が完了していません。hasProcessed()で完了を確認してください。');
+  }
+
+  // ガード節: 次に、眉毛の検出に成功したかを確認します。
+  // プライベートプロパティが false の場合、処理は完了したものの検出に失敗したことを示します。
+  if (this.#eyebrowsCoords === false) {
+    throw new Error('眉毛の検出に失敗しました。');
+  }
+
+  // 上記のチェックを通過した場合、有効なデータが存在するため、
+  // プライベートプロパティに保存されている値を返します。
+  return this.#eyebrowsCoords;
+}
 }
