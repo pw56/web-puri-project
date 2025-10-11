@@ -1,0 +1,9 @@
+仕様変更がありました。
+新たに"Face"クラスに"hair"メソッド、"iris"メソッド、"bbox"メソッドが追加されました。
+またコードを確認したところ、"segmentation-worker.js"でMediaPipeのSelfie Segmentationモデルが使用されず、独自のアルゴリズムが使用されていました。
+独自のアルゴリズムを使用せず、先程
+以上のことを踏まえて以下を作成してください。
+
+出力形式:
+・""メソッドのコード
+・segmentation-worker.js
