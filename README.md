@@ -24,7 +24,7 @@
 - ServiceWorker
 - COCO-SSD (TensorFlow.js)
 - Face Landmarks Detection (TensorFlow.js)
-- MediaPipe Selfie Segmentation (TensorFlow.js)
+- U²-Net
 
 ## ファイル構成
 ```
