@@ -23,7 +23,7 @@
 - PWA
 - Service Worker
 - IndexedDB
-- U²-Net(ONNX + TensorFlow.js)
+- U²-Net (ONNX + TensorFlow.js)
 - COCO-SSD (TensorFlow.js)
 - Face Landmarks Detection (TensorFlow.js)
 
