@@ -23,9 +23,9 @@
 - PWA
 - Service Worker
 - IndexedDB
+- U²-Net(ONNX + TensorFlow.js)
 - COCO-SSD (TensorFlow.js)
 - Face Landmarks Detection (TensorFlow.js)
-- U²-Net(ONNX + TensorFlow.js)
 
 ## ファイル構成
 ```
@@ -55,4 +55,4 @@ root
 
 - テスト環境:
 > **Chrome OS - Google Chrome 138.0.7204.221 (Official Build) （64 ビット）**  
-> **iPhone 16e iOS未入力 Safari バージョン未入力**  
+> **iPhone 16e iOS18.71 Safari 18.6**  
