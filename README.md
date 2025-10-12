@@ -5,12 +5,11 @@
 ![アプリアイコン](src/assets/logo/icon-original.png)
 
 ## 使用プログラミング言語
-- HTML  
-- CSS  
-- JavaScript  
-- TypeScript
-- JSX
-- GLSL  
+- HTML
+- CSS
+- JavaScript
+- TypeScript (TSX)
+- GLSL
 - C言語
 
 ## 使用技術・ライブラリ  
