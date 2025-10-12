@@ -25,7 +25,7 @@
 - IndexedDB
 - COCO-SSD (TensorFlow.js)
 - Face Landmarks Detection (TensorFlow.js)
-- U²-Net
+- U²-Net(ONNX + TensorFlow.js)
 
 ## ファイル構成
 ```
