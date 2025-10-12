@@ -21,7 +21,8 @@
 - Web Share API
 - Web Storage
 - PWA
-- ServiceWorker
+- Service Worker
+- IndexedDB
 - COCO-SSD (TensorFlow.js)
 - Face Landmarks Detection (TensorFlow.js)
 - U²-Net
