@@ -1,6 +1,6 @@
 // COCO-SSD モデル
 importScripts(
-  'u2',
+  'https://pw56.github.io/u2net-tfjs',
   'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0',
   'https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd'
 )
