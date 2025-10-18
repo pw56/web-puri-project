@@ -1,9 +1,9 @@
 // COCO-SSD モデル
 importScripts(
-  'https://pw56.github.io/u2net-tfjs',
+  'https://raw.githubusercontent.com/pw56/u2net-tfjs/refs/heads/master/index.js',
   'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0',
   'https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd'
-)
+);
 
 // COCO-SSDモデルのインスタンスをグローバルスコープで保持し、初回ロード後に再利用します
 let cocoSsdModel = null;
