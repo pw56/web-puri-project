@@ -37,7 +37,7 @@ export function isLengthValue(str) {
   return /^(\d+(\.\d+)?)(cm|mm)$/.test(str);
 }
 
-function imageDataToBlob(imageData) {
+export function imageDataToBlob(imageData) {
   const mimeType = 'image/png';
 
   // Canvasを作成
