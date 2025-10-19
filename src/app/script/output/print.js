@@ -36,3 +36,23 @@ export function printElement(element) {
 export function isLengthValue(str) {
   return /^(\d+(\.\d+)?)(cm|mm)$/.test(str);
 }
+
+function imageDataToBlob(imageData) {
+  const mimeType = 'image/png';
+
+  // Canvasを作成
+  const canvas = document.createElement('canvas');
+  canvas.width = imageData.width;
+  canvas.height = imageData.height;
+
+  // ImageDataを描画
+  const ctx = canvas.getContext('2d');
+  ctx.putImageData(imageData, 0, 0);
+
+  // Blobに変換（非同期）
+  return new Promise((resolve) => {
+    canvas.toBlob((blob) => {
+      resolve(blob);
+    }, mimeType);
+  });
+}
