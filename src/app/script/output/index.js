@@ -1,8 +1,9 @@
-import { printElement } from "./print"
+import "print.js"
 
 export function printPuriSheet(original, height, width) {
   if(!(original instanceof ImageData)) throw new Error("画像が正しくありません。");
-  // 高さと幅もセンチメートルまたはミリメートルか判断するガード節お願い
+  if(!isLengthValue(height)) throw new Error("高さが正しくありません。");
+  if(!isLengthValue(width)) throw new Error("横幅が正しくありません。");
 
   const converted = original; // ここにImagaData型をBlob型に変換して代入
   let imgElement = createElement("img");

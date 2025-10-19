@@ -32,3 +32,7 @@ export function printElement(element) {
     document.body.removeChild(iframe);
   };
 }
+
+export function isLengthValue(str) {
+  return /^(\d+(\.\d+)?)(cm|mm)$/.test(str);
+}
