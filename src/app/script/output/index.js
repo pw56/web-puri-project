@@ -5,7 +5,7 @@ export function printPuriSheet(original, height, width) {
   if(!isLengthValue(height)) throw new Error("高さが正しくありません。");
   if(!isLengthValue(width)) throw new Error("横幅が正しくありません。");
 
-  const converted = original; // ここにImagaData型をBlob型に変換して代入
+  const converted = imageDataToBlob(original);
   let imgElement = createElement("img");
   imgElement.src = URL.createObjectURL(converted);
   imgElement.style.height = height;
