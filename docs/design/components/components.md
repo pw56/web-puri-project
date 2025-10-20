@@ -155,6 +155,9 @@
 > <Select width="20rem"/>
 > ```
 
+  - text
+  - image
+
 ### 選択肢 ピンク
 - 属性: `pink`
 - 表示:
