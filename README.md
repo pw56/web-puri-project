@@ -25,6 +25,7 @@
 - U²-Net (ONNX + TensorFlow.js)
 - COCO-SSD (TensorFlow.js)
 - Face Landmarks Detection (TensorFlow.js)
+- Fabric.js
 
 ## ファイル構成
 ```
