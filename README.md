@@ -34,25 +34,25 @@ root
 
 ## 開発環境
 - マシン:
-  - Chromebook  
+  - Chromebook
   - GitHub Codespaces 2-core
 
 - エディタ:
   - Visual Studio Code
 
 - コンパイラ:
-  - **React:** React Compiler  
-  - **WebAssembly:** Emscripten
+  - **React:** CodeSandbox  
+  - **WebAssembly:** WebAssembly Explorer
 
 - コーディングAI:
-  - Gemini 2.5 Pro  
-  - GPT-5  
+  - Gemini 2.5 Pro
+  - GPT-5
   - Microsoft Copilot
 
 - デザイン:
-  - Figma  
+  - Figma
   - GPT-5
 
 - テスト環境:
-  - Chrome OS - Google Chrome 138.0.7204.221 (Official Build) （64 ビット）  
+  - Chrome OS - Google Chrome 138.0.7204.221 (Official Build) （64 ビット）
   - iPhone 16e iOS18.71 Safari 18.6  
