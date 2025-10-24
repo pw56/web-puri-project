@@ -71,8 +71,8 @@
         <Range name="eyebags" min="0" max="10"/>
         <Range name="eyebrows" min="0" max="10"/>
         <Range name="contour" min="0" max="10"/>
-        <Range name="skin-beauty" min="0" max="10"/>
-        <Range name="skin-clear" min="0" max="10"/>
+        <Range name="smooth-skin" min="0" max="10"/>
+        <Range name="clear-skin" min="0" max="10"/>
       </Face>
 
       <Pen>
