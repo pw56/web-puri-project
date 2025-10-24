@@ -65,7 +65,7 @@
 
     <Function>
       <Face>
-        <Range name="eye" min="0" max="10"/>
+        <Range name="eyes" min="0" max="10"/>
         <Range name="nose" min="0" max="10"/>
         <Range name="mouth" min="0" max="10"/>
         <Range name="eyebags" min="0" max="10"/>
