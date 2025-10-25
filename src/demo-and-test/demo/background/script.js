@@ -11,7 +11,7 @@ window.addEventListener('load', async function (event) {
   });
   selfieSegmentation.setOptions({
     //0:一般的なモデルを使用、1:ランドスケープモデルを使用
-    modelSelection: 1,
+    modelSelection: 0,
   });
   selfieSegmentation.onResults(onResults);
   const camera = new Camera(video, {
