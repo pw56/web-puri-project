@@ -2,7 +2,9 @@
 "selfieSegmentation"関数と"Face"クラスの"selfieSegmentation"プライベートメソッドが仕様変更されました。
 今回の変更で"selfieSegmentation"関数はMediaPipe Selfie Segmentationモデルを使用した背景除去に戻り、
 "selfieSegmentation"プライベートメソッドと"body"メソッドは廃止します。
+また、虹彩の検出を微細化します。
 以上のことを踏まえて以下を作成してください。
 
 出力形式:
 ・"selfieSegmentation"関数のコード
+・虹彩の微細化メソッド("#initialize()"の中で呼び出す)
