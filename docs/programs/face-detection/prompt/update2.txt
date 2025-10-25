@@ -1,7 +1,7 @@
 仕様変更がありました。
 "selfieSegmentation"関数と"Face"クラスの"selfieSegmentation"プライベートメソッドが仕様変更されました。
-今回の変更で"selfieSegmentation"関数は`import("https://pw56.github.io/u2net-tfjs/index.js");`でMediaPipe Selfie Segmentationモデルをインポートして背景除去を実装し、
-"selfieSegmentation"プライベートメソッドは廃止します。
+今回の変更で"selfieSegmentation"関数はMediaPipe Selfie Segmentationモデルを使用した背景除去に戻り、
+"selfieSegmentation"プライベートメソッドと"body"メソッドは廃止します。
 以上のことを踏まえて以下を作成してください。
 
 出力形式:
