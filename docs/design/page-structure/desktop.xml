@@ -64,9 +64,13 @@
     </Result>
 
     <Function>
-      <Select type="pink">
-        <Option>
+      <Select name="mode-switch" type="pink">
+        <Option name="face" text="顔"/>
+        <Option name="pen" text="ペン"/>
+        <Option name="background" text="背景"/>
+        <Option name="filter" text="フィルター"/>
       </Select>
+
       <Face>
         <Range name="eyes" min="0" max="10"/>
         <Range name="nose" min="0" max="10"/>
@@ -80,11 +84,55 @@
 
       <Pen>
         <Range name="width" min="0" max="10">太さ</range>
-        <Select type="menu">
-          <Option name="pen" image="" text="ペン"/>
-          <Option name="marker" image="" text="マーカー"/>
+
+        <Select name="color-palette" type="color" column="入れておいて" row="入れておいて">
+          <Option name="pink-1" color="#"/>
+          <Option name="red-1" color="#"/>
+          <Option name="yellow-1" color="#"/>
+          <Option name="green-1" color="#"/>
+          <Option name="blue-1" color="#"/>
+          <Option name="purple-1" color="#"/>
+          <Option name="black-1" color="#"/>
+
+          <Option name="pink-2" color="#"/>
+          <Option name="red-2" color="#"/>
+          <Option name="yellow-2" color="#"/>
+          <Option name="green-2" color="#"/>
+          <Option name="blue-2" color="#"/>
+          <Option name="purple-2" color="#"/>
+          <Option name="black-2" color="#"/>
+
+          <Option name="pink-3" color="#"/>
+          <Option name="red-3" color="#"/>
+          <Option name="yellow-3" color="#"/>
+          <Option name="green-3" color="#"/>
+          <Option name="blue-3" color="#"/>
+          <Option name="purple-3" color="#"/>
+          <Option name="black-3" color="#"/>
+
+          <Option name="pink-4" color="#"/>
+          <Option name="red-4" color="#"/>
+          <Option name="yellow-4" color="#"/>
+          <Option name="green-4" color="#"/>
+          <Option name="blue-4" color="#"/>
+          <Option name="purple-4" color="#"/>
+          <Option name="black-4" color="#"/>
+        </Select>
+
+        <Select name="pen-switch" type="menu" max-column="3">
+          <Option name="normal" image="" text="ノーマル"/>
+          <Option name="narrow" image="" text="ほそ"/>
+          <Option name="white-border" image="" text="白ふち"/>
+          <Option name="black-border" image="" text="黒ふち"/>
+          <Option name="loose" image="" text="ゆる"/>
+          <Option name="white-neon" image="" text="白ネオン"/>
+          <Option name="black-neon" image="" text="黒ネオン"/>
+          <Option name="plump" image="" text="ぷっくり"/>
+          <Option name="plump-shadow" image="" text="ぷっくりカゲ"/>
           <Option name="crayon" image="" text="クレヨン"/>
-          <Option name="neon" image="" text="ネオン"/>
+          <Option name="translucent" image="" text="半透明"/>
+          <Option name="translucent-shadow" image="" text="半透明ふち"/>
+          <Option name="blur" image="" text="ぼかし"/>
         </Select>
       </Pen>
 
