@@ -64,6 +64,9 @@
     </Result>
 
     <Function>
+      <Select type="pink">
+        <Option>
+      </Select>
       <Face>
         <Range name="eyes" min="0" max="10"/>
         <Range name="nose" min="0" max="10"/>
@@ -76,17 +79,17 @@
       </Face>
 
       <Pen>
-        <Select>
-          <Option name="pen" image="" text="ペン"></Option>
-          <Option name="marker" image="" text="マーカー"></Option>
-          <Option name="crayon" image="" text="クレヨン"></Option>
-          <Option name="neon" image="" text="ネオン"></Option>
-        </Select>
         <Range name="width" min="0" max="10">太さ</range>
+        <Select type="menu">
+          <Option name="pen" image="" text="ペン"/>
+          <Option name="marker" image="" text="マーカー"/>
+          <Option name="crayon" image="" text="クレヨン"/>
+          <Option name="neon" image="" text="ネオン"/>
+        </Select>
       </Pen>
 
       <Background>
-        <Select>
+        <Select type="menu">
           <Option name="example-1" image="" text=""/>
           <Option name="example-2" image="" text=""/>
           <Option name="example-3" image="" text=""/>
@@ -94,7 +97,7 @@
       </Background>
 
       <Filter>
-        <Select>
+        <Select type="menu">
           <Option name="example-hot" image="" text="Example hot"/>
           <Option name="example-dry" image="" text="Example dry"/>
           <Option name="example-mono" image="" text="Example mono"/>
