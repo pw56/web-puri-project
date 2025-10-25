@@ -5,49 +5,98 @@ importScripts(
   'https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd'
 );
 
-// COCO-SSDモデルのインスタンスをグローバルスコープで保持し、初回ロード後に再利用します
+// U²-Netモデルのインスタンスをグローバルスコープで保持し、再利用します
+let u2netModel = null;
+
+/**
+ * U²-Netモデルを用いて、入力された画像から背景を除去します。
+ *
+ * @param {ImageData} imageData - 処理対象となる元の画像(ImageDataオブジェクト)。
+ * @returns {Promise<{image: ImageData, mask: ImageData} | null>} 背景が除去されたImageDataと、
+ * 人物領域を示すマスクImageDataを含むオブジェクト。失敗した場合はnull。
+ */
+async function selfieSegmentation(imageData) {
+  // ガード節: imageDataが無効な場合はエラーを返します
+  if (!imageData || typeof imageData.width !== 'number' || typeof imageData.height !== 'number') {
+    console.error('Error: selfieSegmentationに無効なImageDataオブジェクトが渡されました。');
+    return null;
+  }
+
+  try {
+    // モデルがまだロードされていない場合、初回のみロード処理を実行します
+    if (u2netModel === null) {
+      // U²-Netライブラリを動的にインポートします
+      const u2net = await import('https://pw56.github.io/u2net-tfjs/index.js');
+      // モデルをロードします
+      u2netModel = await u2net.load();
+    }
+
+    // U²-Netモデルでセグメンテーションを実行します
+    // (ライブラリが返す形式を { image: ImageData, mask: ImageData } と仮定します)
+    const result = await u2netModel.segment(imageData);
+
+    // 結果が有効か確認します
+    if (!result || !result.image || !result.mask) {
+      throw new Error('U²-Netによるセグメンテーション結果が無効です。');
+    }
+
+    return result;
+
+  } catch (error) {
+    console.error('背景除去処理中にエラーが発生しました。', error);
+    return null;
+  }
+}
+
+// COCO-SSDモデルのインスタンスをグローバルスコープで保持します
 let cocoSsdModel = null;
 
 /**
- * 入力された画像からTensorFlow.jsのCOCO-SSDモデルを用いて単数または複数の人物を検出し、
+ * 入力された画像からまず背景を除去し、その後COCO-SSDモデルで人物を検出します。
  * 検出した人物の信頼度(score)が0.5以上のものだけを対象とします。
  * 対象者ごとにFaceクラスのインスタンスを生成し、それらのインスタンスを配列で返します。
- * * @param {ImageData} imageData - 検出対象となる画像(ImageDataオブジェクト)。
+ *
+ * @param {ImageData} originalImageData - 検出対象となる元の画像(ImageDataオブジェクト)。
  * @returns {Promise<Face[]>} 検出された顔のFaceクラスインスタンスが格納された配列。
  */
-export async function detectFaces(imageData) {
-  // ガード節: imageDataが無効な場合は、エラーをコンソールに出力し、空の配列を返します
-  if (!imageData || typeof imageData.width !== 'number' || typeof imageData.height !== 'number') {
-    console.error('Error: detectFacesに無効なImageDataオブジェクトが渡されました。');
+async function detectFaces(originalImageData) {
+  // Step 1: 背景除去を実行します
+  const segmentationResult = await selfieSegmentation(originalImageData);
+
+  // 背景除去に失敗した場合は、処理を中断します
+  if (segmentationResult === null) {
+    console.error('背景除去に失敗したため、人物検出を中断します。');
     return [];
   }
 
-  // モデルがまだロードされていない場合、初回のみロード処理を実行します
+  const { image: segmentedImage, mask: segmentationMask } = segmentationResult;
+  
+  // Step 2: 人物検出を実行します
+  
+  // COCO-SSDモデルがロードされていない場合、初回のみロード処理を実行します
   if (cocoSsdModel === null) {
     try {
-      // HTMLでインポート済みのcocoSsdオブジェクトを使用してモデルをロードします
       cocoSsdModel = await cocoSsd.load();
     } catch (error) {
-      // モデルのロードに失敗した場合は、エラーをコンソールに出力し、処理を中断します
       console.error('COCO-SSDモデルのロードに失敗しました。', error);
       return [];
     }
   }
 
   try {
-    // COCO-SSDモデルを使用して、画像からオブジェクトを検出します
-    const predictions = await cocoSsdModel.detect(imageData);
+    // 背景除去済みの画像を使用して、オブジェクトを検出します
+    const predictions = await cocoSsdModel.detect(segmentedImage);
 
     // 検出結果から「人物」であり、かつ信頼度スコアが0.5以上のものだけをフィルタリングします
     const persons = predictions.filter(prediction => {
-      // 'prediction.class'が'person'であり、'prediction.score'が0.5以上であることを確認します
       return prediction.class === 'person' && prediction.score >= 0.5;
     });
 
+    // Step 3: Faceクラスのインスタンスを生成します
     // フィルタリングされた各人物の情報から、Faceクラスのインスタンスを生成します
     const faces = persons.map(person => {
-      // 'person.bbox'には[x, y, width, height]の形式でバウンディングボックスの情報が格納されています
-      return new Face(imageData, person.bbox);
+      // 背景除去済み画像、バウンディングボックス、セグメンテーションマスクを渡します
+      return new Face(segmentedImage, person.bbox, segmentationMask);
     });
 
     return faces;
@@ -58,40 +107,40 @@ export async function detectFaces(imageData) {
   }
 }
 
-export class Face {
+class Face {
   // --- プライベートプロパティ ---
 
-  // 入力された元画像と顔のバウンディングボックス
-  #originalImageData = null;
+  // (既存のプロパティ)
+  #originalImageData = null; // 背景除去済みの画像がここに入ります
   #boundingBox = null;
-
-  // 処理効率化のために顔部分だけを切り出した画像データ
   #faceImageData = null;
-
-  // 全ての非同期処理が完了したかを示すフラグ
   #isProcessed = false;
-
-  // 各パーツの検出結果を格納するプロパティ (エラー時は false が代入される)
   #bodyCoords = null;
   #contourCoords = null;
-  #eyesCoords = null; // { left: [[...]], right: [[...]] }
+  #eyesCoords = null;
   #noseCoords = null;
   #mouthCoords = null;
-  #eyebrowsCoords = null; // { left: [[...]], right: [[...]] }
-  #eyebagsCoords = null; // { left: [[...]], right: [[...]] }
+  #eyebrowsCoords = null;
+  #eyebagsCoords = null;
   #faceAngle = null;
 
+  // (U²-Netのマスクを保持)
+  #segmentationMask = null;
+
+  // (新しく追加されたプロパティ)
+  #hairCoords = null;
+  #irisCoords = null; // { left: [[...]], right: [[...]] }
 
   /**
    * Faceクラスのコンストラクタ。
-   * 検出元の画像と、対象の顔のバウンディングボックスを受け取り、プロパティを初期化します。
-   * 実際のパーツ検出などの重い処理は、プライベートの#initializeメソッドを呼び出すことで非同期に開始されます。
-   * このコンストラクタは、インスタンスを即座に返します。
+   * 背景除去済みの画像、顔のバウンディングボックス、U²-Netのマスクを受け取り、プロパティを初期化します。
+   * 実際のパーツ検出などの重い処理は、プライベートの#initializeメソッドを非同期で開始します。
    *
-   * @param {ImageData} originalImageData - 検出元の画像(ImageDataオブジェクト)。
+   * @param {ImageData} segmentedImageData - 背景が除去された画像(ImageDataオブジェクト)。
    * @param {number[]} boundingBox - COCO-SSDモデルで検出された顔のバウンディングボックス [x, y, width, height]。
+   * @param {ImageData} segmentationMask - U²-Netによって生成された人物領域のマスク画像。
    */
-  constructor(originalImageData, boundingBox) {
+  constructor(segmentedImageData, boundingBox, segmentationMask) {
     // 処理に失敗した場合に備え、結果を格納するプロパティをnullで初期化します
     this.#bodyCoords = null;
     this.#contourCoords = null;
@@ -101,18 +150,30 @@ export class Face {
     this.#eyebrowsCoords = null;
     this.#eyebagsCoords = null;
     this.#faceAngle = null;
+    
+    // 新しいプロパティも初期化します
+    this.#hairCoords = null;
+    this.#irisCoords = null;
 
     // 引数として受け取った値をプライベートプロパティに保存します
-    this.#originalImageData = originalImageData;
+    this.#originalImageData = segmentedImageData;
     this.#boundingBox = boundingBox;
+    this.#segmentationMask = segmentationMask; // マスクを保存
 
     // 処理中であることを示すフラグをfalseに設定します
     this.#isProcessed = false;
-
+    
     // パーツ検出、セグメンテーションなどの全ての非同期処理を開始します。
     // コンストラクタの処理をブロックしないよう、完了を待ちません。
     this.#initialize();
   }
+  
+  // (以下、#initialize, #cropImageData, hasProcessed, faceAngle, isFaceTouched,
+  //  body, contour, eyes, nose, mouth, eyebrows, eyebags メソッドが続く...)
+
+  // (※#initializeメソッドは、内部で #segmentationMask を使って #bodyCoords を計算し、
+  //   face-landmarks-worker.jsから #irisCoords を受け取り、
+  //   #bodyCoords と #contourCoords から #hairCoords を計算するように変更されます)
 
   /**
    * 【参考】コンストラクタから呼び出される非同期初期化メソッド。
