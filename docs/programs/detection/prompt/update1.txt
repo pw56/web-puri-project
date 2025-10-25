@@ -1,6 +1,6 @@
 仕様変更がありました。
 "detectFaces"関数と"Face"クラスのコンストラクタが仕様変更され、新たに"Face"クラスに"hair"メソッド、"iris"メソッド、"bbox"メソッドが追加されました。
-また"selfieSegmentation"関数でU²-Netモデルを用いて背景削除を実装します。
+また"selfieSegmentation"関数では`import("https://raw.githubusercontent.com/pw56/u2net-tfjs/refs/heads/master/index.js");`でU²-Netモデルをインポートして背景除去を実装します。
 さらに現在の
   人物検出 → 顔のパーツ検出 & 背景削除
 から
