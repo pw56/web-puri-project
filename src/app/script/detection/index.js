@@ -1,10 +1,3 @@
-// COCO-SSD モデル
-importScripts(
-  'https://raw.githubusercontent.com/pw56/u2net-tfjs/refs/heads/master/index.js',
-  'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0',
-  'https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd'
-);
-
 // U²-Netモデルのインスタンスをグローバルスコープで保持し、再利用します
 let u2netModel = null;
 
@@ -30,23 +23,29 @@ async function selfieSegmentation(imageData) {
       // モデルをロードします
       u2netModel = await u2net.load();
     }
-
+    
     // U²-Netモデルでセグメンテーションを実行します
     // (ライブラリが返す形式を { image: ImageData, mask: ImageData } と仮定します)
     const result = await u2netModel.segment(imageData);
-
+    
     // 結果が有効か確認します
     if (!result || !result.image || !result.mask) {
       throw new Error('U²-Netによるセグメンテーション結果が無効です。');
     }
-
+    
     return result;
-
+    
   } catch (error) {
     console.error('背景除去処理中にエラーが発生しました。', error);
     return null;
   }
 }
+
+// COCO-SSD モデル
+importScripts(
+  'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0',
+  'https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd'
+);
 
 // COCO-SSDモデルのインスタンスをグローバルスコープで保持します
 let cocoSsdModel = null;
