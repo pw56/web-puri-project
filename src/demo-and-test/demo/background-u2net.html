@@ -1,243 +1,78 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>u2net-tfjs webcam test</title>
+  <meta charset="UTF-8">
+  <title>u2net-tfjs カメラテスト</title>
   <style>
-    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; display:flex; gap:12px; padding:12px; }
-    #left, #right { display:flex; flex-direction:column; gap:8px; align-items:center; }
-    video, canvas { border:1px solid #ccc; width:480px; height:360px; background:#000; }
-    button { padding:8px 12px; font-size:14px; }
-    #status { font-size:13px; color:#333; }
+    body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+    video, canvas { border: 1px solid #ccc; width: 480px; height: 360px; margin: 10px; }
+    button { padding: 10px 20px; margin: 10px; }
   </style>
 </head>
 <body>
-  <div id="left">
-    <video id="video" autoplay playsinline></video>
-    <div>
-      <button id="startBtn">カメラ開始</button>
-      <button id="stopBtn" disabled>停止</button>
-      <button id="toggleBgBtn" disabled>背景を白に</button>
-    </div>
-    <div id="status">モデル未ロード</div>
-  </div>
+  <h2>u2net-tfjs カメラ背景除去デモ</h2>
+  <video id="video" autoplay muted playsinline></video>
+  <canvas id="canvas" width="480" height="360"></canvas>
+  <button id="startBtn">カメラ開始</button>
+  <button id="stopBtn" disabled>カメラ停止</button>
 
-  <div id="right">
-    <canvas id="output" width="480" height="360"></canvas>
-    <div>出力プレビュー</div>
-  </div>
-
+  <!-- TensorFlow.js -->
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.12.0/dist/tf.min.js"></script>
+  <!-- u2net-tfjs index.js（GitHubから直接読み込み） -->
+  <script src="https://raw.githubusercontent.com/pw56/u2net-tfjs/refs/heads/master/index.js"></script>
+
   <script>
-  // ====== 設定 (ここを自分の model.json の URL に差し替える) ======
-  const MODEL_URL = 'https://raw.githubusercontent.com/pw56/u2net-tfjs/refs/heads/master/tfjs/model.json';
-  // 推論用にリサイズする幅・高さ（変換時に使ったサイズに合わせると良い）
-  const MODEL_IN_SIZE = 320;
-  // ===============================================================
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const startBtn = document.getElementById('startBtn');
+    const stopBtn = document.getElementById('stopBtn');
 
-  const video = document.getElementById('video');
-  const outputCanvas = document.getElementById('output');
-  const outCtx = outputCanvas.getContext('2d');
-  const startBtn = document.getElementById('startBtn');
-  const stopBtn = document.getElementById('stopBtn');
-  const toggleBgBtn = document.getElementById('toggleBgBtn');
-  const statusEl = document.getElementById('status');
+    let stream = null;
+    let model = null;
+    let running = false;
 
-  let stream = null;
-  let model = null;
-  let rafId = null;
-  let makeBackgroundWhite = true;
-
-  async function loadModel() {
-    statusEl.textContent = 'モデル読み込み中...';
-    try {
-      model = await tf.loadGraphModel(MODEL_URL);
-      statusEl.textContent = 'モデルロード完了';
-      toggleBgBtn.disabled = false;
-    } catch (err) {
-      statusEl.textContent = 'モデルロード失敗: ' + err.message;
-      console.error(err);
-      throw err;
+    async function loadModel() {
+      model = await u2net.loadModel(); // index.js に定義された関数
     }
-  }
 
-  async function startCamera() {
-    try {
-      stream = await navigator.mediaDevices.getUserMedia({ video: { width: 1280, height: 720 }, audio: false });
+    async function startCamera() {
+      stream = await navigator.mediaDevices.getUserMedia({ video: true });
       video.srcObject = stream;
-      await video.play();
+      running = true;
       startBtn.disabled = true;
       stopBtn.disabled = false;
-      statusEl.textContent = 'カメラ動作中';
-      runLoop();
-    } catch (err) {
-      statusEl.textContent = 'カメラ開始失敗: ' + err.message;
-      console.error(err);
-    }
-  }
-
-  function stopCamera() {
-    if (stream) {
-      stream.getTracks().forEach(t => t.stop());
-      stream = null;
-    }
-    video.pause();
-    video.srcObject = null;
-    startBtn.disabled = false;
-    stopBtn.disabled = true;
-    statusEl.textContent = 'カメラ停止';
-    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
-  }
-
-  // フレームごとにキャプチャして推論・合成を行うループ
-  async function runLoop() {
-    if (!model) {
-      statusEl.textContent = 'モデル未ロード';
-      return;
-    }
-    if (video.readyState < 2) {
-      rafId = requestAnimationFrame(runLoop);
-      return;
+      loop();
     }
 
-    // 元画像を出力キャンバスに合わせて描画（元の解像度を保存）
-    const vw = video.videoWidth;
-    const vh = video.videoHeight;
-    const ow = outputCanvas.width;
-    const oh = outputCanvas.height;
-
-    // 推論用にリサイズ & 前処理
-    await tf.tidy(async () => {
-      let img = tf.browser.fromPixels(video);
-
-      // 中央クロップしてアスペクトを合わせたい場合はここで調整可能
-      // ここでは単純に resize で入力サイズに合わせる
-      const resized = tf.image.resizeBilinear(img, [MODEL_IN_SIZE, MODEL_IN_SIZE]);
-      const normalized = resized.toFloat().div(255.0);
-      const input = normalized.expandDims(0);
-
-      // GraphModel の出力はモデルによって形が異なる（例: [1, H, W, 1] または [1,1,H,W]）
-      // どちらでも対応できるように出力後に形を判定して処理する
-      let out = null;
-      try {
-        out = await model.executeAsync(input);
-      } catch (err) {
-        // 一部モデルは 'input' 名前で呼び出す必要がある場合があるがここでは直接呼ぶ
-        console.error('executeAsync エラー', err);
-        throw err;
+    function stopCamera() {
+      if (stream) {
+        stream.getTracks().forEach(track => track.stop());
+        stream = null;
       }
+      running = false;
+      startBtn.disabled = false;
+      stopBtn.disabled = true;
+    }
 
-      // out が tensor か配列かを統一
-      let maskTensor;
-      if (Array.isArray(out)) {
-        // 最も大きそうなテンソルを選ぶ（慣例で最初または最後）
-        maskTensor = out[0];
-      } else {
-        maskTensor = out;
-      }
+    async function loop() {
+      if (!model || !running) return;
 
-      // mask の形を標準化
-      // 期待: [1, H, W, 1] か [1, 1, H, W]
-      let m = maskTensor;
-      const rank = m.rank;
-      if (rank === 4) {
-        // [1, H, W, 1] の場合は squeeze して [H,W] にする
-        if (m.shape[3] === 1) {
-          m = m.squeeze([0,3]);
-        } else if (m.shape[1] === 1) {
-          // [1,1,H,W] の場合など
-          m = m.squeeze([0,1]).transpose([1,0]);
-        } else {
-          m = m.squeeze([0]).mean(2);
-        }
-      } else if (rank === 3) {
-        m = m.squeeze([0]);
-      } else if (rank === 2) {
-        // already [H,W]
-      } else {
-        // 不明な形状
-      }
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
 
-      // 活性化が必要なら sigmoid を適用（多くの変換済みu2netはそのまま出すが安全策）
-      m = tf.sigmoid(m);
+      const result = await u2net.removeBackground(model, imageData); // index.js の removeBackground 関数
+      ctx.putImageData(result, 0, 0);
 
-      // 0-1 に正規化（念のため）
-      const mMin = m.min();
-      const mMax = m.max();
-      const mask01 = m.sub(mMin).div(mMax.sub(mMin).add(1e-8));
+      requestAnimationFrame(loop);
+    }
 
-      // 元の出力サイズに拡大して Canvas に合成
-      const maskResized = tf.image.resizeBilinear(mask01.expandDims(-1), [oh, ow]).squeeze();
-
-      // Canvas 用の Uint8 マスクを作る
-      const maskData = await tf.browser.toPixels(maskResized);
-
-      // 元画像を描画（キャンバスへ）
-      outCtx.drawImage(video, 0, 0, ow, oh);
-      const imageData = outCtx.getImageData(0, 0, ow, oh);
-
-      // 合成: mask の値に応じてアルファを設定し、背景を白または透過にする
-      const useWhite = makeBackgroundWhite;
-
-      for (let i = 0, p = 0; i < maskData.length; i += 4, p += 4) {
-        // maskData はグレースケールをRGBAで返すため r=g=b=maskByte
-        const maskByte = maskData[i]; // 0-255
-        const alpha = maskByte / 255;
-        // imageData.data[p + 3] = alpha * 255;
-        if (useWhite) {
-          // 前景はそのまま、背景を白にする
-          if (alpha < 0.5) {
-            imageData.data[p + 0] = 255;
-            imageData.data[p + 1] = 255;
-            imageData.data[p + 2] = 255;
-            imageData.data[p + 3] = 255;
-          } else {
-            imageData.data[p + 3] = 255;
-          }
-        } else {
-          // 透過背景: 前景ピクセルのアルファを mask にする
-          imageData.data[p + 3] = Math.floor(alpha * 255);
-        }
-      }
-
-      outCtx.putImageData(imageData, 0, 0);
-
-      // 後片付け
-      if (Array.isArray(out)) out.forEach(t => t.dispose && t.dispose());
-      maskTensor.dispose && maskTensor.dispose();
-      mMin.dispose && mMin.dispose();
-      mMax.dispose && mMax.dispose();
-      maskResized.dispose && maskResized.dispose();
-      mask01.dispose && mask01.dispose();
-      resized.dispose && resized.dispose();
-      normalized.dispose && normalized.dispose();
-      input.dispose && input.dispose();
-      img.dispose && img.dispose();
-    });
-
-    rafId = requestAnimationFrame(runLoop);
-  }
-
-  // UI イベント
-  startBtn.addEventListener('click', async () => {
-    try {
+    startBtn.addEventListener('click', async () => {
       if (!model) await loadModel();
       await startCamera();
-    } catch (e) {
-      console.error(e);
-    }
-  });
+    });
 
-  stopBtn.addEventListener('click', stopCamera);
-
-  toggleBgBtn.addEventListener('click', () => {
-    makeBackgroundWhite = !makeBackgroundWhite;
-    toggleBgBtn.textContent = makeBackgroundWhite ? '背景を白に' : '背景を透過に';
-  });
-
-  // ページ終了時にストリームを閉じる
-  window.addEventListener('beforeunload', stopCamera);
+    stopBtn.addEventListener('click', stopCamera);
   </script>
 </body>
 </html>
