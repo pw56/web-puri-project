@@ -133,7 +133,7 @@ class Face {
   // --- プライベートプロパティ ---
 
   #originalImageData = null; // 背景除去済みの画像がここに入ります
-  #boundingBox = null;
+  #bbox = null;
   #croppedImage = null;
   #isProcessed = false;
   #bodyCoords = null;
@@ -169,7 +169,7 @@ class Face {
 
     // 引数として受け取った値をプライベートプロパティに保存します
     this.#originalImageData = segmentedImageData;
-    this.#boundingBox = boundingBox;
+    this.#bbox = boundingBox;
 
     // 処理中であることを示すフラグをfalseに設定します
     this.#isProcessed = false;
@@ -195,7 +195,7 @@ class Face {
   async #initialize() {
     try {
       // Step 1: 処理を高速化するため、バウンディングボックスを元に顔部分の画像データを切り出す
-      this.#croppedImage = this.#cropImageData(this.#originalImageData, this.#boundingBox);
+      this.#croppedImage = this.#cropImageData(this.#originalImageData, this.#bbox);
       if (!this.#croppedImage) {
         // 切り出しに失敗した場合はエラーをスローする
         throw new Error('顔領域の画像切り出しに失敗しました。');
@@ -299,7 +299,7 @@ class Face {
     const data = imageData.data;
     const width = imageData.width;
     const height = imageData.height;
-    const [bboxX, bboxY] = this.#boundingBox;
+    const [bboxX, bboxY] = this.#bbox;
 
     /**
      * (x, y) 座標 (bbox内) の明度(Luminance)を取得するヘルパー
@@ -705,6 +705,6 @@ class Face {
   bbox() {
     // このメソッドは非同期処理に依存しないため、#isProcessedのチェックは不要です。
     // コンストラクタで受け取った値をそのまま返します。
-    return this.#boundingBox;
+    return this.#bbox;
   }
 }
