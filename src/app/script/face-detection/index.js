@@ -147,20 +147,14 @@ class Face {
   #hairCoords = null;
   #irisCoords = null;
 
-  // (U²-Netのマスクを保持)
-  #segmentationMask = null;
-
-
   /**
    * Faceクラスのコンストラクタ。
-   * 背景除去済みの画像、顔のバウンディングボックス、U²-Netのマスクを受け取り、プロパティを初期化します。
    * 実際のパーツ検出などの重い処理は、プライベートの#initializeメソッドを非同期で開始します。
    *
    * @param {ImageData} segmentedImageData - 背景が除去された画像(ImageDataオブジェクト)。
    * @param {number[]} boundingBox - COCO-SSDモデルで検出された顔のバウンディングボックス [x, y, width, height]。
-   * @param {ImageData} segmentationMask - U²-Netによって生成された人物領域のマスク画像。
    */
-  constructor(segmentedImageData, boundingBox, segmentationMask) {
+  constructor(segmentedImageData, boundingBox) {
     // 処理に失敗した場合に備え、結果を格納するプロパティをnullで初期化します
     this.#bodyCoords = null;
     this.#contourCoords = null;
@@ -176,7 +170,6 @@ class Face {
     // 引数として受け取った値をプライベートプロパティに保存します
     this.#originalImageData = segmentedImageData;
     this.#boundingBox = boundingBox;
-    this.#segmentationMask = segmentationMask; // マスクを保存
 
     // 処理中であることを示すフラグをfalseに設定します
     this.#isProcessed = false;
