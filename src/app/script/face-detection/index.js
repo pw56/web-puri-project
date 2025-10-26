@@ -81,7 +81,7 @@ let cocoSsdModel = null;
  * @param {ImageData} originalImageData - 検出対象となる元の画像(ImageDataオブジェクト)。
  * @returns {Promise<Face[]>} 検出された顔のFaceクラスインスタンスが格納された配列。
  */
-async function detectFaces(originalImageData) {
+export async function detectFaces(originalImageData) {
   // Step 1: 背景除去を実行します
   const segmentationResult = await selfieSegmentation(originalImageData);
 
