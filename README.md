@@ -22,7 +22,7 @@
 - PWA
 - Service Worker
 - IndexedDB
-- U²-Net (ONNX + TensorFlow.js)
+- Selfie Segmentation (MediaPipe)
 - COCO-SSD (TensorFlow.js)
 - Face Landmarks Detection (TensorFlow.js)
 - Fabric.js

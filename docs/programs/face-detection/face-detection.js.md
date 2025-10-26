@@ -20,7 +20,7 @@
 
 ## detectFaces (関数)
 - 概要
-> 入力された画像を`selfieSegmentation`関数で背景削除し、`ImageData`型に変換。
+> 入力された画像を`selfieSegmentation`関数で背景除去し、`ImageData`型に変換。
 > 処理した画像からからTensorFlow.jsのCOCO-SSDモデルを用いて単数または複数の人物を検出しランドマークの処理範囲を限定し、検出した人物の信頼度(`score`)が0.5以上のものだけ、それぞれの人物の顔で`Face`クラスのインスタンスを生成し、それらのインスタンスを配列で返す。
 
 - 引数
