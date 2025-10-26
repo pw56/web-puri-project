@@ -132,10 +132,9 @@ async function detectFaces(originalImageData) {
 class Face {
   // --- プライベートプロパティ ---
 
-  // (既存のプロパティ)
   #originalImageData = null; // 背景除去済みの画像がここに入ります
   #boundingBox = null;
-  #faceImageData = null;
+  #croppedImage = null;
   #isProcessed = false;
   #bodyCoords = null;
   #contourCoords = null;
@@ -145,13 +144,12 @@ class Face {
   #eyebrowsCoords = null;
   #eyebagsCoords = null;
   #faceAngle = null;
+  #hairCoords = null;
+  #irisCoords = null;
 
   // (U²-Netのマスクを保持)
   #segmentationMask = null;
 
-  // (新しく追加されたプロパティ)
-  #hairCoords = null;
-  #irisCoords = null; // { left: [[...]], right: [[...]] }
 
   /**
    * Faceクラスのコンストラクタ。
@@ -172,8 +170,6 @@ class Face {
     this.#eyebrowsCoords = null;
     this.#eyebagsCoords = null;
     this.#faceAngle = null;
-    
-    // 新しいプロパティも初期化します
     this.#hairCoords = null;
     this.#irisCoords = null;
 
@@ -206,8 +202,8 @@ class Face {
   async #initialize() {
     try {
       // Step 1: 処理を高速化するため、バウンディングボックスを元に顔部分の画像データを切り出す
-      this.#faceImageData = this.#cropImageData(this.#originalImageData, this.#boundingBox);
-      if (!this.#faceImageData) {
+      this.#croppedImage = this.#cropImageData(this.#originalImageData, this.#boundingBox);
+      if (!this.#croppedImage) {
         // 切り出しに失敗した場合はエラーをスローする
         throw new Error('顔領域の画像切り出しに失敗しました。');
       }
@@ -216,7 +212,7 @@ class Face {
       // Worker 1: 顔のランドマーク検出 (涙袋の検出も含む)
       const landmarkPromise = new Promise((resolve, reject) => {
         // const worker1 = new Worker('face-landmarks-worker.js');
-        // worker1.postMessage({ image: this.#faceImageData }, [this.#faceImageData.data.buffer]);
+        // worker1.postMessage({ image: this.#croppedImage }, [this.#croppedImage.data.buffer]);
         // worker1.onmessage = e => resolve(e.data);
         // worker1.onerror = reject;
       });
@@ -224,7 +220,7 @@ class Face {
       // Worker 2: 人物のセグメンテーション
       const segmentationPromise = new Promise((resolve, reject) => {
         // const worker2 = new Worker('segmentation-worker.js');
-        // worker2.postMessage({ image: this.#faceImageData }, [this.#faceImageData.data.buffer]);
+        // worker2.postMessage({ image: this.#croppedImage }, [this.#croppedImage.data.buffer]);
         // worker2.onmessage = e => resolve(e.data);
         // worker2.onerror = reject;
       });
@@ -233,7 +229,7 @@ class Face {
       // TODO: Workerから受け取った座標を、バウンディングボックスのオフセットを加えて元画像座標に変換
       // TODO: 変換した座標を各プライベートプロパティ (#contourCoords など) に保存
       // TODO: ランドマークとセグメンテーションの結果を比較し、座標精度を向上させる
-      // TODO: Worker 3を起動し、境界線の微細化処理を行う
+      // TODO: Worker 3と#refineIris()を起動し、境界線の微細化処理を行う
       // TODO: 処理に失敗した場合は、対応するプライベートプロパティに false を代入する
 
     } catch (error) {
@@ -286,127 +282,127 @@ class Face {
  * Face クラス内に定義されるプライベートメソッド
  */
 
-/**
- * 虹彩のランドマークを微細化する (Web Worker内での実行を想定)
- * * モデルから取得した大まかなランドマークを基に、バウンディングボックス内の
- * 画像データ(#croppedImage)をピクセルレベルで解析し、
- * 白目と虹彩の「色の変化(明度の勾配)」が最も大きい点を
- * 虹彩の境界として検出し、#iris に格納する。
- *
- * 依存するプライベート変数 (事前に設定されている前提):
- * - this.#croppedImage: {ImageData} バウンディングボックス内の画像データ
- * - this.#modelIrisLandmarks: { left: [[x,y,z], ...], right: [...] } モデルからの虹彩ランドマーク (bbox内座標)
- * - this.#bbox: [x, y, width, height] 元画像におけるbbox
- *
- * 結果を格納するプライベート変数:
- * - this.#iris: { left: [[x,y,z], ...], right: [...] } (元画像座標)
- */
-#refineIris() {
-  // 最終的な座標を格納する変数を初期化
-  this.#iris = { left: [], right: [] };
-
-  const imageData = this.#croppedImage;
-  if (!imageData) {
-    console.error("Iris refinement failed: #croppedImage is not set.");
-    return; // 処理失敗 (呼び出し元で #processingSuccess = false などで管理)
-  }
-
-  const data = imageData.data;
-  const width = imageData.width;
-  const height = imageData.height;
-  const [bboxX, bboxY] = this.#bbox;
-
   /**
-   * (x, y) 座標 (bbox内) の明度(Luminance)を取得するヘルパー
+   * 虹彩のランドマークを微細化する (Web Worker内での実行を想定)
+   * * モデルから取得した大まかなランドマークを基に、バウンディングボックス内の
+   * 画像データ(#croppedImage)をピクセルレベルで解析し、
+   * 白目と虹彩の「色の変化(明度の勾配)」が最も大きい点を
+   * 虹彩の境界として検出し、#iris に格納する。
+   *
+   * 依存するプライベート変数 (事前に設定されている前提):
+   * - this.#croppedImage: {ImageData} バウンディングボックス内の画像データ
+   * - this.#modelIrisLandmarks: { left: [[x,y,z], ...], right: [...] } モデルからの虹彩ランドマーク (bbox内座標)
+   * - this.#bbox: [x, y, width, height] 元画像におけるbbox
+   *
+   * 結果を格納するプライベート変数:
+   * - this.#iris: { left: [[x,y,z], ...], right: [...] } (元画像座標)
    */
-  const getLuminance = (x, y) => {
-    x = Math.floor(x);
-    y = Math.floor(y);
-    // 画像範囲外チェック
-    if (x < 0 || x >= width || y < 0 || y >= height) {
-      return -1; // 範囲外
-    }
-    const i = (y * width + x) * 4;
-    // 明度計算 (ITU-R BT.601)
-    return 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2];
-  };
+  #refineIris() {
+    // 最終的な座標を格納する変数を初期化
+    this.#irisCoords = { left: [], right: [] };
 
-  // 左右の目をループ処理
-  for (const side of ['left', 'right']) {
-    const landmarks = this.#modelIrisLandmarks[side];
-    
-    // ランドマークが存在しない場合はスキップ
-    if (!landmarks || landmarks.length === 0) {
-      console.warn(`Iris landmarks for '${side}' not found. Skipping refinement.`);
-      continue;
+    const imageData = this.#croppedImage;
+    if (!imageData) {
+      console.error("Iris refinement failed: #croppedImage is not set.");
+      return; // 処理失敗 (呼び出し元で #processingSuccess = false などで管理)
     }
 
-    // 1. ランドマークから虹彩の中心と平均半径を計算 (bbox内座標)
-    let sumX = 0, sumY = 0, sumZ = 0;
-    landmarks.forEach(p => { sumX += p[0]; sumY += p[1]; sumZ += p[2]; });
-    const centerX = sumX / landmarks.length;
-    const centerY = sumY / landmarks.length;
-    const avgZ = sumZ / landmarks.length; // Z座標は平均値を利用
+    const data = imageData.data;
+    const width = imageData.width;
+    const height = imageData.height;
+    const [bboxX, bboxY] = this.#boundingBox;
 
-    let sumRadius = 0;
-    landmarks.forEach(p => {
-      sumRadius += Math.hypot(p[0] - centerX, p[1] - centerY);
-    });
-    const avgRadius = sumRadius / landmarks.length;
-    
-    // 2. 中止から全方位にレイを飛ばし、色の変化(勾配)を探す
-    const refinedPoints = [];
-    const angularSteps = 36; // 360度を10度ステップで探索
-    const searchRadiusMax = avgRadius * 1.8; // 探索する最大半径
-    const searchRadiusMin = avgRadius * 0.4; // 勾配を検出し始める最小半径
+    /**
+     * (x, y) 座標 (bbox内) の明度(Luminance)を取得するヘルパー
+     */
+    const getLuminance = (x, y) => {
+      x = Math.floor(x);
+      y = Math.floor(y);
+      // 画像範囲外チェック
+      if (x < 0 || x >= width || y < 0 || y >= height) {
+        return -1; // 範囲外
+      }
+      const i = (y * width + x) * 4;
+      // 明度計算 (ITU-R BT.601)
+      return 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2];
+    };
 
-    for (let i = 0; i < angularSteps; i++) {
-      const angle = (i / angularSteps) * 2 * Math.PI;
-      const cos = Math.cos(angle);
-      const sin = Math.sin(angle);
+    // 左右の目をループ処理
+    for (const side of ['left', 'right']) {
+      const landmarks = this.#modelIrisLandmarks[side];
       
-      let maxGradient = -Infinity; // 最大勾配
-      let boundaryPoint = null; // 境界点の座標 (bbox内)
+      // ランドマークが存在しない場合はスキップ
+      if (!landmarks || landmarks.length === 0) {
+        console.warn(`Iris landmarks for '${side}' not found. Skipping refinement.`);
+        continue;
+      }
+
+      // 1. ランドマークから虹彩の中心と平均半径を計算 (bbox内座標)
+      let sumX = 0, sumY = 0, sumZ = 0;
+      landmarks.forEach(p => { sumX += p[0]; sumY += p[1]; sumZ += p[2]; });
+      const centerX = sumX / landmarks.length;
+      const centerY = sumY / landmarks.length;
+      const avgZ = sumZ / landmarks.length; // Z座標は平均値を利用
+
+      let sumRadius = 0;
+      landmarks.forEach(p => {
+        sumRadius += Math.hypot(p[0] - centerX, p[1] - centerY);
+      });
+      const avgRadius = sumRadius / landmarks.length;
       
-      let prevLuminance = getLuminance(centerX, centerY);
-      if (prevLuminance === -1) continue; // 中心が範囲外(異常)
+      // 2. 中止から全方位にレイを飛ばし、色の変化(勾配)を探す
+      const refinedPoints = [];
+      const angularSteps = 36; // 360度を10度ステップで探索
+      const searchRadiusMax = avgRadius * 1.8; // 探索する最大半径
+      const searchRadiusMin = avgRadius * 0.4; // 勾配を検出し始める最小半径
 
-      // 中心から外側へ1ピクセルずつ探索
-      for (let r = 1; r < searchRadiusMax; r++) {
-        const x = centerX + cos * r;
-        const y = centerY + sin * r;
+      for (let i = 0; i < angularSteps; i++) {
+        const angle = (i / angularSteps) * 2 * Math.PI;
+        const cos = Math.cos(angle);
+        const sin = Math.sin(angle);
         
-        const currentLuminance = getLuminance(x, y);
-        if (currentLuminance === -1) break; // 画像範囲外
+        let maxGradient = -Infinity; // 最大勾配
+        let boundaryPoint = null; // 境界点の座標 (bbox内)
+        
+        let prevLuminance = getLuminance(centerX, centerY);
+        if (prevLuminance === -1) continue; // 中心が範囲外(異常)
 
-        // 明度の差分(勾配)。白目(高) -> 虹彩(低)への変化で正の値が大きくなる
-        const gradient = prevLuminance - currentLuminance; 
-        
-        // 最小半径を超えた領域で、最大の勾配を持つ点を境界とみなす
-        if (r > searchRadiusMin && gradient > maxGradient) {
-          maxGradient = gradient;
-          boundaryPoint = [x, y];
+        // 中心から外側へ1ピクセルずつ探索
+        for (let r = 1; r < searchRadiusMax; r++) {
+          const x = centerX + cos * r;
+          const y = centerY + sin * r;
+          
+          const currentLuminance = getLuminance(x, y);
+          if (currentLuminance === -1) break; // 画像範囲外
+
+          // 明度の差分(勾配)。白目(高) -> 虹彩(低)への変化で正の値が大きくなる
+          const gradient = prevLuminance - currentLuminance; 
+          
+          // 最小半径を超えた領域で、最大の勾配を持つ点を境界とみなす
+          if (r > searchRadiusMin && gradient > maxGradient) {
+            maxGradient = gradient;
+            boundaryPoint = [x, y];
+          }
+          prevLuminance = currentLuminance;
         }
-        prevLuminance = currentLuminance;
+        
+        if (boundaryPoint) {
+          // 3. 元の画像の座標系に変換して保存
+          refinedPoints.push([
+            boundaryPoint[0] + bboxX, // bboxのオフセットを加算
+            boundaryPoint[1] + bboxY,
+            avgZ // Z座標
+          ]);
+        }
       }
       
-      if (boundaryPoint) {
-        // 3. 元の画像の座標系に変換して保存
-        refinedPoints.push([
-          boundaryPoint[0] + bboxX, // bboxのオフセットを加算
-          boundaryPoint[1] + bboxY,
-          avgZ // Z座標
-        ]);
-      }
+      // 微細化された座標を格納
+      this.#irisCoords[side] = refinedPoints;
     }
     
-    // 微細化された座標を格納
-    this.#iris[side] = refinedPoints;
+    // 処理が完了。
+    // (もし両目とも refinedPoints が空なら、呼び出し元で失敗フラグを設定)
   }
-  
-  // 処理が完了。
-  // (もし両目とも refinedPoints が空なら、呼び出し元で失敗フラグを設定)
-}
 
   /**
    * 顔のパーツの検出やセグメンテーションなど、全ての非同期処理が完了したかを返します。
@@ -494,108 +490,6 @@ class Face {
 
     // 交差した回数が奇数回なら内側、偶数回なら外側となります
     return isInside;
-  }
-
-  /**
-   * [プライベートメソッド]
-   * WebGLとGLSLシェーダーを用いて、セグメンテーションマスクから人物と背景の境界線を高速に抽出し、
-   * 座標の配列として返します。
-   * この処理はOffscreenCanvas上で行われ、DOMに影響を与えません。
-   *
-   * @param {ImageData} mask - 人物領域が示されたセグメンテーションマスクのImageDataオブジェクト。
-   * @returns {Promise<Array<[number, number]>>} 検出された境界線の座標 `[x, y]` の配列。
-   * @throws {Error} WebGLの初期化や処理に失敗した場合。
-   */
-  async #selfieSegmentation(mask) {
-    const { width, height } = mask;
-
-    // 1. OffscreenCanvasを使用してWebGLコンテキストをセットアップします
-    const canvas = new OffscreenCanvas(width, height);
-    const gl = canvas.getContext('webgl');
-    if (!gl) {
-      throw new Error('WebGLコンテキストの初期化に失敗しました。');
-    }
-
-    // 2. GLSLシェーダーコードをコンパイルし、WebGLプログラムを作成します
-    // (シェーダーコードは'selfie-segmentation.glsl'ファイルから読み込まれる想定です)
-    const vertexShader = this.#createShader(gl, gl.VERTEX_SHADER, selfieSegmentationVertexShaderSource);
-    const fragmentShader = this.#createShader(gl, gl.FRAGMENT_SHADER, selfieSegmentationFragmentShaderSource);
-    const program = this.#createProgram(gl, vertexShader, fragmentShader);
-
-    // 3. 画面全体を覆う四角形(ポリゴン)の頂点データを準備します
-    const positionBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
-      -1, -1, 1, -1, -1, 1,
-      -1, 1, 1, -1, 1, 1,
-    ]), gl.STATIC_DRAW);
-
-    // 4. 頂点シェーダーの属性(attribute)とバッファを結びつけます
-    const positionLocation = gl.getAttribLocation(program, 'a_position');
-    gl.enableVertexAttribArray(positionLocation);
-    gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
-
-    // 5. 入力マスク画像をテクスチャとしてGPUにアップロードします
-    const texture = gl.createTexture();
-    gl.bindTexture(gl.TEXTURE_2D, texture);
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, mask);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-
-    // 6. プログラムを使用し、Uniform変数を設定します
-    gl.useProgram(program);
-    gl.uniform2f(gl.getUniformLocation(program, 'u_textureSize'), width, height);
-
-    // 7. レンダリングを実行します (ここでシェーダーが全ピクセルに対して実行されます)
-    gl.drawArrays(gl.TRIANGLES, 0, 6);
-
-    // 8. レンダリング結果(境界線が白く描画された画像)をGPUから読み出します
-    const pixels = new Uint8Array(width * height * 4);
-    gl.readPixels(0, 0, width, height, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
-
-    // 9. ピクセルデータを走査し、白いピクセル(境界線)の座標を抽出します
-    const boundaryCoordinates = [];
-    for (let y = 0; y < height; y++) {
-      for (let x = 0; x < width; x++) {
-        const red = pixels[(y * width + x) * 4];
-        if (red === 255) {
-          // Y座標を上下反転させ、通常の画像座標系に変換します
-          boundaryCoordinates.push([x, height - 1 - y]);
-        }
-      }
-    }
-
-    return boundaryCoordinates;
-  }
-
-  /**
-   * [プライベートヘルパー] WebGLシェーダーをコンパイルします。
-   */
-  #createShader(gl, type, source) {
-    const shader = gl.createShader(type);
-    gl.shaderSource(shader, source);
-    gl.compileShader(shader);
-    if (gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-      return shader;
-    }
-    console.error('シェーダーのコンパイルに失敗しました:', gl.getShaderInfoLog(shader));
-    gl.deleteShader(shader);
-  }
-
-  /**
-   * [プライベートヘルパー] WebGLプログラムをリンクします。
-   */
-  #createProgram(gl, vertexShader, fragmentShader) {
-    const program = gl.createProgram();
-    gl.attachShader(program, vertexShader);
-    gl.attachShader(program, fragmentShader);
-    gl.linkProgram(program);
-    if (gl.getProgramParameter(program, gl.LINK_STATUS)) {
-      return program;
-    }
-    console.error('プログラムのリンクに失敗しました:', gl.getProgramInfoLog(program));
-    gl.deleteProgram(program);
   }
 
   /**
