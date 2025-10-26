@@ -278,16 +278,12 @@ class Face {
     return ctx.getImageData(x, y, width, height);
   }
 
-  /*
- * Face クラス内に定義されるプライベートメソッド
- */
-
   /**
    * 虹彩のランドマークを微細化する (Web Worker内での実行を想定)
    * * モデルから取得した大まかなランドマークを基に、バウンディングボックス内の
    * 画像データ(#croppedImage)をピクセルレベルで解析し、
    * 白目と虹彩の「色の変化(明度の勾配)」が最も大きい点を
-   * 虹彩の境界として検出し、#iris に格納する。
+   * 虹彩の境界として検出し、#irisCoords に格納する。
    *
    * 依存するプライベート変数 (事前に設定されている前提):
    * - this.#croppedImage: {ImageData} バウンディングボックス内の画像データ
@@ -295,7 +291,7 @@ class Face {
    * - this.#bbox: [x, y, width, height] 元画像におけるbbox
    *
    * 結果を格納するプライベート変数:
-   * - this.#iris: { left: [[x,y,z], ...], right: [...] } (元画像座標)
+   * - this.#irisCoords: { left: [[x,y,z], ...], right: [...] } (元画像座標)
    */
   #refineIris() {
     // 最終的な座標を格納する変数を初期化
