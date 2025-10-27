@@ -86,37 +86,37 @@
         <Range name="width" min="0" max="10">太さ</range>
 
         <Select name="color-palette" type="color" column="入れておいて" row="入れておいて">
-          <Option name="pink-1" color="#"/>
-          <Option name="red-1" color="#"/>
-          <Option name="yellow-1" color="#"/>
-          <Option name="green-1" color="#"/>
-          <Option name="blue-1" color="#"/>
-          <Option name="purple-1" color="#"/>
-          <Option name="black-1" color="#"/>
+          <Option name="pink-1" color="#ffdef7"/>
+          <Option name="red-1" color="#ffcccc"/>
+          <Option name="yellow-1" color="#fdfaa3"/>
+          <Option name="green-1" color="#d0faa2"/>
+          <Option name="blue-1" color="#c8f0ff"/>
+          <Option name="purple-1" color="#e2d5fb"/>
+          <Option name="black-1" color="#ffffff"/>
 
-          <Option name="pink-2" color="#"/>
-          <Option name="red-2" color="#"/>
-          <Option name="yellow-2" color="#"/>
-          <Option name="green-2" color="#"/>
-          <Option name="blue-2" color="#"/>
-          <Option name="purple-2" color="#"/>
-          <Option name="black-2" color="#"/>
+          <Option name="pink-2" color="#ffa7e9"/>
+          <Option name="red-2" color="#fdb85f"/>
+          <Option name="yellow-2" color="#fff15b"/>
+          <Option name="green-2" color="#9df3d8"/>
+          <Option name="blue-2" color="#77d9fd"/>
+          <Option name="purple-2" color="#db87dc"/>
+          <Option name="black-2" color="#d9d9d9"/>
 
-          <Option name="pink-3" color="#"/>
-          <Option name="red-3" color="#"/>
-          <Option name="yellow-3" color="#"/>
-          <Option name="green-3" color="#"/>
-          <Option name="blue-3" color="#"/>
-          <Option name="purple-3" color="#"/>
-          <Option name="black-3" color="#"/>
+          <Option name="pink-3" color="#ff7da6"/>
+          <Option name="red-3" color="#ff7e1f"/>
+          <Option name="yellow-3" color="#e5c5a6"/>
+          <Option name="green-3" color="#62cc62"/>
+          <Option name="blue-3" color="#5984ff"/>
+          <Option name="purple-3" color="#ac6df2"/>
+          <Option name="black-3" color="#999797"/>
 
-          <Option name="pink-4" color="#"/>
-          <Option name="red-4" color="#"/>
-          <Option name="yellow-4" color="#"/>
-          <Option name="green-4" color="#"/>
-          <Option name="blue-4" color="#"/>
-          <Option name="purple-4" color="#"/>
-          <Option name="black-4" color="#"/>
+          <Option name="pink-4" color="#ff2ea4"/>
+          <Option name="red-4" color="#f42534"/>
+          <Option name="yellow-4" color="#8c4b25"/>
+          <Option name="green-4" color="#437434"/>
+          <Option name="blue-4" color="#3339ad"/>
+          <Option name="purple-4" color="#7935b7"/>
+          <Option name="black-4" color="#242424"/>
         </Select>
 
         <Select name="pen-switch" type="menu" max-column="3">
