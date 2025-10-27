@@ -24,7 +24,7 @@
   </QuantitySelection>
 
   <Shoot>
-    <Text name="n枚目"/>
+    <Text name="frame-index"/>
     <Shooting>
       <Video name="camera"/>
       <Button name="shoot" type="button-2"/>
@@ -37,7 +37,7 @@
   </Shoot>
 
   <PuriShoot>
-    <Text name="n枚目"/>
+    <Text name="frame-index"/>
     <Shooting>
       <Video name="camera"/>
       <Pose>
@@ -60,7 +60,7 @@
 
     <Banner>
       <Button name="back" type="button-2" image=""/>
-      <Text name="n枚目" type="value"/>
+      <Text name="frame-index" type="value"/>
       <Button name="next" type="button-2" image=""/>
     </Banner>
 
