@@ -57,13 +57,20 @@
 
   <!--ここ(edit)から。このページ構造とマークダウン作って。Codespacesのtreeの方がタイパいい。おやすみ。 2025/09/01 21:52-->
   <Edit>
+
+    <Banner>
+      <Button name="back" type="button-2" image=""/>
+      <Text name="n枚目" type="value"/>
+      <Button name="next" type="button-2" image=""/>
+    </Banner>
+
     <Result>
       <Canvas name="background"/>
       <Canvas name="photo"/>
       <Canvas name="drawing"/>
     </Result>
 
-    <Function>
+    <Workspace>
       <Select name="mode-switch" type="pink">
         <Option name="face" text="顔"/>
         <Option name="pen" text="ペン"/>
@@ -72,20 +79,20 @@
       </Select>
 
       <Face>
-        <Range name="eyes" min="0" max="10"/>
-        <Range name="nose" min="0" max="10"/>
-        <Range name="mouth" min="0" max="10"/>
-        <Range name="eyebags" min="0" max="10"/>
-        <Range name="eyebrows" min="0" max="10"/>
-        <Range name="contour" min="0" max="10"/>
-        <Range name="smooth-skin" min="0" max="10"/>
-        <Range name="clear-skin" min="0" max="10"/>
+        <Text>目</Text><Range name="eyes" min="0" max="10"/>
+        <Text>鼻</Text><Range name="nose" min="0" max="10"/>
+        <Text>口</Text><Range name="mouth" min="0" max="10"/>
+        <Text>涙袋</Text><Range name="eyebags" min="0" max="10"/>
+        <Text>眉毛</Text><Range name="eyebrows" min="0" max="10"/>
+        <Text>透明肌</Text><Range name="clear-skin" min="0" max="10"/>
+        <Text>美肌</Text><Range name="smooth-skin" min="0" max="10"/>
+        <Text>輪郭</Text><Range name="contour" min="0" max="10"/>
       </Face>
 
       <Pen>
         <Range name="width" min="0" max="10">太さ</range>
 
-        <Select name="color-palette" type="color" column="入れておいて" row="入れておいて">
+        <Select name="color-palette" type="color" column="7" row="4">
           <Option name="pink-1" color="#ffdef7"/>
           <Option name="red-1" color="#ffcccc"/>
           <Option name="yellow-1" color="#fdfaa3"/>
@@ -151,7 +158,7 @@
           <Option name="example-mono" image="" text="Example mono"/>
         </Select>
       </Filter>
-    </Function>
+    </Workspace>
   </Edit>
 
   <Output>
