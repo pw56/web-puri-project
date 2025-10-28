@@ -1,0 +1,21 @@
+# ポーズ一覧
+
+- Finger Heart
+- Winged Heart
+- Today’s Favorite Pose
+- Heart Frame
+- Motion Peace
+- Gal Peace
+- Chuki Chuki
+- Reverse Peace
+- Under-Eye Peace
+- Under-Chin Peace
+- Wink Bug
+- Cheek Poke
+- Thinking Pose
+- Slim-Face Pose
+- Cutesy Act
+- Akkanbe
+- Secret Pose
+- Chin Rest
+- Holding Sweet
