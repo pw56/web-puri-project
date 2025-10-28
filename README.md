@@ -18,10 +18,10 @@
 - Web Worker  
 - WebAssembly
 - Web Share API
-- Web Storage
 - PWA
 - Service Worker
 - IndexedDB
+- Dexie.js
 - Selfie Segmentation (MediaPipe)
 - COCO-SSD (TensorFlow.js)
 - Face Landmarks Detection (TensorFlow.js)
