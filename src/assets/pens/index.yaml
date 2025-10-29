@@ -1,0 +1,51 @@
+- name: "normal"
+  image: ""
+  display-name: "ノーマル"
+
+- name: "narrow"
+  image: ""
+  display-name: "ほそ"
+
+- name: "white-border"
+  image: ""
+  display-name: "白ふち"
+
+- name: "black-border"
+  image: ""
+  display-name: "黒ふち"
+
+- name: "loose"
+  image: ""
+  display-name: "ゆる"
+
+- name: "white-neon"
+  image: ""
+  display-name: "白ネオン"
+
+- name: "black-neon"
+  image: ""
+  display-name: "黒ネオン"
+
+- name: "plump"
+  image: ""
+  display-name: "ぷっくり"
+
+- name: "plump-shadow"
+  image: ""
+  display-name: "ぷっくりカゲ"
+
+- name: "crayon"
+  image: ""
+  display-name: "クレヨン"
+
+- name: "translucent"
+  image: ""
+  display-name: "半透明"
+
+- name: "translucent-shadow"
+  image: ""
+  display-name: "半透明ふち"
+
+- name: "blur"
+  image: ""
+  display-name: "ぼかし"
