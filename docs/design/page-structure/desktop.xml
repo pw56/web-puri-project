@@ -150,14 +150,6 @@
           <Option name="example-3" image="" text=""/>
         </Select>
       </Background>
-
-      <Filter>
-        <Select type="menu">
-          <Option name="example-hot" image="" text="Example hot"/>
-          <Option name="example-dry" image="" text="Example dry"/>
-          <Option name="example-mono" image="" text="Example mono"/>
-        </Select>
-      </Filter>
     </Workspace>
   </Edit>
 
