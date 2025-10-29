@@ -1,9 +1,9 @@
 これらのデータ・情報から以下のファイルを作成しなさい。
 
 情報:
-・ページの完成イメージのスクリーンショット(screenshot.png)
+・ページの完成イメージのスクリーンショット(desktop.png, mobile.png)
 ・ページの動作や構造の仕様書(shoot.md)
 ・素材のファイル(.png, .svg)
 
 出力ファイル:
-・shoot.tsx
+・Shoot.tsx

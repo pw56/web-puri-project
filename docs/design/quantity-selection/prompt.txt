@@ -1,9 +1,9 @@
 これらのデータ・情報から以下のファイルを作成しなさい。
 
 情報:
-・ページの完成イメージのスクリーンショット(screenshot.png)
+・ページの完成イメージのスクリーンショット(desktop.png, mobile.png)
 ・ページの動作や構造の仕様書(quantity-selection.md)
 ・素材のファイル(add.svg, subtract.svg)
 
 出力ファイル:
-・quantity-selection.tsx
+・QuantitySelection.tsx

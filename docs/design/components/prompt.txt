@@ -1,8 +1,10 @@
 これらのデータ・情報から以下のファイルを作成しなさい。
 
 情報:
-・ページの完成イメージのスクリーンショット(screenshot.png)
+・ページの完成イメージのスクリーンショット(desktop.png, mobile.png)
 ・ページの動作や構造の仕様書(components.md)
 
 出力ファイル:
-・components.tsx
+・Button.tsx
+・Text.tsx
+・Select.tsx
