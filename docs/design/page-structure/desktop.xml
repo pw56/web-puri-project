@@ -74,8 +74,8 @@
       <Select name="mode-switch" type="pink">
         <Option name="face" text="顔"/>
         <Option name="pen" text="ペン"/>
+        <Option name="stamp" text="スタンプ"/>
         <Option name="background" text="背景"/>
-        <Option name="filter" text="フィルター"/>
       </Select>
 
       <Face>
