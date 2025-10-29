@@ -1,0 +1,39 @@
+- name: "white"
+  image: ""
+  display-name: "白背景（シンプル）"
+
+- name: "pink"
+  image: ""
+  display-name: "ピンク（シンプル）"
+
+- name: "spots"
+  image: ""
+  display-name: "水玉模様（水色）"
+
+- name: "strawberries"
+  image: ""
+  display-name: "いちご柄（赤）"
+
+- name: "stars"
+  image: ""
+  display-name: "星いっぱい"
+
+- name: "hearts"
+  image: ""
+  display-name: "ハートいっぱい"
+
+- name: "rainbow"
+  image: ""
+  display-name: "レインボー"
+
+- name: "y2k"
+  image: ""
+  display-name: "平成レトロ（Y2K風）"
+
+- name: "cloud"
+  image: ""
+  display-name: "雲"
+
+- name: "classroom"
+  image: ""
+  display-name: "教室風（黒板背景）
