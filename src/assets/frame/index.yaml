@@ -1,0 +1,27 @@
+- name: "natural"
+  image: ""
+  display-name: "ナチュラル"
+
+- name: "glitter"
+  image: ""
+  display-name: "キラキラ"
+
+- name: "cherry-blossom"
+  image: ""
+  display-name: "桜"
+
+- name: "retro"
+  image: ""
+  display-name: "レトロ"
+
+- name: "film"
+  image: ""
+  display-name: "フィルム"
+
+- name: "y2k"
+  image: ""
+  display-name: "Y2K風"
+
+- name: "korean"
+  image: ""
+  display-name: "韓国風"
