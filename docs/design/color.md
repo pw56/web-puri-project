@@ -3,12 +3,10 @@
 - 要素
   - ピンク: `#FF87C5`
   - 白: `#FFFFFF`
-  - 水色: `#7AF2FF`
 
 - アプリ全体:
   - アプリ背景: `#FFFFFF`
   - 落書き画面: `#FFB7DC`
-  - 仮: `#D9D9D9`
 
 - アニメーション:
   - 薄い色: `color-mix(in srgb, currentColor, #fff)`
