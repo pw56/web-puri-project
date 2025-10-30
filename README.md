@@ -10,7 +10,6 @@
 - JavaScript
 - TypeScript (TSX)
 - GLSL
-- C言語
 
 ## 使用技術・ライブラリ  
 - React  
