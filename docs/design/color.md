@@ -11,5 +11,6 @@
   - 仮: `#D9D9D9`
 
 - アニメーション:
-  - 薄いピンク: `#FFB7DC`
+  - 薄い色: `color-mix(in srgb, currentColor, #fff)`
   - ピンクがかった白: `#FFD9EC`
+  - 暗転色: `rgb(178 178 178 / 0.5)`
