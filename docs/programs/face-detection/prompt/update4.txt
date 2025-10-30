@@ -1,0 +1,7 @@
+意思の伝達に不備がありました。
+"selfieSegmentation"は内部でWeb Workerを立ち上げて、U²-Netモデルではなく、Selfie Segmentationモデルを実行する仕様に変更されました。
+以上のことを踏まえて以下を作成してください。
+
+出力形式:
+・"selfieSegmentation"関数のコード
+・segmentation-worker.js
