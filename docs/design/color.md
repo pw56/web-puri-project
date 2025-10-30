@@ -9,6 +9,6 @@
   - 落書き画面: `#FFB7DC`
 
 - アニメーション:
-  - 薄い色: `color-mix(in srgb, currentColor, #fff)`
+  - 薄い色: `color-mix(in srgb, currentColor, #FFFFFF)`
   - ピンクがかった白: `#FFD9EC`
   - 暗転色: `rgb(178 178 178 / 0.5)`
