@@ -42,7 +42,7 @@ root
 
 - コンパイラ:
   - **React:** CodeSandbox  
-  - **WebAssembly:** WebAssembly Explorer
+  - **WebAssembly:** Emscripten
 
 - コーディングAI:
   - Gemini 2.5 Pro
