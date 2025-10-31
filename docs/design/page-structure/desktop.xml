@@ -161,4 +161,43 @@
     <Button name="end" type="button-1">終わる</Button>
   </Output>
   
+  <Print>
+    <Image name="preview"/>
+    <Workspace>
+      <Frame></Frame>
+      <PanelLayout></PanelLayout>
+      <Size></Size>
+    </Workspace>
+    <Button name="page-back" type="back"/>
+    <Button name="start-printing" type="button-1">
+  </Print>
+
+  <Album>
+    <Button name="page-back" type="back"></Button>
+    <Images>
+      <Image/>
+      <Image/>
+      <Image/>...
+    </Images>
+    <Pages>
+      <Button name="previous" type="back"/>
+      <Text name="current-page" type="plain"/>
+      <Button name="next" type="next"/>
+    </Pages>
+  </Album>
+
+  <Album-puri>
+    <Button name="page-back" type="back"/>
+    <Button name="delete" type="button-1" image=""/>
+    <Image name="preview"/>
+    <Date>
+      <Text name="property" type="plain"></Text>
+      <Text name="link" type="link"></Text>
+    </Date>
+    <Place>
+      <Text name="property" type="plain"></Text>
+      <Text name="link" type="link"></Text>
+    </Place>
+  </Album-puri>
+
 </WebPage>
