@@ -9,6 +9,8 @@
 - CSS
 - JavaScript
 - TypeScript (TSX)
+- WebAssembly
+- GLSL
 
 ## 使用技術・ライブラリ  
 - React  
