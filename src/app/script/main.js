@@ -4,7 +4,7 @@ import "../style/main.js";
 import "face-detection/index.js";
 import "face-editing/index.js";
 import "output/index.js";
-import "preserve/version.js";
+import "app-version-manager/index.js";
 
 // オフライン対応
 if ('serviceWorker' in navigator) {
