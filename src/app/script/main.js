@@ -1,6 +1,9 @@
-import "detection/detection.js";
-import "editing/editing.js";
-import "output/output.js";
+// React呼び出し
+import "../style/main.js";
+
+import "face-detection/index.js";
+import "face-editing/index.js";
+import "output/index.js";
 import "preserve/version.js";
 
 // オフライン対応
