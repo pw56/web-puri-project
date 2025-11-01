@@ -1,5 +1,5 @@
 const CACHE_NAME = 'puri-app-cache';
-const urlsToCache = ['/', './index.html', './style', './script', './image'];
+const urlsToCache = ['../app', '../assets'];
 
 self.addEventListener('install', event => {
   event.waitUntil(
