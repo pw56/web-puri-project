@@ -271,127 +271,73 @@ class Face {
     return ctx.getImageData(x, y, width, height);
   }
 
-  /**
-   * 虹彩のランドマークを微細化する (Web Worker内での実行を想定)
-   * * モデルから取得した大まかなランドマークを基に、バウンディングボックス内の
-   * 画像データ(#croppedImage)をピクセルレベルで解析し、
-   * 白目と虹彩の「色の変化(明度の勾配)」が最も大きい点を
-   * 虹彩の境界として検出し、#irisCoords に格納する。
-   *
-   * 依存するプライベート変数 (事前に設定されている前提):
-   * - this.#croppedImage: {ImageData} バウンディングボックス内の画像データ
-   * - this.#modelIrisLandmarks: { left: [[x,y,z], ...], right: [...] } モデルからの虹彩ランドマーク (bbox内座標)
-   * - this.#bbox: [x, y, width, height] 元画像におけるbbox
-   *
-   * 結果を格納するプライベート変数:
-   * - this.#irisCoords: { left: [[x,y,z], ...], right: [...] } (元画像座標)
-   */
-  #refineIris() {
-    // 最終的な座標を格納する変数を初期化
-    this.#irisCoords = { left: [], right: [] };
+// Faceクラスの静的プロパティとしてIris検出モデルを保持します
+Face.irisModel = null;
 
-    const imageData = this.#croppedImage;
-    if (!imageData) {
-      console.error("Iris refinement failed: #croppedImage is not set.");
-      return; // 処理失敗 (呼び出し元で #processingSuccess = false などで管理)
-    }
-
-    const data = imageData.data;
-    const width = imageData.width;
-    const height = imageData.height;
-    const [bboxX, bboxY] = this.#bbox;
-
-    /**
-     * (x, y) 座標 (bbox内) の明度(Luminance)を取得するヘルパー
-     */
-    const getLuminance = (x, y) => {
-      x = Math.floor(x);
-      y = Math.floor(y);
-      // 画像範囲外チェック
-      if (x < 0 || x >= width || y < 0 || y >= height) {
-        return -1; // 範囲外
-      }
-      const i = (y * width + x) * 4;
-      // 明度計算 (ITU-R BT.601)
-      return 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2];
-    };
-
-    // 左右の目をループ処理
-    for (const side of ['left', 'right']) {
-      const landmarks = this.#modelIrisLandmarks[side];
-      
-      // ランドマークが存在しない場合はスキップ
-      if (!landmarks || landmarks.length === 0) {
-        console.warn(`Iris landmarks for '${side}' not found. Skipping refinement.`);
-        continue;
-      }
-
-      // 1. ランドマークから虹彩の中心と平均半径を計算 (bbox内座標)
-      let sumX = 0, sumY = 0, sumZ = 0;
-      landmarks.forEach(p => { sumX += p[0]; sumY += p[1]; sumZ += p[2]; });
-      const centerX = sumX / landmarks.length;
-      const centerY = sumY / landmarks.length;
-      const avgZ = sumZ / landmarks.length; // Z座標は平均値を利用
-
-      let sumRadius = 0;
-      landmarks.forEach(p => {
-        sumRadius += Math.hypot(p[0] - centerX, p[1] - centerY);
-      });
-      const avgRadius = sumRadius / landmarks.length;
-      
-      // 2. 中止から全方位にレイを飛ばし、色の変化(勾配)を探す
-      const refinedPoints = [];
-      const angularSteps = 36; // 360度を10度ステップで探索
-      const searchRadiusMax = avgRadius * 1.8; // 探索する最大半径
-      const searchRadiusMin = avgRadius * 0.4; // 勾配を検出し始める最小半径
-
-      for (let i = 0; i < angularSteps; i++) {
-        const angle = (i / angularSteps) * 2 * Math.PI;
-        const cos = Math.cos(angle);
-        const sin = Math.sin(angle);
-        
-        let maxGradient = -Infinity; // 最大勾配
-        let boundaryPoint = null; // 境界点の座標 (bbox内)
-        
-        let prevLuminance = getLuminance(centerX, centerY);
-        if (prevLuminance === -1) continue; // 中心が範囲外(異常)
-
-        // 中心から外側へ1ピクセルずつ探索
-        for (let r = 1; r < searchRadiusMax; r++) {
-          const x = centerX + cos * r;
-          const y = centerY + sin * r;
-          
-          const currentLuminance = getLuminance(x, y);
-          if (currentLuminance === -1) break; // 画像範囲外
-
-          // 明度の差分(勾配)。白目(高) -> 虹彩(低)への変化で正の値が大きくなる
-          const gradient = prevLuminance - currentLuminance; 
-          
-          // 最小半径を超えた領域で、最大の勾配を持つ点を境界とみなす
-          if (r > searchRadiusMin && gradient > maxGradient) {
-            maxGradient = gradient;
-            boundaryPoint = [x, y];
-          }
-          prevLuminance = currentLuminance;
+/**
+ * [プライベートメソッド]
+ * MediaPipe Irisモデル（face-landmarks-detectionの機能）を使用して、
+ * 顔画像から高精度な虹彩（瞳）のランドマークを検出します。
+ *
+ * @param {ImageData} faceImageData - 検出対象となる顔部分のImageDataオブジェクト。
+ * @returns {Promise<{left: Array<[number, number, number]>, right: Array<[number, number, number]>} | false>} 
+ * 左右の虹彩の座標配列を持つオブジェクト。検出に失敗した場合は false。
+ */
+async #refineIris(faceImageData) {
+  try {
+    // 1. モデルのロード（初回のみ）
+    if (Face.irisModel === null) {
+      // HTMLでインポート済みのfaceLandmarksDetectionを使用します
+      Face.irisModel = await faceLandmarksDetection.load(
+        faceLandmarksDetection.SupportedPackages.mediapipeFacemesh,
+        {
+          maxFaces: 1,
+          // 虹彩検出を有効化します
+          predictIrises: true
         }
-        
-        if (boundaryPoint) {
-          // 3. 元の画像の座標系に変換して保存
-          refinedPoints.push([
-            boundaryPoint[0] + bboxX, // bboxのオフセットを加算
-            boundaryPoint[1] + bboxY,
-            avgZ // Z座標
-          ]);
-        }
-      }
-      
-      // 微細化された座標を格納
-      this.#irisCoords[side] = refinedPoints;
+      );
     }
     
-    // 処理が完了。
-    // (もし両目とも refinedPoints が空なら、呼び出し元で失敗フラグを設定)
+    // 2. 虹彩を含む顔ランドマークの推定
+    const predictions = await Face.irisModel.estimateFaces({
+      input: faceImageData,
+      // trueに設定すると、モデルは入力画像の向きを自動補正します
+      flipHorizontal: false
+    });
+
+    if (!predictions || predictions.length === 0) {
+      // 顔（虹彩）が検出できなかった場合
+      return false;
+    }
+
+    const keypoints = predictions[0].keypoints;
+
+    // 3. 虹彩のキーポイントのみを抽出・整形します
+    // 'leftIris' と 'rightIris' という名前でキーポイントが取得されます
+    const leftIrisCoords = keypoints
+      .filter(p => p.name && p.name.startsWith('leftIris'))
+      .map(p => [p.x, p.y, p.z]);
+      
+    const rightIrisCoords = keypoints
+      .filter(p => p.name && p.name.startsWith('rightIris'))
+      .map(p => [p.x, p.y, p.z]);
+
+    // 両方の虹彩が検出できた場合のみ結果を返します
+    if (leftIrisCoords.length > 0 && rightIrisCoords.length > 0) {
+      return {
+        left: leftIrisCoords,
+        right: rightIrisCoords
+      };
+    } else {
+      // 虹彩の座標が取得できなかった場合
+      return false;
+    }
+
+  } catch (error) {
+    console.error('虹彩の検出処理中にエラーが発生しました。', error);
+    return false;
   }
+}
 
   /**
    * 顔のパーツの検出やセグメンテーションなど、全ての非同期処理が完了したかを返します。
