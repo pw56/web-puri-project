@@ -1,67 +1,48 @@
 /**
- * MediaPipe Selfie Segmentationモデルで、入力画像から背景を除去して返す。
- * (内部関数)
+ * Web Workerを起動し、MediaPipe Selfie Segmentationモデルによる背景除去を実行します。
  *
- * @param {ImageData} image - 処理する画像
- * @returns {Promise<ImageData>} - 背景が除去された画像 (背景は透明)
+ * @param {ImageData} imageData - 処理対象となる元の画像(ImageDataオブジェクト)。
+ * @returns {Promise<{image: ImageData, mask: ImageData} | null>} 
+ * 背景が除去されたImageDataと、人物領域を示すマスクImageDataを含むオブジェクト。
+ * 失敗した場合はnull。
  */
-async function selfieSegmentation(image) {
-  // 'selfieSegmenterModel' は、
-  // await bodySegmentation.createSegmenter(
-  //   bodySegmentation.SupportedModels.MediaPipeSelfieSegmentation,
-  //   { runtime: 'mediapipe', ... }
-  // );
-  // によって事前にロードされたモデルインスタンスと仮定します。
-  
-  if (!selfieSegmenterModel) {
-    console.error("Selfie Segmentation model (selfieSegmenterModel) is not loaded.");
-    // モデルがない場合は、空の（透明な）画像を返します。
-    return new ImageData(image.width, image.height);
+async function selfieSegmentation(imageData) {
+  // ガード節: imageDataが無効な場合はエラーを返します
+  if (!imageData || typeof imageData.width !== 'number' || typeof imageData.height !== 'number') {
+    console.error('Error: selfieSegmentationに無効なImageDataオブジェクトが渡されました。');
+    return null;
   }
 
-  const segmentationConfig = {
-    flipHorizontal: false, // 水平反転なし
-    multiSegmentPerson: false // 単一人物モード
-  };
-  
-  // セグメンテーションの実行
-  const people = await selfieSegmenterModel.segmentPeople(image, segmentationConfig);
+  return new Promise((resolve, reject) => {
+    // ワーカースクリプトのパスを指定してWorkerを起動します
+    const worker = new Worker('segmentation-worker.js');
 
-  if (people.length === 0) {
-    // 人物が検出されなかった場合、空の（透明な）画像を返します。
-    return new ImageData(image.width, image.height);
-  }
+    // Workerからの処理結果（またはエラー）を受け取るリスナーを設定します
+    worker.onmessage = (event) => {
+      if (event.data.error) {
+        // Worker内でエラーが発生した場合
+        console.error('Segmentation Worker Error:', event.data.error);
+        reject(new Error(event.data.error));
+      } else {
+        // 処理が成功した場合、結果オブジェクトを返します
+        // { image: segmentedImageData, mask: maskImageData }
+        resolve(event.data.result);
+      }
+      // 処理完了後、Workerを終了させます
+      worker.terminate();
+    };
 
-  // 人物のマスク(ImageData)を取得
-  const foregroundThreshold = 0.5; // 人物と判定する閾値
-  const mask = await bodySegmentation.toBinaryMask(
-    people,
-    { r: 0, g: 0, b: 0, a: 0 }, // 背景色 (透明)
-    { r: 255, g: 255, b: 255, a: 255 }, // 前景色 (白)
-    false, // foregroundThresholdMask (falseで単一マスク)
-    foregroundThreshold
-  );
+    // Workerでエラーが発生した場合
+    worker.onerror = (error) => {
+      console.error('Failed to start Segmentation Worker:', error);
+      reject(error);
+      worker.terminate();
+    };
 
-  // 元の画像(image)とマスク(mask)を合成
-  const originalData = image.data;
-  const maskData = mask.data;
-  // 結果を格納する新しいバッファ
-  const segmentedData = new Uint8ClampedArray(originalData.length);
-
-  // ピクセルごとに処理
-  for (let i = 0; i < originalData.length; i += 4) {
-    // マスクが白 (maskData[i] === 255) の場合、それは前景（人物）
-    if (maskData[i] === 255) { 
-      segmentedData[i]     = originalData[i];     // R
-      segmentedData[i + 1] = originalData[i + 1]; // G
-      segmentedData[i + 2] = originalData[i + 2]; // B
-      segmentedData[i + 3] = originalData[i + 3]; // A
-    } 
-    // 背景 (maskData[i] === 0) の場合、segmentedDataはデフォルトの (0, 0, 0, 0) [透明] のまま
-  }
-
-  // 合成されたデータから新しいImageDataオブジェクトを作成して返す
-  return new ImageData(segmentedData, image.width, image.height);
+    // Workerに画像データを送信して処理を開始します
+    // パフォーマンス向上のため、画像バッファをコピーではなく転送(transfer)します
+    worker.postMessage({ image: imageData }, [imageData.data.buffer]);
+  });
 }
 
 // COCO-SSD モデル
