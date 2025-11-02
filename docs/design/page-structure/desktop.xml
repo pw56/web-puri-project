@@ -186,7 +186,7 @@
     </Pages>
   </Album>
 
-  <Album-puri>
+  <AlbumPicked>
     <Button name="page-back" type="back"/>
     <Button name="delete" type="button-1" image=""/>
     <Image name="preview"/>
@@ -198,6 +198,6 @@
       <Text name="property" type="plain"></Text>
       <Text name="link" type="link"></Text>
     </Place>
-  </Album-puri>
+  </AlbumPicked>
 
 </WebPage>
