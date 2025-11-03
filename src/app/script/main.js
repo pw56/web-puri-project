@@ -15,11 +15,10 @@ if ('serviceWorker' in navigator) {
   });
 }
 
-// Reactの仮想DOMのページ読み込み時
 // ここは新バージョンリリース時に絶対更新！
-() => {
+window.addEventListener('load', () => {
   const appVersion = new AppVersionManager("1.0.0");
-  if(appVersion.isUpdated()) {
-    // notice関数でポップアップ
-  }
-}
+  // if(appVersion.isUpdated()) {
+  //   notice('新機能をリリース！', 'screenshot.png');
+  // }
+});
