@@ -1,4 +1,4 @@
-export class AppVersionManager() {
+export class AppVersionManager {
   #INITIAL_VERSION = "";
   #STORAGE_KEY = "lastVisitedVersion";
   #PREVIOUS_VERSION = localStorage.getItem(STORAGE_KEY);
@@ -10,7 +10,7 @@ export class AppVersionManager() {
   constructor(initialVersion) {
     if(typeof(initialVersion) !== 'string') throw new Error("入力値が文字列ではありません。");
     
-    #INITIAL_VERSION = initialVersion;
+    this.#INITIAL_VERSION = initialVersion;
   }
 
   /**
