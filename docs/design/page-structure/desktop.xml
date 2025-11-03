@@ -168,12 +168,12 @@
       <PanelLayout></PanelLayout>
       <Size></Size>
     </Workspace>
-    <Button name="page-back" type="back"/>
+    <Button name="cancel-printing" type="back"/>
     <Button name="start-printing" type="button-1">
   </Print>
 
   <Album>
-    <Button name="page-back" type="back"></Button>
+    <Button name="close-album" type="back"></Button>
     <Images>
       <Image/>
       <Image/>
@@ -187,7 +187,7 @@
   </Album>
 
   <AlbumPicked>
-    <Button name="page-back" type="back"/>
+    <Button name="back-to-album" type="back"/>
     <Button name="delete" type="button-1" image=""/>
     <Image name="preview"/>
     <Date>
