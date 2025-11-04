@@ -59,12 +59,12 @@ let cocoSsdModel = null;
  * 検出した人物の信頼度(score)が0.5以上のものだけを対象とします。
  * 対象者ごとにDetectedFaceクラスのインスタンスを生成し、それらのインスタンスを配列で返します。
  *
- * @param {ImageData} originalImageData - 検出対象となる元の画像(ImageDataオブジェクト)。
+ * @param {ImageData} segmentedImageData - 検出対象となる元の画像(ImageDataオブジェクト)。
  * @returns {Promise<DetectedFace[]>} 検出された顔のDetectedFaceクラスインスタンスが格納された配列。
  */
-export async function detectFaces(originalImageData) {
+export async function detectFaces(segmentedImageData) {
   // Step 1: 背景除去を実行します
-  const segmentationResult = await selfieSegmentation(originalImageData);
+  const segmentationResult = await selfieSegmentation(segmentedImageData);
 
   // 背景除去に失敗した場合は、処理を中断します
   if (segmentationResult === null) {
@@ -113,7 +113,7 @@ export async function detectFaces(originalImageData) {
 class DetectedFace {
   // --- プライベートプロパティ ---
 
-  #originalImageData = null; // 背景除去済みの画像がここに入ります
+  #segmentedImageData = null; // 背景除去済みの画像がここに入ります
   #bbox = null;
   #croppedImage = null;
   #isProcessed = false;
@@ -149,7 +149,7 @@ class DetectedFace {
     this.#irisCoords = null;
 
     // 引数として受け取った値をプライベートプロパティに保存します
-    this.#originalImageData = segmentedImageData;
+    this.#segmentedImageData = segmentedImageData;
     this.#bbox = boundingBox;
 
     // 処理中であることを示すフラグをfalseに設定します
@@ -176,7 +176,7 @@ class DetectedFace {
   async #initialize() {
     try {
       // Step 1: 処理を高速化するため、バウンディングボックスを元に顔部分の画像データを切り出す
-      this.#croppedImage = this.#cropImageData(this.#originalImageData, this.#bbox);
+      this.#croppedImage = this.#cropImageData(this.#segmentedImageData, this.#bbox);
       if (!this.#croppedImage) {
         // 切り出しに失敗した場合はエラーをスローする
         throw new Error('顔領域の画像切り出しに失敗しました。');
