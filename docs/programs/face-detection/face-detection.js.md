@@ -65,7 +65,7 @@
 > [x, y, width, height] // 第2引数
 > ```
 
-### getOriginal (メソッド)
+### getSegmented (メソッド)
 - 概要
 > クラス内のプライベート変数が保持している元画像を返す。
 
