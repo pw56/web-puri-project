@@ -73,9 +73,9 @@ export async function detectFaces(segmentedImageData) {
   }
 
   const { image: segmentedImage, mask: segmentationMask } = segmentationResult;
-  
+
   // Step 2: 人物検出を実行します
-  
+
   // COCO-SSDモデルがロードされていない場合、初回のみロード処理を実行します
   if (cocoSsdModel === null) {
     try {
@@ -154,12 +154,12 @@ class DetectedFace {
 
     // 処理中であることを示すフラグをfalseに設定します
     this.#isProcessed = false;
-    
+
     // パーツ検出、セグメンテーションなどの全ての非同期処理を開始します。
     // コンストラクタの処理をブロックしないよう、完了を待ちません。
     this.#initialize();
   }
-  
+
   // (以下、#initialize, #cropImageData, hasProcessed, faceAngle, isFaceTouched,
   //  body, contour, eyes, nose, mouth, eyebrows, eyebags メソッドが続く...)
 
@@ -172,7 +172,7 @@ class DetectedFace {
    * 仕様書に記述されているWeb Workerの起動や画像処理をここで行います。
    * (このメソッドはコンストラクタの一部として機能するため、参考として記載します)
    */
-  
+
   async #initialize() {
     try {
       // Step 1: 処理を高速化するため、バウンディングボックスを元に顔部分の画像データを切り出す
@@ -252,73 +252,73 @@ class DetectedFace {
     return ctx.getImageData(x, y, width, height);
   }
 
-// DetectedFaceクラスの静的プロパティとしてIris検出モデルを保持します
-DetectedFace.irisModel = null;
+  // DetectedFaceクラスの静的プロパティとしてIris検出モデルを保持します
+  DetectedFace.irisModel = null;
 
-/**
- * [プライベートメソッド]
- * MediaPipe Irisモデル（face-landmarks-detectionの機能）を使用して、
- * 顔画像から高精度な虹彩（瞳）のランドマークを検出します。
- *
- * @param {ImageData} faceImageData - 検出対象となる顔部分のImageDataオブジェクト。
- * @returns {Promise<{left: Array<[number, number, number]>, right: Array<[number, number, number]>} | false>} 
- * 左右の虹彩の座標配列を持つオブジェクト。検出に失敗した場合は false。
- */
-async #refineIris(faceImageData) {
-  try {
-    // 1. モデルのロード（初回のみ）
-    if (DetectedFace.irisModel === null) {
-      // HTMLでインポート済みのfaceLandmarksDetectionを使用します
-      DetectedFace.irisModel = await faceLandmarksDetection.load(
-        faceLandmarksDetection.SupportedPackages.mediapipeFacemesh,
-        {
-          maxFaces: 1,
-          // 虹彩検出を有効化します
-          predictIrises: true
-        }
-      );
-    }
-    
-    // 2. 虹彩を含む顔ランドマークの推定
-    const predictions = await DetectedFace.irisModel.estimateFaces({
-      input: faceImageData,
-      // trueに設定すると、モデルは入力画像の向きを自動補正します
-      flipHorizontal: false
-    });
+  /**
+   * [プライベートメソッド]
+   * MediaPipe Irisモデル（face-landmarks-detectionの機能）を使用して、
+   * 顔画像から高精度な虹彩（瞳）のランドマークを検出します。
+   *
+   * @param {ImageData} faceImageData - 検出対象となる顔部分のImageDataオブジェクト。
+   * @returns {Promise<{left: Array<[number, number, number]>, right: Array<[number, number, number]>} | false>} 
+   * 左右の虹彩の座標配列を持つオブジェクト。検出に失敗した場合は false。
+   */
+  async #refineIris(faceImageData) {
+    try {
+      // 1. モデルのロード（初回のみ）
+      if (DetectedFace.irisModel === null) {
+        // HTMLでインポート済みのfaceLandmarksDetectionを使用します
+        DetectedFace.irisModel = await faceLandmarksDetection.load(
+          faceLandmarksDetection.SupportedPackages.mediapipeFacemesh,
+          {
+            maxFaces: 1,
+            // 虹彩検出を有効化します
+            predictIrises: true
+          }
+        );
+      }
 
-    if (!predictions || predictions.length === 0) {
-      // 顔（虹彩）が検出できなかった場合
+      // 2. 虹彩を含む顔ランドマークの推定
+      const predictions = await DetectedFace.irisModel.estimateFaces({
+        input: faceImageData,
+        // trueに設定すると、モデルは入力画像の向きを自動補正します
+        flipHorizontal: false
+      });
+
+      if (!predictions || predictions.length === 0) {
+        // 顔（虹彩）が検出できなかった場合
+        return false;
+      }
+
+      const keypoints = predictions[0].keypoints;
+
+      // 3. 虹彩のキーポイントのみを抽出・整形します
+      // 'leftIris' と 'rightIris' という名前でキーポイントが取得されます
+      const leftIrisCoords = keypoints
+        .filter(p => p.name && p.name.startsWith('leftIris'))
+        .map(p => [p.x, p.y, p.z]);
+
+      const rightIrisCoords = keypoints
+        .filter(p => p.name && p.name.startsWith('rightIris'))
+        .map(p => [p.x, p.y, p.z]);
+
+      // 両方の虹彩が検出できた場合のみ結果を返します
+      if (leftIrisCoords.length > 0 && rightIrisCoords.length > 0) {
+        return {
+          left: leftIrisCoords,
+          right: rightIrisCoords
+        };
+      } else {
+        // 虹彩の座標が取得できなかった場合
+        return false;
+      }
+
+    } catch (error) {
+      console.error('虹彩の検出処理中にエラーが発生しました。', error);
       return false;
     }
-
-    const keypoints = predictions[0].keypoints;
-
-    // 3. 虹彩のキーポイントのみを抽出・整形します
-    // 'leftIris' と 'rightIris' という名前でキーポイントが取得されます
-    const leftIrisCoords = keypoints
-      .filter(p => p.name && p.name.startsWith('leftIris'))
-      .map(p => [p.x, p.y, p.z]);
-      
-    const rightIrisCoords = keypoints
-      .filter(p => p.name && p.name.startsWith('rightIris'))
-      .map(p => [p.x, p.y, p.z]);
-
-    // 両方の虹彩が検出できた場合のみ結果を返します
-    if (leftIrisCoords.length > 0 && rightIrisCoords.length > 0) {
-      return {
-        left: leftIrisCoords,
-        right: rightIrisCoords
-      };
-    } else {
-      // 虹彩の座標が取得できなかった場合
-      return false;
-    }
-
-  } catch (error) {
-    console.error('虹彩の検出処理中にエラーが発生しました。', error);
-    return false;
   }
-}
 
   /**
    * 顔のパーツの検出やセグメンテーションなど、全ての非同期処理が完了したかを返します。
