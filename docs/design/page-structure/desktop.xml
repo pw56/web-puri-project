@@ -127,6 +127,7 @@
         </Select>
 
         <Select name="pen-switch" type="menu" max-column="3">
+          <!--ここはプログラムにより動的生成-->
           <Option name="normal" image="" text="ノーマル"/>
           <Option name="narrow" image="" text="ほそ"/>
           <Option name="white-border" image="" text="白ふち"/>
@@ -164,9 +165,45 @@
   <Print>
     <Image name="preview"/>
     <Workspace>
-      <Frame></Frame>
-      <PanelLayout></PanelLayout>
-      <Size></Size>
+      <Select name="mode-switch" type="pink">
+        <Option name="frame" text="フレーム"/>
+        <Option name="panel-layout" text="コマ割り"/>
+        <Option name="size" text="サイズ"/>
+      </Select>
+      <Frame>
+        <Select name="menu" type="menu" max-column="3">
+          <!--ここはプログラムにより動的生成-->
+        </Select>
+      </Frame>
+      <PanelLayout>
+        <Column>
+          <Text type="plain">横</Text>
+          <Count/> <!--"default-value"属性をプログラムから動的設定-->
+        </Column>
+        <Row>
+          <Text type="plain">縦</Text>
+          <Count/> <!--"default-value"属性をプログラムから動的設定-->
+        </Row>
+      </PanelLayout>
+      <Size>
+        <SheetSize>
+          <Text name="property" type="plain">用紙</Text>
+          <Select name="size-select" type="white">
+            <Option name="" text="L判"/>
+            <Option name="" text="2L判"/>
+            <Option name="" text="A4"/>
+            <Option name="" text="B5"/>
+          </Select>
+        </SheetSize>
+
+        <PrintSize>
+          <Text name="property" type="plain">印刷サイズ</Text>
+          <Select name="size-select" type="white">
+            <Option name="puri-size" text="プリサイズ"/>
+            <Option name="zoom" text="拡大"/>
+          </Select>
+        </PrintSize>
+      </Size>
     </Workspace>
     <Button name="cancel-printing" type="back"/>
     <Button name="start-printing" type="button-1">
@@ -175,9 +212,7 @@
   <Album>
     <Button name="close-album" type="back"></Button>
     <Images>
-      <Image/>
-      <Image/>
-      <Image/>...
+      <!--ここはプログラムにより動的生成-->
     </Images>
     <Pages>
       <Button name="previous" type="back"/>
