@@ -57,10 +57,10 @@ let cocoSsdModel = null;
 /**
  * 入力された画像からまず背景を除去し、その後COCO-SSDモデルで人物を検出します。
  * 検出した人物の信頼度(score)が0.5以上のものだけを対象とします。
- * 対象者ごとにFaceクラスのインスタンスを生成し、それらのインスタンスを配列で返します。
+ * 対象者ごとにDetectedFaceクラスのインスタンスを生成し、それらのインスタンスを配列で返します。
  *
  * @param {ImageData} originalImageData - 検出対象となる元の画像(ImageDataオブジェクト)。
- * @returns {Promise<Face[]>} 検出された顔のFaceクラスインスタンスが格納された配列。
+ * @returns {Promise<DetectedFace[]>} 検出された顔のDetectedFaceクラスインスタンスが格納された配列。
  */
 export async function detectFaces(originalImageData) {
   // Step 1: 背景除去を実行します
@@ -95,11 +95,11 @@ export async function detectFaces(originalImageData) {
       return prediction.class === 'person' && prediction.score >= 0.5;
     });
 
-    // Step 3: Faceクラスのインスタンスを生成します
-    // フィルタリングされた各人物の情報から、Faceクラスのインスタンスを生成します
+    // Step 3: DetectedFaceクラスのインスタンスを生成します
+    // フィルタリングされた各人物の情報から、DetectedFaceクラスのインスタンスを生成します
     const faces = persons.map(person => {
       // 背景除去済み画像、バウンディングボックス、セグメンテーションマスクを渡します
-      return new Face(segmentedImage, person.bbox, segmentationMask);
+      return new DetectedFace(segmentedImage, person.bbox, segmentationMask);
     });
 
     return faces;
@@ -110,7 +110,7 @@ export async function detectFaces(originalImageData) {
   }
 }
 
-class Face {
+class DetectedFace {
   // --- プライベートプロパティ ---
 
   #originalImageData = null; // 背景除去済みの画像がここに入ります
@@ -129,7 +129,7 @@ class Face {
   #irisCoords = null;
 
   /**
-   * Faceクラスのコンストラクタ。
+   * DetectedFaceクラスのコンストラクタ。
    * 実際のパーツ検出などの重い処理は、プライベートの#initializeメソッドを非同期で開始します。
    *
    * @param {ImageData} segmentedImageData - 背景が除去された画像(ImageDataオブジェクト)。
@@ -252,8 +252,8 @@ class Face {
     return ctx.getImageData(x, y, width, height);
   }
 
-// Faceクラスの静的プロパティとしてIris検出モデルを保持します
-Face.irisModel = null;
+// DetectedFaceクラスの静的プロパティとしてIris検出モデルを保持します
+DetectedFace.irisModel = null;
 
 /**
  * [プライベートメソッド]
@@ -267,9 +267,9 @@ Face.irisModel = null;
 async #refineIris(faceImageData) {
   try {
     // 1. モデルのロード（初回のみ）
-    if (Face.irisModel === null) {
+    if (DetectedFace.irisModel === null) {
       // HTMLでインポート済みのfaceLandmarksDetectionを使用します
-      Face.irisModel = await faceLandmarksDetection.load(
+      DetectedFace.irisModel = await faceLandmarksDetection.load(
         faceLandmarksDetection.SupportedPackages.mediapipeFacemesh,
         {
           maxFaces: 1,
@@ -280,7 +280,7 @@ async #refineIris(faceImageData) {
     }
     
     // 2. 虹彩を含む顔ランドマークの推定
-    const predictions = await Face.irisModel.estimateFaces({
+    const predictions = await DetectedFace.irisModel.estimateFaces({
       input: faceImageData,
       // trueに設定すると、モデルは入力画像の向きを自動補正します
       flipHorizontal: false
@@ -359,7 +359,7 @@ async #refineIris(faceImageData) {
   }
 
   /**
-   * 入力された元の画像の座標が、このオブジェクトの保持している顔(Face Landmarks Detectionモデルで検出した顔の輪郭の内側)の範囲内かを判別します。
+   * 入力された元の画像の座標が、このオブジェクトの保持している顔(DetectedFace Landmarks Detectionモデルで検出した顔の輪郭の内側)の範囲内かを判別します。
    * 境界線上の座標も範囲内として扱います。
    *
    * @param {number[]} coordinate - 判別対象の座標 `[x, y]`。
