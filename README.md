@@ -9,7 +9,7 @@
 - CSS
 - JavaScript
 - TypeScript (TSX)
-- C言語(WebAssembly)
+- C言語 (WebAssembly)
 - GLSL
 
 ## 使用技術・ライブラリ  
@@ -26,6 +26,9 @@
 - COCO-SSD (TensorFlow.js)
 - Face Landmarks Detection (TensorFlow.js)
 - Fabric.js
+
+## 使用素材
+- [OtoLogic](https://otologic.jp)
 
 ## ファイル構成
 ```
