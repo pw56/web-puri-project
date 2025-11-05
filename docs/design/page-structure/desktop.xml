@@ -4,8 +4,8 @@
     <Title>
       <Image name="sample-1"/>
       <Image name="sample-2"/>
-      <Object name="heart-1"/>
-      <Object name="heart-2"/>
+      <Object name="heart-1" type="svg" src="heart-1.svg"/>
+      <Object name="heart-2" type="svg" src="heart-2.svg"/>
       <Text name="title-name" type="plane">Webプリ</Text>
     </Title>
     <Button name="shooting" type="button-1">撮影</Button>
@@ -15,11 +15,12 @@
 
   <QuantitySelection>
     <Text name="page-title" type="plane">枚数選択</Text>
-    <Quantity>
+    <!-- <Quantity>
       <Text name="count" type="value"></Text>
       <Button name="add" type="button-1" image=""></Button>
       <Button name="subtract" type="button-1" image=""></Button>
-    </Quantity>
+    </Quantity> -->
+    <Count name="quantity"/>
     <Button name="start-shooting" type="button-1">撮影を始める</Button>
   </QuantitySelection>
 
@@ -43,9 +44,10 @@
       <Pose>
         <Image name="example" image=""/>
         <Text name="message" type="plane"/>
+        <Object name="background" type=""/>
       </Pose>
       <Countdown>
-        <Object name="background-circle"/>
+        <Object name="background-circle" type="circle"/>
         <Text name="number" type="plane"/>
       </Countdown>
     </Shooting>
@@ -59,9 +61,9 @@
   <Edit>
 
     <Banner>
-      <Button name="back" type="button-2" image=""/>
+      <Button name="back" type="back"/>
       <Text name="frame-index" type="value"/>
-      <Button name="next" type="button-2" image=""/>
+      <Button name="next" type="next"/>
     </Banner>
 
     <Result>
@@ -204,6 +206,7 @@
           </Select>
         </PrintSize>
       </Size>
+      <Object name="background" type="">
     </Workspace>
     <Button name="cancel-printing" type="back"/>
     <Button name="start-printing" type="button-1">
