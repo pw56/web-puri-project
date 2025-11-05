@@ -167,10 +167,6 @@ class DetectedFace {
   // (以下、#initialize, #cropImageData, hasProcessed, faceAngle, isFaceTouched,
   //  body, contour, eyes, nose, mouth, eyebrows, eyebags メソッドが続く...)
 
-  // (※#initializeメソッドは、内部で #segmentationMask を使って #bodyCoords を計算し、
-  //   face-landmarks-worker.jsから #irisCoords を受け取り、
-  //   #bodyCoords と #contourCoords から #hairCoords を計算するように変更されます)
-
   /**
    * 【参考】コンストラクタから呼び出される非同期初期化メソッド。
    * 仕様書に記述されているWeb Workerの起動や画像処理をここで行います。
@@ -189,18 +185,10 @@ class DetectedFace {
       // Step 2: Web Workerを起動し、並列処理を開始する
       // Worker 1: 顔のランドマーク検出 (涙袋の検出も含む)
       const landmarkPromise = new Promise((resolve, reject) => {
-        // const worker1 = new Worker('face-landmarks-worker.js');
-        // worker1.postMessage({ image: this.#croppedImage }, [this.#croppedImage.data.buffer]);
-        // worker1.onmessage = e => resolve(e.data);
-        // worker1.onerror = reject;
-      });
-
-      // Worker 2: 人物のセグメンテーション
-      const segmentationPromise = new Promise((resolve, reject) => {
-        // const worker2 = new Worker('segmentation-worker.js');
-        // worker2.postMessage({ image: this.#croppedImage }, [this.#croppedImage.data.buffer]);
-        // worker2.onmessage = e => resolve(e.data);
-        // worker2.onerror = reject;
+        const worker1 = new Worker('face-landmarks-worker.js');
+        worker1.postMessage({ image: this.#croppedImage }, [this.#croppedImage.data.buffer]);
+        worker1.onmessage = e => resolve(e.data);
+        worker1.onerror = reject;
       });
 
       // TODO: Promise.allSettled を使用してWorkerからの結果を待つ
