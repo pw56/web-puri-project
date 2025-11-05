@@ -54,6 +54,10 @@ importScripts(
 // COCO-SSDモデルのインスタンスをグローバルスコープで保持します
 let cocoSsdModel = null;
 
+
+// DetectedFaceクラスの静的プロパティとしてIris検出モデルを保持します
+irisModel = null;
+
 /**
  * 入力された画像からまず背景を除去し、その後COCO-SSDモデルで人物を検出します。
  * 検出した人物の信頼度(score)が0.5以上のものだけを対象とします。
@@ -252,9 +256,6 @@ class DetectedFace {
     return ctx.getImageData(x, y, width, height);
   }
 
-  // DetectedFaceクラスの静的プロパティとしてIris検出モデルを保持します
-  DetectedFace.irisModel = null;
-
   /**
    * [プライベートメソッド]
    * MediaPipe Irisモデル（face-landmarks-detectionの機能）を使用して、
@@ -267,9 +268,9 @@ class DetectedFace {
   async #refineIris(faceImageData) {
     try {
       // 1. モデルのロード（初回のみ）
-      if (DetectedFace.irisModel === null) {
+      if (irisModel === null) {
         // HTMLでインポート済みのfaceLandmarksDetectionを使用します
-        DetectedFace.irisModel = await faceLandmarksDetection.load(
+        irisModel = await faceLandmarksDetection.load(
           faceLandmarksDetection.SupportedPackages.mediapipeFacemesh,
           {
             maxFaces: 1,
@@ -280,7 +281,7 @@ class DetectedFace {
       }
 
       // 2. 虹彩を含む顔ランドマークの推定
-      const predictions = await DetectedFace.irisModel.estimateFaces({
+      const predictions = await irisModel.estimateFaces({
         input: faceImageData,
         // trueに設定すると、モデルは入力画像の向きを自動補正します
         flipHorizontal: false
