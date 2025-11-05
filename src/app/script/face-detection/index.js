@@ -1,3 +1,16 @@
+// MediaPipe Irisモデル
+importScripts(
+  'https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh',
+  'https://cdn.jsdelivr.net/npm/@tensorflow-models/face-landmarks-detection'
+);
+
+// COCO-SSDモデルのインスタンスをグローバルスコープで保持します
+let cocoSsdModel = null;
+
+
+// MediaPipe Irisモデルのインスタンスをグローバルスコープで保持します
+let irisModel = null;
+
 /**
  * Web Workerを起動し、MediaPipe Selfie Segmentationモデルによる背景除去を実行します。
  *
@@ -44,19 +57,6 @@ async function selfieSegmentation(imageData) {
     worker.postMessage({ image: imageData }, [imageData.data.buffer]);
   });
 }
-
-// COCO-SSD モデル
-importScripts(
-  'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0',
-  'https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd'
-);
-
-// COCO-SSDモデルのインスタンスをグローバルスコープで保持します
-let cocoSsdModel = null;
-
-
-// DetectedFaceクラスの静的プロパティとしてIris検出モデルを保持します
-irisModel = null;
 
 /**
  * 入力された画像からまず背景を除去し、その後COCO-SSDモデルで人物を検出します。
