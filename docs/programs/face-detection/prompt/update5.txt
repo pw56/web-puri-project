@@ -1,0 +1,6 @@
+仕様変更がありました。
+"refineIris"プライベートメソッドは"face-landmarks-worker.js"のWeb Worker内でランドマーク検出の一部として実行する仕様に変更されました。
+以上のことを踏まえて以下を作成してください。
+
+出力形式:
+・face-landmarks-worker.js
