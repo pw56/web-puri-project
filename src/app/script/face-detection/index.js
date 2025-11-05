@@ -195,7 +195,6 @@ class DetectedFace {
       // TODO: Workerから受け取った座標を、バウンディングボックスのオフセットを加えて元画像座標に変換
       // TODO: 変換した座標を各プライベートプロパティ (#contourCoords など) に保存
       // TODO: ランドマークとセグメンテーションの結果を比較し、座標精度を向上させる
-      // TODO: Worker 3と#refineIris()を起動し、境界線の微細化処理を行う
       // TODO: 処理に失敗した場合は、対応するプライベートプロパティに false を代入する
 
     } catch (error) {
