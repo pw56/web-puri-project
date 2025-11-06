@@ -353,11 +353,11 @@
 > <Object type="rect" width="50%"/>
 > ```
 
-- r
+- radius
 > `type`属性に`circle`が指定された場合、オブジェクトの半径を指定。
 > 
 > ```xml
-> <Object type="circle" r="10em"/>
+> <Object type="circle" radius="10em"/>
 > ```
 
 - points
