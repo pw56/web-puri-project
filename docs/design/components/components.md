@@ -312,7 +312,7 @@
 > ![オブジェクト例](object-example.png)
 - 属性:
   - type
-> オブジェクトの種類(`rect`, `circle`, `polygon`, `svg`など)を指定。
+> オブジェクトの種類(`rect`, `circle`, `polygon`, `svg`, `component-background`など)を指定。
 > 
 > ```xml
 > <Object type="svg" src="heart.svg"/>
@@ -374,11 +374,11 @@
 > <Object type="svg" src="star.svg"/>
 > ```
 
-### 背景の四角形
-- 属性: ``
+### コンポーネントの背景
+- 属性: `component-background`
 - 表示:
 > 背景がピンク、縁が白で、丸みを帯びた四角形を表示。  
-> ![四角形](rect.png)
+> ![コンポーネントの背景](component-background.png)
 
 ## ローディングアニメーション
 - 種類: ポップアップ
