@@ -312,7 +312,7 @@
 > ![オブジェクト例](object-example.png)
 - 属性:
   - type
-> オブジェクトの種類(`rect`, `circle`, `shape`, `svg`など)を指定。
+> オブジェクトの種類(`rect`, `circle`, `polygon`, `svg`など)を指定。
 > 
 > ```xml
 > <Object type="svg" src="heart.svg"/>
@@ -360,11 +360,11 @@
 > <Object type="circle" radius="10em"/>
 > ```
 
-- polygon
-> `type`属性に`shape`が指定された場合、オブジェクトの描画する図形の点を指定。
+- points
+> `type`属性に`polygon`が指定された場合、オブジェクトの描画する図形の点を指定。
 > 
 > ```xml
-> <Object type="shape" polygon="[20, 30], [25, 30], [40, 50]"/>
+> <Object type="polygon" points="[20, 30], [25, 30], [40, 50]"/>
 > ```
 
 - src
