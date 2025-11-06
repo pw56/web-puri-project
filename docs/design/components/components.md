@@ -360,11 +360,11 @@
 > <Object type="circle" radius="10em"/>
 > ```
 
-- points
+- polygon
 > `type`属性に`shape`が指定された場合、オブジェクトの描画する図形の点を指定。
 > 
 > ```xml
-> <Object type="shape" points="[20, 30], [25, 30], [40, 50]"/>
+> <Object type="shape" polygon="[20, 30], [25, 30], [40, 50]"/>
 > ```
 
 - src
