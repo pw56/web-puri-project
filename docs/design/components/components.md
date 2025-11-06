@@ -340,14 +340,14 @@
 > ```
 
 - height
-> `type`属性に`rect`が指定された場合、オブジェクトの高さを指定。
+> `type`属性に`rect`または`component-background`が指定された場合、オブジェクトの高さを指定。
 > 
 > ```xml
 > <Object type="rect" height="20px"/>
 > ```
 
 - width
-> `type`属性に`rect`が指定された場合、オブジェクトの横幅を指定。
+> `type`属性に`rect`または`component-background`が指定された場合、オブジェクトの横幅を指定。
 > 
 > ```xml
 > <Object type="rect" width="50%"/>
