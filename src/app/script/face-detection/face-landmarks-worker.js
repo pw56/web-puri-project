@@ -101,20 +101,179 @@ self.onmessage = async (event) => {
  * 目元のランドマークと画像データから涙袋の境界線を検出します。
  * 仕様: 目元の明暗の境界から検出する。
  * この関数は、指定された領域内の輝度変化を分析し、エッジを検出する簡易的な実装です。
- *
- * @param {ImageData} imageData - 顔部分の画像データ。
- * @param {object} eyes - 左右の目のランドマーク座標。
- * @returns {object} 左右の涙袋の座標配列 { left: [...], right: [...] }。
+ * @param {ImageData} imageData - 顔領域全体の ImageData
+ * @param {object} eyes - { left: [{x,y},...], right: [{x,y},...] }  各目のランドマーク（画像座標）
+ * @param {object} [opts] - オプション
+ *   opts.roiPadding: 目下 ROI の上下左右余白（ピクセル, デフォルト: 8）
+ *   opts.minWidth: ROI の最小幅（ピクセル, デフォルト: 12）
+ *   opts.smoothRadius: 平滑化カーネル半径（デフォルト: 3）
+ * @returns {object} { left: [{x,y},...], right: [{x,y},...] }
  */
-function detectEyebags(imageData, eyes) {
-  // TODO: 涙袋検出の高度な画像処理アルゴリズムを実装します。
-  // 1. 目の下の領域(ROI)を特定する。
-  // 2. ROIをグレースケール化し、輝度データを取得する。
-  // 3. 輝度の勾配が最大になる水平ライン(エッジ)を探索する。
-  // 4. 検出されたエッジの座標を返す。
-  
-  // 以下はダミーの戻り値です
-  return { left: [], right: [] };
+function detectEyebags(imageData, eyes, opts) {
+  opts = Object.assign({ roiPadding: 8, minWidth: 12, smoothRadius: 3 }, opts || {});
+
+  function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+
+  // 画像情報
+  const W = imageData.width;
+  const H = imageData.height;
+  const data = imageData.data;
+
+  // ランドマーク配列からバウンディングボックスを作る
+  function bboxFromPoints(points) {
+    if (!points || points.length === 0) return null;
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    for (const p of points) {
+      if (p.x < minX) minX = p.x;
+      if (p.y < minY) minY = p.y;
+      if (p.x > maxX) maxX = p.x;
+      if (p.y > maxY) maxY = p.y;
+    }
+    return { minX, minY, maxX, maxY, width: maxX - minX, height: maxY - minY };
+  }
+
+  // ROI を決める（目の下：上下方向はランドマークの高さの比で拡張）
+  function computeEyeROI(eyePoints) {
+    const bb = bboxFromPoints(eyePoints);
+    if (!bb) return null;
+    const centerY = (bb.minY + bb.maxY) / 2;
+    // 目下を伸ばす：下に多めに伸ばす
+    const pad = opts.roiPadding;
+    const roiMinX = Math.floor(clamp(bb.minX - pad, 0, W - 1));
+    const roiMaxX = Math.ceil(clamp(bb.maxX + pad, 0, W - 1));
+    // 上端は目の下少し上から、下端は目の高さに応じて伸ばす
+    const roiMinY = Math.floor(clamp(bb.minY - pad * 0.2, 0, H - 1));
+    const roiMaxY = Math.ceil(clamp(bb.maxY + pad * 2.0, 0, H - 1));
+    const width = Math.max(opts.minWidth, roiMaxX - roiMinX);
+    return { x: roiMinX, y: roiMinY, w: width, h: roiMaxY - roiMinY };
+  }
+
+  // ImageData 内の (x,y) の輝度を返す
+  function luminanceAt(x, y) {
+    x = Math.floor(x); y = Math.floor(y);
+    const idx = (y * W + x) * 4;
+    const r = data[idx], g = data[idx + 1], b = data[idx + 2];
+    return 0.299 * r + 0.587 * g + 0.114 * b;
+  }
+
+  // ROI をグレースケール配列として抽出（row-major: rows x cols）
+  function extractGrayROI(roi) {
+    const rows = roi.h;
+    const cols = roi.w;
+    const gray = new Float32Array(rows * cols);
+    for (let ry = 0; ry < rows; ry++) {
+      const y = roi.y + ry;
+      for (let cx = 0; cx < cols; cx++) {
+        const x = roi.x + cx;
+        gray[ry * cols + cx] = luminanceAt(x, y);
+      }
+    }
+    return { gray, rows, cols };
+  }
+
+  // 垂直方向（上下）の勾配を sobel風に簡易計算：Gy = I(y+1)-I(y-1)
+  function verticalGradient(gray, rows, cols) {
+    const Gy = new Float32Array(rows * cols);
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        const above = r <= 0 ? gray[c] : gray[(r - 1) * cols + c];
+        const below = r >= rows - 1 ? gray[(rows - 1) * cols + c] : gray[(r + 1) * cols + c];
+        Gy[r * cols + c] = below - above;
+      }
+    }
+    return Gy;
+  }
+
+  // 各列ごとに最大勾配位置を探す（エッジが上向きか下向きかを考慮）
+  function findEdgePolyline(Gy, rows, cols, roi) {
+    const edgeYs = new Array(cols).fill(null);
+    for (let c = 0; c < cols; c++) {
+      // 列 c の勾配列をスキャンして、絶対値が最大の位置を採る
+      let bestR = -1;
+      let bestVal = -Infinity;
+      for (let r = 1; r < rows - 1; r++) {
+        const val = Math.abs(Gy[r * cols + c]);
+        if (val > bestVal) {
+          bestVal = val;
+          bestR = r;
+        }
+      }
+      if (bestR >= 0) {
+        edgeYs[c] = bestR + roi.y; // 画像座標系の y
+      } else {
+        edgeYs[c] = null;
+      }
+    }
+
+    // 外れ値除去：連続した null は補間し、小さなスパイクを除去する
+    // 1) 線形補間で短い欠損を埋める
+    function linearFill(arr) {
+      let i = 0;
+      while (i < arr.length) {
+        if (arr[i] == null) {
+          let j = i + 1;
+          while (j < arr.length && arr[j] == null) j++;
+          // if edges at both ends exist and gap small, interpolate
+          if (i > 0 && j < arr.length && (j - i) <= 6) {
+            const a = arr[i - 1], b = arr[j];
+            for (let k = i; k < j; k++) {
+              const t = (k - i + 1) / (j - i + 1);
+              arr[k] = a * (1 - t) + b * t;
+            }
+          }
+          i = j;
+        } else i++;
+      }
+    }
+    linearFill(edgeYs);
+
+    // 2) 簡単な中央値フィルタでスパイク除去
+    const smoothed = edgeYs.slice();
+    const r = Math.max(1, Math.floor(opts.smoothRadius));
+    for (let i = 0; i < edgeYs.length; i++) {
+      const window = [];
+      for (let k = Math.max(0, i - r); k <= Math.min(edgeYs.length - 1, i + r); k++) {
+        if (edgeYs[k] != null) window.push(edgeYs[k]);
+      }
+      if (window.length > 0) {
+        window.sort((a, b) => a - b);
+        smoothed[i] = window[Math.floor(window.length / 2)];
+      } else {
+        smoothed[i] = null;
+      }
+    }
+
+    // 出力を画像座標の点配列に変換（x,y）
+    const points = [];
+    for (let c = 0; c < cols; c++) {
+      const y = smoothed[c];
+      if (y != null) {
+        const x = roi.x + c;
+        points.push({ x: x, y: y });
+      }
+    }
+    return points;
+  }
+
+  // メイン処理：左右の目それぞれ処理
+  function processEye(eyePoints) {
+    const roi = computeEyeROI(eyePoints);
+    if (!roi || roi.w <= 0 || roi.h <= 0) return [];
+    const { gray, rows, cols } = extractGrayROI(roi);
+    const Gy = verticalGradient(gray, rows, cols);
+    const poly = findEdgePolyline(Gy, rows, cols, roi);
+    // 最終的に、目の幅外の極端な点を削る（ランドマーク幅に近いもののみ残す）
+    const bb = bboxFromPoints(eyePoints);
+    const minX = Math.max(0, Math.floor(bb.minX - opts.roiPadding));
+    const maxX = Math.min(W - 1, Math.ceil(bb.maxX + opts.roiPadding));
+    const filtered = poly.filter(p => p.x >= minX && p.x <= maxX);
+    return filtered;
+  }
+
+  return {
+    left: processEye(eyes.left || []),
+    right: processEye(eyes.right || [])
+  };
 }
 
 /**
