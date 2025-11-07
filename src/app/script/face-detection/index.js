@@ -270,7 +270,7 @@ class DetectedFace {
  * @returns {{x: number, y: number, z: number}} 顔の軸ごと(X, Y, Z)の傾きの角度(-180° ~ 180°)を持つオブジェクト。
  * @throws {Error} 検出処理がまだ完了していない場合、または顔の傾きの検出に失敗した場合にスローされます。
  */
-  faceAngle() {
+  getFaceAngle() {
     // ガード節: まず、全ての非同期処理が完了しているかを確認します
     // 完了していない場合、まだ結果は利用できないため例外をスローします
     if (!this.#isProcessed) {
@@ -345,7 +345,7 @@ class DetectedFace {
    * @returns {Array<[number, number]>} 検出された体全体の境界線の座標 `[x, y]` が格納された配列。
    * @throws {Error} 検出処理がまだ完了していない場合、または体の検出に失敗した場合にスローされます。
    */
-  body() {
+  getBody() {
     // ガード節: まず、全ての非同期処理が完了しているかを確認します。
     // 完了していない場合、まだ結果は利用できないため例外をスローします。
     if (!this.#isProcessed) {
@@ -370,7 +370,7 @@ class DetectedFace {
    * @returns {Array<[number, number, number]>} 検出された顔の輪郭の座標 `[x, y, z]` が格納された配列。
    * @throws {Error} 検出処理がまだ完了していない場合、または顔の輪郭の検出に失敗した場合にスローされます。
    */
-  contour() {
+  getContour() {
     // ガード節: まず、全ての非同期処理が完了しているかを確認します。
     if (!this.#isProcessed) {
       throw new Error('顔の検出処理が完了していません。hasProcessed()で完了を確認してください。');
@@ -394,7 +394,7 @@ class DetectedFace {
  * @returns {{left: Array<[number, number, number]>, right: Array<[number, number, number]>}} 左右の目の縁の座標 `[x, y, z]` が格納された配列を持つオブジェクト。
  * @throws {Error} 検出処理がまだ完了していない場合、または目の検出に失敗した場合にスローされます。
  */
-  eyes() {
+  getEyes() {
     // ガード節: まず、全ての非同期処理が完了しているかを確認します。
     if (!this.#isProcessed) {
       throw new Error('顔の検出処理が完了していません。hasProcessed()で完了を確認してください。');
@@ -417,7 +417,7 @@ class DetectedFace {
  * @returns {Array<[number, number, number]>} 鼻の縁（鼻と肌の境目）の座標 `[x, y, z]` が格納された配列。
  * @throws {Error} 検出処理がまだ完了していない場合、または鼻の検出に失敗した場合にスローされます。
  */
-  nose() {
+  getNose() {
     // ガード節: まず、全ての非同期処理が完了しているかを確認します。
     if (!this.#isProcessed) {
       throw new Error('顔の検出処理が完了していません。hasProcessed()で完了を確認してください。');
@@ -440,7 +440,7 @@ class DetectedFace {
  * @returns {Array<[number, number, number]>} 口の縁（口と肌の境目）の座標 `[x, y, z]` が格納された配列。
  * @throws {Error} 検出処理がまだ完了していない場合、または口の検出に失敗した場合にスローされます。
  */
-  mouth() {
+  getMouth() {
     // ガード節: まず、全ての非同期処理が完了しているかを確認します。
     if (!this.#isProcessed) {
       throw new Error('顔の検出処理が完了していません。hasProcessed()で完了を確認してください。');
@@ -464,7 +464,7 @@ class DetectedFace {
  * @returns {{left: Array<[number, number, number]>, right: Array<[number, number, number]>}} 左右の眉毛の縁の座標 `[x, y, z]` が格納された配列を持つオブジェクト。
  * @throws {Error} 検出処理がまだ完了していない場合、または眉毛の検出に失敗した場合にスローされます。
  */
-  eyebrows() {
+  getEyebrows() {
     // ガード節: まず、全ての非同期処理が完了しているかを確認します。
     if (!this.#isProcessed) {
       throw new Error('顔の検出処理が完了していません。hasProcessed()で完了を確認してください。');
@@ -489,7 +489,7 @@ class DetectedFace {
  * @returns {{left: Array<[number, number, number]>, right: Array<[number, number, number]>}} 左右の涙袋の縁の座標 `[x, y, z]` が格納された配列を持つオブジェクト。
  * @throws {Error} 検出処理がまだ完了していない場合、または涙袋の検出に失敗した場合にスローされます。
  */
-  eyebags() {
+  getEyebags() {
     // ガード節: まず、全ての非同期処理が完了しているかを確認します。
     if (!this.#isProcessed) {
       throw new Error('顔の検出処理が完了していません。hasProcessed()で完了を確認してください。');
@@ -512,7 +512,7 @@ class DetectedFace {
    * @returns {Array<[number, number]>} 検出された髪の毛の領域の座標 `[x, y]` が格納された配列。
    * @throws {Error} 検出処理がまだ完了していない場合、または髪の毛の検出に失敗した場合にスローされます。
    */
-  hair() {
+  getHair() {
     // ガード節: まず、全ての非同期処理が完了しているかを確認します。
     if (!this.#isProcessed) {
       throw new Error('顔の検出処理が完了していません。hasProcessed()で完了を確認してください。');
@@ -536,7 +536,7 @@ class DetectedFace {
    * @returns {{left: Array<[number, number, number]>, right: Array<[number, number, number]>}} 左右の虹彩の座標 `[x, y, z]` が格納された配列を持つオブジェクト。
    * @throws {Error} 検出処理がまだ完了していない場合、または虹彩の検出に失敗した場合にスローされます。
    */
-  iris() {
+  getIris() {
     // ガード節: まず、全ての非同期処理が完了しているかを確認します。
     if (!this.#isProcessed) {
       throw new Error('顔の検出処理が完了していません。hasProcessed()で完了を確認してください。');
@@ -559,7 +559,7 @@ class DetectedFace {
    *
    * @returns {number[]} バウンディングボックスの座標 `[x, y, width, height]`。
    */
-  bbox() {
+  getBbox() {
     // このメソッドは非同期処理に依存しないため、#isProcessedのチェックは不要です。
     // コンストラクタで受け取った値をそのまま返します。
     return this.#bbox;
