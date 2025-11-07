@@ -7,10 +7,6 @@ importScripts(
 // COCO-SSDモデルのインスタンスをグローバルスコープで保持します
 let cocoSsdModel = null;
 
-
-// MediaPipe Irisモデルのインスタンスをグローバルスコープで保持します
-let irisModel = null;
-
 /**
  * Web Workerを起動し、MediaPipe Selfie Segmentationモデルによる背景除去を実行します。
  *
