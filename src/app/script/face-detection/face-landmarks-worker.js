@@ -120,15 +120,99 @@ function detectEyebags(imageData, eyes) {
 /**
  * 3Dランドマークから顔の傾き(オイラー角)を推定します。
  *
- * @param {Array} keypoints - 全てのランドマークキーポイント。
- * @returns {object} X, Y, Z軸周りの回転角度 { x, y, z }。
+ * @param {Array} keypoints - ランドマーク配列。各要素は {x, y, z} または [x, y, z]。
+ * @returns {object} 回転角度 { x: rollDeg, y: pitchDeg, z: yawDeg } （度）
  */
-function calculateFaceAngle(keypoints) {
-  // TODO: 顔の傾きを計算する3Dジオメトリ計算を実装します。
-  // 1. 顔の向きを定義する代表的なキーポイントを選択 (例: 鼻先, 顎, 左右のこめかみ)。
-  // 2. 3Dポイントから顔の平面/法線ベクトルを計算する。
-  // 3. カメラ座標系に対する法線ベクトルの向きからオイラー角(Roll, Pitch, Yaw)を算出する。
-  
-  // 以下はダミーの戻り値です
-  return { x: 0, y: 0, z: 0 };
+function calculateFaceAngle(keypoints, options = {}) {
+  if (!Array.isArray(keypoints) || keypoints.length === 0) {
+    throw new Error('keypoints must be a non-empty array');
+  }
+
+  // ユーティリティ
+  const toPoint = (p) => {
+    if (Array.isArray(p)) return { x: p[0], y: p[1], z: p[2] ?? 0 };
+    return { x: p.x ?? 0, y: p.y ?? 0, z: p.z ?? 0 };
+  };
+  const sub = (a, b) => ({ x: a.x - b.x, y: a.y - b.y, z: a.z - b.z });
+  const add = (a, b) => ({ x: a.x + b.x, y: a.y + b.y, z: a.z + b.z });
+  const mul = (a, s) => ({ x: a.x * s, y: a.y * s, z: a.z * s });
+  const norm = (v) => Math.sqrt(v.x * v.x + v.y * v.y + v.z * v.z) || 1e-9;
+  const normalize = (v) => {
+    const n = norm(v);
+    return { x: v.x / n, y: v.y / n, z: v.z / n };
+  };
+  const cross = (a, b) => ({
+    x: a.y * b.z - a.z * b.y,
+    y: a.z * b.x - a.x * b.z,
+    z: a.x * b.y - a.y * b.x,
+  });
+  const dot = (a, b) => a.x * b.x + a.y * b.y + a.z * b.z;
+  const toDeg = (r) => (r * 180) / Math.PI;
+
+  // MediaPipe FaceMesh の代表的インデックス（使うランドマークのインデックス）
+  const idx = {
+    leftEye: 33,
+    rightEye: 263,
+    noseTip: 1,
+    chin: 152,
+  };
+
+  // 安全にランドマークを取得（存在しない場合は centroid を使って近似）
+  const getLandmark = (i) => {
+    if (i != null && i >= 0 && i < keypoints.length) return toPoint(keypoints[i]);
+    // fallback: compute centroid
+    let cx = 0, cy = 0, cz = 0;
+    for (let p of keypoints) {
+      const q = toPoint(p);
+      cx += q.x; cy += q.y; cz += q.z;
+    }
+    const n = keypoints.length;
+    return { x: cx / n, y: cy / n, z: cz / n };
+  };
+
+  const leftEye = getLandmark(idx.leftEye);
+  const rightEye = getLandmark(idx.rightEye);
+  const nose = getLandmark(idx.noseTip);
+  const chin = getLandmark(idx.chin);
+
+  // 基本ベクトル
+  const eyeMid = mul(add(leftEye, rightEye), 0.5);
+  const eyeVec = sub(rightEye, leftEye); // 右方向ベクトル（ローカル）
+  const noseVec = sub(nose, eyeMid);      // 前方を向くベクトル（鼻先方向）
+  const chinVec = sub(chin, eyeMid);
+
+  // forward ベクトル（顔が向いている方向）と right, up を定義
+  let forward = normalize(noseVec);
+  // もし forward が不安定なら chin を使う
+  if (norm(forward) < 1e-4) forward = normalize(chinVec);
+
+  let right = normalize(eyeVec);
+  // up は forward と right の外積
+  let up = normalize(cross(forward, right));
+  // 再正規化 right を up と forward から作り直す（直交基底）
+  right = normalize(cross(up, forward));
+
+  // Euler 推定（Tait-Bryan ZYX に近い解釈で計算）
+  // yaw: y 軸周り（左右向き）
+  // pitch: x 軸周り（上下向き）
+  // roll: z 軸周り（傾き）
+  // ここでは forward をカメラ座標系の「前方（z）」とみなし計算する
+  const fx = forward.x, fy = forward.y, fz = forward.z;
+
+  // 数値的安定化
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+
+  // yaw: 左右（右が正）
+  const yaw = Math.atan2(fx, fz);
+  // pitch: 上下（上を見ると負か正かは定義次第。ここでは上を見ると負になるように asin(-fy) を用いる）
+  const pitch = Math.asin(clamp(-fy, -1, 1));
+  // roll: 顔の回転（左右の目線差から近似）
+  // right ベクトルと水平面（y=0）成分を利用して roll を推定
+  const roll = Math.atan2(right.y, right.x);
+
+  return {
+    x: toDeg(roll),   // roll (around Z in this local convention)
+    y: toDeg(pitch),  // pitch (around X)
+    z: toDeg(yaw),    // yaw (around Y)
+  };
 }
