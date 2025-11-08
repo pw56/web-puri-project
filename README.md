@@ -13,9 +13,9 @@
 - GLSL
 
 ## 使用技術・ライブラリ  
-- React  
-- WebGL  
-- Web Worker  
+- React
+- WebGL
+- Web Worker
 - WebAssembly
 - Web Share API
 - PWA
