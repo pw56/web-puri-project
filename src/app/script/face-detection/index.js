@@ -1,9 +1,3 @@
-// MediaPipe Irisモデル
-importScripts(
-  'https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh',
-  'https://cdn.jsdelivr.net/npm/@tensorflow-models/face-landmarks-detection'
-);
-
 // COCO-SSDモデルのインスタンスをグローバルスコープで保持します
 let cocoSsdModel = null;
 
