@@ -26,6 +26,8 @@
 - COCO-SSD (TensorFlow.js)
 - Face Landmarks Detection (TensorFlow.js)
 - Fabric.js
+- JSZip
+- FileSaver.js
 
 ## 使用素材
 - [OtoLogic](https://otologic.jp)
