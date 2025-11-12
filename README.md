@@ -9,7 +9,7 @@
 - CSS
 - JavaScript
 - TypeScript (TSX)
-- C言語 (WebAssembly)
+- C++ (WebAssembly)
 - GLSL
 
 ## 使用技術・ライブラリ  
