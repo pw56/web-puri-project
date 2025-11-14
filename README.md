@@ -28,6 +28,7 @@
 - Fabric.js
 - JSZip
 - FileSaver.js
+- Marked.js
 
 ## 使用素材
 - [OtoLogic](https://otologic.jp)
