@@ -234,6 +234,134 @@ class DetectedFace {
   }
 
   /**
+   * [プライベートメソッド]
+   * ランドマーク座標とセグメンテーション境界座標の間にある空間の「色の勾配」を分析し、
+   * 輝度変化が最も大きい点（エッジ）に座標をスナップさせることで微細化（高精度化）します。
+   *
+   * @param {Array<[number, number, number]>} landmarkCoords - 顔パーツのグローバル座標配列 (例: 顔輪郭)。
+   * @param {Array<[number, number]>} bodyBoundaryCoords - 体の境界線のグローバル座標配列。
+   * @param {ImageData} sourceImageData - 色の勾配を分析するための元画像(背景除去済み)のImageData。
+   * @param {number} snapThreshold - ランドマークと境界点を関連付ける最大距離 (ピクセル単位)。
+   * @param {number} numSteps - 2点間をサンプリングする分割数。
+   * @returns {Array<[number, number, number]>} 精度が向上されたグローバル座標の配列。
+   */
+  #refineCoordsByGradient(
+    landmarkCoords, 
+    bodyBoundaryCoords, 
+    sourceImageData,
+    snapThreshold = 15.0,
+    numSteps = 10 
+  ) {
+    // ガード節: 必要なデータが不足している場合は、元の座標をそのまま返します
+    if (!bodyBoundaryCoords || bodyBoundaryCoords.length === 0 || !landmarkCoords || !sourceImageData) {
+      return landmarkCoords;
+    }
+    if (numSteps <= 0) {
+      console.error('refineCoordsByGradient: numStepsは1以上である必要があります。');
+      return landmarkCoords;
+    }
+
+    const refinedCoords = [];
+
+    // ランドマークの各点について処理を実行します
+    for (const landmarkPoint of landmarkCoords) {
+      const [lx, ly, lz] = landmarkPoint;
+      
+      let minDistanceSq = Infinity;
+      let nearestBodyPoint = null;
+
+      // 1. ランドマーク点 (P_landmark) に最も近いセグメンテーション境界点 (P_body) を探します
+      for (const bodyPoint of bodyBoundaryCoords) {
+        const [bx, by] = bodyPoint;
+        const distanceSq = (lx - bx) ** 2 + (ly - by) ** 2;
+        
+        if (distanceSq < minDistanceSq) {
+          minDistanceSq = distanceSq;
+          nearestBodyPoint = bodyPoint;
+        }
+      }
+
+      const distance = Math.sqrt(minDistanceSq);
+
+      // 2. 距離が閾値 (snapThreshold) より大きいか、近すぎる(1.0未満)場合は、
+      //    関連性が低いとみなし、元の座標をそのまま採用します
+      if (!nearestBodyPoint || distance > snapThreshold || distance < 1.0) {
+        refinedCoords.push(landmarkPoint);
+        continue;
+      }
+
+      // 3. P_landmark と P_body 間の線分上で色の勾配を分析します
+      const [bx, by] = nearestBodyPoint;
+      const vecX = bx - lx;
+      const vecY = by - ly;
+
+      let maxGradient = -1.0;
+      let bestPoint = landmarkPoint; // 最も勾配が大きかった点（デフォルトは元の点）
+      
+      // 最初の点の輝度を取得
+      let lastIntensity = this.#getPixelIntensity(sourceImageData, lx, ly);
+
+      // 線分上を (numSteps) 回サンプリングします
+      for (let i = 1; i <= numSteps; i++) {
+        // 現在のサンプリング位置 (t = 0.0 ... 1.0)
+        const t = i / numSteps;
+        const currentX = lx + vecX * t;
+        const currentY = ly + vecY * t;
+
+        const currentIntensity = this.#getPixelIntensity(sourceImageData, currentX, currentY);
+        
+        // 1つ前の点との輝度の差（勾配）を計算します
+        const gradient = Math.abs(currentIntensity - lastIntensity);
+
+        // 勾配がこれまでの最大値を更新した場合
+        if (gradient > maxGradient) {
+          maxGradient = gradient;
+          
+          // エッジは、最も勾配が急だった2点間の中間にあると仮定します
+          const prevT = (i - 1) / numSteps;
+          const prevX = lx + vecX * prevT;
+          const prevY = ly + vecY * prevT;
+          
+          // Z座標は元のランドマークのものを維持します
+          bestPoint = [ (prevX + currentX) / 2, (prevY + currentY) / 2, lz ];
+        }
+        
+        lastIntensity = currentIntensity;
+      }
+      
+      // 4. 検出された「最もエッジらしい点」を結果として採用します
+      refinedCoords.push(bestPoint);
+    }
+    
+    return refinedCoords;
+  }
+
+  /**
+   * [プライベートヘルパー]
+   * ImageDataから指定された座標の輝度（Luma）を取得します。
+   * @param {ImageData} imageData - ピクセルデータを保持するImageDataオブジェクト。
+   * @param {number} x - X座標。
+   * @param {number} y - Y座標。
+   * @returns {number} 輝度 (0.0 ~ 255.0)。
+   */
+  #getPixelIntensity(imageData, x, y) {
+    const { data, width, height } = imageData;
+    
+    // 座標を整数に丸め、画像境界内に収めます
+    const xi = Math.max(0, Math.min(width - 1, Math.floor(x)));
+    const yi = Math.max(0, Math.min(height - 1, Math.floor(y)));
+
+    const i = (yi * width + xi) * 4;
+    const r = data[i];
+    const g = data[i + 1];
+    const b = data[i + 2];
+    
+    // 輝度計算 (Rec. 601 Luma)
+    // Y' = 0.299 * R' + 0.587 * G' + 0.114 * B'
+    return 0.299 * r + 0.587 * g + 0.114 * b;
+  }
+
+  /**
    * 背景除去済みの画像を返します。
    * このメソッドは、背景除去済みの画像を取得するために使用します。
    *
