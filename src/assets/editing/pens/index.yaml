@@ -1,47 +1,47 @@
 - name: "normal"
-  image: ""
+  image: "normal.svg"
   display-name: "ノーマル"
 
 - name: "white-border"
-  image: ""
+  image: "white-border.svg"
   display-name: "白ふち"
 
 - name: "black-border"
-  image: ""
+  image: "black-border.svg"
   display-name: "黒ふち"
 
 - name: "loose"
-  image: ""
+  image: "loose.svg"
   display-name: "ゆる"
 
 - name: "white-neon"
-  image: ""
+  image: "white-neon.svg"
   display-name: "白ネオン"
 
 - name: "black-neon"
-  image: ""
+  image: "black-neon.svg"
   display-name: "黒ネオン"
 
 - name: "plump"
-  image: ""
+  image: "plump.svg"
   display-name: "ぷっくり"
 
 - name: "plump-shadow"
-  image: ""
+  image: "plump-shadow.svg"
   display-name: "ぷっくりカゲ"
 
 - name: "crayon"
-  image: ""
+  image: "crayon.svg"
   display-name: "クレヨン"
 
 - name: "translucent"
-  image: ""
+  image: "translucent.svg"
   display-name: "半透明"
 
 - name: "translucent-shadow"
-  image: ""
+  image: "translucent-shadow.svg"
   display-name: "半透明ふち"
 
 - name: "blur"
-  image: ""
+  image: "blur.svg"
   display-name: "ぼかし"
