@@ -2,10 +2,6 @@
   image: ""
   display-name: "ノーマル"
 
-- name: "narrow"
-  image: ""
-  display-name: "ほそ"
-
 - name: "white-border"
   image: ""
   display-name: "白ふち"
