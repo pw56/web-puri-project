@@ -1,5 +1,5 @@
-const CACHE_NAME = 'puri-app-cache';
-const urlsToCache = ['../app', '../assets'];
+const CACHE_NAME = 'web-puri-cache';
+const urlsToCache = ['../../app', '../../assets']; // キャッシュ対象に機械学習モデルを追加予定(外部リンクのCORSエラーとか、わからん)
 
 self.addEventListener('install', event => {
   event.waitUntil(

@@ -2,7 +2,7 @@
 
 ## 概要
 このリポジトリはプリ機をWebアプリとして動かすことを目的に作成されました。
-![アプリアイコン](assets/logo/icon-original.png)
+![アプリアイコン](assets/icons/icon-original.png)
 
 ## 使用プログラミング言語
 - HTML

@@ -1,6 +1,6 @@
-<WebPage>
+<App>
   
-  <Start>
+  <StartPage>
     <Title>
       <Image name="sample-1"/>
       <Image name="sample-2"/>
@@ -11,9 +11,9 @@
     <Button name="shooting" type="button-1">撮影</Button>
     <Button name="puri-shooting" type="button-1">プリモード</Button>
     <Button name="upload" type="button-1">アップロード</Button>
-  </Start>
+  </StartPage>
 
-  <QuantitySelection>
+  <QuantitySelectionPage>
     <Text name="page-title" type="plane">枚数選択</Text>
     <!-- <Quantity>
       <Text name="count" type="value"></Text>
@@ -22,9 +22,9 @@
     </Quantity> -->
     <Count name="quantity"/>
     <Button name="start-shooting" type="button-1">撮影を始める</Button>
-  </QuantitySelection>
+  </QuantitySelectionPage>
 
-  <Shoot>
+  <ShootingPage>
     <Text name="frame-index"/>
     <Shooting>
       <Video name="camera"/>
@@ -35,9 +35,9 @@
       <Image name="check"/>
       <Button name="retry" type="button-1">撮り直し</Button>
     </Checking>
-  </Shoot>
+  </ShootingPage>
 
-  <PuriShoot>
+  <PuriShootingPage>
     <Text name="frame-index"/>
     <Shooting>
       <Video name="camera"/>
@@ -55,10 +55,10 @@
       <Image name="check" src=""/>
       <Button name="retry" type="button-1">撮り直し</Button>
     </Checking>
-  </PuriShoot>
+  </PuriShootingPage>
 
   <!--ここ(edit)から。このページ構造とマークダウン作って。Codespacesのtreeの方がタイパいい。おやすみ。 2025/09/01 21:52-->
-  <Edit>
+  <EditingPage>
 
     <Banner>
       <Button name="back" type="back"/>
@@ -154,17 +154,17 @@
         </Select>
       </Background>
     </Workspace>
-  </Edit>
+  </EditingPage>
 
-  <Output>
+  <ResultPage>
     <Image name="preview"/>
     <Button name="download" type="button-1">ダウンロード</Button>
     <Button name="share" type="button-1">シェアする</Button>
     <Button name="print" type="button-1">プリント</Button>
     <Button name="end" type="button-1">終わる</Button>
-  </Output>
+  </ResultPage>
   
-  <Print>
+  <PrintPage>
     <Image name="preview"/>
     <Workspace>
       <Select name="mode-switch" type="pink">
@@ -210,9 +210,9 @@
     </Workspace>
     <Button name="cancel-printing" type="back"/>
     <Button name="start-printing" type="button-1">
-  </Print>
+  </PrintPage>
 
-  <Album>
+  <AlbumPage>
     <Button name="close-album" type="back"></Button>
     <Images>
       <!--ここはプログラムにより動的生成-->
@@ -222,9 +222,9 @@
       <Text name="current-page" type="plain"/>
       <Button name="next" type="next"/>
     </Pages>
-  </Album>
+  </AlbumPage>
 
-  <AlbumPicked>
+  <PickedPage>
     <Button name="back-to-album" type="back"/>
     <Button name="delete" type="button-1" image=""/>
     <Image name="preview"/>
@@ -236,6 +236,6 @@
       <Text name="property" type="plain"></Text>
       <Text name="link" type="link"></Text>
     </Place>
-  </AlbumPicked>
+  </PickedPage>
 
-</WebPage>
+</App>
