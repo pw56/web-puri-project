@@ -59,6 +59,9 @@ root
   - Figma
   - GPT-5
 
+- CI/CD:
+  - GitHub Action
+
 - テスト環境:
   - Chrome OS - Google Chrome 138.0.7204.221 (Official Build) （64 ビット）
   - iPhone 16e iOS18.71 Safari 18.6  
