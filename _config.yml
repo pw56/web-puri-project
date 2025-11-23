@@ -1,2 +1,9 @@
 plugins:
   - jekyll-sitemap
+
+exclude:
+  - docs
+  - src
+  - assets
+  - test
+  - build
