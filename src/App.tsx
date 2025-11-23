@@ -4,7 +4,12 @@ import 'pages';
 import { AppVersionManager } from './functions/app-version-manager';
 
 const App = () => {
-  return <></>;
+  return (
+    <>
+      <StartPage />
+      <ResultPage />
+    </>
+  );
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
