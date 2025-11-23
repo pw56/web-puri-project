@@ -47,8 +47,12 @@ root
   - Visual Studio Code
 
 - コンパイラ:
-  - **React:** CodeSandbox  
+  - **TypeScript:** esbuild
+  - **React:** esbuild
   - **WebAssembly:** Emscripten
+
+- バンドラ:
+  - Vite
 
 - コーディングAI:
   - Gemini 2.5 Pro
