@@ -1,0 +1,8 @@
+@font-face {
+  font-family: 'Hachi Maru Pop';
+  src: url('../../assets/font/HachiMaruPop/HachiMaruPop-Regular.ttf') format('truetype');
+}
+
+.App {
+  font-family: 'Hachi Maru Pop', cursive, sans-serif;
+}
