@@ -60,7 +60,7 @@ root
   - GPT-5
 
 - CI/CD:
-  - GitHub Action
+  - GitHub Actions
 
 - テスト環境:
   - Chrome OS - Google Chrome 138.0.7204.221 (Official Build) （64 ビット）
