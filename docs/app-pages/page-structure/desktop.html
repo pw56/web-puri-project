@@ -13,7 +13,7 @@
     <Button name="upload" type="button-1">アップロード</Button>
   </StartPage>
 
-  <QuantitySelectionPage>
+  <QuantitySelectPage>
     <Text name="page-title" type="plane">枚数選択</Text>
     <!-- <Quantity>
       <Text name="count" type="value"></Text>
@@ -22,9 +22,9 @@
     </Quantity> -->
     <Count name="quantity"/>
     <Button name="start-shooting" type="button-1">撮影を始める</Button>
-  </QuantitySelectionPage>
+  </QuantitySelectPage>
 
-  <ShootingPage>
+  <ShootPage>
     <Text name="frame-index"/>
     <Shooting>
       <Video name="camera"/>
@@ -35,9 +35,9 @@
       <Image name="check"/>
       <Button name="retry" type="button-1">撮り直し</Button>
     </Checking>
-  </ShootingPage>
+  </ShootPage>
 
-  <PuriShootingPage>
+  <PuriShootPage>
     <Text name="frame-index"/>
     <Shooting>
       <Video name="camera"/>
@@ -55,10 +55,10 @@
       <Image name="check" src=""/>
       <Button name="retry" type="button-1">撮り直し</Button>
     </Checking>
-  </PuriShootingPage>
+  </PuriShootPage>
 
   <!--ここ(edit)から。このページ構造とマークダウン作って。Codespacesのtreeの方がタイパいい。おやすみ。 2025/09/01 21:52-->
-  <EditingPage>
+  <EditPage>
 
     <Banner>
       <Button name="back" type="back"/>
@@ -154,7 +154,7 @@
         </Select>
       </Background>
     </Workspace>
-  </EditingPage>
+  </EditPage>
 
   <ResultPage>
     <Image name="preview"/>

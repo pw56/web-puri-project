@@ -1,4 +1,4 @@
 import StartPage from 'StartPage';
-import ShootingPage from 'ShootingPage';
-import EditingPage from 'EditingPage';
-import OutputPage from 'OutputPage';
+import ShootPage from 'ShootPage';
+import EditPage from 'EditPage';
+import ResultPage from 'ResultPage';

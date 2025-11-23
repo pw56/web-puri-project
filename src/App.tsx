@@ -1,17 +1,14 @@
-import { createRoot } from 'react-dom/client'
-import "components/index"
-import "pages/index"
-
-import "function/face-detection/index.js"
-import "function/face-editing/index.js"
-import "function/output/index.js"
-import "function/app-version-manager/index.js"
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import 'components/index';
+import 'pages/index';
+import 'function/index.js';
 
 const App = () => {
   return <></>;
 }
 
-const root = createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<App />);
 
 

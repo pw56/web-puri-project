@@ -1,4 +1,4 @@
-# face-detection
+# index.js
 
 ## selfieSegmentation (内部関数)
 - 概要
