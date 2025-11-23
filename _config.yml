@@ -4,3 +4,5 @@ plugins:
 exclude:
   - docs
   - src
+  - LICENSE
+  - README.md
