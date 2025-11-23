@@ -4,23 +4,18 @@
 このリポジトリはプリ機をWebアプリとして動かすことを目的に作成されました。
 ![アプリアイコン](assets/icons/icon-original.png)
 
-## 使用プログラミング言語
+## 技術スタック
 - HTML
 - CSS
 - JavaScript
-- TypeScript (TSX)
-- C++ (WebAssembly)
-- GLSL
-
-## 使用技術・ライブラリ  
+- TypeScript
 - React
-- WebGL
+- C++ (WebAssembly)
 - Web Worker
 - WebAssembly
 - Web Share API
 - PWA
 - Service Worker
-- IndexedDB
 - Dexie.js
 - Selfie Segmentation (MediaPipe)
 - COCO-SSD (TensorFlow.js)
@@ -31,17 +26,13 @@
 - Marked.js
 
 ## 使用素材
+- [Google Fonts](https://fonts.google.com)
 - [OtoLogic](https://otologic.jp)
-
-## ファイル構成
-```
-root
-```
 
 ## 開発環境
 - マシン:
-  - Chromebook
-  - GitHub Codespaces 2-core
+  - Lenovo 300e Chromebook 2nd Gen AST
+  - Actions
 
 - エディタ:
   - Visual Studio Code
@@ -54,7 +45,7 @@ root
 - バンドラ:
   - Vite
 
-- コーディングAI:
+- AIアシスタント:
   - Gemini 2.5 Pro
   - GPT-5
   - Microsoft Copilot
@@ -67,5 +58,6 @@ root
   - GitHub Actions
 
 - テスト環境:
-  - Chrome OS - Google Chrome 138.0.7204.221 (Official Build) （64 ビット）
-  - iPhone 16e iOS18.71 Safari 18.6  
+  - Chrome OS - Google Chrome 142.0.7444.181 (Official Build) （64 ビット）
+  - iPhone 16e iOS18.71 Safari 18.6
+  - Actions
