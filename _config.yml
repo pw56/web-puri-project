@@ -4,6 +4,3 @@ plugins:
 exclude:
   - docs
   - src
-  - assets
-  - test
-  - build
