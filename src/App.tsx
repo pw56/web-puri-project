@@ -2,7 +2,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import 'components/index';
 import 'pages/index';
-import 'function/index.js';
+import 'functions/index.js';
 
 const App = () => {
   return <></>;
