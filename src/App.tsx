@@ -17,10 +17,6 @@ const App = () => {
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<App />);
 
-
-
-// ここから下は旧式(main.js, main.css)の相続
-
 // オフライン対応
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
