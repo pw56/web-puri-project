@@ -28,3 +28,18 @@ target_include_directories(web_puri PRIVATE
 
 # 必要ならライブラリをリンク
 # target_link_libraries(web_puri PRIVATE <ライブラリ名>)
+
+if("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
+    # Debug ビルドの場合のオプション
+    target_compile_options(web_puri PRIVATE "-O0" "-g")
+    target_link_options(web_puri PRIVATE "-O0" "-s ASSERTIONS=2")
+
+elseif("${CMAKE_BUILD_TYPE}" STREQUAL "Release")
+    # Release ビルドの場合のオプション
+    target_compile_options(web_puri PRIVATE "-O3" "-flto")
+    target_link_options(web_puri PRIVATE "-O3" "-flto" "--closure 1")
+
+else()
+    # 他のビルドタイプ (MinSizeRel, RelWithDebInfoなど) のデフォルト設定
+    # 必要に応じて追加設定を記述
+endif()
