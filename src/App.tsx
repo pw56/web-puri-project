@@ -1,21 +1,20 @@
-import React from 'react';
 import { createRoot } from 'react-dom/client';
 
 import './pages';
 import styles from './App.module.css';
 import { AppVersionManager } from './functions/app-version-manager';
 
-const App = () => {
-  return (
-    <div className={styles.App}>
-      <StartPage />
-      <ResultPage />
-    </div>
-  );
-}
+// const App = () => {
+//   return (
+//     <div className={styles.App}>
+//       <StartPage />
+//       <ResultPage />
+//     </div>
+//   );
+// }
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
+// const root = ReactDOM.createRoot(document.getElementById('root'));
+// root.render(<App />);
 
 // オフライン対応
 if ('serviceWorker' in navigator) {
