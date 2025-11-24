@@ -50,9 +50,7 @@ if(EMSCRIPTEN)
 
     # --- オプションの適用 ---
     # target_link_options を使って、ビルドタイプごとに異なるフラグを適用
-    add_executable(my_target main.cpp)
-    
-    target_link_options(my_target PRIVATE
+    target_link_options(web_puri PRIVATE
         # config属性でビルドタイプを指定
         "$<$<CONFIG:Debug>:${DEBUG_LINK_FLAGS}>"
         "$<$<CONFIG:Release>:${RELEASE_LINK_FLAGS}>"
@@ -61,7 +59,7 @@ if(EMSCRIPTEN)
     )
     
     # コンパイルオプションも同様に設定可能
-    target_compile_options(my_target PRIVATE
+    target_compile_options(web_puri PRIVATE
         "$<$<CONFIG:Debug>:-O0>"
         "$<$<CONFIG:Release>:-O3;-flto>"
         "$<$<CONFIG:RelWithDebInfo>:-O3;-flto>"
