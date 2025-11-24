@@ -16,8 +16,9 @@ file(GLOB_RECURSE SOURCES
 # 実行ファイルの生成
 add_executable(web_puri ${SOURCES})
 
+# 出力先を dist に設定
 set_target_properties(web_puri PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}../../../build"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}../../../dist"
 )
 
 # インクルードディレクトリの追加

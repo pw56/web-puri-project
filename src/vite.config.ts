@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   root: './src', // プロジェクトのエントリを src に設定
   build: {
-    outDir: '../build', // ビルド成果物を build に出力
+    outDir: '../dist', // ビルド成果物を dist に出力
     emptyOutDir: true, // ビルド前に出力先を空にする
     minify: true, // ミニフィケーションを有効化
   },
