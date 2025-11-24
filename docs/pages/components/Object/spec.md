@@ -69,7 +69,7 @@
 > <Object type="svg" src="star.svg"/>
 > ```
 
-😊コンポーネントの背景
+## コンポーネントの背景
 - 属性: `component-background`
 - 表示:
 > 背景がピンク、縁が白で、丸みを帯びた四角形を表示。  
