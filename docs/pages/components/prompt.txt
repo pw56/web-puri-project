@@ -5,11 +5,3 @@
 ・コンポーネントの完成イメージのスクリーンショット(desktop.png, mobile.png)
 ・コンポーネントの見た目や動作の仕様書(spec.md)
 ・コンポーネントの構造(structure.xml)
-
-出力ファイル:
-・Button.tsx
-・Text.tsx
-・Select.tsx
-・Count.tsx
-・Object.tsx
-・LoadingAnimation.tsx
