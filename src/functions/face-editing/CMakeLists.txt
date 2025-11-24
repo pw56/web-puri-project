@@ -7,7 +7,7 @@ project(web_puri_project LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# ソースコードを src ディレクトリから取得
+# ソースコードを functions ディレクトリから取得
 file(GLOB_RECURSE SOURCES
     "${CMAKE_SOURCE_DIR}./*.cpp"
     "${CMAKE_SOURCE_DIR}./*.c"
@@ -17,12 +17,12 @@ file(GLOB_RECURSE SOURCES
 add_executable(web_puri ${SOURCES})
 
 set_target_properties(web_puri PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}./build"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}../../../build"
 )
 
 # インクルードディレクトリの追加
 target_include_directories(web_puri PRIVATE
-    "${CMAKE_SOURCE_DIR}./src"
+    "${CMAKE_SOURCE_DIR}./"
 )
 
 # 必要ならライブラリをリンク
