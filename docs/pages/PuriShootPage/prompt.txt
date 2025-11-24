@@ -8,4 +8,4 @@
 ・素材のファイル(.png, .svg)
 
 出力ファイル:
-・PuriShoot.tsx
+・PuriShootPage.tsx

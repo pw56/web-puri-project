@@ -8,4 +8,4 @@
 ・素材のファイル(add.svg, subtract.svg)
 
 出力ファイル:
-・QuantitySelection.tsx
+・QuantitySelectPage.tsx

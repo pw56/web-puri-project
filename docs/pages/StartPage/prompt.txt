@@ -8,4 +8,4 @@
 ・素材のファイル(sample-1.png, sample-2.png, heart-1.svg, heart-2.svg)
 
 出力ファイル:
-・Start.tsx
+・StartPage.tsx
