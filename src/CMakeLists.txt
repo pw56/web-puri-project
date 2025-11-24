@@ -9,16 +9,20 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # ソースコードを src ディレクトリから取得
 file(GLOB_RECURSE SOURCES
-    "${CMAKE_SOURCE_DIR}/src/*.cpp"
-    "${CMAKE_SOURCE_DIR}/src/*.c"
+    "${CMAKE_SOURCE_DIR}./*.cpp"
+    "${CMAKE_SOURCE_DIR}./*.c"
 )
 
 # 実行ファイルの生成
 add_executable(web_puri ${SOURCES})
 
+set_target_properties(web_puri PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}./build"
+)
+
 # インクルードディレクトリの追加
 target_include_directories(web_puri PRIVATE
-    "${CMAKE_SOURCE_DIR}/src"
+    "${CMAKE_SOURCE_DIR}./src"
 )
 
 # 必要ならライブラリをリンク
