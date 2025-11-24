@@ -104,11 +104,21 @@
   </EditPage>
 
   <ResultPage>
-    <Image name="preview"/>
-    <Button name="download" type="button-1">ダウンロード</Button>
-    <Button name="share" type="button-1">シェアする</Button>
-    <Button name="print" type="button-1">プリント</Button>
     <Button name="end" type="button-1">終わる</Button>
+    <Scroll type="puri">
+      <!--ここはプログラムにより動的生成-->
+      <Image name="preview-1"/>
+      <Image name="preview-2"/>
+      <Image name="preview-3"/>
+      <Image name="preview-4"/>
+    </Scroll>
+    <!--デスクトップ版-->
+      <Button name="download" type="button-1"></Button>
+    <!--モバイル版-->
+      <Button name="share" type="button-1"></Button>
+    <Button name="print" type="button-1"></Button>
+    <Button name="location" type="button-1"></Button>
+    <Tag name="tags"></Tag>
   </ResultPage>
   
   <PrintPage>
