@@ -5,7 +5,7 @@
 ・ページの完成イメージのスクリーンショット(desktop.png, mobile.png)
 ・ページの見た目や動作の仕様書(spec.md)
 ・ページの構造(structure.xml)
-・素材のファイル(.png, .svg)
+・素材のファイル(.svg)
 
 出力ファイル:
 ・PuriShootPage.tsx
