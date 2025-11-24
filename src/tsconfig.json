@@ -13,13 +13,13 @@
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
     "noEmit": true,
-    "baseUrl": "./src",
+    "baseUrl": "./",
     "paths": {
       "@components/*": ["components/*"],
       "@functions/*": ["functions/*"],
       "@pages/*": ["pages/*"]
     }
   },
-  "include": ["./src/**/*.ts", "./src/**/*.tsx"],
-  "exclude": ["node_modules", "build", "dist", "app"]
+  "include": ["./**/*.ts", "./**/*.tsx"],
+  "exclude": []
 }
