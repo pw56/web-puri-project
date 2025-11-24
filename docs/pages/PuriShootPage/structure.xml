@@ -1,0 +1,19 @@
+<PuriShootPage>
+  <Text name="frame-index"/>
+  <Shooting>
+    <Video name="camera"/>
+    <Pose>
+      <Image name="example" image=""/>
+      <Text name="message" type="plane"/>
+      <Object name="background" type=""/>
+    </Pose>
+    <Countdown>
+      <Object name="background-circle" type="circle"/>
+      <Text name="number" type="plane"/>
+    </Countdown>
+  </Shooting>
+  <Checking>
+    <Image name="check" src=""/>
+    <Button name="retry" type="button-1">撮り直し</Button>
+  </Checking>
+</PuriShootPage>

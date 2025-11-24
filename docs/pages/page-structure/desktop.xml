@@ -1,61 +1,8 @@
 <App>
-  
-  <StartPage>
-    <Title>
-      <Image name="sample-1"/>
-      <Image name="sample-2"/>
-      <Object name="heart-1" type="svg" src="heart-1.svg"/>
-      <Object name="heart-2" type="svg" src="heart-2.svg"/>
-      <Text name="title-name" type="plane">Webプリ</Text>
-    </Title>
-    <Button name="shooting" type="button-1">撮影</Button>
-    <Button name="puri-shooting" type="button-1">プリモード</Button>
-    <Button name="upload" type="button-1">アップロード</Button>
-  </StartPage>
-
-  <QuantitySelectPage>
-    <Text name="page-title" type="plane">枚数選択</Text>
-    <!-- <Quantity>
-      <Text name="count" type="value"></Text>
-      <Button name="add" type="button-1" image=""></Button>
-      <Button name="subtract" type="button-1" image=""></Button>
-    </Quantity> -->
-    <Count name="quantity"/>
-    <Button name="start-shooting" type="button-1">撮影を始める</Button>
-  </QuantitySelectPage>
-
-  <ShootPage>
-    <Text name="frame-index"/>
-    <Shooting>
-      <Video name="camera"/>
-      <Button name="shoot" type="button-2"/>
-      <Button name="switch" type="button-1" image="camera-switch.svg"/>
-    </Shooting>
-    <Checking>
-      <Image name="check"/>
-      <Button name="retry" type="button-1">撮り直し</Button>
-    </Checking>
-  </ShootPage>
-
-  <PuriShootPage>
-    <Text name="frame-index"/>
-    <Shooting>
-      <Video name="camera"/>
-      <Pose>
-        <Image name="example" image=""/>
-        <Text name="message" type="plane"/>
-        <Object name="background" type=""/>
-      </Pose>
-      <Countdown>
-        <Object name="background-circle" type="circle"/>
-        <Text name="number" type="plane"/>
-      </Countdown>
-    </Shooting>
-    <Checking>
-      <Image name="check" src=""/>
-      <Button name="retry" type="button-1">撮り直し</Button>
-    </Checking>
-  </PuriShootPage>
+  <StartPage/>
+  <QuantitySelectPage/>
+  <ShootPage/>
+  <PuriShootPage/>
 
   <!--ここ(edit)から。このページ構造とマークダウン作って。Codespacesのtreeの方がタイパいい。おやすみ。 2025/09/01 21:52-->
   <EditPage>
