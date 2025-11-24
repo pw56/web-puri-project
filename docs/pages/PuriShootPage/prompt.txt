@@ -2,7 +2,8 @@
 
 情報:
 ・ページの完成イメージのスクリーンショット(desktop.png, mobile.png)
-・ページの動作や構造の仕様書(puri-shoot.md)
+・ページの見た目や動作の仕様書(spec.md)
+・ページの構造(structure.xml)
 ・素材のファイル(.png, .svg)
 
 出力ファイル:
