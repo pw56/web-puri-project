@@ -30,13 +30,6 @@
 - [OtoLogic](https://otologic.jp)
 
 ## 開発環境
-- マシン:
-  - Lenovo 300e Chromebook 2nd Gen AST
-  - Actions
-
-- エディタ:
-  - Visual Studio Code
-
 - コンパイラ:
   - **TypeScript:** esbuild
   - **React:** esbuild
@@ -55,9 +48,9 @@
   - GPT-5
 
 - CI/CD:
-  - GitHub Actions
+  - GitHubホステッドランナー (ubuntu-latest)
 
 - テスト環境:
   - Chrome OS - Google Chrome 142.0.7444.181 (Official Build) （64 ビット）
   - iPhone 16e iOS18.71 Safari 18.6
-  - Actions
+  - GitHubホステッドランナー (ubuntu-latest)
