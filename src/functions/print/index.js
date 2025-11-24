@@ -1,4 +1,4 @@
-import "print.js"
+import "./printElement.js"
 
 export function printPuriSheet(original, height, width) {
   if(!(original instanceof ImageData)) throw new Error("画像が正しくありません。");
