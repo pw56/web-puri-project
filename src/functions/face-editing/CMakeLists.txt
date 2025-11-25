@@ -24,7 +24,7 @@ set_target_properties(web_puri PROPERTIES
 
 # インクルードディレクトリの追加
 target_include_directories(web_puri PRIVATE
-    "${CMAKE_SOURCE_DIR}/"
+    "${CMAKE_SOURCE_DIR}./"
 )
 
 # Emscripten 環境でのみ設定を適用
