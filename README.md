@@ -53,4 +53,4 @@
 - テスト環境:
   - Chrome OS - Google Chrome 142.0.7444.181 (Official Build) （64 ビット）
   - iPhone 16e iOS18.71 Safari 18.6
-  - GitHubホステッドランナー (ubuntu-latest)
+  - GitHubホステッドランナー (ubuntu-latest) 
