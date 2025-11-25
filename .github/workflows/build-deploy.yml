@@ -17,8 +17,13 @@ jobs:
       - name: Detect changes
         id: changes
         run: |
-          git fetch origin main
-          CHANGED=$(git diff --name-only HEAD~1 HEAD | grep -vE '^(docs|dist|app|LICENSE|README.md)')
+          if git rev-parse HEAD~1 >/dev/null 2>&1; then
+            CHANGED=$(git diff --name-only HEAD~1 HEAD | grep -vE '^(docs|dist|app|LICENSE|README.md)')
+          else
+            # 初回コミットは全ファイルを変更扱いにする
+            CHANGED=$(git ls-files | grep -vE '^(docs|dist|app|LICENSE|README.md)')
+          fi
+
           if [ -z "$CHANGED" ]; then
             echo "skip=true" >> $GITHUB_OUTPUT
           else
