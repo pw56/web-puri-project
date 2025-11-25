@@ -1,0 +1,109 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 0. 差分チェック
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Detect changes
+        id: changes
+        run: |
+          git fetch origin main
+          CHANGED=$(git diff --name-only HEAD~1 HEAD | grep -vE '^(docs|dist|app|LICENSE|README.md)')
+          if [ -z "$CHANGED" ]; then
+            echo "skip=true" >> $GITHUB_OUTPUT
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Stop if no relevant changes
+        if: steps.changes.outputs.skip == 'true'
+        run: |
+          echo "No relevant changes detected. Skipping workflow."
+          exit 0
+
+      # 1. 環境構築 (Node.js, npm, Vite, Emscripten, CMake)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Setup Emscripten
+        uses: mymindstorm/setup-emsdk@v12
+        with:
+          version: latest
+
+      - name: Setup CMake
+        uses: jwlawson/actions-setup-cmake@v1.14
+        with:
+          cmake-version: '3.27.0'
+
+      # 2. ソースファイル変更検出 & ビルド
+      - name: Detect source changes
+        id: src_changes
+        run: |
+          SRC_CHANGED=$(git diff --name-only HEAD~1 HEAD | grep -E '\.(ts|tsx|jsx|cpp)$' || true)
+          if [ -z "$SRC_CHANGED" ]; then
+            echo "src=false" >> $GITHUB_OUTPUT
+          else
+            echo "src=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Determine build mode
+        id: mode
+        run: |
+          if echo "${{ github.event.head_commit.message }}" | grep -qE '新バージョンをリリース: [0-9]+\.[0-9]+\.[0-9]+'; then
+            echo "mode=release" >> $GITHUB_OUTPUT
+          else
+            echo "mode=debug" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Build TypeScript/JSX
+        if: steps.src_changes.outputs.src == 'true'
+        run: |
+          if [ "${{ steps.mode.outputs.mode }}" = "release" ]; then
+            npm run build -- --mode production
+          else
+            npm run build -- --mode development
+          fi
+
+      - name: Build C++ (Wasm)
+        if: steps.src_changes.outputs.src == 'true'
+        run: |
+          if [ "${{ steps.mode.outputs.mode }}" = "release" ]; then
+            emcmake cmake -B build_release -DCMAKE_BUILD_TYPE=Release
+            cmake --build build_release
+          else
+            emcmake cmake -B build_debug -DCMAKE_BUILD_TYPE=Debug
+            cmake --build build_debug
+          fi
+
+      # 3. Vite バンドル & ミニフィケーション
+      - name: Vite bundle
+        run: |
+          if [ "${{ steps.mode.outputs.mode }}" = "release" ]; then
+            npm run build -- --mode production
+          else
+            npm run build -- --mode development
+          fi
+
+      # 4. GitHub Pages デプロイ
+      - name: Deploy to GitHub Pages
+        if: steps.mode.outputs.mode == 'release'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
