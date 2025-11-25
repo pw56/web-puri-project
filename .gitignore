@@ -1,4 +1,4 @@
 /dist
-/package.jso
-/package-lock.jso
+/package.json
+/package-lock.json
 /node_modules
