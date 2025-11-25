@@ -31,12 +31,20 @@ jobs:
           echo "No relevant changes detected. Skipping workflow."
           exit 0
 
-      # 1. 環境構築 (Node.js, npm, Vite, Emscripten, CMake)
+      # 1. 環境構築 (Node.js, npm, Vite, Emscripten, CMake) + キャッシュ
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
+
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            npm-
 
       - name: Install dependencies
         run: npm ci
@@ -45,6 +53,14 @@ jobs:
         uses: mymindstorm/setup-emsdk@v12
         with:
           version: latest
+
+      - name: Cache emscripten build
+        uses: actions/cache@v4
+        with:
+          path: build_*
+          key: emscripten-${{ runner.os }}-${{ steps.mode.outputs.mode }}
+          restore-keys: |
+            emscripten-${{ runner.os }}-
 
       - name: Setup CMake
         uses: jwlawson/actions-setup-cmake@v1.14
