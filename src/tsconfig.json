@@ -16,8 +16,7 @@
     "baseUrl": "./",
     "paths": {
       "@components/*": ["components/*"],
-      "@functions/*": ["functions/*"],
-      "@pages/*": ["pages/*"]
+      "@features/*": ["features/*"]
     }
   },
   "include": ["./**/*.ts", "./**/*.tsx"],
