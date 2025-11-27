@@ -25,10 +25,9 @@ if ('serviceWorker' in navigator) {
   });
 }
 
-// ここは新バージョンリリース時に絶対更新！
-window.addEventListener('load', () => {
-  const appVersion = new AppVersionManager("0.1.0-alpha");
-  if(appVersion.isUpdated()) {
-    // notice('新機能をリリース！', 'screenshot.png');
-  }
-});
+// window.addEventListener('load', () => {
+//   const appVersion = new AppVersionManager();
+//   if(appVersion.isUpdated()) {
+//     notice('ここのマークダウン形式のコンテンツは ./release/message.md から読み込む');
+//   }
+// });
