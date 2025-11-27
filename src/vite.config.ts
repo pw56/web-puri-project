@@ -5,9 +5,9 @@ export default defineConfig(({ mode }) => ({
   plugins: [react()],
   root: './src',
   build: {
-    outDir: mode === 'release' ? '../app' : '../dist',
+    outDir: mode === 'production' ? '../app' : '../dist',
     emptyOutDir: true,
-    minify: mode === 'release',
+    minify: mode === 'production',
   },
   resolve: {
     alias: {
