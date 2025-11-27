@@ -78,3 +78,10 @@
 > ボタン1の派生。
 > ボタンに戻るアイコン(next.svg)を表示する。  
 > ![button-next](button-next.png)
+
+## チェック
+- 属性: `check`
+- 表示:
+> ボタン1の派生。
+> ボタンにチェックアイコン(check.svg)を表示する。  
+> ![button-next](button-check.png)
