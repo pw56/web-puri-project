@@ -173,8 +173,7 @@ jobs:
 
       # 4. GitHub Pages デプロイ
       - name: Deploy to GitHub Pages
-        if: steps.mode.outputs.mode == 'release'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          publish_dir: ${{ steps.mode.outputs.mode == 'release' && './app' || './dist' }}
