@@ -81,7 +81,9 @@ jobs:
       - name: Cache emscripten build
         uses: actions/cache@v4
         with:
-          path: build_*
+          path: |
+            build_release
+            build_debug
           key: emscripten-${{ runner.os }}-${{ steps.mode.outputs.mode }}
           restore-keys: |
             emscripten-${{ runner.os }}-
