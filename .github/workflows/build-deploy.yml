@@ -17,18 +17,45 @@ jobs:
       - name: Detect changes
         id: changes
         run: |
+          # _config.yml に書かれた対象パスを取得
+          CONFIG_PATHS=$(yq '.paths[]' _config.yml 2>/dev/null || echo "")
+
+          # 変更ファイル一覧を取得
           if git rev-parse HEAD~1 >/dev/null 2>&1; then
-            CHANGED=$(git diff --name-only HEAD~1 HEAD | grep -vE '^(docs|dist|app|LICENSE|README.md)')
+            CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD)
           else
-            # 初回コミットは全ファイルを変更扱いにする
-            CHANGED=$(git ls-files | grep -vE '^(docs|dist|app|LICENSE|README.md)')
+            CHANGED_FILES=$(git ls-files)
           fi
 
-          if [ -z "$CHANGED" ]; then
+          echo "Changed files:"
+          echo "$CHANGED_FILES"
+
+          ONLY_CONFIG_PATHS=true
+
+          for FILE in $CHANGED_FILES; do
+            MATCHED=false
+
+            # _config.yml の paths に含まれるパスと一致するかチェック
+            for P in $CONFIG_PATHS; do
+              if [[ "$FILE" == $P* ]]; then
+                MATCHED=true
+              fi
+            done
+
+            # 1つでも一致しないファイルがあれば「_config.yml のパスだけ」ではない
+            if [ "$MATCHED" = false ]; then
+              ONLY_CONFIG_PATHS=false
+            fi
+          done
+
+          # ✅ _config.yml のパスだけの変更ならスキップ
+          if [ "$ONLY_CONFIG_PATHS" = true ]; then
             echo "skip=true" >> $GITHUB_OUTPUT
-          else
-            echo "skip=false" >> $GITHUB_OUTPUT
+            exit 0
           fi
+
+          # ✅ それ以外は実行
+          echo "skip=false" >> $GITHUB_OUTPUT
 
       - name: Stop if no relevant changes
         if: steps.changes.outputs.skip == 'true'
