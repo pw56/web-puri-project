@@ -110,13 +110,42 @@ jobs:
             echo "src=true" >> $GITHUB_OUTPUT
           fi
 
-      - name: Determine build mode
-        id: mode
+      - name: Detect release mode
+        id: release
         run: |
-          if echo "${{ github.event.head_commit.message }}" | grep -qE '新バージョンをリリース: [0-9]+\.[0-9]+\.[0-9]+'; then
+          # 変更ファイル一覧を取得
+          if git rev-parse HEAD~1 >/dev/null 2>&1; then
+            CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD)
+          else
+            CHANGED_FILES=$(git ls-files)
+          fi
+
+          echo "Changed files:"
+          echo "$CHANGED_FILES"
+
+          # コミットメッセージ取得
+          COMMIT_MSG=$(git log -1 --pretty=%B)
+          echo "Commit message: $COMMIT_MSG"
+
+          # 条件1: コミットメッセージに特定文字列が含まれるか
+          if echo "$COMMIT_MSG" | grep -q "アプリの新バージョンをリリース"; then
+            MSG_OK=true
+          else
+            MSG_OK=false
+          fi
+
+          # 条件2: version.yml が変更されているか
+          if echo "$CHANGED_FILES" | grep -q "^src/version.yml$"; then
+            VERSION_OK=true
+          else
+            VERSION_OK=false
+          fi
+
+          # 両方満たしたらリリースモード
+          if [ "$MSG_OK" = true ] && [ "$VERSION_OK" = true ]; then
             echo "mode=release" >> $GITHUB_OUTPUT
           else
-            echo "mode=debug" >> $GITHUB_OUTPUT
+            echo "mode=development" >> $GITHUB_OUTPUT
           fi
 
       - name: Build TypeScript/JSX
