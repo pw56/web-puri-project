@@ -2,7 +2,7 @@
 
 ## 概要
 このリポジトリはプリ機をWebアプリとして動かすことを目的に作成されました。
-![アプリアイコン](assets/icons/icon-original.png)
+![アプリアイコン](assets/icons/icon-512x512.png)
 
 ## 技術スタック
 - HTML
