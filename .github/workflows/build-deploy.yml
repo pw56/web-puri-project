@@ -145,15 +145,6 @@ jobs:
             echo "mode=development" >> $GITHUB_OUTPUT
           fi
 
-      - name: Build TypeScript/JSX
-        if: steps.src_changes.outputs.src == 'true'
-        run: |
-          if [ "${{ steps.mode.outputs.mode }}" = "release" ]; then
-            npm run build -- --mode production
-          else
-            npm run build -- --mode development
-          fi
-
       - name: Build C++ (Wasm)
         if: steps.src_changes.outputs.src == 'true'
         run: |
@@ -165,13 +156,13 @@ jobs:
             cmake --build build_debug
           fi
 
-      # 3. Vite バンドル & ミニフィケーション
+      # 3. Vite ビルド (リリース時はバンドル, ミニフィケーションも含む)
       - name: Vite bundle
         run: |
           if [ "${{ steps.mode.outputs.mode }}" = "release" ]; then
-            npm run build -- --mode production
+            npm run build:release
           else
-            npm run build -- --mode development
+            npm run dev
           fi
 
       # 4. GitHub Pages デプロイ
