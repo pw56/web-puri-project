@@ -13,14 +13,6 @@ if ('serviceWorker' in navigator) {
   });
 }
 
-// アップデート通知
-// window.addEventListener('load', () => {
-//   const appVersion = new AppVersionManager();
-//   if(appVersion.isUpdated()) {
-//     notice('ここのマークダウン形式のコンテンツは ./release/message.md から読み込む');
-//   }
-// });
-
 // レンダリング
 // const App = () => {
 //   return (
@@ -33,3 +25,16 @@ if ('serviceWorker' in navigator) {
 //
 // const root = ReactDOM.createRoot(document.getElementById('root'));
 // root.render(<App />);
+
+// アップデートがあったら通知
+// window.addEventListener('load', () => {
+//   const appVersion = new AppVersionManager();
+//   if(appVersion.isUpdated()) {
+//     notice('ここのマークダウン形式のコンテンツは ./release/message.md から読み込む');
+//   }
+// });
+
+// 誤って編集内容が失われるのを防ぐため、ページの離脱を警告
+window.addEventListener('beforeunload',(e)=>{
+  e.preventDefault();
+})
