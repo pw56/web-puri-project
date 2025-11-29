@@ -6,7 +6,8 @@ declare const self: ServiceWorkerGlobalScope;
 const CACHE_NAME: string = 'web-puri-cache';
 const urlsToCache: string[] = [
   './',
-  '../assets',
+  '../assets/fonts',
+  '../assets/icons',
   'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js',
   'https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation@0.1/selfie_segmentation.js',
   'https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js',
