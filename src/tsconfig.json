@@ -17,8 +17,10 @@
     "paths": {
       "@components/*": ["components/*"],
       "@features/*": ["features/*"]
-    }
+    },
+    "incremental": true,
+    "tsBuildInfoFile": "./.tsbuildinfo"
   },
   "include": ["./**/*.ts", "./**/*.tsx"],
-  "exclude": []
+  "exclude": ["node_modules"]
 }

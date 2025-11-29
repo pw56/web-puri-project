@@ -76,6 +76,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # TypeScript ビルドキャッシュの復元
+      - name: Restore TS build cache
+        uses: actions/cache@v4
+        with:
+          path: ./.tsbuildinfo
+          # keyのハッシュ生成に package-lock.json と .tsbuildinfo の両方を使用
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('./.tsbuildinfo') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}-
+
       - name: Setup Emscripten
         uses: mymindstorm/setup-emsdk@v12
         with:
