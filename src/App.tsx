@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client';
 
-import './features/pages';
+import '@features/pages';
 import styles from './App.module.css';
 import { AppVersionManager } from './app-version-manager';
 
@@ -14,25 +14,25 @@ if ('serviceWorker' in navigator) {
 }
 
 // レンダリング
-// const App = () => {
-//   return (
-//     <div className={styles.App}>
-//       <StartPage />
-//       <ResultPage />
-//     </div>
-//   );
-// }
-//
-// const root = ReactDOM.createRoot(document.getElementById('root'));
-// root.render(<App />);
+const App = () => {
+  return (
+    <div className={styles.App}>
+      <StartPage />
+      <ResultPage />
+    </div>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
 
 // アップデートがあったら通知
-// window.addEventListener('load', () => {
-//   const appVersion = new AppVersionManager();
-//   if(appVersion.isUpdated()) {
-//     notice('ここのマークダウン形式のコンテンツは ./release/message.md から読み込む');
-//   }
-// });
+window.addEventListener('load', () => {
+  const appVersion = new AppVersionManager('ここは ./release/version.yml から読み込む');
+  if(appVersion.isUpdated()) {
+    // notice('ここは ./release/message.md から読み込む');
+  }
+});
 
 // 誤って編集内容が失われるのを防ぐため、ページの離脱を警告
 window.addEventListener('beforeunload',(e)=>{
