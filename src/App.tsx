@@ -4,18 +4,6 @@ import './features/pages';
 import styles from './App.module.css';
 import { AppVersionManager } from './app-version-manager';
 
-// const App = () => {
-//   return (
-//     <div className={styles.App}>
-//       <StartPage />
-//       <ResultPage />
-//     </div>
-//   );
-// }
-
-// const root = ReactDOM.createRoot(document.getElementById('root'));
-// root.render(<App />);
-
 // オフライン対応
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
@@ -25,9 +13,23 @@ if ('serviceWorker' in navigator) {
   });
 }
 
+// アップデート通知
 // window.addEventListener('load', () => {
 //   const appVersion = new AppVersionManager();
 //   if(appVersion.isUpdated()) {
 //     notice('ここのマークダウン形式のコンテンツは ./release/message.md から読み込む');
 //   }
 // });
+
+// レンダリング
+// const App = () => {
+//   return (
+//     <div className={styles.App}>
+//       <StartPage />
+//       <ResultPage />
+//     </div>
+//   );
+// }
+//
+// const root = ReactDOM.createRoot(document.getElementById('root'));
+// root.render(<App />);
