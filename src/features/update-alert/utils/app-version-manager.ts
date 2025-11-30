@@ -34,7 +34,11 @@ export class AppVersionManager {
    * @returns {boolean} 更新されたか否か
    */
   isUpdated(): boolean {
-    const result: boolean = (this.getVersion() !== this.#previousVersion);
-    return result;
+    // 前回のデータが存在しなかったら
+    if(this.getVersion() === null)
+      return false;
+    // 前回から更新されたか
+    else
+      return (this.getVersion() !== this.#previousVersion);
   }
 };
