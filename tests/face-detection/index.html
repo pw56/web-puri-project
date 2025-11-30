@@ -2,8 +2,8 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <title>test - detection.js</title>
-  <link rel="stylesheet" href="style.css">
+  <title>test - face-detection</title>
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
   <canvas id="canvas"></canvas>
@@ -15,11 +15,11 @@
   </script>
 
   <script
-    src="/web-puri-project/src/function/face-detection/index.js"
+    src="../../dist/features/edit/utils/face-detection/index.js"
     onload="libLoaded = true;"
     onerror="libLoaded = false; alert('ライブラリの読み込みに失敗しました。');">
   </script>
 
-  <script src="script.js"></script>
+  <script src="./script.js"></script>
 </body>
 </html>
