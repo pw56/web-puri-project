@@ -10,19 +10,19 @@ function sendNotification(type, text) {
   switch (type) {
     case 'log': {
       displayType = 'ログ';
-      iconPath += 'log.svg';
+      iconPath += 'log.png';
       break;
     }
 
     case 'warn': {
       displayType = '警告';
-      iconPath += 'warn.svg';
+      iconPath += 'warn.png';
       break;
     }
 
     case 'error': {
       displayType = 'エラー';
-      iconPath += 'error.svg';
+      iconPath += 'error.png';
       break;
     }
   }
