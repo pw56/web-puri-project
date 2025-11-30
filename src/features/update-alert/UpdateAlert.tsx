@@ -13,6 +13,6 @@ console.log(`アップデートされたか: ${appVersion.isUpdated()}`);
 // アップデートがあったら通知
 useEffect(() => {
   if(appVersion.isUpdated()) {
-    // app.alert('ここは ./release/message.md から読み込む');
+    // showAlert('ここは ./release/message.md から読み込む');
   }
 }, []);
