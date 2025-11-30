@@ -6,29 +6,29 @@ Notification.requestPermission().then(() => {
 
 function sendNotification(type, text) {
   let displayType = '',
-      icon = './assets/';
+      iconPath = '/web-puri-project/tests/debug/assets';
   switch (type) {
     case 'log': {
       displayType = 'ログ';
-      icon += 'log.svg';
+      iconPath += 'log.svg';
       break;
     }
 
     case 'warn': {
       displayType = '警告';
-      icon += 'warn.svg';
+      iconPath += 'warn.svg';
       break;
     }
 
     case 'error': {
       displayType = 'エラー';
-      icon += 'error.svg';
+      iconPath += 'error.svg';
       break;
     }
   }
   const options = {
     body: text,
-    icon: icon
+    icon: iconPath
   };
   new Notification(displayType, options);
 }
