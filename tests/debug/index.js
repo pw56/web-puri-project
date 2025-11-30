@@ -4,24 +4,32 @@ Notification.requestPermission().then(() => {
 });
 
 function sendNotification(type, text) {
-  let displayType = '';
+  let displayType = '',
+      icon = './assets/';
   switch (type) {
     case 'log': {
       displayType = 'ログ';
+      icon += 'log.svg';
       break;
     }
 
     case 'warn': {
       displayType = '警告';
+      icon += 'warn.svg';
       break;
     }
 
     case 'error': {
       displayType = 'エラー';
+      icon += 'error.svg';
       break;
     }
   }
-  alert(`${displayType}: ${text}`);
+  const options = {
+    body: text,
+    icon: icon
+  };
+  new Notification(displayType, options);
 }
 
 console.log = (text) => { sendNotification('log', text); };
