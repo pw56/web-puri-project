@@ -16,7 +16,8 @@
     "baseUrl": "./",
     "paths": {
       "@components/*": ["components/*"],
-      "@features/*": ["features/*"]
+      "@features/*": ["features/*"],
+      "@debug/*": ["../tests"]
     },
     "incremental": true,
     "tsBuildInfoFile": "./.tsbuildinfo"
