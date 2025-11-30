@@ -1,3 +1,4 @@
+!function() {
 let isNotificationGranted = false;
 Notification.requestPermission().then(() => {
   isNotificationGranted = true;
@@ -32,6 +33,7 @@ function sendNotification(type, text) {
   new Notification(displayType, options);
 }
 
-export console.log = (text) => { sendNotification('log', text); };
-export console.warn = (text) => { sendNotification('warn', text); };
-export console.error = (text) => { sendNotification('error', text) };
+console.log = (text) => { sendNotification('log', text); };
+console.warn = (text) => { sendNotification('warn', text); };
+console.error = (text) => { sendNotification('error', text) };
+}();
