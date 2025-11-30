@@ -1,3 +1,5 @@
+import '/web-puri-project/tests/debug/index.js';
+
 // COCO-SSDモデルのインスタンスをグローバルスコープで保持します
 let cocoSsdModel = null;
 

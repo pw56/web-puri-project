@@ -1,3 +1,5 @@
+import '/web-puri-project/tests/debug/index.js';
+
 /**
  * segmentation-worker.js
  * Web Worker for MediaPipe Selfie Segmentation.

@@ -1,3 +1,5 @@
+import '/web-puri-project/tests/debug/index.js';
+
 /**
  * face-landmarks-worker.js
  * Web Worker for face landmark, eyebag, and iris detection.
