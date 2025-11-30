@@ -6,7 +6,7 @@ Notification.requestPermission().then(() => {
 
 function sendNotification(type, text) {
   let displayType = '',
-      iconPath = '/web-puri-project/tests/debug/assets/';
+      iconPath = 'https://pw56.github.io/web-puri-project/tests/debug/assets/';
   switch (type) {
     case 'log': {
       displayType = 'ログ';
