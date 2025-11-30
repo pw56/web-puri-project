@@ -32,6 +32,6 @@ function sendNotification(type, text) {
   new Notification(displayType, options);
 }
 
-console.log = (text) => { sendNotification('log', text); };
-console.warn = (text) => { sendNotification('warn', text); };
-console.error = (text) => { sendNotification('error', text) };
+export console.log = (text) => { sendNotification('log', text); };
+export console.warn = (text) => { sendNotification('warn', text); };
+export console.error = (text) => { sendNotification('error', text) };
