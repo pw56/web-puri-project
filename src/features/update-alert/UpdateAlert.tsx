@@ -3,8 +3,9 @@ import '@components/Alert';
 import { AppVersionManager } from './utils/app-version-manager';
 
 // ここに ./release/version.yml を読み込む処理
-const file: /* ファイルオブジェクトの型 */ | null = ;
-const version: string = file.version || '1.0.0';
+const file: File | null = ;
+const result: Object = file;
+const version: string = result.version || '1.0.0';
 const appVersion = new AppVersionManager("window-app-version", version);
 
 console.log(`現在のアプリのバージョン: ${appVersion.getVersion()}`);
