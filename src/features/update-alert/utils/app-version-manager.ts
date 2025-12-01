@@ -1,11 +1,11 @@
-import Dexie from "./dexie";
+import Dexie from "./dexie.min.js";
 
 class VersionDB extends Dexie {
   versions: Dexie.Table<{ key: string; value: string }, string>;
 
   constructor() {
     super("AppVersionDB");
-    this.version(1).stores({
+    this.versions(1).stores({
       versions: "&key"
     });
     this.versions = this.table("versions");
