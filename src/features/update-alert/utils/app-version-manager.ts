@@ -1,12 +1,14 @@
 export class AppVersionManager {
-  readonly #STORAGE_KEY:string = "lastVisitedVersion";
+  readonly #BASE_KEY: string = "lastVisitedVersion";
+  #STORAGE_KEY:string = "";
   readonly #previousVersion: string | null = localStorage.getItem(this.#STORAGE_KEY);
 
   /**
    * 文字列型かチェック
    * @throw 文字列型の例外
    */
-  constructor(initialVersion: string) {
+  constructor(id: string, initialVersion: string) {
+    this.#STORAGE_KEY = this.#BASE_KEY + id;
     this.#setVersion(initialVersion);
   }
 
