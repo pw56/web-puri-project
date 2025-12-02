@@ -1,4 +1,4 @@
-import Dexie from "./dexie.min.js";
+import Dexie from "@libs/dexie.min.js";
 
 class VersionDB extends Dexie {
   versions: Dexie.Table<{ key: string; value: string }, string>;

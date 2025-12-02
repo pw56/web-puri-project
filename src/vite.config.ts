@@ -13,6 +13,7 @@ export default defineConfig(({ mode }) => ({
     alias: {
       '@components': './components',
       '@features': './features',
+      '@libs': './libs',
       '@debug': '../tests'
     },
   },
