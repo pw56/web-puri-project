@@ -14,7 +14,13 @@ console.log(`アップデートされたか: ${appVersion.isUpdated()}`);
 
 // アップデートがあったら通知
 useEffect(async () => {
-  if(await appVersion.isUpdated()) {
-    // showAlert('ここは ./release/message.md から読み込む');
-  }
+  const checkUpdate = async () => {
+    if (await appVersion.isUpdated()) {
+      // ここで ./release/message.md からメッセージを読み込む処理も非同期になる場合があります
+      //showAlert('ここは ./release/message.md から読み込む');
+    }
+  };
+
+  // 定義した非同期関数をすぐに実行
+  checkUpdate();
 }, []);
