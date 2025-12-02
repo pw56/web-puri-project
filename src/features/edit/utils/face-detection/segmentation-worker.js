@@ -1,15 +1,6 @@
-import '/web-puri-project/tests/debug/index.js';
-
-/**
- * segmentation-worker.js
- * Web Worker for MediaPipe Selfie Segmentation.
- */
-
-// 必要なライブラリをWorkerのスコープにインポートします
-importScripts(
-  'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js',
-  'https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation@0.1/selfie_segmentation.js'
-);
+import '@debug';
+import '@libs/tf.js';
+import '@libs/selfie-segmentation.js';
 
 // セグメンテーションモデルのインスタンスをWorkerスコープで保持します
 let segmenter = null;
@@ -25,6 +16,7 @@ function initializeSegmenter() {
   
   try {
     // SelfieSegmentationのインスタンスを生成します
+    // ファイルをホストしたから、CDNっぽいのどうにかして
     segmenter = new SelfieSegmentation({
       locateFile: (file) => {
         return `https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation@0.1/${file}`;

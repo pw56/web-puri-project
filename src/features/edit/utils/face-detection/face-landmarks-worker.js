@@ -1,16 +1,7 @@
-import '/web-puri-project/tests/debug/index.js';
-
-/**
- * face-landmarks-worker.js
- * Web Worker for face landmark, eyebag, and iris detection.
- */
-
-// 必要なライブラリをWorkerのスコープにインポートします
-importScripts(
-  'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js',
-  'https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js',
-  'https://cdn.jsdelivr.net/npm/@tensorflow-models/face-landmarks-detection/dist/face-landmarks-detection.js'
-);
+import '@debug';
+import '@libs/tf.js';
+import '@libs/face-mesh.js';
+import '@libs/face-landmarks-detection.js';
 
 // モデルのインスタンスをWorkerスコープで保持し、再利用します
 let model = null;
