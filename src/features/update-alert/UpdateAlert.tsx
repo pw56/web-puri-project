@@ -12,8 +12,8 @@ console.log(`現在のアプリのバージョン: ${appVersion.getVersion()}`);
 console.log(`アップデートされたか: ${appVersion.isUpdated()}`);
 
 // アップデートがあったら通知
-useEffect(() => {
-  if(appVersion.isUpdated()) {
+useEffect(async () => {
+  if(await appVersion.isUpdated()) {
     // showAlert('ここは ./release/message.md から読み込む');
   }
 }, []);
