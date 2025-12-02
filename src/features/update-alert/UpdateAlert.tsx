@@ -1,6 +1,7 @@
 import '@debug';
 import '@components/Alert';
 import { AppVersionManager } from './utils/app-version-manager';
+import './utils/yaml.min.js';
 
 // ここに ./release/version.yml を読み込む処理
 const file: File | null = ;
