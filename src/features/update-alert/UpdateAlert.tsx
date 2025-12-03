@@ -1,26 +1,54 @@
 import '@debug';
 import '@components/Alert';
 import { AppVersionManager } from './utils/app-version-manager';
-import './utils/yaml.min.js';
+import { fetchTextFile } from "./utils/fetch-text-file";
+import 'yaml';
 
-// ここに ./release/version.yml を読み込む処理
-const file: File | null = ;
-const result: Object = file;
-const version: string = result.version || '1.0.0';
-const appVersion = new AppVersionManager("window-app-version", version);
+async function updateAlert(): Promise<void> {
+  let appVersion: AppVersionManager;
 
-console.log(`現在のアプリのバージョン: ${appVersion.getVersion()}`);
-console.log(`アップデートされたか: ${appVersion.isUpdated()}`);
+  async function getVersion(): Promise<string> {
+    const path: string = "./release/version.yml";
+    const versionText: string = await fetchTextFile(path)
+    .catch((error) => {
+      throw new Error(`アップデートバージョンファイルの読み取りでエラーが発生しました ${error}`);
+    });
 
-// アップデートがあったら通知
-useEffect(() => {
-  const checkUpdate = async () => {
-    if (await appVersion.isUpdated()) {
-      // ここで ./release/message.md からメッセージを読み込む処理も非同期になる場合があります
-      //showAlert('ここは ./release/message.md から読み込む');
-    }
-  };
+    const versionObject: Object = YAML.parse(versionText);
+    const version: string = versionObject.version || '1.0.0';
+    return version;
+  }
 
-  // 定義した非同期関数をすぐに実行
-  checkUpdate();
-}, []);
+  async function getMessage(): Promise<string> {
+    const path: string = "./release/message.md";
+    const message: string = await fetchTextFile(path)
+    .catch((error) => {
+      throw new Error(`アップデートメッセージファイルの読み取りでエラーが発生しました ${error}`);
+    });
+
+    return message;
+  }
+
+  async function openVersionManager(): Promise<void> {
+    const VERSIOM_ID: string = "window-app-version";
+    appVersion = new AppVersionManager(VERSION_ID, await getVersion());
+
+    console.log(`現在のアプリのバージョン: ${await appVersion.getVersion()}`);
+    console.log(`アップデートされたか: ${await appVersion.isUpdated()}`);
+  }
+
+  await openVersionManager();
+
+  // アップデートがあったら通知
+  useEffect(() => {
+    const checkUpdate = async () => {
+      if (await appVersion.isUpdated()) {
+        // showAlert(await getMessage());
+      }
+    };
+
+    checkUpdate();
+  }, []);
+}
+
+updateAlert();
