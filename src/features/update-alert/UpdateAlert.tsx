@@ -13,7 +13,7 @@ console.log(`現在のアプリのバージョン: ${appVersion.getVersion()}`);
 console.log(`アップデートされたか: ${appVersion.isUpdated()}`);
 
 // アップデートがあったら通知
-useEffect(async () => {
+useEffect(async (): Promise<void> => {
   const checkUpdate = async () => {
     if (await appVersion.isUpdated()) {
       // ここで ./release/message.md からメッセージを読み込む処理も非同期になる場合があります
