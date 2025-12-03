@@ -1,7 +1,6 @@
 import '@debug';
-import '@libs/tf.js';
-import '@libs/face-mesh.js';
-import '@libs/face-landmarks-detection.js';
+import '@tensorflow/tfjs';
+import '@mediapipe/tasks-vision';
 
 // モデルのインスタンスをWorkerスコープで保持し、再利用します
 let model = null;

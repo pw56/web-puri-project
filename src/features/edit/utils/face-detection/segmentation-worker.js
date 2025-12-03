@@ -1,6 +1,6 @@
 import '@debug';
-import '@libs/tf.js';
-import '@libs/selfie-segmentation.js';
+import '@tensorflow/tfjs';
+import '@mediapipe/tasks-vision';
 
 // セグメンテーションモデルのインスタンスをWorkerスコープで保持します
 let segmenter = null;
