@@ -17,7 +17,6 @@
     "paths": {
       "@components/*": ["components/*"],
       "@features/*": ["features/*"],
-      "@libs/*": ["libs/"],
       "@debug/*": ["../tests"],
     },
     "incremental": true,
