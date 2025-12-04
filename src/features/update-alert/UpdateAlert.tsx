@@ -30,7 +30,7 @@ async function updateAlert(): Promise<void> {
   }
 
   async function openVersionManager(): Promise<void> {
-    const VERSIOM_ID: string = "window-app-version";
+    const VERSION_ID: string = "window-app-version";
     appVersion = new AppVersionManager(VERSION_ID, await getVersion());
 
     console.log(`現在のアプリのバージョン: ${await appVersion.getVersion()}`);
