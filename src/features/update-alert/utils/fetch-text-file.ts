@@ -1,4 +1,4 @@
-async function fetchTextFile(path: string): Promise<string> => {
+async function fetchTextFile(path: string): Promise<string> {
   const response: Response = await fetch(path);
   if (!response.ok) {
     throw new Error(`HTTPエラー ステータス: ${response.status}`);
