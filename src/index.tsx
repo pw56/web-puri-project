@@ -1,6 +1,6 @@
 import '@debug';
 import { createRoot } from 'react-dom/client';
-import App from './App';
+import App from './app/App';
 
 // レンダリング
 const root = ReactDOM.createRoot(document.getElementById('root'));
