@@ -43,7 +43,7 @@ async function updateAlert(): Promise<void> {
   useEffect(() => {
     const checkUpdate = async () => {
       if (await appVersion.isUpdated()) {
-        // showAlert(await getMessage());
+        // useShowAlert(await getMessage());
       }
     };
 
