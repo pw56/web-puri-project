@@ -18,6 +18,7 @@
       "@components/*": ["components/*"],
       "@features/*": ["features/*"],
       "@debug/*": ["../tests"],
+      "@release/*": ["../assets/release"]
     },
     "incremental": true,
     "tsBuildInfoFile": "./.tsbuildinfo"

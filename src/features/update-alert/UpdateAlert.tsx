@@ -8,7 +8,7 @@ async function updateAlert(): Promise<void> {
   let appVersion: AppVersionManager;
 
   async function getVersion(): Promise<string> {
-    const path: string = "./release/version.yml";
+    const path: string = "@release/version.yml";
     const versionText: string = await fetchTextFile(path)
     .catch((error) => {
       throw new Error(`アップデートバージョンファイルの読み取りでエラーが発生しました ${error}`);
@@ -20,7 +20,7 @@ async function updateAlert(): Promise<void> {
   }
 
   async function getMessage(): Promise<string> {
-    const path: string = "./release/message.md";
+    const path: string = "@release/message.md";
     const message: string = await fetchTextFile(path)
     .catch((error) => {
       throw new Error(`アップデートメッセージファイルの読み取りでエラーが発生しました ${error}`);
@@ -43,7 +43,7 @@ async function updateAlert(): Promise<void> {
   useEffect(() => {
     const checkUpdate = async () => {
       if (await appVersion.isUpdated()) {
-        // useShowAlert(await getMessage());
+        // useShowAlert(await getMessage('@release/message.md'));
       }
     };
 

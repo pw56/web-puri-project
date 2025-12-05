@@ -142,7 +142,7 @@ jobs:
           fi
 
           # 条件2: version.yml が変更されているか
-          if echo "$CHANGED_FILES" | grep -q "^src/version.yml$"; then
+          if echo "$CHANGED_FILES" | grep -q "^assets/release/version.yml$"; then
             VERSION_OK=true
           else
             VERSION_OK=false
