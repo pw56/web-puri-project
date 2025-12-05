@@ -19,16 +19,6 @@ async function updateAlert(): Promise<void> {
     return version;
   }
 
-  async function getMessage(): Promise<string> {
-    const path: string = "@release/message.md";
-    const message: string = await fetchTextFile(path)
-    .catch((error) => {
-      throw new Error(`アップデートメッセージファイルの読み取りでエラーが発生しました ${error}`);
-    });
-
-    return message;
-  }
-
   async function openVersionManager(): Promise<void> {
     const VERSION_ID: string = "window-app-version";
     appVersion = new AppVersionManager(VERSION_ID, await getVersion());
@@ -43,7 +33,7 @@ async function updateAlert(): Promise<void> {
   useEffect(() => {
     const checkUpdate = async () => {
       if (await appVersion.isUpdated()) {
-        // useShowAlert(await getMessage('@release/message.md'));
+        // useShowAlert({contentUrl: '@release/message.md'});
       }
     };
 
