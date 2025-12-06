@@ -17,8 +17,7 @@
     "paths": {
       "@components/*": ["components/*"],
       "@features/*": ["features/*"],
-      "@debug/*": ["../tests"],
-      "@release/*": ["../assets/release"]
+      "@debug/*": ["../tests"]
     },
     "incremental": true,
     "tsBuildInfoFile": "./.tsbuildinfo"
