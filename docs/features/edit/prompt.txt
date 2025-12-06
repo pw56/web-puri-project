@@ -3,8 +3,8 @@
 
 情報:
 ・ページのプロトタイプのスクリーンショット(desktop.png, mobile.png)
-・ページの見た目や動作の仕様書(spec.md)
-・ページの構造(structure.xml)
+・ページの見た目や動作の仕様書(EditPage.md)
+・ページの構造(EditPage.xml)
 ・素材のファイル(.svg)
 
 出力ファイル:
