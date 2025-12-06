@@ -5,8 +5,9 @@ import '@features/update-alert/UpdateAlert';
 
 const App = () => {
   useEffect(() => {
-    const handleBeforeUnload = (e) => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
       e.preventDefault();
+      e.returnValue = '';
     };
     window.addEventListener('beforeunload', handleBeforeUnload);
 
