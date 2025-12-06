@@ -13,7 +13,7 @@
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
     "noEmit": true,
-    "baseUrl": "./",
+    "baseUrl": "/web-puri-project/",
     "paths": {
       "@components/*": ["components/*"],
       "@features/*": ["features/*"],

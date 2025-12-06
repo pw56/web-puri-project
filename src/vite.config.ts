@@ -3,7 +3,8 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig(({ mode }) => ({
   plugins: [react()],
-  root: './src',
+  root: './',
+  base: '/web-puri-project/',
   build: {
     outDir: mode === 'production' ? '../app' : '../dist',
     emptyOutDir: true,
