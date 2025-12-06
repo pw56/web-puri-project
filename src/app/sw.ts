@@ -5,9 +5,9 @@ declare const self: ServiceWorkerGlobalScope;
 
 const CACHE_NAME: string = 'web-puri-cache';
 const urlsToCache: string[] = [
-  '/',
-  '/../assets/fonts',
-  '/../assets/icons',
+  '/app', // 開発時はキャッシュしない前提で本番環境しかキャッシュしてない
+  '/assets/fonts',
+  '/assets/icons',
 ];
 
 self.addEventListener('install', (event: ExtendableEvent) => {

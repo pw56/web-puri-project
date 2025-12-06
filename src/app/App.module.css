@@ -2,7 +2,7 @@
 
 @font-face {
   font-family: 'Hachi Maru Pop';
-  src: url('/../assets/fonts/HachiMaruPop/HachiMaruPop-Regular.ttf') format('truetype');
+  src: url('/assets/fonts/HachiMaruPop/HachiMaruPop-Regular.ttf') format('truetype');
 }
 
 .App {

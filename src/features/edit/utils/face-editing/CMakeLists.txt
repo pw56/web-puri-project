@@ -18,8 +18,8 @@ add_executable(web_puri ${SOURCES})
 
 # 出力先をビルドタイプごとに切り替え
 set_target_properties(web_puri PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "$<$<CONFIG:Release>:${CMAKE_BINARY_DIR}../../../app>"
-    RUNTIME_OUTPUT_DIRECTORY "$<$<NOT:$<CONFIG:Release>>:${CMAKE_BINARY_DIR}../../../dist>"
+    RUNTIME_OUTPUT_DIRECTORY "$<$<CONFIG:Release>:${CMAKE_BINARY_DIR}../../app>"
+    RUNTIME_OUTPUT_DIRECTORY "$<$<NOT:$<CONFIG:Release>>:${CMAKE_BINARY_DIR}../../dist>"
 )
 
 # インクルードディレクトリの追加
