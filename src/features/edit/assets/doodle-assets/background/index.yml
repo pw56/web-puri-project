@@ -1,39 +1,39 @@
 - name: "white"
   image: ""
-  display-name: "白"
+  display_name: "白"
 
 - name: "pink"
   image: ""
-  display-name: "ピンク"
+  display_name: "ピンク"
 
 - name: "spots"
   image: ""
-  display-name: "水玉"
+  display_name: "水玉"
 
 - name: "strawberries"
   image: ""
-  display-name: "いちご"
+  display_name: "いちご"
 
 - name: "stars"
   image: ""
-  display-name: "星"
+  display_name: "星"
 
 - name: "hearts"
   image: ""
-  display-name: "ハート"
+  display_name: "ハート"
 
 - name: "rainbow"
   image: ""
-  display-name: "レインボー"
+  display_name: "レインボー"
 
 - name: "y2k"
   image: ""
-  display-name: "平成レトロ"
+  display_name: "平成レトロ"
 
 - name: "cloud"
   image: ""
-  display-name: "雲"
+  display_name: "雲"
 
 - name: "classroom"
   image: ""
-  display-name: "教室風"
+  display_name: "教室風"

@@ -1,27 +1,27 @@
 - name: "natural"
   image: ""
-  display-name: "ナチュラル"
+  display_name: "ナチュラル"
 
 - name: "glitter"
   image: ""
-  display-name: "キラキラ"
+  display_name: "キラキラ"
 
-- name: "cherry-blossom"
+- name: "cherry_blossom"
   image: ""
-  display-name: "桜"
+  display_name: "桜"
 
 - name: "retro"
   image: ""
-  display-name: "レトロ"
+  display_name: "レトロ"
 
 - name: "film"
   image: ""
-  display-name: "フィルム"
+  display_name: "フィルム"
 
 - name: "y2k"
   image: ""
-  display-name: "Y2K風"
+  display_name: "Y2K風"
 
 - name: "korean"
   image: ""
-  display-name: "韓国風"
+  display_name: "韓国風"

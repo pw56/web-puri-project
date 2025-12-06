@@ -1,39 +1,39 @@
 - name: "heart"
   image: ""
-  display-name: "ハート"
+  display_name: "ハート"
 
 - name: "star"
   image: ""
-  display-name: "星"
+  display_name: "星"
 
 - name: "ribbon"
   image: ""
-  display-name: "リボン"
+  display_name: "リボン"
 
 - name: "cat"
   image: ""
-  display-name: "ネコ"
+  display_name: "ネコ"
 
 - name: "rabbit"
   image: ""
-  display-name: "うさぎ"
+  display_name: "うさぎ"
 
 - name: "flower"
   image: ""
-  display-name: "花"
+  display_name: "花"
 
-- name: "angel-wings"
+- name: "angel_wings"
   image: ""
-  display-name: "天使の羽"
+  display_name: "天使の羽"
 
 - name: "note"
   image: ""
-  display-name: "音符"
+  display_name: "音符"
 
 - name: "flame"
   image: ""
-  display-name: "炎（テンションUP系）"
+  display_name: "炎（テンションUP系）"
 
 - name: "cloud"
   image: ""
-  display-name: "雲＆雨（天気系）
+  display_name: "雲＆雨（天気系）

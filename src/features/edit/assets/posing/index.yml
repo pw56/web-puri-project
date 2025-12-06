@@ -30,11 +30,11 @@
   image: ""
   instruction: "裏ピースで大人っぽく♪"
 
-- name: "Under-Eye Peace"
+- name: "Under_Eye Peace"
   image: ""
   instruction: "目の下にピース＋ウィンク！"
 
-- name: "Under-Chin Peace"
+- name: "Under_Chin Peace"
   image: ""
   instruction: "アゴ下ピースで小顔効果◎"
 
@@ -50,7 +50,7 @@
   image: ""
   instruction: "顎に指で考え中っぽく！"
 
-- name: "Slim-Face Pose"
+- name: "Slim_Face Pose"
   image: ""
   instruction: "顔横に輪っかで小顔アピール♪"
 
