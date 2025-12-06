@@ -8,7 +8,7 @@ async function updateAlert(): Promise<void> {
   let appVersion: AppVersionManager;
 
   async function getVersion(): Promise<string> {
-    const path: string = "/web-puri-project/assets/release/version.yml";
+    const path: string = "/assets/release/version.yml";
     const versionText: string = await fetchTextFile(path)
     .catch((error) => {
       throw new Error(`アップデートバージョンファイルの読み取りでエラーが発生しました ${error}`);
@@ -33,7 +33,7 @@ async function updateAlert(): Promise<void> {
   useEffect(() => {
     const checkUpdate = async () => {
       if (await appVersion.isUpdated()) {
-        // useShowAlert({contentUrl: '/web-puri-project/assets/release/message.md'});
+        // useShowAlert({contentUrl: '/assets/release/message.md'});
       }
     };
 
