@@ -1,7 +1,7 @@
 export function printElement(element: HTMLElement | null): void {
   if (!element) return;
 
-  const iframe = document.createElement('iframe');
+  const iframe: HTMLIFrameElement = document.createElement('iframe');
   iframe.style.position = 'fixed';
   iframe.style.right = '0';
   iframe.style.bottom = '0';
@@ -11,10 +11,10 @@ export function printElement(element: HTMLElement | null): void {
 
   document.body.appendChild(iframe);
 
-  const iframeWindow = iframe.contentWindow;
-  if (!iframeWindow) return;
+  const iframeWindow: (Window & typeof globalThis) | null = iframe.contentWindow;
+  if (!iframeWindow) throw new Error("印刷用ウィンドウの生成に失敗");
 
-  const doc = iframeWindow.document;
+  const doc: Document = iframeWindow.document;
   doc.open();
   doc.write(`
     <html>
@@ -29,9 +29,9 @@ export function printElement(element: HTMLElement | null): void {
   `);
   doc.close();
 
-  iframe.onload = () => {
+  iframe.addEventListener('load', () => {
     iframeWindow.focus();
     iframeWindow.print();
     document.body.removeChild(iframe);
-  };
+  });
 }
