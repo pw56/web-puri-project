@@ -1,6 +1,6 @@
-import { printElement } from "./printElement.ts";
-import { isLengthValue} from "./isLengthValue.ts";
-import { imageDataToBlob } from "./imageDataToBlob.ts";
+import { printElement } from "./printElement";
+import { isLengthValue} from "./isLengthValue";
+import { imageDataToBlob } from "./imageDataToBlob";
 
 export async function printPuriSheet(
   original: ImageData,
