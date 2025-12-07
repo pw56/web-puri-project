@@ -1,5 +1,5 @@
 import '@debug';
-import '@components/Alert';
+import { useAlert } from '@components/Alert';
 import { AppVersionManager } from './utils/app-version-manager';
 import { fetchTextFile } from "./utils/fetch-text-file";
 import YAML from 'yaml';
