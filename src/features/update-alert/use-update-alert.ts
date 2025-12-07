@@ -2,7 +2,7 @@ import '@debug';
 import '@components/Alert';
 import { AppVersionManager } from './utils/app-version-manager';
 import { fetchTextFile } from "./utils/fetch-text-file";
-import 'yaml';
+import YAML from 'yaml';
 
 let appVersion: AppVersionManager;
 
