@@ -32,12 +32,10 @@ export async function useUpdateAlert(): Promise<void> {
 
   // アップデートがあったら通知
   useEffect(() => {
-    const checkUpdate = async () => {
+    void(async (): Promise<void> => {
       if (await appVersion.isUpdated()) {
         alert({contentUrl: '/assets/release/message.md'});
       }
-    };
-
-    checkUpdate();
+    })();
   }, [alert]);
 }
