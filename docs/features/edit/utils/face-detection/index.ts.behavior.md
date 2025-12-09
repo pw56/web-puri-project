@@ -1,6 +1,12 @@
 # index.js
 
-## detectFaces (関数)
+## faceDetection (クラス)
+
+### loadModels (メソッド)
+
+### disposeModels (メソッド)
+
+### detectFaces (メソッド)
 - 概要
 > 入力された画像から、それぞれの人物の顔で`Face`クラスのインスタンスを生成し、それらのインスタンスを配列で返す。
 
@@ -20,7 +26,7 @@
 
 ---
 
-## Face (クラス)
+## DetectedFace (クラス)
 - 概要
 > 入力された顔の情報を保持、抽出するためのクラス。
 > 抽出処理にはFace Landmarks Detectionモデルを使用し、MediaPipe Face Meshモジュールも使用して高速化を図る。
