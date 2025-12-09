@@ -14,7 +14,7 @@ async function getVersion(): Promise<string> {
   });
 
   const versionObject: Object = YAML.parse(versionText);
-  const version: string = versionObject.app_version || '1.0.0';
+  const version: string = versionObject.app_version? ?? '1.0.0';
   return version;
 }
 
