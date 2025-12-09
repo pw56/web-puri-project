@@ -1,8 +1,7 @@
-# selfie-segmentation.ts
+# predict.ts
 
 - 概要
-> ワーカーで立ち上げて利用されることを想定する。
-> ワーカーの管理はモデルマネージャー('model-manager.ts')で行う。
+> 実際の推論処理が実装されるファイル。
 
 ---
 

@@ -1,12 +1,11 @@
-# person-detector.ts
+# predict.ts
 
 - 概要
-> ワーカーで立ち上げて利用されることを想定する。
-> ワーカーの管理はモデルマネージャー('model-manager.ts')で行う。
+> 実際の推論処理が実装されるファイル。
 
 ---
 
-## personDetecotr (関数)
+## personDetector (関数)
 - 概要
 > TensorFlow.jsのCOCO-SSDモデルで、単数または複数の人物を検出し、そのまま返す。
 
