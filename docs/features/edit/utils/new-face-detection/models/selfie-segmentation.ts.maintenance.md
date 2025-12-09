@@ -1,7 +1,7 @@
 # selfie-segmentation.ts
 
 - 概要
-> Shared Workerで立ち上げて利用されることを想定する。
+> ワーカーで立ち上げて利用されることを想定する。
 > ワーカーの管理はモデルマネージャー('model-manager.ts')で行う。
 
 ---

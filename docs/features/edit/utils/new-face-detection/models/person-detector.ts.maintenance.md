@@ -1,4 +1,4 @@
-# extract-people.ts
+# person-detector.ts
 
 - 概要
 > ワーカーで立ち上げて利用されることを想定する。
@@ -6,7 +6,7 @@
 
 ---
 
-## extractPeople (関数)
+## personDetecotr (関数)
 - 概要
 > TensorFlow.jsのCOCO-SSDモデルで、単数または複数の人物を検出し、そのまま返す。
 
