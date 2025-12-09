@@ -6,7 +6,7 @@ import '@mediapipe/tasks-vision';
 let model = null;
 
 /**
- * Face Landmarks Detectionモデルをロードします。
+ * Face Landmarkerモデルをロードします。
  * 虹彩検出(predictIrises: true)を有効にしてロードします。
  */
 async function loadModel() {
@@ -25,7 +25,7 @@ async function loadModel() {
       }
     );
   } catch (error) {
-    console.error('Face Landmarks Detectionモデルのロードに失敗しました。', error);
+    console.error('Face Landmarkerモデルのロードに失敗しました。', error);
     // エラーが発生した場合は、メインスレッドに通知します
     self.postMessage({ error: 'モデルのロードに失敗しました。' });
   }

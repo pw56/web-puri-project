@@ -20,7 +20,7 @@
 - BlazeFace (MediaPipe)
 - Selfie Segmentation (MediaPipe)
 - COCO-SSD (TensorFlow.js)
-- Face Landmarks Detection (TensorFlow.js)
+- Face Landmarker (MediaPipe)
 - Fabric.js
 - JSZip
 - FileSaver.js

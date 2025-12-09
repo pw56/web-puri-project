@@ -4,11 +4,11 @@
 後ほど追加の指示を出すので、それまでコードを生成せず、仕様書を読み要求や仕様などを理解しておいてください。
 
 HTMLコード:
-https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0 TensorFlow バージョン指定 4.22.0
-https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd TensorFlow COCO-SSDモデル
-https://cdn.jsdelivr.net/npm/@tensorflow-models/face-landmarks-detection TensorFlow Face Landmarks Detectionモデル
+https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0 TensorFlow.js バージョン指定 4.22.0
+https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd TensorFlow.js COCO-SSDモデル
+https://cdn.jsdelivr.net/npm/@tensorflow-models/face-landmarks-detection MediaPipe Face Landmarkerモデル
 https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh MediaPipe Face Meshモジュール
-https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation@0.1/selfie_segmentation.jsMediaPipe Selfie Segmentationモデル
+https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation@0.1/selfie_segmentation.js MediaPipe Selfie Segmentationモデル
 
 出力形式:
 ・detection.js
