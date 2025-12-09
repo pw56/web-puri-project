@@ -17,6 +17,7 @@
 - PWA
 - Service Worker
 - Dexie.js
+- BlazeFace (MediaPipe)
 - Selfie Segmentation (MediaPipe)
 - COCO-SSD (TensorFlow.js)
 - Face Landmarks Detection (TensorFlow.js)
