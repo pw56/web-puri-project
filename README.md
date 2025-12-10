@@ -5,7 +5,9 @@
 ![アプリアイコン](assets/icons/icon-512x512.png)
 
 ## 🔧 技術スタック
-<!-- - HTML
+<!--
+テキストベースの技術スタック
+- HTML
 - CSS
 - JavaScript
 - TypeScript
@@ -24,7 +26,8 @@
 - Fabric.js
 - JSZip
 - FileSaver.js
-- Marked.js -->
+- Marked.js
+-->
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
@@ -43,32 +46,42 @@
 ![FileSaver.js](https://img.shields.io/badge/FileSaver.js-9C27B0?logo=javascript&logoColor=white)
 ![Marked.js](https://img.shields.io/badge/Marked.js-795548?logo=markdown&logoColor=white)
 
-## 🧩 使用素材
-- [Google Fonts](https://fonts.google.com)
-- [OtoLogic](https://otologic.jp)
+## 🧩 使用素材  
+[![Google Fonts](https://img.shields.io/badge/Google%20Fonts-4285F4?logo=googlefonts&logoColor=white)](https://fonts.google.com)
+[![OtoLogic](https://img.shields.io/badge/OtoLogic-000000?style=flat&logo=music&logoColor=white)](https://otologic.jp)
 
 ## ⚡️ 開発環境
-- コンパイラ:
-  - **TypeScript:** ![esbuild](https://img.shields.io/badge/esbuild-FFCF00?logo=esbuild&logoColor=black)
-  - **React:** ![esbuild](https://img.shields.io/badge/esbuild-FFCF00?logo=esbuild&logoColor=black)
-  - **WebAssembly:** ![Emscripten](https://img.shields.io/badge/Emscripten-2C2D72?logo=emscripten&logoColor=white)
+### コンパイラ  
+**![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white):** 
+![Node.js]()
+![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)
+![esbuild](https://img.shields.io/badge/esbuild-FFCF00?logo=esbuild&logoColor=black)
+  
+**![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black):** 
+![Node.js]()
+![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)
+![esbuild](https://img.shields.io/badge/esbuild-FFCF00?logo=esbuild&logoColor=black)
+  
+**![WebAssembly](https://img.shields.io/badge/WebAssembly-654FF0?logo=webassembly&logoColor=white):** 
+![CMake]()
+![Emscripten](https://img.shields.io/badge/Emscripten-2C2D72?logo=emscripten&logoColor=white)  
 
-- バンドラ:
-  ![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)
+### AIアシスタント  
+![Gemini](https://img.shields.io/badge/Gemini%202.5%20Pro-4285F4?logo=google&logoColor=white)
+![GPT-5](https://img.shields.io/badge/GPT--5-412991?logo=openai&logoColor=white)
+![Copilot](https://img.shields.io/badge/Microsoft%20Copilot-0067B8?logo=microsoft&logoColor=white)
 
-- AIアシスタント:
-  - ![Gemini](https://img.shields.io/badge/Gemini%202.5%20Pro-4285F4?logo=google&logoColor=white)
-  - ![GPT-5](https://img.shields.io/badge/GPT--5-412991?logo=openai&logoColor=white)
-  - ![Copilot](https://img.shields.io/badge/Microsoft%20Copilot-0067B8?logo=microsoft&logoColor=white)
+### デザイン  
+![Figma](https://img.shields.io/badge/Figma-F24E1E?logo=figma&logoColor=white)
+![GPT-5](https://img.shields.io/badge/GPT--5-412991?logo=openai&logoColor=white)
 
-- デザイン:
-  - ![Figma](https://img.shields.io/badge/Figma-F24E1E?logo=figma&logoColor=white)  
-  - ![GPT-5](https://img.shields.io/badge/GPT--5-412991?logo=openai&logoColor=white)
+### バンドラ  
+![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)
 
-- CI/CD:
-  - ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?logo=githubactions&logoColor=white)
+### CI/CD  
+![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?logo=githubactions&logoColor=white)
 
-- テスト環境:
-  - ![Chrome](https://img.shields.io/badge/Chrome%20OS%20%7C%20Google%20Chrome-4285F4?logo=googlechrome&logoColor=white)  
-  - ![Safari](https://img.shields.io/badge/iPhone%2016e%20%7C%20Safari-000000?logo=safari&logoColor=white)  
-  - ![GitHub Actions](https://img.shields.io/badge/GitHub%20Runner-181717?logo=github&logoColor=white)
+### テスト環境  
+![Chrome](https://img.shields.io/badge/Chrome%20OS%20%7C%20Google%20Chrome-4285F4?logo=googlechrome&logoColor=white)
+![Safari](https://img.shields.io/badge/iPhone%2016e%20%7C%20Safari-000000?logo=safari&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub%20Runner-181717?logo=github&logoColor=white)
