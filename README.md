@@ -1,10 +1,10 @@
 # web-puri-project
 
-## 概要
+## 💻️ 概要
 このリポジトリはプリ機をWebアプリとして動かすことを目的に作成されました。
 ![アプリアイコン](assets/icons/icon-512x512.png)
 
-## 技術スタック
+## 🔧 技術スタック
 - HTML
 - CSS
 - JavaScript
@@ -26,11 +26,11 @@
 - FileSaver.js
 - Marked.js
 
-## 使用素材
+## 🧩 使用素材
 - [Google Fonts](https://fonts.google.com)
 - [OtoLogic](https://otologic.jp)
 
-## 開発環境
+## ⚡️ 開発環境
 - コンパイラ:
   - **TypeScript:** esbuild
   - **React:** esbuild

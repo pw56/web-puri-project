@@ -88,11 +88,11 @@ export class DetectedFace {
    * OffscreenCanvasを利用してDOMに依存せず効率的に処理します。
    *
    * @param {ImageData} sourceImageData - 切り出し元の画像データ。
-   * @param {number[]} bbox - 切り出す範囲 [x, y, width, height]。
+   * @param {DetectedObject} bbox - 切り出す範囲 [x, y, width, height]。
    * @returns {ImageData | null} 切り出された新しいImageDataオブジェクト。失敗した場合はnull。
    */
   #cropImageData(sourceImageData: ImageData, bbox: DetectedObject): ImageData | null {
-    const [x, y, width, height] = bbox.map(Math.round);
+    const {x, y, width, height} = bbox.bbox;
 
     // 幅や高さが0以下の場合は処理できないためnullを返す
     if (width <= 0 || height <= 0) {
