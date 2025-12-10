@@ -53,17 +53,17 @@
 ## ⚡️ 開発環境
 ### コンパイラ  
 **![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white):** 
-![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)
 ![esbuild](https://img.shields.io/badge/esbuild-FFCF00?logo=esbuild&logoColor=black)
   
 **![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black):** 
-![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)
 ![esbuild](https://img.shields.io/badge/esbuild-FFCF00?logo=esbuild&logoColor=black)
   
 **![WebAssembly](https://img.shields.io/badge/WebAssembly-654FF0?logo=webassembly&logoColor=white):** 
-![CMake](https://img.shields.io/badge/CMake-064F8C?style=for-the-badge&logo=cmake&logoColor=white)
+![CMake](https://img.shields.io/badge/CMake-064F8C?style=logo=cmake&logoColor=white)
 ![Emscripten](https://img.shields.io/badge/Emscripten-2C2D72?logo=emscripten&logoColor=white)  
 
 ### AIアシスタント  
