@@ -2,10 +2,7 @@ plugins:
   - jekyll-sitemap
 
 exclude:
-  - docs/requirements
-  - docs/ux
-  - docs/components
-  - docs/features
+  - docs
   - src
   - LICENSE
   - README.md
