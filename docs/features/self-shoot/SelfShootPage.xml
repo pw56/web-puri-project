@@ -1,4 +1,4 @@
-<ShootPage>
+<SelfShootPage>
   <Text name="frame-index"/>
   <Shooting>
     <Video name="camera"/>
@@ -9,4 +9,4 @@
     <Image name="check"/>
     <Button name="retry" type="button-1">撮り直し</Button>
   </Checking>
-</ShootPage>
+</SelfShootPage>
