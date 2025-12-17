@@ -134,11 +134,11 @@ jobs:
           echo "$CHANGED_FILES"
 
           # コミットメッセージ取得
-          COMMIT_MSG=$(git log -1 --pretty=%B)
-          echo "Commit message: $COMMIT_MSG"
+          PR_TITLE=$(git log -1 --pretty=%B)
+          echo "PR title: $PR_TITLE"
 
           # 条件1: コミットメッセージに特定文字列が含まれるか
-          if echo "$COMMIT_MSG" | grep -q "アプリの新バージョンをリリース"; then
+          if echo "$PR_TITLE" | grep -q "アプリの新バージョンをリリース"; then
             MSG_OK=true
           else
             MSG_OK=false
