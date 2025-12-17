@@ -1,0 +1,28 @@
+TODO:
+🟪Puriクラス(プライベート)
+    imageUrl文字列(プライベートプロパティ)
+
+    コンストラクタ ※引数はImageオブジェクトまたはBlobオブジェクト、内部でURLに変換して保持
+    
+    getImageAsImageメソッド ※内部でImageに変換して返す
+    getImageAsBlobメソッド ※内部でBlobに変換して返す
+    getImageAsUrlメソッド
+    
+🟪PuriImagesクラス(エクスポート)
+    dispose ※インスタンス破棄時に保持しているURLを無効化
+    puris配列(プライベートプロパティ) ※Puri型の配列
+    count ※保持しているプリの枚数
+    
+    addImageFromImageメソッド ※引数はImageオブジェクト
+    addImageFromBlobメソッド ※引数はBlobオブジェクト
+    
+    addImagesFromImageメソッド ※引数はImageオブジェクトの入った配列
+    addImagesFromBlobメソッド ※引数はBlobオブジェクトの入った配列
+    
+    getImageAsImageメソッド ※引数でプリのインデックスを指定、返り値はImageオブジェクト
+    getImageAsBlobメソッド ※引数でプリのインデックスを指定、返り値はBlobオブジェクト
+    getImageAsUrlメソッド ※引数でプリのインデックスを指定、返り値はURL文字列
+    
+    getAllImagesAsImageメソッド ※返り値はImage型のプリが入った配列
+    getAllImagesAsBlobメソッド ※返り値はBlob型のプリが入った配列
+    getAllImagesAsUrlメソッド ※返り値はプリのURLが入った配列

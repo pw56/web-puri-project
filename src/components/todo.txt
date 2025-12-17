@@ -1,0 +1,10 @@
+TODO:
+🟪useShowLoadingAnimationフックをドキュメントに記述
+🟥Promptコンポーネント追加(ボタンの表記をカスタマイズできるようにしたい)　→　(いいえ / はい)　→　(キャンセル / 続行)
+🟨ポップアップのマークダウン表示をオブジェクトで指定
+  {
+    content?: 'マークダウン形式の文字列', baseUrl?: './',
+    contentUrl?: '絶対パス or ルートパス or HTMLからの相対パス'
+  }
+🟨Alertコンポーネント(useShowAlertフック) → 'baseUrl'または'contentUrl'で相対パスを解決
+🟨マークダウン中の相対パスの解決 → 正規表現で置換

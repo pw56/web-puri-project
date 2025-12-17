@@ -1,0 +1,7 @@
+TODO:
+🟪DetectedFaceクラスに座標の型定義を追加
+🟪仕様書作り直し　disposeModelsメソッドの引数の仕様 → 廃棄したいモデル名の文字列の配列
+🟥顔検出のモデルを共通利用
+🟥顔検出ライブラリの作り直し
+🟦微細化実装 → #refineCoordsメソッド
+🟦元の座標に変換 → #mapToOriginalCoordsメソッド + 処理の終了(isProcessed = true)を代入
