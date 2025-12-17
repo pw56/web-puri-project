@@ -1,18 +1,15 @@
 name: Build and Deploy
 
 on:
-  pull_request_target:
+  push:
     branches:
       - main
-    types:
-      - closed
 
 permissions:
   contents: write
 
 jobs:
   build-deploy:
-    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:
@@ -98,7 +95,6 @@ jobs:
         uses: actions/cache@v4
         with:
           path: |
-            build_release
             build_debug
           key: emscripten-${{ runner.os }}-${{ steps.mode.outputs.mode }}
           restore-keys: |
@@ -120,67 +116,20 @@ jobs:
             echo "src=true" >> $GITHUB_OUTPUT
           fi
 
-      - name: Detect release mode
-        id: release
-        run: |
-          # 変更ファイル一覧を取得
-          if git rev-parse HEAD~1 >/dev/null 2>&1; then
-            CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD)
-          else
-            CHANGED_FILES=$(git ls-files)
-          fi
-
-          echo "Changed files:"
-          echo "$CHANGED_FILES"
-
-          # コミットメッセージ取得
-          PR_TITLE=$(git log -1 --pretty=%B)
-          echo "PR title: $PR_TITLE"
-
-          # 条件1: コミットメッセージに特定文字列が含まれるか
-          if echo "$PR_TITLE" | grep -q "アプリの新バージョンをリリース"; then
-            MSG_OK=true
-          else
-            MSG_OK=false
-          fi
-
-          # 条件2: version.yml が変更されているか
-          if echo "$CHANGED_FILES" | grep -q "^assets/release/version.yml$"; then
-            VERSION_OK=true
-          else
-            VERSION_OK=false
-          fi
-
-          # 両方満たしたらリリースモード
-          if [ "$MSG_OK" = true ] && [ "$VERSION_OK" = true ]; then
-            echo "mode=release" >> $GITHUB_OUTPUT
-          else
-            echo "mode=development" >> $GITHUB_OUTPUT
-          fi
-
       - name: Build C++ (Wasm)
         if: steps.src_changes.outputs.src == 'true'
         run: |
-          if [ "${{ steps.mode.outputs.mode }}" = "release" ]; then
-            emcmake cmake -B build_release -DCMAKE_BUILD_TYPE=Release
-            cmake --build build_release
-          else
-            emcmake cmake -B build_debug -DCMAKE_BUILD_TYPE=Debug
-            cmake --build build_debug
-          fi
+          emcmake cmake -B build_debug -DCMAKE_BUILD_TYPE=Debug
+          cmake --build build_debug
 
       # 3. Vite ビルド (リリース時はバンドル, ミニフィケーションも含む)
       - name: Vite bundle
         run: |
-          if [ "${{ steps.mode.outputs.mode }}" = "release" ]; then
-            npm run build:release
-          else
-            npm run dev
-          fi
+          npm run dev
 
       # 4. GitHub Pages デプロイ
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ${{ steps.mode.outputs.mode == 'release' && './app' || './dist' }}
+          publish_dir: './dist'
