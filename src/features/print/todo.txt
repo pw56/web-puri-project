@@ -8,7 +8,5 @@ TODO:
   ・印刷用紙のサイズ選択用フックを作成 → "useSetPrintSheetSize"
   ・フレームのサイズ選択用フックを作成 → "useSetPrintFrameSize"
   ・コマ割り用フックを作成 → "useSetPanelLayout"
-  ※Reactのコンポーネントでiframe描画 & iframeをuseRefで書き換え
-  ※TSで動的に`@page`を挿入してフレームのサイズを調整
 🟥印刷フレームのHTMLの仕様策定 & テンプレート作成
 🟥印刷フレームのCSSの仕様策定
