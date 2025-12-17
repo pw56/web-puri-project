@@ -1,15 +1,18 @@
 name: Build and Deploy
 
 on:
-  push:
+  pull_request_target:
     branches:
       - main
+    types:
+      - closed
 
 permissions:
   contents: write
 
 jobs:
   build-deploy:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:
