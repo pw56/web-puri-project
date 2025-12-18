@@ -1,19 +1,11 @@
 import { useEffect } from 'react';
 import styles from './App.module.css';
 import '@features/pages';
-import '@features/update-alert/use-update-alert';
+import { useUpdateAlert } from '../features/update-alert/use-update-alert';
 
 const App = () => {
   useEffect(() => {
-    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
-      e.preventDefault();
-      e.returnValue = '';
-    };
-    window.addEventListener('beforeunload', handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-    };
+    useUpdateAlert();
   }, []);
 
   return (
