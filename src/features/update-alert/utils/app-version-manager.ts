@@ -1,65 +1,46 @@
-import Dexie from "dexie";
-
-class VersionDB extends Dexie {
-  versions: Dexie.Table<{ key: string; value: string }, string>;
-
-  constructor() {
-    super("AppVersionDB");
-    this.versions(1).stores({
-      versions: "&key"
-    });
-    this.versions = this.table("versions");
-  }
-}
-
-const db = new VersionDB();
-
 export class AppVersionManager {
   readonly #BASE_KEY: string = "lastVisitedVersion";
-  #STORAGE_KEY: string = "";
-  #previousVersion: string | null = null;
+  #STORAGE_KEY:string = "";
+  readonly #previousVersion: string | null = localStorage.getItem(this.#STORAGE_KEY);
 
+  /**
+   * 文字列型かチェック
+   * @throw 文字列型の例外
+   */
   constructor(id: string, initialVersion: string) {
     this.#STORAGE_KEY = this.#BASE_KEY + id;
-
-    // 非同期 init を投げる（await はできない）
-    this.#init(initialVersion);
+    this.#setVersion(initialVersion);
   }
 
   /**
-   * プライベート初期化処理（非同期）
+   * 現在のアプリのバージョンを取得
+   * @returns {string | null} 現在のアプリのバージョン（例: "1.0.0"）
    */
-  async #init(initialVersion: string): Promise<void> {
-    this.#previousVersion = await this.getVersion();
-    await this.#setVersion(initialVersion);
+  getVersion(): string | null {
+    const result:string | null = localStorage.getItem(this.#STORAGE_KEY);
+    return result;
   }
 
   /**
-   * 現在のバージョンを取得
+   * バージョンを保存する（プライベート）
    */
-  async getVersion(): Promise<string | null> {
-    const record = await db.versions.get(this.#STORAGE_KEY);
-    return record?.value ?? null;
-  }
-
-  /**
-   * バージョンを保存（プライベート）
-   */
-  async #setVersion(version: string): Promise<void> {
+  #setVersion(version: string): void {
     if (typeof version !== "string") {
       throw new Error("入力値が文字列ではありません。");
     }
-    await db.versions.put({ key: this.#STORAGE_KEY, value: version });
+    localStorage.setItem(this.#STORAGE_KEY, version);
   }
 
   /**
-   * 前回アクセス時からアップデートされたか確認
+   * 前回アクセス時からアップデートされたかを確認
+   * @returns {boolean} 更新されたか否か
    */
-  async isUpdated(): Promise<boolean> {
-    const current = await this.getVersion();
-
-    if (current === null) return false;
-
-    return current !== this.#previousVersion;
+  isUpdated(): boolean {
+    // 前回のデータが存在しなかったら
+    if(this.getVersion() === null)
+      return false;
+    // 前回から更新されたか
+    else
+      return (this.getVersion() !== this.#previousVersion);
   }
-}
+};
