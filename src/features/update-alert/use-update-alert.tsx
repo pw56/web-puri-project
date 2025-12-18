@@ -22,8 +22,8 @@ async function openVersionManager(): Promise<void> {
   const VERSION_ID: string = "window-app-version";
   appVersion = new AppVersionManager(VERSION_ID, await getVersion());
 
-  console.log(`現在のアプリのバージョン: ${await appVersion.getVersion()}`);
-  console.log(`アップデートされたか: ${await appVersion.isUpdated()}`);
+  console.log(`現在のアプリのバージョン: ${appVersion.getVersion()}`);
+  console.log(`アップデートされたか: ${appVersion.isUpdated()}`);
 }
 
 export async function useUpdateAlert(): Promise<void> {
@@ -33,7 +33,7 @@ export async function useUpdateAlert(): Promise<void> {
   // アップデートがあったら通知
   useEffect(() => {
     void(async (): Promise<void> => {
-      if (await appVersion.isUpdated()) {
+      if (appVersion.isUpdated()) {
         alert({contentUrl: '/assets/release/message.md'});
       }
     })();
