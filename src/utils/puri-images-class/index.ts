@@ -1,0 +1,1 @@
+export { PuriImages } from './puri-images-class';
