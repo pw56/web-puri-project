@@ -28,14 +28,13 @@ async function openVersionManager(): Promise<void> {
 
 export async function useUpdateAlert(): Promise<void> {
   const alert = useAlert();
-  await openVersionManager();
-
-  // アップデートがあったら通知
+  
   useEffect(() => {
     void(async (): Promise<void> => {
+      await openVersionManager();
       if (appVersion.isUpdated()) {
         alert({contentUrl: '/assets/release/message.md'});
       }
     })();
-  }, [alert]);
+  }, []);
 }
