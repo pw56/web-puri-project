@@ -1,4 +1,4 @@
 実装メモ:
 🌟印刷時のフレーム選択画面は、プレビュー部分がiframeで、印刷時はそのiframe内でwindow.printを実行し印刷する
 🌟Reactのコンポーネントでiframe描画 & iframeをuseRefで書き換え
-🌟TSで動的に`@page`を挿入してフレームのサイズを調整
+🌟TSで動的に`@page`を含むstyleタグを挿入してフレームのサイズを調整
