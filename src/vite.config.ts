@@ -48,6 +48,7 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     alias: {
       '@components': './components',
+      '@utils': './utils',
       '@features': './features',
       '@debug': '../tests'
     },

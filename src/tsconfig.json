@@ -16,6 +16,7 @@
     "baseUrl": "/web-puri-project/",
     "paths": {
       "@components/*": ["components/*"],
+      "@utils/*": ["utils/*"],
       "@features/*": ["features/*"],
       "@debug/*": ["../tests"]
     },
