@@ -2,9 +2,7 @@ export class Puri {
   #imageUrl: string;
 
   constructor(image: Blob) {
-    let imageUrl: string = "";
-    if() {} // Blob型のチェック&URL変換
-    this.#imageUrl = imageUrl;
+    this.#imageUrl = URL.createObjectURL(image);
   }
 
   getImageAsImage(): HTMLImageElement {
@@ -13,8 +11,9 @@ export class Puri {
     return image;
   }
 
-  getImageAsBlob(): Blob {
-    const image = new Blob();
+  async getImageAsBlob(): Promise<Blob> {
+    const response = await fetch(this.#imageUrl);
+    const image = await response.blob();
     return image;
   }
 
