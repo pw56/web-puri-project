@@ -8,7 +8,9 @@ TODO:
     getImageAsBlobメソッド ※内部でBlobに変換して返す
     getImageAsUrlメソッド
     
-☑PuriImagesクラス(エクスポート)
+🟪PuriImagesクラス(エクスポート)
+    date(プライベートプロパティ) ※Date型
+    location(プライベートプロパティ) ※GeoLocationオブジェクト
     puris配列(プライベートプロパティ) ※Puri型の配列
     dispose ※インスタンス破棄時に保持しているURLを無効化
     count ※保持しているプリの枚数
