@@ -1,7 +1,14 @@
 import { Puri } from './puri-class';
 
+interface GeoLocation {
+  lat: number; // 緯度 (-90 ～ 90)
+  lng: number; // 経度 (-180 ～ 180)
+}
+
 export class PuriImages {
   #puris: Puri[] = [];
+  #date: Date | null = null;
+  #location: GeoLocation | null = null;
 
   count(): number {
     return this.#puris.length;
@@ -54,5 +61,21 @@ export class PuriImages {
     return this.#puris.map((puri) => {
       return puri.getImageAsUrl();
     });
+  }
+
+  setDate(date: Date): void {
+    this.#date = date;
+  }
+
+  getDate(): Date | null {
+    return this.#date;
+  }
+
+  setLocation(location: GeoLocation): void {
+    this.#location = location;
+  }
+
+  getLocation(): GeoLocation | null{
+    return this.#location;
   }
 }
