@@ -30,8 +30,8 @@ export class PuriImages {
     return this.#puris[index].getImageAsImage();
   }
 
-  getImageAsBlob(index: number): Blob {
-    return this.#puris[index].getImageAsBlob();
+  async getImageAsBlob(index: number): Promise<Blob> {
+    return await this.#puris[index].getImageAsBlob();
   }
 
   getImageAsUrl(index: number): string {
