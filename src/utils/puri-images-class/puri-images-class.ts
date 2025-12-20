@@ -44,10 +44,10 @@ export class PuriImages {
     });
   }
 
-  getAllImagesAsBlob(): Array<Blob> {
-    return this.#puris.map((puri) => {
-      return puri.getImageAsBlob();
-    });
+  async getAllImagesAsBlob(): Promise<Blob[]> {
+    return await Promise.all(
+      this.#puris.map((puri) => puri.getImageAsBlob())
+    );
   }
 
   getAllImagesAsUrl(): Array<string> {
