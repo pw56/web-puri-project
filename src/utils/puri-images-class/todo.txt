@@ -20,8 +20,10 @@ TODO:
     
     getImageAsImageメソッド ※引数でプリのインデックスを指定、返り値はImageオブジェクト
     getImageAsBlobメソッド ※引数でプリのインデックスを指定、返り値はBlobオブジェクト
+    getImageAsFileメソッド ※引数でプリのインデックスを指定、返り値はFileオブジェクト
     getImageAsUrlメソッド ※引数でプリのインデックスを指定、返り値はURL文字列
     
     getAllImagesAsImageメソッド ※返り値はImage型のプリが入った配列
     getAllImagesAsBlobメソッド ※返り値はBlob型のプリが入った配列
+    getAllImagesAsFileメソッド ※返り値はFile型のプリが入った配列
     getAllImagesAsUrlメソッド ※返り値はプリのURLが入った配列
