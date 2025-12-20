@@ -29,16 +29,16 @@ export class DetectedFace {
    */
   constructor(segmentedImageData: ImageData, boundingBox: DetectedObject) {
     // 処理に失敗した場合に備え、結果を格納するプロパティをnullで初期化します
-    this.#bodyCoords = false;
-    this.#contourCoords = false;
-    this.#eyesCoords = false;
-    this.#noseCoords = false;
-    this.#mouthCoords = false;
-    this.#eyebrowsCoords = false;
-    this.#eyebagsCoords = false;
-    this.#faceAngle = false;
-    this.#hairCoords = false;
-    this.#irisCoords = false;
+    this.#bodyCoords = null;
+    this.#contourCoords = null;
+    this.#eyesCoords = null;
+    this.#noseCoords = null;
+    this.#mouthCoords = null;
+    this.#eyebrowsCoords = null;
+    this.#eyebagsCoords = null;
+    this.#faceAngle = null;
+    this.#hairCoords = null;
+    this.#irisCoords = null;
 
     // 引数として受け取った値をプライベートプロパティに保存します
     this.#segmentedImageData = segmentedImageData;
@@ -67,15 +67,15 @@ export class DetectedFace {
       
     } catch (error) {
       console.error('Faceオブジェクトの初期化に失敗しました。', error);
-      // 全ての結果プロパティを「失敗」を示すfalseに設定する
-      this.#bodyCoords = false;
-      this.#contourCoords = false;
-      this.#eyesCoords = false;
-      this.#noseCoords = false;
-      this.#mouthCoords = false;
-      this.#eyebrowsCoords = false;
-      this.#eyebagsCoords = false;
-      this.#faceAngle = false;
+      // 全ての結果プロパティを「失敗」を示すnullに設定する
+      this.#bodyCoords = null;
+      this.#contourCoords = null;
+      this.#eyesCoords = null;
+      this.#noseCoords = null;
+      this.#mouthCoords = null;
+      this.#eyebrowsCoords = null;
+      this.#eyebagsCoords = null;
+      this.#faceAngle = null;
 
     } finally {
       // 成功・失敗にかかわらず、全ての処理が完了したことを示すフラグをtrueに設定する
@@ -356,8 +356,8 @@ export class DetectedFace {
     }
 
     // ガード節: 次に、体の輪郭の検出に成功したかを確認します。
-    // プライベートプロパティが false の場合、処理は完了したものの検出に失敗したことを示します。
-    if (this.#bodyCoords === false) {
+    // プライベートプロパティが null の場合、処理は完了したものの検出に失敗したことを示します。
+    if (this.#bodyCoords === null) {
       throw new Error('体の輪郭の検出に失敗しました。');
     }
 
@@ -380,8 +380,8 @@ export class DetectedFace {
     }
 
     // ガード節: 次に、顔の輪郭の検出に成功したかを確認します。
-    // プライベートプロパティが false の場合、処理は完了したものの検出に失敗したことを示します。
-    if (this.#contourCoords === false) {
+    // プライベートプロパティが null の場合、処理は完了したものの検出に失敗したことを示します。
+    if (this.#contourCoords === null) {
       throw new Error('顔の輪郭の検出に失敗しました。');
     }
 
@@ -404,8 +404,8 @@ export class DetectedFace {
     }
 
     // ガード節: 次に、目の検出に成功したかを確認します。
-    // プライベートプロパティが false の場合、処理は完了したものの検出に失敗したことを示します。
-    if (this.#eyesCoords === false) {
+    // プライベートプロパティが null の場合、処理は完了したものの検出に失敗したことを示します。
+    if (this.#eyesCoords === null) {
       throw new Error('目の検出に失敗しました。');
     }
 
@@ -427,8 +427,8 @@ export class DetectedFace {
     }
 
     // ガード節: 次に、鼻の検出に成功したかを確認します。
-    // プライベートプロパティが false の場合、処理は完了したものの検出に失敗したことを示します。
-    if (this.#noseCoords === false) {
+    // プライベートプロパティが null の場合、処理は完了したものの検出に失敗したことを示します。
+    if (this.#noseCoords === null) {
       throw new Error('鼻の検出に失敗しました。');
     }
 
@@ -450,8 +450,8 @@ export class DetectedFace {
     }
 
     // ガード節: 次に、口の検出に成功したかを確認します。
-    // プライベートプロパティが false の場合、処理は完了したものの検出に失敗したことを示します。
-    if (this.#mouthCoords === false) {
+    // プライベートプロパティが null の場合、処理は完了したものの検出に失敗したことを示します。
+    if (this.#mouthCoords === null) {
       throw new Error('口の検出に失敗しました。');
     }
 
@@ -474,8 +474,8 @@ export class DetectedFace {
     }
 
     // ガード節: 次に、眉毛の検出に成功したかを確認します。
-    // プライベートプロパティが false の場合、処理は完了したものの検出に失敗したことを示します。
-    if (this.#eyebrowsCoords === false) {
+    // プライベートプロパティが null の場合、処理は完了したものの検出に失敗したことを示します。
+    if (this.#eyebrowsCoords === null) {
       throw new Error('眉毛の検出に失敗しました。');
     }
 
@@ -499,8 +499,8 @@ export class DetectedFace {
     }
 
     // ガード節: 次に、涙袋の検出に成功したかを確認します。
-    // プライベートプロパティが false の場合、処理は完了したものの検出に失敗したことを示します。
-    if (this.#eyebagsCoords === false) {
+    // プライベートプロパティが null の場合、処理は完了したものの検出に失敗したことを示します。
+    if (this.#eyebagsCoords === null) {
       throw new Error('涙袋の検出に失敗しました。');
     }
 
@@ -522,8 +522,8 @@ export class DetectedFace {
     }
 
     // ガード節: 次に、髪の毛の検出に成功したかを確認します。
-    // プライベートプロパティが false の場合、処理は完了したものの検出に失敗したことを示します。
-    if (this.#hairCoords === false) {
+    // プライベートプロパティが null の場合、処理は完了したものの検出に失敗したことを示します。
+    if (this.#hairCoords === null) {
       throw new Error('髪の毛の検出に失敗しました。');
     }
 
@@ -546,8 +546,8 @@ export class DetectedFace {
     }
 
     // ガード節: 次に、虹彩の検出に成功したかを確認します。
-    // プライベートプロパティが false の場合、処理は完了したものの検出に失敗したことを示します。
-    if (this.#irisCoords === false) {
+    // プライベートプロパティが null の場合、処理は完了したものの検出に失敗したことを示します。
+    if (this.#irisCoords === null) {
       throw new Error('虹彩の検出に失敗しました。');
     }
 
