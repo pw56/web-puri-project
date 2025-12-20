@@ -1,7 +1,7 @@
 import { Puri } from './puri-class';
 
 export class PuriImages {
-  #puris: Array<Puri> = [];
+  #puris: Puri[] = [];
 
   count(): number {
     return this.#puris.length;
@@ -18,7 +18,7 @@ export class PuriImages {
     this.#puris.push(puri);
   }
 
-  addImagesFromBlob(images: Array<Blob>): void {
+  addImagesFromBlob(images: Blob[]): void {
     images.forEach((image) => {
       const puri:Puri = new Puri(image);
       this.#puris.push(puri);
@@ -38,7 +38,7 @@ export class PuriImages {
     return this.#puris[index].getImageAsUrl();
   }
   
-  getAllImagesAsImage(): Array<HTMLImageElement> {
+  getAllImagesAsImage(): HTMLImageElement[] {
     return this.#puris.map((puri) => {
       return puri.getImageAsImage();
     });
@@ -50,7 +50,7 @@ export class PuriImages {
     );
   }
 
-  getAllImagesAsUrl(): Array<string> {
+  getAllImagesAsUrl(): string[] {
     return this.#puris.map((puri) => {
       return puri.getImageAsUrl();
     });
