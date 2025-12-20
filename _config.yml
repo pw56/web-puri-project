@@ -4,6 +4,7 @@ plugins:
 exclude:
   - docs
   - src
+  - backup
   - LICENSE
   - README.md
   - package.json
