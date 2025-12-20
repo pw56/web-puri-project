@@ -1,0 +1,10 @@
+実装メモ:
+🌟プリの情報コンポーネント
+  props(属性):
+  ・mode ⋯ 'after-shooting', 'album-view'
+  ・puri ⋯ プリ画像管理クラスのインスタンス
+  ・onAddToFavorites ⋯ ハンドラ
+  ・onRemoveFromFavorites ⋯ ハンドラ
+  ・onAllowRecordLocation ⋯ ハンドラ
+  ・onDenyRecordLocation ⋯ ハンドラ
+  ・onEditTags ⋯ ハンドラ(引数: タグの文字列の配列)
