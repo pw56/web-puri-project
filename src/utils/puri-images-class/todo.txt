@@ -8,7 +8,7 @@ TODO:
     getImageAsBlobメソッド ※内部でBlobに変換して返す
     getImageAsUrlメソッド
     
-🟪PuriImagesクラス(エクスポート)
+☑PuriImagesクラス(エクスポート)
     date(プライベートプロパティ) ※Date型
     location(プライベートプロパティ) ※GeoLocationオブジェクト
     puris配列(プライベートプロパティ) ※Puri型の配列
@@ -27,3 +27,5 @@ TODO:
     getAllImagesAsBlobメソッド ※返り値はBlob型のプリが入った配列
     getAllImagesAsFileメソッド ※返り値はFile型のプリが入った配列
     getAllImagesAsUrlメソッド ※返り値はプリのURLが入った配列
+
+🟪AIによる仕様書作成
