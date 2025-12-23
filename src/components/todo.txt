@@ -1,10 +1,17 @@
 TODO:
 🟪useShowLoadingAnimationフックをドキュメントに記述
+🟥Objectコンポーネントを廃止&分離
+  ・SVGはインポート文で直接組み込むから廃止
+  ・Shape, Rect, Circle も使う予定ないから廃止
+  ・CountDownコンポーネントを、プリモードのディレクトリに作成
+  ・PuriWorkspaceコンポーネントは使うから作成
+🟥Buttonコンポーネントのtype属性廃止 → 属性ごとに分離
+🟥Selectコンポーネントのtype属性廃止&用途ごとにコンポーネントを分離 → それぞれの目的ごとに別のコンポーネントに分離
 🟥Promptコンポーネント追加(ボタンの表記をカスタマイズできるようにしたい)　→　(いいえ / はい)　→　(キャンセル / 続行)
+🟥Alertコンポーネント(useShowAlertフック) → 'baseUrl'または'contentUrl'で相対パスを解決
 🟨ポップアップのマークダウン表示をオブジェクトで指定
   {
     content?: 'マークダウン形式の文字列', baseUrl?: './',
     contentUrl?: '絶対パス or ルートパス or HTMLからの相対パス'
   }
-🟨Alertコンポーネント(useShowAlertフック) → 'baseUrl'または'contentUrl'で相対パスを解決
 🟨マークダウン中の相対パスの解決 → 正規表現で置換
