@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import '@debug';
 import { useAlert } from '@components/Alert';
 import { AppVersionManager } from './utils/app-version-manager';
