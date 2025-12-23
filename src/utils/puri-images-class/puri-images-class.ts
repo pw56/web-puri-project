@@ -18,6 +18,7 @@ export class PuriImages {
     this.#puris.forEach((puri) => {
       puri.dispose();
     });
+    this.#puris = [];
   }
 
   addImageFromBlob(image: Blob): void {
@@ -35,6 +36,7 @@ export class PuriImages {
 
   delete(index: number): void {
     this.#puris[index].dispose();
+    this.#puris.splice(index, index);
   }
 
   getImageAsImage(index: number): HTMLImageElement {
