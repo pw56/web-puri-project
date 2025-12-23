@@ -1,4 +1,4 @@
-# app-version-manager.ts 仕様書
+# app-version-manager.ts
 
 ## AppVersionManager (クラス)
 - 概要  

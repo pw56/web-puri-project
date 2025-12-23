@@ -1,4 +1,4 @@
-# index.ts 仕様書
+# index.ts
 
 ## LeaveGuard (クラス)
 - 概要  
