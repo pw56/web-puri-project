@@ -5,6 +5,10 @@ export class Puri {
     this.#imageUrl = URL.createObjectURL(image);
   }
 
+  dispose(): void {
+    URL.revokeObjectURL(this.getImageAsUrl());
+  }
+
   getImageAsImage(): HTMLImageElement {
     const image = new Image();
     image.src = this.#imageUrl;

@@ -16,7 +16,7 @@ export class PuriImages {
 
   dispose(): void {
     this.#puris.forEach((puri) => {
-      URL.revokeObjectURL(puri.getImageAsUrl());
+      puri.dispose();
     });
   }
 
@@ -31,6 +31,10 @@ export class PuriImages {
       this.#puris.push(puri);
     });
 
+  }
+
+  delete(index: number): void {
+    this.#puris[index].dispose();
   }
 
   getImageAsImage(index: number): HTMLImageElement {
