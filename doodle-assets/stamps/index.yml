@@ -1,0 +1,39 @@
+- name: "heart"
+  image: ""
+  display_name: "ハート"
+
+- name: "star"
+  image: ""
+  display_name: "星"
+
+- name: "ribbon"
+  image: ""
+  display_name: "リボン"
+
+- name: "cat"
+  image: ""
+  display_name: "ネコ"
+
+- name: "rabbit"
+  image: ""
+  display_name: "うさぎ"
+
+- name: "flower"
+  image: ""
+  display_name: "花"
+
+- name: "angel_wings"
+  image: ""
+  display_name: "天使の羽"
+
+- name: "note"
+  image: ""
+  display_name: "音符"
+
+- name: "flame"
+  image: ""
+  display_name: "炎（テンションUP系）"
+
+- name: "cloud"
+  image: ""
+  display_name: "雲＆雨（天気系）
