@@ -17,6 +17,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Install yq
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y yq
+
       - name: Detect changes
         id: changes
         run: |
@@ -96,7 +101,7 @@ jobs:
         with:
           path: |
             build_debug
-          key: emscripten-${{ runner.os }}-${{ steps.mode.outputs.mode }}
+          key: emscripten-${{ runner.os }}
           restore-keys: |
             emscripten-${{ runner.os }}-
 
