@@ -15,10 +15,10 @@
     "noEmit": true,
     "baseUrl": "/web-puri-project/",
     "paths": {
-      "@components/*": ["components/*"],
-      "@utils/*": ["utils/*"],
-      "@features/*": ["features/*"],
-      "@debug/*": ["../tests"]
+      "@components/*": ["src/components/*"],
+      "@utils/*": ["src/utils/*"],
+      "@features/*": ["src/features/*"],
+      "@debug/*": ["tests/*"]
     },
     "incremental": true,
     "tsBuildInfoFile": "./.tsbuildinfo"
