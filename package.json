@@ -38,6 +38,6 @@
   },
   "scripts": {
     "build:dev": "vite build --mode development",
-    "build:release": "vite build --mode production",
+    "build:release": "vite build --mode production"
   }
 }
