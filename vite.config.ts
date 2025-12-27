@@ -23,8 +23,8 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     react(),
     VitePWA({
-      srcDir: 'src/app',
-      filename: 'src/app/app/sw.js',
+      srcDir: 'src/app/app',
+      filename: 'sw.ts',
       strategies: 'injectManifest',
       registerType: 'autoUpdate',
       devOptions: { enabled: true },
