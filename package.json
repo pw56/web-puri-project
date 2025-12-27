@@ -1,6 +1,7 @@
 {
   "name": "web-puri-project",
   "version": "1.0.0",
+  "type": "module",
   "description": "## 概要 このリポジトリはプリ機をWebアプリとして動かすことを目的に作成されました。 ![アプリアイコン](assets/icons/icon-original.png)",
   "main": "index.js",
   "directories": {
@@ -38,6 +39,5 @@
   "scripts": {
     "build:dev": "vite build --mode development",
     "build:release": "vite build --mode production",
-    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
