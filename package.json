@@ -36,7 +36,7 @@
     "vite": "^5.0.0"
   },
   "scripts": {
-    "dev": "vite build --mode development",
+    "build:dev": "vite build --mode development",
     "build:release": "vite build --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
   }

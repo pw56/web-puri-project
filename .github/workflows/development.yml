@@ -125,7 +125,7 @@ jobs:
       # 3. Vite ビルド (リリース時はバンドル, ミニフィケーションも含む)
       - name: Vite bundle
         run: |
-          npm run dev
+          npm run build:dev
 
       # 4. GitHub Pages デプロイ
       - name: Deploy to GitHub Pages
