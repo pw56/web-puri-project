@@ -15,10 +15,12 @@
     "noEmit": true,
     "baseUrl": "/web-puri-project/",
     "paths": {
-      "@components/*": ["src/components/*"],
-      "@utils/*": ["src/utils/*"],
-      "@features/*": ["src/features/*"],
-      "@debug/*": ["tests/*"]
+      "@shared/components/*": ["packages/components/*"],
+      "@debug/*": ["src/tests/*"],
+      "@landing/components/*": ["src/landing/components/*"],
+      "@pwa/components/*": ["src/pwa/components/*"],
+      "@pwa/utils/*": ["src/pwa/utils/*"],
+      "@pwa/features/*": ["src/pwa/features/*"]
     },
     "incremental": true,
     "tsBuildInfoFile": "./.tsbuildinfo"

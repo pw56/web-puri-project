@@ -14,17 +14,17 @@ export default defineConfig(({ mode }) => ({
   },
   resolve: {
     alias: {
-      '@components': 'src/app/components',
-      '@utils': 'src/app/utils',
-      '@features': 'src/app/features',
-      '@debug': 'src/tests'
+      '@components': 'components',
+      '@utils': 'utils',
+      '@features': 'features',
+      '@debug': '../tests'
     },
   },
   plugins: [
     react(),
     VitePWA({
       strategies: 'injectManifest',
-      srcDir: 'src/app/app',
+      srcDir: 'src/pwa/app',
       filename: 'sw.js',
       registerType: 'autoUpdate',
       devOptions: { enabled: true },
