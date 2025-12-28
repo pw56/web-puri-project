@@ -24,7 +24,6 @@ export default defineConfig(({ mode }) => ({
     react(),
     VitePWA({
       srcDir: 'src/app/app',
-      filename: 'sw.js',
       injectManifest: {
         swSrc: 'src/app/app/sw.ts',
         swDest: 'sw.js'
