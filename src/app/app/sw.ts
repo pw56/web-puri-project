@@ -1,10 +1,12 @@
 export {}; // モジュール化してグローバル補完の重複を避ける
 
+import { precacheAndRoute } from 'workbox-precaching';
+
 declare const self: ServiceWorkerGlobalScope;
 
 // Workbox がここに precache manifest を注入する
 // injectManifest を使う場合は必須
-self.__WB_MANIFEST;
+precacheAndRoute(self.__WB_MANIFEST);
 
 const CACHE_NAME: string = 'web-puri-cache';
 const urlsToCache: string[] = [
