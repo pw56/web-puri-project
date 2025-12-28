@@ -26,7 +26,7 @@ export default defineConfig(({ mode }) => ({
       srcDir: 'src/app/app',
       filename: 'sw.js',
       injectManifest: {
-        swSrc: 'sw.ts',
+        swSrc: 'src/app/app/sw.ts',
         swDest: 'sw.js'
       },
       strategies: 'injectManifest',
