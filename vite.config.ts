@@ -24,10 +24,6 @@ export default defineConfig(({ mode }) => ({
     react(),
     VitePWA({
       strategies: 'injectManifest',
-      injectManifest: {
-        swSrc: 'src/app/app/sw.ts',
-        swDest: 'sw.js'
-      },
       srcDir: 'src/app/app',
       filename: 'sw.js',
       registerType: 'autoUpdate',
