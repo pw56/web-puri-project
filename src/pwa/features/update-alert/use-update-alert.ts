@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import '@debug';
-import { useAlert } from '@components/Alert';
+import { useAlert } from '@pwa/components/Alert';
 import { AppVersionManager } from './utils/app-version-manager';
 import { fetchTextFile } from "./utils/fetch-text-file";
 import YAML from 'yaml';

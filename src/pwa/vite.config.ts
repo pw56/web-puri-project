@@ -8,15 +8,15 @@ export default defineConfig(({ mode }) => ({
   root: './',
   base: base,
   build: {
-    outDir: mode === 'production' ? '../app' : '../dist',
+    outDir: mode === 'production' ? '../../app' : '../../dist',
     emptyOutDir: true,
     minify: mode === 'production',
   },
   resolve: {
     alias: {
-      '@components': 'components',
-      '@utils': 'utils',
-      '@features': 'features',
+      '@pwa/components': 'components',
+      '@pwa/utils': 'utils',
+      '@pwa/features': 'features',
       '@debug': '../tests'
     },
   },
@@ -24,7 +24,7 @@ export default defineConfig(({ mode }) => ({
     react(),
     VitePWA({
       strategies: 'injectManifest',
-      srcDir: 'src/pwa/app',
+      srcDir: 'app',
       filename: 'sw.js',
       registerType: 'autoUpdate',
       devOptions: { enabled: true },

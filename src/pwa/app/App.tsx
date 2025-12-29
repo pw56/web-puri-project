@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import styles from './App.module.css';
-import '@features/pages';
+import '@pwa/features/pages';
 import { useUpdateAlert } from '../features/update-alert/use-update-alert';
 
 const App = () => {
