@@ -28,7 +28,7 @@ jobs:
 
       # TypeScript ビルドキャッシュの復元
       - name: Restore TS build cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ./.tsbuildinfo
           # keyのハッシュ生成に package-lock.json と .tsbuildinfo の両方を使用
@@ -42,7 +42,7 @@ jobs:
           version: latest
 
       - name: Cache emscripten build
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             build_release
