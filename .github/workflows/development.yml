@@ -73,7 +73,7 @@ jobs:
 
       # 1. 環境構築 (Node.js, npm, Vite, Emscripten, CMake) + キャッシュ
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: '20'
           cache: 'npm'
