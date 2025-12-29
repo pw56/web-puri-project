@@ -16,7 +16,7 @@
     "@tensorflow-models/coco-ssd": "^2.2.3",
     "@tensorflow/tfjs": "^4.22.0",
     "dexie": "^4.2.1",
-    "fabric": "^6.9.0",
+    "fabric": "^7.0.0",
     "file-saver": "^2.0.5",
     "jszip": "^3.10.1",
     "marked": "^17.0.1",
