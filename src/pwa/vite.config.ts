@@ -12,14 +12,6 @@ export default defineConfig(({ mode }) => ({
     emptyOutDir: true,
     minify: mode === 'production',
   },
-  resolve: {
-    alias: {
-      '@pwa/components': 'components',
-      '@pwa/utils': 'utils',
-      '@pwa/features': 'features',
-      '@debug': '../tests'
-    },
-  },
   plugins: [
     react(),
     VitePWA({

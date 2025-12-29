@@ -34,7 +34,8 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.1",
     "tailwindcss": "^4.1.18",
-    "vite": "^5.0.0"
+    "vite": "^5.0.0",
+    "vite-tsconfig-paths": "^6.0.3"
   },
   "scripts": {
     "build:dev": "vite build --mode development",
