@@ -1,0 +1,7 @@
+{
+  "name": "web-puri-project",
+  "private": true, 
+  "workspaces": [
+    "src/*"
+  ]
+}
