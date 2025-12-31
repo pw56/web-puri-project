@@ -1,16 +1,11 @@
 {
   "name": "pwa",
   "version": "1.0.0",
-  "type": "module",
   "description": "Webプリのアプリページ",
-  "main": "index.js",
-  "directories": {
-    "doc": "docs",
-    "test": "test"
-  },
-  "keywords": [],
-  "author": "Ryu",
   "license": "MIT",
+  "author": "Ryu",
+  "type": "module",
+  "main": "index.js",
   "dependencies": {
     "@mediapipe/tasks-vision": "^0.10.22-rc.20250304",
     "@tensorflow-models/coco-ssd": "^2.2.3",
