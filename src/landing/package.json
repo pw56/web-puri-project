@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Webプリのランディングページ",
   "license": "MIT",
-  "author": "pw56",
+  "author": "Ryu",
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
