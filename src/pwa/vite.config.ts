@@ -23,7 +23,6 @@ export default defineConfig(({ mode }) => ({
       manifest: {
         name: 'Webプリ',
         short_name: 'Webプリ',
-        author: 'Ryu',
         description: 'このアプリは、AIや画像処理などの最新技術を使ったWebアプリケーションです。',
         start_url: './',
         scope: './',
