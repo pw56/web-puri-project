@@ -1,0 +1,12 @@
+{
+  "name": "landing",
+  "version": "1.0.0",
+  "description": "Webプリのランディングページ",
+  "license": "MIT",
+  "author": "pw56",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
