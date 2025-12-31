@@ -8,7 +8,7 @@ export default defineConfig(({ mode }) => ({
   root: './',
   base: base,
   build: {
-    outDir: mode === 'production' ? '../../app' : '../../dist',
+    outDir: mode === 'production' ? '../../app' : './dist',
     emptyOutDir: true,
     minify: mode === 'production',
   },

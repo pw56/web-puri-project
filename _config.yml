@@ -2,10 +2,15 @@ plugins:
   - jekyll-sitemap
 
 exclude:
-  - docs
-  - src
-  - backup
+  - docs/*
+  - packages/*
+  - backup/*
   - LICENSE
   - README.md
   - package.json
   - package-lock.json
+  - tsconfig.json
+
+include:
+  - packages/landing/out
+  - packages/pwa/dist
