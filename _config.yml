@@ -3,7 +3,7 @@ plugins:
 
 exclude:
   - docs/*
-  - packages/*
+  - apps/*
   - backup/*
   - LICENSE
   - README.md
@@ -12,5 +12,5 @@ exclude:
   - tsconfig.json
 
 include:
-  - packages/landing/out
-  - packages/pwa/dist
+  - apps/landing/out
+  - apps/pwa/dist

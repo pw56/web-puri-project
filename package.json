@@ -2,6 +2,7 @@
   "name": "web-puri-project",
   "private": true, 
   "workspaces": [
-    "packages/*"
+    "apps/*",
+    "apps/*"
   ]
 }

@@ -16,11 +16,11 @@
     "baseUrl": "/web-puri-project/",
     "paths": {
       "@shared/components/*": ["packages/components/*"],
-      "@debug/*": ["packages/tests/*"],
-      "@landing/components/*": ["packages/landing/components/*"],
-      "@pwa/components/*": ["packages/pwa/components/*"],
-      "@pwa/utils/*": ["packages/pwa/utils/*"],
-      "@pwa/features/*": ["packages/pwa/features/*"]
+      "@debug/*": ["apps/tests/*"],
+      "@landing/components/*": ["apps/landing/components/*"],
+      "@pwa/components/*": ["apps/pwa/components/*"],
+      "@pwa/utils/*": ["apps/pwa/utils/*"],
+      "@pwa/features/*": ["apps/pwa/features/*"]
     },
     "incremental": true,
     "tsBuildInfoFile": "./.tsbuildinfo"
