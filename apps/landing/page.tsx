@@ -11,43 +11,10 @@ default export function Page() {
       <a href="./dummies/dummy-1.html" className="nav-link">ダミー1</a>
       <a href="./dummies/dummy-2.html" className="nav-link">ダミー2</a>
       <div className="share-heading">このページを共有する</div>
-      <div className="share-buttons">
-        {/* X(Twitter) */}
-        <div className="share-btn-wrap">
-          <a className="share-btn"
-            href="https://x.com/intent/tweet?text=%E3%82%B9%E3%83%9E%E3%83%9B%E3%81%A7%E3%83%97%E3%83%AA%E3%82%92%E6%92%AE%E3%82%8D%E3%81%86%EF%BC%81&url=https%3A%2F%2Fpw56.github.io%2Fweb-puri-project%2F"
-            target="-blank" rel="noopener" title="X (旧Twitter)で共有">
-            <img src="./share-icons/x.png" alt="X(旧Twitter)">
-          </a>
-          <span className="share-label">X</span>
-        </div>
-        {/* Instagram */}
-        <div className="share-btn-wrap">
-          <a className="share-btn"
-            href="https://www.instagram.com/?url=https%3A%2F%2Fpw56.github.io%2Fweb-puri-project%2F&text=%E3%81%84%E3%81%A4%E3%81%A7%E3%82%82%E3%80%81%E3%81%A9%E3%81%93%E3%81%A7%E3%82%82%E3%80%81%E3%83%96%E3%83%A9%E3%82%A6%E3%82%B6%E3%81%A7%E7%B0%A1%E5%8D%98%E3%81%AB%E3%83%97%E3%83%AA%E3%81%8C%E6%92%AE%E3%82%8C%E3%82%8B%E3%80%82%0D%0A%E3%83%96%E3%83%A9%E3%82%A6%E3%82%B6%E3%81%A7%E5%8B%95%E3%81%8F%E3%81%8B%E3%82%89%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%AA%E3%81%97%EF%BC%81%0D%0Ahttps%3A%2F%2Fpw56.github.io%2Fweb-puri-project%2F"
-            target="-blank" rel="noopener" title="Instagramで紹介">
-            <img src="./share-icons/instagram.png" alt="Instagram">
-          </a>
-          <span className="share-label">Instagram</span>
-        </div>
-        {/* LINE */}
-        <div className="share-btn-wrap">
-          <a className="share-btn"
-            href="http://line.me/R/msg/text/?https%3A%2F%2Fpw56.github.io%2Fweb-puri-project%2F%0a%E3%82%B9%E3%83%9E%E3%83%9B%E3%81%A7%E3%83%97%E3%83%AA%E3%82%92%E6%92%AE%E3%82%8D%E3%81%86%EF%BC%81"
-            target="-blank" rel="noopener" title="LINEで共有">
-            <img src="./share-icons/line.png" alt="LINE">
-          </a>
-          <span className="share-label">LINE</span>
-        </div>
-        {/* Email */}
-        <div className="share-btn-wrap">
-          <a className="share-btn"
-            href="mailto:?subject=%E3%82%B9%E3%83%9E%E3%83%9B%E3%81%A7%E3%83%97%E3%83%AA%E3%82%92%E6%92%AE%E3%82%8D%E3%81%86%EF%BC%81&body=%E3%81%84%E3%81%A4%E3%81%A7%E3%82%82%E3%80%81%E3%81%A9%E3%81%93%E3%81%A7%E3%82%82%E3%80%81%E3%83%96%E3%83%A9%E3%82%A6%E3%82%B6%E3%81%A7%E7%B0%A1%E5%8D%98%E3%81%AB%E3%83%97%E3%83%AA%E3%81%8C%E6%92%AE%E3%82%8C%E3%82%8B%E3%80%82%0D%0A%E3%83%96%E3%83%A9%E3%82%A6%E3%82%B6%E3%81%A7%E5%8B%95%E3%81%8F%E3%81%8B%E3%82%89%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%AA%E3%81%97%EF%BC%81%0D%0Ahttps%3A%2F%2Fpw56.github.io%2Fweb-puri-project%2F"
-            title="メールで共有">
-            <img src="./share-icons/email.png" alt="メール">
-          </a>
-          <span className="share-label">メール</span>
-        </div>
+      <ShareButton service="x" />
+      <ShareButton service="instagram" />
+      <ShareButton />
+      <ShareButton />
       </div>
     </div>
   );
