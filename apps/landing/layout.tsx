@@ -9,7 +9,7 @@ export const metadata = {
   title: "Web Puri Project",
   description: "AIや画像処理を使ったWebアプリケーション",
   icons: {
-    icon: "/icons/icon-192x192.png",
+    icon: "/app-icons/icon-192x192.png",
   },
 };
 
