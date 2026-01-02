@@ -24,6 +24,7 @@
     "zustand": "^5.0.9"
   },
   "devDependencies": {
+    "@fontsource/hachi-maru-pop": "^5.2.8",
     "@types/fabric": "^5.3.10",
     "@types/file-saver": "^2.0.7",
     "@types/react-dom": "^19.2.3",
