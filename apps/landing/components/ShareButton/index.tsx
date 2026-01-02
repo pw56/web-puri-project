@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import styles from "./index.module.css";
 
 type ShareService = "x" | "instagram" | "line" | "mail";
 
@@ -22,8 +21,8 @@ export default function ShareButton({
   // 共有リンク
   const shareLinks = {
     x: `https://x.com/intent/tweet?text=${encodedMessage}&url=${encodedUrl}`,
-    instagram: `https://www.instagram.com/?text=${encodeMessage}&url=${encodedUrl}`,
-    line: `https://social-plugins.line.me/lineit/share?text=${encode}&url=${encodedUrl}`,
+    instagram: `https://www.instagram.com/?text=${encodedMessage}&url=${encodedUrl}`,
+    line: `https://social-plugins.line.me/lineit/share?text=${encodedMessage}&url=${encodedUrl}`,
     mail: `mailto:?subject=${encodedMessage}&body=${encodedMessage}%0D%0A${encodedUrl}`,
   };
 
