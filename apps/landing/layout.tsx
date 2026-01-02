@@ -1,4 +1,3 @@
-import "./globals.css";
 import { Hachi_Maru_Pop } from "next/font/google";
 
 const hachi = Hachi_Maru_Pop({
