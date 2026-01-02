@@ -34,7 +34,7 @@ export class PuriImages {
 
   }
 
-  delete(index: number): void {
+  removeImage(index: number): void {
     this.#puris[index].dispose();
     this.#puris.splice(index, index);
   }
