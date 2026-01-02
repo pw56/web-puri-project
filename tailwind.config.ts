@@ -23,7 +23,8 @@ const config: Config = {
         }
       },
       fontFamily: {
-        sans: ['Hachi Maru Pop', 'cursive', 'sans-serif'],
+        sans: ['Inter', 'sans-serif'],
+        hachi: ['var(--font-hachi)', 'cursive']
       },
     },
   },
