@@ -11,6 +11,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
+    "@vercel/og": "^0.8.6",
     "next": "^16.1.1",
     "next-sitemap": "^4.2.3",
     "tailwindcss": "^4.1.18"
