@@ -29,6 +29,7 @@
 ![JSZip](https://img.shields.io/badge/JSZip-2196F3?logo=zip&logoColor=white)
 ![FileSaver.js](https://img.shields.io/badge/FileSaver.js-9C27B0?logo=javascript&logoColor=white)
 ![Marked.js](https://img.shields.io/badge/Marked.js-795548?logo=markdown&logoColor=white)
+![i18n](https://img.shields.io/badge/i18n-1E90FF?style=flat&logoColor=white)
 
 ## 🧩 使用素材  
 [![Google Fonts](https://img.shields.io/badge/Google%20Fonts-4285F4?logo=googlefonts&logoColor=white)](https://fonts.google.com)
