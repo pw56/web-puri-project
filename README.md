@@ -6,27 +6,11 @@
 
 ## 🛠️ 技術スタック
 <!--
-テキストベースの技術スタック
-- HTML
-- CSS
-- JavaScript
-- TypeScript
-- React
-- C++ (WebAssembly)
-- Web Worker
-- WebAssembly
-- Web Share API
-- PWA
-- Service Worker
-- Dexie.js
+機械学習の使用モデル
 - BlazeFace (MediaPipe)
 - Selfie Segmentation (MediaPipe)
 - COCO-SSD (TensorFlow.js)
 - Face Landmarker (MediaPipe)
-- Fabric.js
-- JSZip
-- FileSaver.js
-- Marked.js
 -->
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
@@ -51,35 +35,33 @@
 [![OtoLogic](https://img.shields.io/badge/OtoLogic-000000?style=flat&logo=music&logoColor=white)](https://otologic.jp)
 
 ## ⚡️ 開発環境
-### コンパイラ  
-**![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white):** 
+### ビルドツール
 ![Node.js](https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)
 ![esbuild](https://img.shields.io/badge/esbuild-FFCF00?logo=esbuild&logoColor=black)
-  
-**![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black):** 
-![Node.js](https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white)
-![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)
-![esbuild](https://img.shields.io/badge/esbuild-FFCF00?logo=esbuild&logoColor=black)
-  
-**![WebAssembly](https://img.shields.io/badge/WebAssembly-654FF0?logo=webassembly&logoColor=white):** 
 ![CMake](https://img.shields.io/badge/CMake-064F8C?style=logo=cmake&logoColor=white)
 ![Emscripten](https://img.shields.io/badge/Emscripten-2C2D72?logo=emscripten&logoColor=white)  
 
 ### AIアシスタント  
 ![Gemini](https://img.shields.io/badge/Gemini%202.5%20Pro-4285F4?logo=google&logoColor=white)
 ![GPT-5](https://img.shields.io/badge/GPT--5-412991?logo=openai&logoColor=white)
-![Copilot](https://img.shields.io/badge/Microsoft%20Copilot-0067B8?logo=microsoft&logoColor=white)
+![Microsoft Copilot](https://img.shields.io/badge/Microsoft%20Copilot-0067B8?logo=microsoft&logoColor=white)
+![Cursor](https://img.shields.io/badge/Cursor-000000?style=flat&logo=cursor&logoColor=white)
 
 ### デザイン  
 ![Figma](https://img.shields.io/badge/Figma-F24E1E?logo=figma&logoColor=white)
+![Locofy](https://img.shields.io/badge/Locofy-000000?style=flat&logo=locofy&logoColor=white)
+![Cursor](https://img.shields.io/badge/Cursor-000000?style=flat&logo=cursor&logoColor=white)
 ![GPT-5](https://img.shields.io/badge/GPT--5-412991?logo=openai&logoColor=white)
-
-### バンドラ  
-![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)
+![Storybook](https://img.shields.io/badge/Storybook-FF4785?style=flat&logo=storybook&logoColor=white)
+![Chromastic](https://img.shields.io/badge/Chromastic-FF6A00?style=flat&logoColor=white)
 
 ### CI/CD  
 ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?logo=githubactions&logoColor=white)
+
+### 公開サービス
+![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat&logo=vercel&logoColor=white)
+![Cloudflare Pages](https://img.shields.io/badge/Cloudflare%20Pages-F38020?style=flat&logo=cloudflarepages&logoColor=white)
 
 ### テスト環境  
 ![Chrome](https://img.shields.io/badge/Chrome%20OS%20%7C%20Google%20Chrome-4285F4?logo=googlechrome&logoColor=white)
