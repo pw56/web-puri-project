@@ -37,7 +37,7 @@ jobs:
             ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}-
 
       - name: Setup Emscripten
-        uses: mymindstorm/setup-emsdk@v12
+        uses: mymindstorm/setup-emsdk@v14
         with:
           version: latest
 
