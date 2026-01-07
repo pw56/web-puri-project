@@ -1,5 +1,4 @@
 TODO:
-✨️Page.tsxの共有ボタンの属性に 共有URL(ページURL), 共有メッセージ を指定
 🟥生のHTML, CSSをNext.js(React)移行
 🟥Actionsのワークフロー作り直し
   🟨プッシュ時に、developmentモードでビルド & Next.js経由でVercelにデプロイ
