@@ -14,10 +14,10 @@ export default function Page() {
       <div className="desc">{desc}</div>
       <a href="/app" className="nav-link">始める</a>
       <div className="share-heading">このページを共有する</div>
-      <ShareButton service="x" />
-      <ShareButton service="instagram" />
-      <ShareButton service="line" />
-      <ShareButton service="mail" />
+      <ShareButton service="x" shareMessage="スマホでプリを撮ろう！" shareUrl="https://example.com" />
+      <ShareButton service="instagram" shareMessage="スマホでプリを撮ろう！" shareUrl="https://example.com" />
+      <ShareButton service="line" shareMessage="スマホでプリを撮ろう！" shareUrl="https://example.com" />
+      <ShareButton service="mail" shareMessage="スマホでプリを撮ろう！" shareUrl="https://example.com" />
     </div>
   );
 }
