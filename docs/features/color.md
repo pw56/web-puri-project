@@ -1,13 +1,15 @@
 # カラーパレット
 
-- 要素
-  - ピンク: `#FF87C5`
-  - 白: `#FFFFFF`
-  - 水色: `#7AF2FF`
+- コンポーネント
+  - メイン: `#FFFFFF`
+  - アクセント: `#FF87C5`
+  - リンク: `#7AF2FF`
+  - コンポーネントの背景: `#FFDCEE`
+  - タグ: `#C587FF`
 
 - アプリ全体:
-  - アプリ背景: `#FFFFFF`
-  - 落書き画面: `#FFB7DC`
+  - アプリの背景: `#FFFFFF`
+  - 編集ページの背景: `#FFB7DC`
 
 - アニメーション:
   - 薄い色: `color-mix(in srgb, currentColor, #FFFFFF)`

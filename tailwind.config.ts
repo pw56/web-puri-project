@@ -8,13 +8,15 @@ const config: Config = {
     extend: {
       colors: {
         components: {
-          'pink': '#FF87C5',
-          'white': '#FFFFFF',
-          'lightblue': '#7AF2FF',
+          'main': '#FFFFFF',
+          'accent': '#FF87C5',
+          'link': '#7AF2FF',
+          'component-background': '#FFDCEE',
+          'tags': '#C587FF',
         },
         app: {
-          'background': '#FFFFFF',
-          'doodle-screen': '#FFB7DC'
+          'app-background': '#FFFFFF',
+          'edit-page': '#FFB7DC'
         },
         animation: {
           'light': 'color-mix(in srgb, currentColor, #FFFFFF)',
