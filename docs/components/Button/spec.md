@@ -85,3 +85,10 @@
 > ボタン1の派生。
 > ボタンにチェックアイコン(check.svg)を表示する。  
 > ![button-next](button-check.png)
+
+## キャンセル
+- 属性: `cancel`
+- 表示:
+> ボタン1の派生。
+> ボタンにキャンセルアイコン(cancle.svg)を表示する。  
+> ![button-next](button-cancel.png)
