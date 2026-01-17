@@ -2,13 +2,13 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
-const base = '/web-puri-project/';
+const base = '/';
 
 export default defineConfig(({ mode }) => ({
   root: './',
   base: base,
   build: {
-    outDir: mode === 'production' ? '../../app' : './dist',
+    outDir: '../landing/public/app',
     emptyOutDir: true,
     minify: mode === 'production',
   },

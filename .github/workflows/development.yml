@@ -13,63 +13,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 0. 差分チェック
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Install yq
+      # 0. 更新チェック
+      - name: Detect source changes
+        id: pwa_changes
         run: |
-          sudo apt-get update
-          sudo apt-get install -y yq
+          CHANGED=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} \
+            | grep -E '^(apps/pwa|packages/|public/|apps/tests)' || true)
 
-      - name: Detect changes
-        id: changes
-        run: |
-          # _config.yml に書かれた対象パスを取得
-          CONFIG_PATHS=$(yq '.paths[]' _config.yml 2>/dev/null || echo "")
-
-          # 変更ファイル一覧を取得
-          if git rev-parse HEAD~1 >/dev/null 2>&1; then
-            CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD)
+          if [ -z "$CHANGED" ]; then
+            echo "src=false" >> $GITHUB_OUTPUT
           else
-            CHANGED_FILES=$(git ls-files)
+            echo "src=true" >> $GITHUB_OUTPUT
           fi
-
-          echo "Changed files:"
-          echo "$CHANGED_FILES"
-
-          ONLY_CONFIG_PATHS=true
-
-          for FILE in $CHANGED_FILES; do
-            MATCHED=false
-
-            # _config.yml の paths に含まれるパスと一致するかチェック
-            for P in $CONFIG_PATHS; do
-              if [[ "$FILE" == $P* ]]; then
-                MATCHED=true
-              fi
-            done
-
-            # 1つでも一致しないファイルがあれば「_config.yml のパスだけ」ではない
-            if [ "$MATCHED" = false ]; then
-              ONLY_CONFIG_PATHS=false
-            fi
-          done
-
-          # ✅ _config.yml のパスだけの変更ならスキップ
-          if [ "$ONLY_CONFIG_PATHS" = true ]; then
-            echo "skip=true" >> $GITHUB_OUTPUT
-            exit 0
-          fi
-
-          # ✅ それ以外は実行
-          echo "skip=false" >> $GITHUB_OUTPUT
-
-      - name: Stop if no relevant changes
-        if: steps.changes.outputs.skip == 'true'
-        run: |
-          echo "No relevant changes detected. Skipping workflow."
-          exit 0
 
       # 1. 環境構築 (Node.js, npm, Vite, Emscripten, CMake) + キャッシュ
       - name: Setup Node.js
@@ -132,9 +87,4 @@ jobs:
         run: |
           npm run build:dev
 
-      # 4. GitHub Pages デプロイ
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: './dist'      
+      # 4. PWAの成果物の出力先のフォルダは、VercelまたはCloudflare Pagesに自動でデプロイされる
