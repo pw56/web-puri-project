@@ -1,4 +1,4 @@
-name: Build (Development)
+name: Dev Build
 
 on:
   push:
@@ -83,8 +83,9 @@ jobs:
           cmake --build build_debug
 
       # 3. Vite ビルド (リリース時はバンドル, ミニフィケーションも含む)
+      # Wasmコンパイルを含むため、Makefileに移行予定
       - name: Vite bundle
         run: |
           npm run build:dev
 
-      # 4. PWAの成果物の出力先のフォルダは、VercelまたはCloudflare Pagesに自動でデプロイされる
+      # 4. PWAの成果物の出力先のフォルダは、Vercelに自動でデプロイされるため、ここは何もなし
