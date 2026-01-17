@@ -11,7 +11,7 @@ const config: Config = {
           'main': '#FFFFFF',
           'accent': '#FF87C5',
           'link': '#7AF2FF',
-          'component-background': '#FFDCEE',
+          'comp-background': '#FFDCEE',
           'tags': '#C587FF',
         },
         app: {
@@ -20,7 +20,7 @@ const config: Config = {
         },
         animation: {
           'light': 'color-mix(in srgb, currentColor, #FFFFFF)',
-          'pinkish-white': '#FFD9EC',
+          'white-comp-hover': '#FFD9EC',
           'darken': 'rgb(178 178 178 / 0.5)'
         }
       },
