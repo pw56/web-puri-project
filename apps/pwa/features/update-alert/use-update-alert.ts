@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import '@debug';
+import { resolveBaseUrl } from '../../utils/resolve-base-url';
 import { useAlert } from '@pwa/components/Alert';
 import { AppVersionManager } from './utils/app-version-manager';
 import { fetchTextFile } from "./utils/fetch-text-file";
@@ -8,7 +9,7 @@ import YAML from 'yaml';
 let appVersion: AppVersionManager;
 
 async function getVersion(): Promise<string> {
-  const path: string = "/assets/release/version.yml";
+  const path: string = resolveBaseUrl("/release/version.yml");
   const versionText: string = await fetchTextFile(path)
   .catch((error) => {
     throw new Error(`アップデートバージョンファイルの読み取りでエラーが発生しました ${error}`);
@@ -34,7 +35,7 @@ export async function useUpdateAlert(): Promise<void> {
     void(async (): Promise<void> => {
       await openVersionManager();
       if (appVersion.isUpdated()) {
-        alert({contentUrl: '/assets/release/message.md'});
+        alert({contentUrl: resolveBaseUrl('/release/message.md')});
       }
     })();
   }, []);

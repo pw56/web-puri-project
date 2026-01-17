@@ -9,8 +9,8 @@ precacheAndRoute(self.__WB_MANIFEST);
 const CACHE_NAME = 'web-puri-cache';
 const urlsToCache = [
   '/app', // 開発時はキャッシュしない前提で本番環境しかキャッシュしてない
-  '/assets/fonts',
-  '/assets/icons',
+  '/fonts',
+  '/icons',
 ];
 
 self.addEventListener('install', (event) => {
