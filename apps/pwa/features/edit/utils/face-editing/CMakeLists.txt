@@ -9,8 +9,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # ソースコードを取得
 file(GLOB_RECURSE SOURCES
-    "${CMAKE_SOURCE_DIR}./*.cpp"
-    "${CMAKE_SOURCE_DIR}./*.c"
+    "${CMAKE_SOURCE_DIR}/*.cpp"
+    "${CMAKE_SOURCE_DIR}/*.c"
 )
 
 # 実行ファイルの生成
@@ -24,7 +24,7 @@ set_target_properties(web_puri PROPERTIES
 
 # インクルードディレクトリの追加
 target_include_directories(web_puri PRIVATE
-    "${CMAKE_SOURCE_DIR}./"
+    "${CMAKE_SOURCE_DIR}/"
 )
 
 # Emscripten 環境でのみ設定を適用
