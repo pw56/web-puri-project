@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import '@pwa/features/pages';
-import { useUpdateAlert } from '../features/update-alert/use-update-alert';
+import { useUpdateAlert } from '@pwa/features/update-alert/use-update-alert';
 
 const App = () => {
   useEffect(() => {

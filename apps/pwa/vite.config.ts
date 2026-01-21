@@ -20,6 +20,9 @@ export default defineConfig(({ mode }) => ({
       filename: 'sw.js',
       registerType: 'autoUpdate',
       devOptions: { enabled: true },
+      workbox: {
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,ttf,wasm,yml,yaml,md}'],
+      },
       manifest: {
         name: 'Webプリ',
         short_name: 'Webプリ',
