@@ -1,0 +1,33 @@
+name: Vite Build (PWA)
+
+on:
+  workflow_call:
+    inputs:
+      mode:
+        required: false
+        type: string
+        default: "dev"
+
+jobs:
+  build-vite:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Vite bundle
+        run: |
+          if [ "${{ inputs.mode }}" = "release" ]; then
+            npm run build:release
+          else
+            npm run build:dev
+          fi

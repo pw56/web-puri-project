@@ -1,91 +1,24 @@
-name: Dev Build
+name: Development Build
 
 on:
   push:
     branches:
       - main
-
-permissions:
-  contents: write
+  workflow_call:
+    inputs:
+      mode:
+        description: "Build mode: dev or release"
+        required: false
+        default: "dev"
 
 jobs:
-  build-development:
-    runs-on: ubuntu-latest
+  cargo:
+    uses: ./.github/workflows/cargo.yml
+    with:
+      mode: ${{ inputs.mode }}
 
-    steps:
-      # 0. 更新チェック
-      - name: Detect source changes
-        id: pwa_changes
-        run: |
-          CHANGED=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} \
-            | grep -E '^(apps/pwa|packages/|public/|apps/tests)' || true)
-
-          if [ -z "$CHANGED" ]; then
-            echo "src=false" >> $GITHUB_OUTPUT
-          else
-            echo "src=true" >> $GITHUB_OUTPUT
-          fi
-
-      # 1. 環境構築 (Node.js, npm, Vite, Emscripten, CMake) + キャッシュ
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      # TypeScript ビルドキャッシュの復元
-      - name: Restore TS build cache
-        uses: actions/cache@v4
-        with:
-          path: ./.tsbuildinfo
-          # keyのハッシュ生成に package-lock.json と .tsbuildinfo の両方を使用
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('./.tsbuildinfo') }}
-          restore-keys: |
-            ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}-
-
-      - name: Setup Emscripten
-        uses: mymindstorm/setup-emsdk@v12
-        with:
-          version: latest
-
-      - name: Cache emscripten build
-        uses: actions/cache@v4
-        with:
-          path: |
-            build_debug
-          key: emscripten-${{ runner.os }}
-          restore-keys: |
-            emscripten-${{ runner.os }}-
-
-      - name: Setup CMake
-        uses: jwlawson/actions-setup-cmake@v1.14
-        with:
-          cmake-version: '3.27.0'
-
-      # 2. ソースファイル変更検出 & ビルド
-      - name: Detect source changes
-        id: src_changes
-        run: |
-          SRC_CHANGED=$(git diff --name-only HEAD~1 HEAD | grep -E '\.(ts|tsx|jsx|cpp)$' || true)
-          if [ -z "$SRC_CHANGED" ]; then
-            echo "src=false" >> $GITHUB_OUTPUT
-          else
-            echo "src=true" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Build C++ (Wasm)
-        if: steps.src_changes.outputs.src == 'true'
-        run: |
-          emcmake cmake -B build_debug -DCMAKE_BUILD_TYPE=Debug
-          cmake --build build_debug
-
-      # 3. Vite ビルド (リリース時はバンドル, ミニフィケーションも含む)
-      # Wasmコンパイルを含むため、Makefileに移行予定
-      - name: Vite bundle
-        run: |
-          npm run build:dev
-
-      # 4. PWAの成果物の出力先のフォルダは、Vercelに自動でデプロイされるため、ここは何もなし
+  vite:
+    needs: cargo
+    uses: ./.github/workflows/vite.yml
+    with:
+      mode: ${{ inputs.mode }}

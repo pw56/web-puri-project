@@ -5,6 +5,12 @@ on:
     types: [published]
 
 jobs:
+  build-release:
+    uses:
+      ./.github/workflows/development.yml
+    with:
+      mode: "release"
+
   cloudflare-deploy:
     runs-on: ubuntu-latest
 
@@ -15,4 +21,5 @@ jobs:
           curl -X POST \
             -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
             -H "Content-Type: application/json" \
+            -d '{"deployment_trigger": {"type": "api"}}' \
             https://api.cloudflare.com/client/v4/accounts/${{ secrets.CLOUDFLARE_ACCOUNT_ID }}/pages/projects/${{ secrets.CLOUDFLARE_PROJECT_NAME }}/deployments

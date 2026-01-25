@@ -1,0 +1,38 @@
+name: Cargo Build (Wasm)
+
+on:
+  workflow_call:
+    inputs:
+      mode:
+        required: false
+        type: string
+        default: "dev"
+
+jobs:
+  build-wasm:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: stable
+          targets: wasm32-unknown-unknown
+
+      - name: Install wasm-pack
+        run: |
+          curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+
+      - name: Build Rust Wasm
+        run: |
+          if [ "${{ inputs.mode }}" = "release" ]; then
+            wasm-pack build apps/wasm --release --target web
+          else
+            wasm-pack build apps/wasm --target web
+          fi
+      
+      - name: Copy Build Artifacts
+        run: |
+          cp -r /packages/wasm/pkg* /apps/landing/public/app/wasm/
