@@ -1,12 +1,12 @@
 <StartPage>
   <Title>
-    <Image name="sample-1"/>
-    <Image name="sample-2"/>
-    <Object name="heart-1" type="svg" src="heart-1.svg"/>
+    <img name="sample-1"/>
+    <img name="sample-2"/>
+    <img name="heart-1" src="heart-1.svg"/>
     <Object name="heart-2" type="svg" src="heart-2.svg"/>
     <Text name="title-name" type="plane">Webプリ</Text>
   </Title>
-  <Button name="shooting" type="button-1">撮影</Button>
-  <Button name="puri-shooting" type="button-1">プリモード</Button>
-  <Button name="upload" type="button-1">アップロード</Button>
+  <PuriButton name="shooting" type="button-1">撮影</PuriButton>
+  <PuriButton name="puri-shooting" type="button-1">プリモード</PuriButton>
+  <PuriButton name="upload" type="button-1">アップロード</PuriButton>
 </StartPage>

@@ -2,11 +2,11 @@
   <Text name="frame-index"/>
   <Shooting>
     <Video name="camera"/>
-    <Button name="shoot" type="button-2"/>
-    <Button name="switch" type="button-1" image="camera-switch.svg"/>
+    <PuriButton name="shoot" type="button-2"/>
+    <PuriButton name="switch" type="button-1" image="camera-switch.svg"/>
   </Shooting>
   <Checking>
-    <Image name="check"/>
-    <Button name="retry" type="button-1">撮り直し</Button>
+    <img name="check"/>
+    <PuriButton name="retry" type="button-1">撮り直し</PuriButton>
   </Checking>
 </SelfShootPage>

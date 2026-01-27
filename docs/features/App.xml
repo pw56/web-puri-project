@@ -8,9 +8,9 @@
   <EditPage>
 
     <Banner>
-      <Button name="back" type="back"/>
+      <PuriButton name="back" type="back"/>
       <Text name="frame-index" type="value"/>
-      <Button name="next" type="next"/>
+      <PuriButton name="next" type="next"/>
     </Banner>
 
     <Result>
@@ -104,25 +104,25 @@
   </EditPage>
 
   <ResultPage>
-    <Button name="end" type="button-1">終わる</Button>
+    <PuriButton name="end" type="button-1">終わる</PuriButton>
     <Scroll type="puri">
       <!--ここはプログラムにより動的生成-->
-      <Image name="preview-1"/>
-      <Image name="preview-2"/>
-      <Image name="preview-3"/>
-      <Image name="preview-4"/>
+      <img name="preview-1"/>
+      <img name="preview-2"/>
+      <img name="preview-3"/>
+      <img name="preview-4"/>
     </Scroll>
     <!--デスクトップ版-->
-      <Button name="download" type="button-1"></Button>
+      <PuriButton name="download" type="button-1"></PuriButton>
     <!--モバイル版-->
-      <Button name="share" type="button-1"></Button>
-    <Button name="print" type="button-1"></Button>
-    <Button name="location" type="button-1"></Button>
+      <PuriButton name="share" type="button-1"></PuriButton>
+    <PuriButton name="print" type="button-1"></PuriButton>
+    <PuriButton name="location" type="button-1"></PuriButton>
     <Tag name="tags"></Tag>
   </ResultPage>
   
   <PrintPage>
-    <Image name="preview"/>
+    <img name="preview"/>
     <Workspace>
       <Select name="mode-switch" type="pink">
         <Option name="frame" text="フレーム"/>
@@ -163,28 +163,28 @@
           </Select>
         </PrintSize>
       </Size>
-      <Object name="background" type="">
+      <PuriWorkspaceArea/>
     </Workspace>
-    <Button name="cancel-printing" type="back"/>
-    <Button name="start-printing" type="button-1">
+    <PuriButton name="cancel-printing" type="back"/>
+    <PuriButton name="start-printing" type="button-1">
   </PrintPage>
 
   <AlbumPage>
-    <Button name="close-album" type="back"></Button>
+    <PuriButton name="close-album" type="back"></PuriButton>
     <Images>
       <!--ここはプログラムにより動的生成-->
     </Images>
     <Pages>
-      <Button name="previous" type="back"/>
+      <PuriButton name="previous" type="back"/>
       <Text name="current-page" type="plain"/>
-      <Button name="next" type="next"/>
+      <PuriButton name="next" type="next"/>
     </Pages>
   </AlbumPage>
 
   <PickedPage>
-    <Button name="back-to-album" type="back"/>
-    <Button name="delete" type="button-1" image=""/>
-    <Image name="preview"/>
+    <PuriButton name="back-to-album" type="back"/>
+    <PuriButton name="delete" type="button-1" image=""/>
+    <img name="preview"/>
     <Date>
       <Text name="property" type="plain"></Text>
       <Text name="link" type="link"></Text>

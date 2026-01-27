@@ -3,9 +3,9 @@
   <Shooting>
     <Video name="camera"/>
     <Pose>
-      <Image name="example" image=""/>
+      <img name="example" image=""/>
       <Text name="message" type="plane"/>
-      <Object name="background" type=""/>
+      <PuriWorkspaceArea/>
     </Pose>
     <Countdown>
       <Object name="background-circle" type="circle"/>
@@ -13,7 +13,7 @@
     </Countdown>
   </Shooting>
   <Checking>
-    <Image name="check" src=""/>
-    <Button name="retry" type="button-1">撮り直し</Button>
+    <img name="check" src=""/>
+    <PuriButton name="retry" type="button-1">撮り直し</PuriButton>
   </Checking>
 </PuriShootPage>
