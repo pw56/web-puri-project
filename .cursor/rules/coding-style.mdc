@@ -1,0 +1,117 @@
+# Coding Style Rules
+
+## Purpose
+- Maintain consistent code quality across human developers and coding AI.
+
+---
+
+## Indentation
+- Use **2 spaces** for indentation.
+
+### Example
+```javascript
+function sayHello() {
+  let text = "Hello World!";
+  console.log(text);
+}
+```
+
+---
+
+## Braces Style
+- Use **K&R style** for all control structures and functions.
+
+### Example
+```javascript
+if (condition) {
+  // code
+} else {
+  // code
+}
+
+function example() {
+  // code
+}
+```
+
+---
+
+## Comments
+- Use `//` for inline comments, with **one space** after `//`.
+- Describe both **purpose** and **behavior**.
+- Prefer **inline comments**.
+
+### Example
+```javascript
+// This is a comment
+console.log("Hello World!");
+```
+
+---
+
+## Naming Conventions
+
+### Variables
+- Use **lowerCamelCase**.
+```javascript
+let isPushed;
+```
+
+### Constants
+- Use **UPPER_CASE**.
+```javascript
+const DEVICE_NAME;
+```
+
+### Functions / Methods
+- Use **lowerCamelCase**.
+```javascript
+function getName() {}
+```
+
+### Classes
+- Use **PascalCase**.
+```javascript
+class Car {}
+```
+
+---
+
+## Prohibited
+- `var` declarations
+- `with` statement
+- Ternary operator
+- Assignments inside `if` conditions
+- `goto`
+- `eval()`
+- `document.write()`
+- Excessive global variables
+- Inline event handlers (e.g., `<button onclick="...">`)
+- Synchronous network requests
+- `escape()` / `unescape()`
+
+---
+
+## Restricted
+- Romanized (ローマ字) naming
+- Deep nesting
+- Callback hell
+- Loose equality (`==`)
+- Unsafe DOM operations (`innerHTML` etc.)
+
+---
+
+## Recommended
+- Use **early return** / **guard clauses** to avoid deep nesting
+- Refactor for readability
+- Use immutability where beneficial
+- Apply encapsulation
+- Follow the **Single Responsibility Principle**
+
+---
+
+## AI Behavior (for Cursor)
+- Follow all rules strictly.
+- Prefer readability over cleverness.
+- Ask for clarification when requirements are ambiguous.
+- Avoid introducing prohibited patterns even if user code contains them.
