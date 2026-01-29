@@ -1,0 +1,14 @@
+# Implement From Documentation Rules
+
+## Core Rule
+- Implement code strictly based on the provided specification or documentation.
+
+## Restrictions
+- Do not introduce any assumptions, interpretations, or behaviors that are not explicitly stated in the documentation.
+- Do not add features, logic, or flows that are not required by the specification.
+- When the specification is unclear, request clarification instead of guessing.
+
+## AI Behavior
+- Always prioritize fidelity to the documentation over convenience or optimization.
+- Ensure that all implemented logic directly corresponds to documented requirements.
+- Avoid speculative behavior or creative interpretation unless explicitly requested.

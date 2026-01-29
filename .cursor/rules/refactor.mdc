@@ -1,0 +1,27 @@
+# Refactoring Rules
+
+## Core Rule
+- Refactor the code while preserving all external behavior.
+
+## Requirements
+- Improve internal structure without changing the public API, UI behavior, or observable outputs.
+- Maintain full backward compatibility.
+- Ensure that all existing functionality continues to work exactly as before.
+
+## Allowed Improvements
+- Simplify complex logic.
+- Reduce duplication.
+- Improve readability and maintainability.
+- Extract functions or components when it does not alter behavior.
+- Reorganize code internally as long as external behavior remains unchanged.
+
+## Restrictions
+- Do not modify input/output formats.
+- Do not change component props or event signatures unless explicitly allowed.
+- Do not alter timing, side effects, or user-visible behavior.
+- Do not introduce new features or remove existing ones.
+
+## AI Behavior
+- Prioritize minimal, safe, behavior-preserving changes.
+- Validate that the refactored code produces identical results under all conditions.
+- When uncertain whether a change affects behavior, choose the safer option or request clarification.

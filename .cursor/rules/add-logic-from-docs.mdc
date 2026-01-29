@@ -1,0 +1,43 @@
+# Add Logic From Documentation Rules
+
+## Purpose
+- Implement application logic based on the provided specification.
+- Preserve the existing React component structure as much as possible.
+- Inject only the minimum required state and handlers.
+
+---
+
+## React Structure
+- Do not significantly modify the existing component hierarchy or file structure.
+- Respect the current component responsibilities and avoid unnecessary merging or splitting.
+- Extend the existing props flow without breaking it.
+
+---
+
+## State Management
+- Add new state only when absolutely necessary.
+- Place new state in the **lowest common ancestor** that naturally manages it.
+- Avoid adding state that causes unnecessary re-renders.
+- Reuse existing state whenever possible.
+
+---
+
+## Handlers
+- Add new event handlers in a way that aligns with the existing component structure.
+- Define handlers in the component that has the clearest responsibility, then pass them down via props when needed.
+- Reuse or extend existing handlers when appropriate instead of creating new ones.
+
+---
+
+## Implementation Guidelines
+- The behavior described in the specification must be implemented as the top priority.
+- When the specification is ambiguous, infer behavior based on existing UI and code intentions.
+- Follow the project's coding conventions (indentation, naming, prohibited patterns, etc.).
+
+---
+
+## AI Behavior
+- Carefully read the specification and identify all required logic before implementing.
+- Always prioritize extending the existing structure rather than refactoring it.
+- Large-scale refactoring or abstraction should only be done when strictly necessary to satisfy the specification.
+- Keep changes minimal and easy to understand.
