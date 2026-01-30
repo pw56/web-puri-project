@@ -1,5 +1,20 @@
 # ボタン
 ## Props:
+| Prop  | 型  | 初期値  | 説明  |
+| ------------ | ------------ | ------------ | ------------ |
+| text  |   |   |   |
+| font-size  |   |   |   |
+| imageSrc  |   |   |   |
+| height  |   |   |   |
+| width  |   |   |   |
+
+- type
+ボタンの種類(`button-1`, `button-2`など)を指定。
+
+```xml
+<Button type="button-1"/>
+```
+
 - text
 ボタンに表示するテキストを指定。
 
@@ -14,11 +29,11 @@
 <Button font-size="20rem"/>
 ```
 
-- imageSrc
+- image
 ボタンに表示するアイコン(画像)のパスを指定。
 
 ```xml
-<Button imageSrc="camera.png"/>
+<Button image="camera.png"/>
 ```
 
 - height
