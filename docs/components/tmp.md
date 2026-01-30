@@ -2,18 +2,11 @@
 ## Props:
 | Prop  | 型  | 初期値  | 説明  |
 | ------------ | ------------ | ------------ | ------------ |
-| text  |   |   |   |
+| text  |   |   | ボタンに表示するテキストを指定。  |
 | font-size  |   |   |   |
 | imageSrc  |   |   |   |
 | height  |   |   |   |
 | width  |   |   |   |
-
-- type
-ボタンの種類(`button-1`, `button-2`など)を指定。
-
-```xml
-<Button type="button-1"/>
-```
 
 - text
 ボタンに表示するテキストを指定。
