@@ -17,6 +17,6 @@
     "tailwindcss": "^4.1.18"
   },
   "dependencies": {
-    "@napi-rs/canvas": "^0.1.88"
+    "@napi-rs/canvas": "^0.1.89"
   }
 }
