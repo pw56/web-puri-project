@@ -3,8 +3,8 @@
 ## Props:
 | Prop  | 型  | 初期値  | 説明  |
 | ------------ | ------------ | ------------ | ------------ |
-| height  | `number`  | 自動  | カウントの高さ(縦方向の大きさ)を指定。  |
-| width  | `number`  | 自動  | カウントの横幅(横方向の大きさ)を指定。  |
+| height  | `csstype.Property.Width`  | 自動  | カウントの高さ(縦方向の大きさ)を指定。  |
+| width  | `csstype.Property.Width`  | 自動  | カウントの横幅(横方向の大きさ)を指定。  |
 | defaultValue  | `number`  | 0  | 初期値を設定。  |
 | step  | `number`  | 1  | 粒度を設定。  |
 | min  | `number`  | なし  | 最小値を設定。  |

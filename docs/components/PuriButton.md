@@ -6,8 +6,8 @@
 | text  | `string`  | なし  | ボタンに表示するテキストを指定。  |
 | font-size  | `number`  | 自動  | ボタンに表示するテキストのサイズを指定。  |
 | imageSrc  | `string` \| `URL` | なし  | ボタンに表示するアイコン(画像)のパスを指定。  |
-| height  | `number`  | 自動  | ボタンの高さ(縦方向の大きさ)を指定。  |
-| width  | `number`  | 自動  | ボタンの横幅(横方向の大きさ)を指定。  |
+| height  | `csstype.Property.Width`  | 自動  | ボタンの高さ(縦方向の大きさ)を指定。  |
+| width  | `csstype.Property.Width`  | 自動  | ボタンの横幅(横方向の大きさ)を指定。  |
 
 ## 振る舞い
 - ボタン押下時に登録された関数を実行
