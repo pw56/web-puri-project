@@ -1,6 +1,6 @@
 # PuriLoadingAnimation
 
-## カスタムフック
+## Hooks
 | Hook  | 引数  | 説明  |
 | ------------ | ------------ | ------------ |
 | showLoading  | `void`  | アプリにローディングアニメーションを表示。  |
