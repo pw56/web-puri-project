@@ -3,10 +3,14 @@
 ## Props
 | Prop  | 型  | 初期値  | 説明  |
 | ------------ | ------------ | ------------ | ------------ |
-| `children`  | `string` \| `URL`  | なし  | 表示するリンクを指定。  |
+| `children`  | `string`  | なし  | 表示するテキストを指定。  |
 | `fontSize`  | `React,CSSProperties['fontSize']`  | 自動  | テキストのサイズを指定。  |
 | `height`  | `React,CSSProperties['height']`  | 自動  | コンポーネントの高さを指定。  |
 | `width`  | `React,CSSProperties['width']`  | 自動  | コンポーネントの横幅を指定。  |
+| `href`  | `string` \| `URL`  | なし  | リンクを指定。  |
+
+## Behavior
+- リンク押下時に、指定されたリンクを開く
 
 ## Notes
 - `height`または`width`が指定されていた場合、`fontSize`よりも優先して適用される
