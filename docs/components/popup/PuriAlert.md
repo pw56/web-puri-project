@@ -8,4 +8,4 @@
 ## Hooks
 | Hook  | 引数  | 返り値  | 説明  |
 | ------------ | ------------ | ------------ | ------------ |
-| `useShowAlert`  | { message?: `string`, okButtonMessage?: `string`, noButtonMessage?: `string` }  | `void`  | アラートを表示。  |
+| `useShowAlert`  | { message?: `string`, baseUrl?: `string` \| `URL`, contentUrl?: `string` \| `URL` }  | `void`  | アラートを表示。  |
