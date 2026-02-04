@@ -1,11 +1,8 @@
 TODO:
-🟥Objectコンポーネントを廃止&分離
-  ・CountDownコンポーネントを、プリモードのディレクトリに作成
-🟥Promptコンポーネント追加(ボタンの表記をカスタマイズできるようにしたい)　→　(いいえ / はい)　→　(キャンセル / 続行)
-🟥Alertコンポーネント(useShowAlertフック) → 'baseUrl'または'contentUrl'で相対パスを解決
-🟨ポップアップのマークダウン表示をオブジェクトで指定
+☑Alertコンポーネント(useShowAlertフック) → 'baseUrl'または'contentUrl'で相対パスを解決
+☑ポップアップのマークダウン表示をオブジェクトで指定
   {
-    content?: 'マークダウン形式の文字列', baseUrl?: './',
+    message?: 'マークダウン形式の文字列', baseUrl?: './',
     contentUrl?: '絶対パス or ルートパス or HTMLからの相対パス'
   }
 🟨マークダウン中の相対パスの解決 → 正規表現で置換

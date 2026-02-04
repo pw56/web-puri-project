@@ -2,4 +2,4 @@
 
 ## Notes
 - `AccentColorButton`の派生コンポーネント
-- `down-arrow.svg`をアイコンとして表示
+- `scroll.svg`をアイコンとして表示
