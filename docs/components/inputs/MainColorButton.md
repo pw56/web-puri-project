@@ -1,4 +1,4 @@
 # MainColorButton
 
 ## Notes
-- `PuriButton`の派生コンポーネント
+- `AccentColorButton`の派生コンポーネント

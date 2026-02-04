@@ -1,5 +1,5 @@
 # NextButton
 
 ## Notes
-- `PuriButton`の派生コンポーネント
+- `AccentColorButton`の派生コンポーネント
 - `next.svg`をアイコンとして表示

@@ -1,5 +1,5 @@
 # BackButton
 
 ## Notes
-- `PuriButton`の派生コンポーネント
+- `AccentColorButton`の派生コンポーネント
 - `back.svg`をアイコンとして表示

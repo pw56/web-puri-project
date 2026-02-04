@@ -1,5 +1,5 @@
 # CheckButton
 
 ## Notes
-- `PuriButton`の派生コンポーネント
+- `AccentColorButton`の派生コンポーネント
 - `check.svg`をアイコンとして表示
