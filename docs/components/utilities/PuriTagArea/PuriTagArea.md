@@ -13,3 +13,4 @@
 
 ## Notes
 - 子に`PuriTag`を持つ
+- このコンポーネントがモードを`State`で持ち、`Context`で子に伝達
