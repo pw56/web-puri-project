@@ -6,6 +6,7 @@
 | `text`  | `string`  | なし  | 選択肢に表示するテキストを指定。  |
 | `image`  | `string` \| `URL` \| `HTMLImage` \| `Blob`  | なし  | 選択肢に表示する画像を指定。  |
 | `onSelect`  | `function()`  | なし  | 選択肢が選択されたときのハンドラを指定。  |
+| `variant`  | `string`  | `'primary'`  | コンポーネントのバリアントを指定。  |
 
 ## Behavior
 - 選択肢が選択されたら登録されたハンドラを実行
