@@ -1,5 +1,5 @@
 # ScrollButton
 
 ## Notes
-- `AccentColorButton`の派生コンポーネント
+- `AccentColorButton`の継承
 - `scroll.svg`をアイコンとして表示

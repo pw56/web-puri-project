@@ -1,5 +1,5 @@
 # AddButton
 
 ## Notes
-- `AccentColorButton`の派生コンポーネント
+- `AccentColorButton`の継承
 - `add.svg`をアイコンとして表示

@@ -1,5 +1,5 @@
 # CancelButton
 
 ## Notes
-- `AccentColorButton`の派生コンポーネント
+- `AccentColorButton`の継承
 - `cancel.svg`をアイコンとして表示

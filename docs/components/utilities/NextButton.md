@@ -1,5 +1,5 @@
 # NextButton
 
 ## Notes
-- `AccentColorButton`の派生コンポーネント
+- `AccentColorButton`の継承
 - `next.svg`をアイコンとして表示

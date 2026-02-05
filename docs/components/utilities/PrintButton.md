@@ -1,5 +1,5 @@
 # PrintButton
 
 ## Notes
-- `AccentColorButton`の派生コンポーネント
+- `AccentColorButton`の継承
 - `print.svg`をアイコンとして表示

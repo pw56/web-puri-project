@@ -1,5 +1,5 @@
 # ShareButton
 
 ## Notes
-- `AccentColorButton`の派生コンポーネント
+- `AccentColorButton`の継承
 - `share.svg`をアイコンとして表示
