@@ -1,4 +1,4 @@
-# PuriColorPicker
+# PuriColorSwatch
 
 ## Props
 | Prop  | 型  | 初期値  | 説明  |
