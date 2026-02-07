@@ -1,5 +1,5 @@
 # CancelButton
 
 ## Notes
-- `AccentColorButton`の継承
+- `PuriButton`の継承
 - `cancel.svg`をアイコンとして表示

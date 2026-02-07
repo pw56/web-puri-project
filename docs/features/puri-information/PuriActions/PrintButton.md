@@ -1,5 +1,5 @@
 # PrintButton
 
 ## Notes
-- `AccentColorButton`の継承
+- `PuriButton`の継承
 - `print.svg`をアイコンとして表示
