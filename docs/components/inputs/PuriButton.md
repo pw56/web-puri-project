@@ -4,7 +4,7 @@
 | Prop  | 型  | 初期値  | 説明  |
 | ------------ | ------------ | ------------ | ------------ |
 | `text`  | `string`  | なし  | ボタンに表示するテキストを指定。  |
-| `image`  | `string` \| `URL` \| `HTMLImage` \| `Blob` | なし  | ボタンに表示するアイコンのパスを指定。  |
+| `image`  | `string` \| `URL` \| `HTMLImageElement` \| `Blob` | なし  | ボタンに表示するアイコンのパスを指定。  |
 | `height`  | `React.CSSProperties['height']`  | 自動  | ボタンの高さを指定。  |
 | `width`  | `React.CSSProperties['width']`  | 自動  | ボタンの横幅を指定。  |
 | `onClick`  | `React.MouseEventHandler<HTMLButtonElement>`  | なし  | ボタンが押されたときのハンドラを指定。  |

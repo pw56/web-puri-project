@@ -3,7 +3,7 @@
 ## Interfaces
 | Interface  | 型  | 説明  |
 | ------------ | ------------ | ------------ |
-| `PuriMenuOption`  | `[{ label?: string, image: string \| URL \| HTMLImage \| Blob, value: string, onSelected?: () => void }]`  | 選択肢のデータ配列。  |
+| `PuriMenuOption`  | `[{ label?: string, image: string \| URL \| HTMLImageElement \| Blob, value: string, onSelected?: () => void }]`  | 選択肢のデータ配列。  |
 
 ## Props
 | Prop  | 型  | 初期値  | 説明  |
