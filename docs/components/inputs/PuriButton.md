@@ -7,7 +7,7 @@
 | `image`  | `string` \| `URL` \| `HTMLImage` \| `Blob` | なし  | ボタンに表示するアイコンのパスを指定。  |
 | `height`  | `React.CSSProperties['height']`  | 自動  | ボタンの高さを指定。  |
 | `width`  | `React.CSSProperties['width']`  | 自動  | ボタンの横幅を指定。  |
-| `onClick`  | `function()`  | なし  | ボタンが押されたときのハンドラを指定。  |
+| `onClick`  | `React.MouseEventHandler<HTMLButtonElement>`  | なし  | ボタンが押されたときのハンドラを指定。  |
 
 ## Behavior
 - ボタン押下時に登録されたハンドラを実行

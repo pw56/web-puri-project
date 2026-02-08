@@ -7,6 +7,7 @@
 
 ## Behavior
 - ホバー時に、マウスカーソルをリンク(`pointer`)に変化
+- 選択時に、サイズを一回り縮小
 
 ## Notes
-- このコンポーネントは`PuriColorPalette`のみで使用できる
+- `PuriColorPalette`で内部的に使用され、エクスポートされない
