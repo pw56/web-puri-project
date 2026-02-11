@@ -7,8 +7,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "build": "next build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "next build"
   },
   "devDependencies": {
     "@vercel/og": "^0.8.6",
