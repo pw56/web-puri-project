@@ -1,7 +1,11 @@
 {
   "name": "web-puri-project",
-  "private": true, 
+  "private": true,
   "workspaces": [
-    "apps/*"
-  ]
+    "pwa",
+    "landing"
+  ],
+  "devDependencies": {
+    "shx": "^0.4.0"
+  }
 }
