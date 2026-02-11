@@ -7,7 +7,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "build": "next build"
+    "build": "shx cp -r ../assets/* ./public/ && next build"
   },
   "devDependencies": {
     "@vercel/og": "^0.8.6",
