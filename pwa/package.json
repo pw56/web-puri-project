@@ -34,7 +34,8 @@
     "vite-tsconfig-paths": "^6.1.0"
   },
   "scripts": {
-    "build:dev": "vite build --mode development",
-    "build:release": "vite build --mode production"
+    "copy-assets": "node ../scripts/copy-assets-all.mjs",
+    "build:dev": "npm run copy-assets && vite build --mode development",
+    "build:release": "npm run copy-assets && vite build --mode production"
   }
 }
