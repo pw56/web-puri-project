@@ -19,6 +19,8 @@
 ![WebAssembly](https://img.shields.io/badge/WebAssembly-654FF0?logo=webassembly&logoColor=white)
 ![Web Worker](https://img.shields.io/badge/Web%20Worker-FF9800?logo=web&logoColor=white)
 ![PWA](https://img.shields.io/badge/PWA-5A0FC8?logo=pwa&logoColor=white)
+![Web Share API](https://img.shields.io/badge/Web%20Share%20API-0080FF?logo=web-share&logoColor=white)
+![Web Share Target API](https://img.shields.io/badge/Web%20Share%20Target%20API-0080FF?logo=web-share&logoColor=white)
 ![TensorFlow.js](https://img.shields.io/badge/TensorFlow.js-FF6F00?logo=tensorflow&logoColor=white)
 ![Dexie.js](https://img.shields.io/badge/Dexie.js-009688?logo=database&logoColor=white)
 ![MediaPipe](https://img.shields.io/badge/MediaPipe-4285F4?logo=google&logoColor=white)
