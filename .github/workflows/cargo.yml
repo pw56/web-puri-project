@@ -26,13 +26,10 @@ jobs:
           curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
 
       - name: Build Rust Wasm
+        working-directory: ./pwa/features/face-editing/wasm
         run: |
           if [ "${{ inputs.mode }}" = "release" ]; then
-            wasm-pack build apps/wasm --release --target web
+            wasm-pack build --release --target web
           else
-            wasm-pack build apps/wasm --dev --target web
+            wasm-pack build --dev --target web
           fi
-      
-      - name: Copy Build Artifacts
-        run: |
-          cp -r /packages/wasm/pkg* /apps/landing/public/app/wasm/
