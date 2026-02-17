@@ -6,4 +6,4 @@
 ## Notes
 - `PuriButton`の継承
 - `print.svg`をアイコンとして表示
-- このコンポーネントは`PuriActions`のみで使用できる
+- このコンポーネントは`PuriActionsArea`のみで使用できる
