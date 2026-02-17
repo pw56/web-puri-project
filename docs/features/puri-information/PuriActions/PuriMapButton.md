@@ -6,5 +6,5 @@
 
 ## Notes
 - `PuriButton`の継承
-- `print.svg`をアイコンとして表示
+- `map.svg`をアイコンとして表示
 - このコンポーネントは`PuriActions`のみで使用できる
