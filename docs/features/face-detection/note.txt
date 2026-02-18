@@ -1,17 +1,19 @@
-index.ts # faceDetectionクラスをエクスポートするだけのインデックス
-face-detection-class.ts # メインのクラス(faceDetection)の所在
-detected-face-class.ts # 検出された顔ごとに生成されるクラス
-model-manager.ts # モデルマネージャー
-models # モデルの実体が含まれるフォルダ
+実装メモ:
+🌟ファイル構成
+  index.ts # faceDetectionクラスをエクスポートするだけのインデックス
+  face-detection-class.ts # メインのクラス(faceDetection)の所在
+  detected-face-class.ts # 検出された顔ごとに生成されるクラス
+  model-manager.ts # モデルマネージャー
+  models # モデルの実体が含まれるフォルダ
 
-  selfie-segmentation # 各モデルのフォルダ (MediaPipe Selfie Segmentation)
-    index.ts # モデルを利用するメソッドが含まれる
-    predict.ts # 実際の処理(推論)
-    
-  person-detector # 各モデルのフォルダ (COCO-SSD)
-    index.ts # モデルを利用するメソッドが含まれる
-    predict.ts # 実際の処理(推論)
+    selfie-segmentation # 各モデルのフォルダ (MediaPipe Selfie Segmentation)
+      index.ts # モデルを利用するメソッドが含まれる
+      predict.ts # 実際の処理(推論)
       
-  face-landmarker # 各モデルのフォルダ (Face Landmark Detection)
-    index.ts # モデルを利用するメソッドが含まれる
-    predict.ts # 実際の処理(推論)
+    person-detector # 各モデルのフォルダ (COCO-SSD)
+      index.ts # モデルを利用するメソッドが含まれる
+      predict.ts # 実際の処理(推論)
+        
+    face-landmarker # 各モデルのフォルダ (Face Landmark Detection)
+      index.ts # モデルを利用するメソッドが含まれる
+      predict.ts # 実際の処理(推論)
