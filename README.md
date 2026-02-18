@@ -51,7 +51,7 @@
 
 ### デザイン  
 ![Figma](https://img.shields.io/badge/Figma-F24E1E?logo=figma&logoColor=white)
-![Locofy](https://img.shields.io/badge/Locofy-000000?style=flat&logo=locofy&logoColor=white)
+![Builder.io](https://img.shields.io/badge/Builder.io-FF3366?logo=builder.io&logoColor=white)
 ![Cursor](https://img.shields.io/badge/Cursor-000000?style=flat&logo=cursor&logoColor=white)
 ![GPT-5](https://img.shields.io/badge/GPT--5-412991?logo=openai&logoColor=white)
 ![Storybook](https://img.shields.io/badge/Storybook-FF4785?style=flat&logo=storybook&logoColor=white)
