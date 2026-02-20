@@ -58,19 +58,19 @@
 | 項目  | 説明  |
 | ------------ | ------------ |
 | Overview  | セルフ撮影モードを選択。  |
-| Behavior  | `SelftShootPage`に遷移。  |
+| Behavior  | `setAppMode()`で、`FlowMode`を`SELF`にして、`QuantitySlectPage`に遷移。  |
 
 #### PuriShootButton
 | 項目  | 説明  |
 | ------------ | ------------ |
 | Overview  | プリ撮影モードを選択。  |
-| Behavior  | `PuriShootPage`に遷移。  |
+| Behavior  | `setAppMode()`で、`FlowMode`を`PURI`にして、`QuantitySlectPage`に遷移。  |
 
 #### UploadButton
 | 項目  | 説明  |
 | ------------ | ------------ |
 | Overview  | アップロードモードを選択。  |
-| Behavior  | 画像をアップロード。`EditPage`に遷移。  |
+| Behavior  | 画像をアップロード。`setAppMode()`で、`FlowMode`を`UPLOAD`にして、`EditPage`に遷移。  |
 
 ### AlbumButton
 | 項目  | 説明  |
