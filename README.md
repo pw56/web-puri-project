@@ -4,6 +4,8 @@
 このリポジトリはプリ機をWebアプリとして動かすことを目的に作成されました。
 ![アプリアイコン](./assets/app-icons/icon-512x512.png)
 
+---
+
 ## 🛠️ 技術スタック
 <!--
 機械学習の使用モデル
@@ -31,11 +33,16 @@
 ![i18n](https://img.shields.io/badge/i18n-1E90FF?style=flat&logoColor=white)
 ![Cargo](https://img.shields.io/badge/Cargo-DEA584?logo=rust&logoColor=black)
 
+---
+
 ## 🧩 使用素材  
 [![Google Fonts](https://img.shields.io/badge/Google%20Fonts-4285F4?logo=googlefonts&logoColor=white)](https://fonts.google.com)
 [![OtoLogic](https://img.shields.io/badge/OtoLogic-000000?style=flat&logo=music&logoColor=white)](https://otologic.jp)
 
+---
+
 ## ⚡️ 開発環境
+
 ### ビルドツール
 ![Node.js](https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)
