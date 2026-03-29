@@ -16,7 +16,7 @@
 -->
 ![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css&logoColor=white)
 ![Rust](https://img.shields.io/badge/Rust-DEA584?logo=rust&logoColor=black)
 ![WebAssembly](https://img.shields.io/badge/WebAssembly-654FF0?logo=webassembly&logoColor=white)
 ![Web Worker](https://img.shields.io/badge/Web%20Worker-FF9800?logo=web&logoColor=white)
@@ -24,14 +24,13 @@
 ![Web Share API](https://img.shields.io/badge/Web%20Share%20API-0080FF?logo=web-share&logoColor=white)
 ![Web Share Target API](https://img.shields.io/badge/Web%20Share%20Target%20API-0080FF?logo=web-share&logoColor=white)
 ![TensorFlow.js](https://img.shields.io/badge/TensorFlow.js-FF6F00?logo=tensorflow&logoColor=white)
-![Dexie.js](https://img.shields.io/badge/Dexie.js-009688?logo=database&logoColor=white)
 ![MediaPipe](https://img.shields.io/badge/MediaPipe-4285F4?logo=google&logoColor=white)
+![Dexie.js](https://img.shields.io/badge/Dexie.js-009688?logo=javascript&logoColor=white)
 ![Fabric.js](https://img.shields.io/badge/Fabric.js-4CAF50?logo=javascript&logoColor=white)
 ![FileSaver.js](https://img.shields.io/badge/FileSaver.js-9C27B0?logo=javascript&logoColor=white)
-![JSZip](https://img.shields.io/badge/JSZip-2196F3?logo=zip&logoColor=white)
-![Marked.js](https://img.shields.io/badge/Marked.js-795548?logo=markdown&logoColor=white)
-![i18n](https://img.shields.io/badge/i18n-1E90FF?style=flat&logoColor=white)
-![Cargo](https://img.shields.io/badge/Cargo-DEA584?logo=rust&logoColor=black)
+![JSZip](https://img.shields.io/badge/JSZip-2196F3?logo=javascript&logoColor=white)
+![Marked.js](https://img.shields.io/badge/Marked.js-795548?logo=javascript&logoColor=white)
+![i18n](https://img.shields.io/badge/i18n-1E90FF?logo=javascript&logoColor=white)
 
 ---
 
