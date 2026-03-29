@@ -45,9 +45,7 @@
 ### ビルドツール
 ![Node.js](https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)
-![esbuild](https://img.shields.io/badge/esbuild-FFCF00?logo=esbuild&logoColor=black)
-![CMake](https://img.shields.io/badge/CMake-064F8C?style=logo=cmake&logoColor=white)
-![Emscripten](https://img.shields.io/badge/Emscripten-2C2D72?logo=emscripten&logoColor=white)  
+![Cargo](https://img.shields.io/badge/Cargo-DEA584?logo=rust&logoColor=black)
 
 ### AIアシスタント  
 ![Gemini](https://img.shields.io/badge/Gemini%202.5%20Pro-4285F4?logo=google&logoColor=white)
@@ -60,8 +58,8 @@
 ![Builder.io](https://img.shields.io/badge/Builder.io-FF3366?logo=builder.io&logoColor=white)
 ![Cursor](https://img.shields.io/badge/Cursor-000000?style=flat&logo=cursor&logoColor=white)
 ![GPT-5](https://img.shields.io/badge/GPT--5-412991?logo=openai&logoColor=white)
-![Storybook](https://img.shields.io/badge/Storybook-FF4785?style=flat&logo=storybook&logoColor=white)
-![Chromastic](https://img.shields.io/badge/Chromastic-FF6A00?style=flat&logoColor=white)
+![Storybook](https://img.shields.io/badge/Storybook-FF4785?logo=storybook&logoColor=white)
+![Chromatic](https://img.shields.io/badge/Chromatic-FF6A00?logo=chromatic&logoColor=white)
 
 ### CI/CD  
 ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?logo=githubactions&logoColor=white)
