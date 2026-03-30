@@ -27,6 +27,7 @@
 ![MediaPipe](https://img.shields.io/badge/MediaPipe-4285F4?logo=google&logoColor=white)
 ![Dexie.js](https://img.shields.io/badge/Dexie.js-009688?logo=javascript&logoColor=white)
 ![Fabric.js](https://img.shields.io/badge/Fabric.js-4CAF50?logo=javascript&logoColor=white)
+![context-filter-polyfill](https://img.shields.io/badge/context--filter--polyfill-F7DF1E?logo=javascript&logoColor=000000)
 ![FileSaver.js](https://img.shields.io/badge/FileSaver.js-9C27B0?logo=javascript&logoColor=white)
 ![JSZip](https://img.shields.io/badge/JSZip-2196F3?logo=javascript&logoColor=white)
 ![piexifjs](https://img.shields.io/badge/piexifjs-FF9800?logo=javascript&logoColor=white)
