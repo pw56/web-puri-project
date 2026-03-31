@@ -1,47 +1,47 @@
 - name: "white"
   image: ""
-  display_name: "白"
+  i18n_key: "doodle/assets/backgrounds:white"
 
 - name: "pink"
   image: ""
-  display_name: "ピンク"
+  i18n_key: "doodle/assets/backgrounds:pink"
 
 - name: "light-blue"
   image: ""
-  display_name: "水色"
+  i18n_key: "doodle/assets/backgrounds:light-blue"
 
 - name: "yellow"
   image: ""
-  display_name: "黄色"
+  i18n_key: "doodle/assets/backgrounds:yellow"
 
 - name: "spots"
   image: ""
-  display_name: "水玉"
+  i18n_key: "doodle/assets/backgrounds:spots"
 
 - name: "strawberries"
   image: ""
-  display_name: "いちご"
+  i18n_key: "doodle/assets/backgrounds:strawberries"
 
 - name: "stars"
   image: ""
-  display_name: "星"
+  i18n_key: "doodle/assets/backgrounds:stars"
 
 - name: "hearts"
   image: ""
-  display_name: "ハート"
+  i18n_key: "doodle/assets/backgrounds:hearts"
 
 - name: "rainbow"
   image: ""
-  display_name: "レインボー"
+  i18n_key: "doodle/assets/backgrounds:rainbow"
 
 - name: "y2k"
   image: ""
-  display_name: "平成レトロ"
+  i18n_key: "doodle/assets/backgrounds:y2k"
 
 - name: "cloud"
   image: ""
-  display_name: "雲"
+  i18n_key: "doodle/assets/backgrounds:cloud"
 
 - name: "classroom"
   image: ""
-  display_name: "教室風"
+  i18n_key: "doodle/assets/backgrounds:classroom"
