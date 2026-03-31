@@ -1,17 +1,17 @@
 - name: "white"
-  image: ""
+  image: "plain-white-background.png"
   i18n_key: "doodle/assets/backgrounds:white"
 
 - name: "pink"
-  image: ""
+  image: "plain-pink-background.png"
   i18n_key: "doodle/assets/backgrounds:pink"
 
 - name: "light-blue"
-  image: ""
+  image: "plain-light-blue-background.png"
   i18n_key: "doodle/assets/backgrounds:light-blue"
 
 - name: "yellow"
-  image: ""
+  image: "plain-yellow-background.png"
   i18n_key: "doodle/assets/backgrounds:yellow"
 
 - name: "spots"
