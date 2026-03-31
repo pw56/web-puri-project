@@ -1,47 +1,47 @@
 - name: "normal"
   image: "normal.svg"
-  display_name: "ノーマル"
+  i18n_key: "normal"
 
 - name: "white_border"
   image: "white_border.svg"
-  display_name: "白ふち"
+  i18n_key: "white_border"
 
 - name: "black_border"
   image: "black_border.svg"
-  display_name: "黒ふち"
+  i18n_key: "black_border"
 
 - name: "loose"
   image: "loose.svg"
-  display_name: "ゆる"
+  i18n_key: "loose"
 
 - name: "white_neon"
   image: "white_neon.svg"
-  display_name: "白ネオン"
+  i18n_key: "white_neon"
 
 - name: "black_neon"
   image: "black_neon.svg"
-  display_name: "黒ネオン"
+  i18n_key: "black_neon"
 
 - name: "plump"
   image: "plump.svg"
-  display_name: "ぷっくり"
+  i18n_key: "plump"
 
 - name: "plump_shadow"
   image: "plump_shadow.svg"
-  display_name: "ぷっくりカゲ"
+  i18n_key: "plump_shadow"
 
 - name: "crayon"
   image: "crayon.svg"
-  display_name: "クレヨン"
+  i18n_key: "crayon"
 
 - name: "translucent"
   image: "translucent.svg"
-  display_name: "半透明"
+  i18n_key: "translucent"
 
 - name: "translucent_shadow"
   image: "translucent_shadow.svg"
-  display_name: "半透明ふち"
+  i18n_key: "translucent_shadow"
 
 - name: "blur"
   image: "blur.svg"
-  display_name: "ぼかし"
+  i18n_key: "blur"
