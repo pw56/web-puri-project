@@ -1,16 +1,14 @@
 {
-  "background": {
-    "white": "白",
-    "pink": "ピンク",
-    "light-blue": "水色",
-    "yellow": "黄色",
-    "spots": "水玉",
-    "strawberries": "いちご",
-    "stars": "星",
-    "hearts": "ハート",
-    "rainbow": "レインボー",
-    "y2k": "平成レトロ",
-    "cloud": "雲",
-    "classroom": "教室風"
-  }
+  "white": "白",
+  "pink": "ピンク",
+  "light-blue": "水色",
+  "yellow": "黄色",
+  "spots": "水玉",
+  "strawberries": "いちご",
+  "stars": "星",
+  "hearts": "ハート",
+  "rainbow": "レインボー",
+  "y2k": "平成レトロ",
+  "cloud": "雲",
+  "classroom": "教室風"
 }
