@@ -4,4 +4,4 @@
   ・被写体レイヤー: img要素
   ・フィルターレイヤー: svg要素
   ・落書きレイヤー: canvas要素
-  とする。また、SafariではCanvasでフィルター未対応の場合があるため、ブラウザがSafariの場合は
+  とする。また、SafariではCanvasでフィルター未対応の場合があるため、ブラウザがSafariの場合はcontext-filter-polyfillで代替する
