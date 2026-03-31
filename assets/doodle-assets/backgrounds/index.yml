@@ -6,6 +6,14 @@
   image: ""
   display_name: "ピンク"
 
+- name: "light-blue"
+  image: ""
+  display_name: "水色"
+
+- name: "yellow"
+  image: ""
+  display_name: "黄色"
+
 - name: "spots"
   image: ""
   display_name: "水玉"
