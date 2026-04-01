@@ -32,8 +32,8 @@
 
 - name: "flame"
   image: ""
-  display_name: "炎（テンションUP系）"
+  display_name: "炎"
 
 - name: "cloud"
   image: ""
-  display_name: "雲＆雨（天気系）
+  display_name: "雲と雨
