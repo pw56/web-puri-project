@@ -8,7 +8,7 @@
 
 - name: "light-blue"
   image: "plain-light-blue-background.png"
-  i18n_key: "doodle/assets/backgrounds:light-blue"
+  i18n_key: "doodle/assets/backgrounds:light_blue"
 
 - name: "yellow"
   image: "plain-yellow-background.png"
