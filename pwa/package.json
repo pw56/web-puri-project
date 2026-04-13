@@ -15,7 +15,7 @@
     "file-saver": "^2.0.5",
     "jszip": "^3.10.1",
     "marked": "^17.0.6",
-    "react": "^19.2.4",
+    "react": "^19.2.5",
     "react-dom": "^19.2.4",
     "react-router-dom": "^7.14.0",
     "typescript": "^6.0.2",
