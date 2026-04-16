@@ -32,7 +32,7 @@
 ![piexifjs](https://img.shields.io/badge/piexifjs-FF9800?logo=javascript&logoColor=white)
 ![Marked.js](https://img.shields.io/badge/Marked.js-795548?logo=javascript&logoColor=white)
 ![react-router](https://img.shields.io/badge/React%20Router-CA4245?logo=reactrouter&logoColor=white)
-![Zustand](https://img.shields.io/badge/Zustand-ff9e00?logo=react&logoColor=black)
+![Zustand](https://img.shields.io/badge/Zustand-ff9e00?logo=react&logoColor=white)
 ![react-i18next](https://img.shields.io/badge/react--i18next-61DAFB?logo=react&logoColor=black)
 
 ---
