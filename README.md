@@ -72,6 +72,5 @@
 ![Cloudflare Pages](https://img.shields.io/badge/Cloudflare%20Pages-F38020?style=flat&logo=cloudflarepages&logoColor=white)
 
 ### テスト環境  
-![Chrome](https://img.shields.io/badge/Chrome%20OS%20%7C%20Google%20Chrome-4285F4?logo=googlechrome&logoColor=white)
-![Safari](https://img.shields.io/badge/iPhone%2016e%20%7C%20Safari-000000?logo=safari&logoColor=white)
-![GitHub Actions](https://img.shields.io/badge/GitHub%20Runner-181717?logo=github&logoColor=white)
+![Safari](https://img.shields.io/badge/iPhone%2016e%20%7C%20Safari-007AFF?logo=safari&logoColor=white)
+![Lighthouse CI](https://img.shields.io/badge/GitHub%20Runner%20%7C%20Lighthouse%20CI-F44B21?logo=lighthouse&logoColor=white)
