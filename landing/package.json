@@ -13,7 +13,7 @@
     "tailwindcss": "^4.3.0"
   },
   "dependencies": {
-    "@napi-rs/canvas": "^0.1.100"
+    "@napi-rs/canvas": "^1.0.0"
   },
   "scripts": {
     "copy-assets": "node ../scripts/copy-assets-min.mjs",
