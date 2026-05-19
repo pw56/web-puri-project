@@ -21,7 +21,7 @@
     "typescript": "^6.0.3",
     "vite-plugin-pwa": "^1.3.0",
     "yaml": "^2.9.0",
-    "zustand": "^5.0.11"
+    "zustand": "^5.0.13"
   },
   "devDependencies": {
     "@fontsource/hachi-maru-pop": "^5.2.8",
