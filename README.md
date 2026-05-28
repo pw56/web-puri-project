@@ -14,63 +14,29 @@
 - COCO-SSD (TensorFlow.js)
 - Face Landmarker (MediaPipe)
 -->
-![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css&logoColor=white)
-![Rust](https://img.shields.io/badge/Rust-DEA584?logo=rust&logoColor=black)
-![WebAssembly](https://img.shields.io/badge/WebAssembly-654FF0?logo=webassembly&logoColor=white)
-![Web Worker](https://img.shields.io/badge/Web%20Worker-FF9800?logo=web&logoColor=white)
-![PWA](https://img.shields.io/badge/PWA-5A0FC8?logo=pwa&logoColor=white)
-![Web Share API](https://img.shields.io/badge/Web%20Share%20API-0080FF?logo=web-share&logoColor=white)
-![Web Share Target API](https://img.shields.io/badge/Web%20Share%20Target%20API-0080FF?logo=web-share&logoColor=white)
-![TensorFlow.js](https://img.shields.io/badge/TensorFlow.js-FF6F00?logo=tensorflow&logoColor=white)
-![MediaPipe](https://img.shields.io/badge/MediaPipe-4285F4?logo=google&logoColor=white)
-![Dexie.js](https://img.shields.io/badge/Dexie.js-009688?logo=javascript&logoColor=white)
-![Fabric.js](https://img.shields.io/badge/Fabric.js-4CAF50?logo=javascript&logoColor=white)
-![FileSaver.js](https://img.shields.io/badge/FileSaver.js-9C27B0?logo=javascript&logoColor=white)
-![JSZip](https://img.shields.io/badge/JSZip-2196F3?logo=javascript&logoColor=white)
-![piexifjs](https://img.shields.io/badge/piexifjs-FF9800?logo=javascript&logoColor=white)
-![Marked.js](https://img.shields.io/badge/Marked.js-795548?logo=javascript&logoColor=white)
-![react-router](https://img.shields.io/badge/React%20Router-CA4245?logo=reactrouter&logoColor=white)
-![Zustand](https://img.shields.io/badge/Zustand-ff9e00?logo=react&logoColor=white)
-![react-i18next](https://img.shields.io/badge/react--i18next-61DAFB?logo=react&logoColor=black)
+![React](https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css&logoColor=white)
+![Rust](https://img.shields.io/badge/Rust-DEA584?style=flat&logo=rust&logoColor=black)
+![WebAssembly](https://img.shields.io/badge/WebAssembly-654FF0?style=flat&logo=webassembly&logoColor=white)
+![Web Worker](https://img.shields.io/badge/Web%20Worker-FF9800?style=flat&logo=web&logoColor=white)
+![PWA](https://img.shields.io/badge/PWA-5A0FC8?style=flat&logo=pwa&logoColor=white)
+![Web Share API](https://img.shields.io/badge/Web%20Share%20API-0080FF?style=flat&logo=web-share&logoColor=white)
+![Web Share Target API](https://img.shields.io/badge/Web%20Share%20Target%20API-0080FF?style=flat&logo=web-share&logoColor=white)
+![TensorFlow.js](https://img.shields.io/badge/TensorFlow.js-FF6F00?style=flat&logo=tensorflow&logoColor=white)
+![MediaPipe](https://img.shields.io/badge/MediaPipe-4285F4?style=flat&logo=google&logoColor=white)
+![Dexie.js](https://img.shields.io/badge/Dexie.js-009688?style=flat&logo=javascript&logoColor=white)
+![Fabric.js](https://img.shields.io/badge/Fabric.js-4CAF50?style=flat&logo=javascript&logoColor=white)
+![FileSaver.js](https://img.shields.io/badge/FileSaver.js-9C27B0?style=flat&logo=javascript&logoColor=white)
+![JSZip](https://img.shields.io/badge/JSZip-2196F3?style=flat&logo=javascript&logoColor=white)
+![piexifjs](https://img.shields.io/badge/piexifjs-FF9800?style=flat&logo=javascript&logoColor=white)
+![Marked.js](https://img.shields.io/badge/Marked.js-795548?style=flat&logo=javascript&logoColor=white)
+![react-router](https://img.shields.io/badge/React%20Router-CA4245?style=flat&logo=reactrouter&logoColor=white)
+![Zustand](https://img.shields.io/badge/Zustand-ff9e00?style=flat&logo=react&logoColor=white)
+![react-i18next](https://img.shields.io/badge/react--i18next-61DAFB?style=flat&logo=react&logoColor=black)
 
 ---
 
 ## 🧩 使用素材  
-[![Google Fonts](https://img.shields.io/badge/Google%20Fonts-4285F4?logo=googlefonts&logoColor=white)](https://fonts.google.com)
+[![Google Fonts](https://img.shields.io/badge/Google%20Fonts-4285F4?style=flat&logo=googlefonts&logoColor=white)](https://fonts.google.com)
 [![OtoLogic](https://img.shields.io/badge/OtoLogic-000000?style=flat&logo=music&logoColor=white)](https://otologic.jp)
-
----
-
-## ⚡️ 開発環境
-
-### ビルドツール
-![Node.js](https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white)
-![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)
-![Cargo](https://img.shields.io/badge/Cargo-DEA584?logo=rust&logoColor=black)
-
-### AIアシスタント  
-![Gemini](https://img.shields.io/badge/Gemini%202.5%20Pro-4285F4?logo=google&logoColor=white)
-![GPT-5](https://img.shields.io/badge/GPT--5-412991?logo=openai&logoColor=white)
-![Microsoft Copilot](https://img.shields.io/badge/Microsoft%20Copilot-0067B8?logo=microsoft&logoColor=white)
-![Cursor](https://img.shields.io/badge/Cursor-000000?style=flat&logo=cursor&logoColor=white)
-
-### デザイン  
-![Figma](https://img.shields.io/badge/Figma-F24E1E?logo=figma&logoColor=white)
-![Builder.io](https://img.shields.io/badge/Builder.io-FF3366?logo=builder.io&logoColor=white)
-![Cursor](https://img.shields.io/badge/Cursor-000000?style=flat&logo=cursor&logoColor=white)
-![GPT-5](https://img.shields.io/badge/GPT--5-412991?logo=openai&logoColor=white)
-![Storybook](https://img.shields.io/badge/Storybook-FF4785?logo=storybook&logoColor=white)
-![Chromatic](https://img.shields.io/badge/Chromatic-FF6A00?logo=chromatic&logoColor=white)
-
-### CI/CD  
-![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?logo=githubactions&logoColor=white)
-
-### 公開サービス
-![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat&logo=vercel&logoColor=white)
-![Cloudflare Pages](https://img.shields.io/badge/Cloudflare%20Pages-F38020?style=flat&logo=cloudflarepages&logoColor=white)
-
-### テスト環境  
-![Safari](https://img.shields.io/badge/iPhone%2016e%20%7C%20Safari-007AFF?logo=safari&logoColor=white)
-![Lighthouse CI](https://img.shields.io/badge/GitHub%20Runner%20%7C%20Lighthouse%20CI-F44B21?logo=lighthouse&logoColor=white)
