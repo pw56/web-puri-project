@@ -7,20 +7,9 @@
 ### loadModels (メソッド)
 - 概要
 > このメソッドで事前にモデルを読み込んでおくことができる。
-> モデルごとの起動したいワーカーの数を`Object`型で指定。
-> 複数回呼び出しがあった場合、最後に呼び出されたときの入力が設定される。
 
 - 引数
-> 第1引数: モデルごとの起動したいワーカーの数(`Object`型)
->
-> ```typescript
-> {
->   countPeople?: 1,
->   selfieSegmentation?: 2,
->   personDetector?: 1,
->   faceLandmarker?: 4
-> }
-> ```
+> 第1引数: なし
 
 ### disposeModels (メソッド)
 

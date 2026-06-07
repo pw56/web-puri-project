@@ -9,20 +9,20 @@
 ## 🛠️ 技術スタック
 <!--
 機械学習の使用モデル
+- Object Detector (MediaPipe)
 - Selfie Segmentation (MediaPipe)
 - Face Landmarker (MediaPipe)
 - Image Segmenter (MediaPipe)
 -->
 ![React](https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat&logo=tailwindcss&logoColor=white)
 ![Rust](https://img.shields.io/badge/Rust-DEA584?style=flat&logo=rust&logoColor=black)
 ![WebAssembly](https://img.shields.io/badge/WebAssembly-654FF0?style=flat&logo=webassembly&logoColor=white)
 ![Web Worker](https://img.shields.io/badge/Web%20Worker-FF9800?style=flat&logo=web&logoColor=white)
 ![PWA](https://img.shields.io/badge/PWA-5A0FC8?style=flat&logo=pwa&logoColor=white)
 ![Web Share API](https://img.shields.io/badge/Web%20Share%20API-0080FF?style=flat&logo=web-share&logoColor=white)
 ![Web Share Target API](https://img.shields.io/badge/Web%20Share%20Target%20API-0080FF?style=flat&logo=web-share&logoColor=white)
-![TensorFlow.js](https://img.shields.io/badge/TensorFlow.js-FF6F00?style=flat&logo=tensorflow&logoColor=white)
 ![MediaPipe](https://img.shields.io/badge/MediaPipe-4285F4?style=flat&logo=google&logoColor=white)
 ![Dexie.js](https://img.shields.io/badge/Dexie.js-009688?style=flat&logo=javascript&logoColor=white)
 ![Fabric.js](https://img.shields.io/badge/Fabric.js-4CAF50?style=flat&logo=javascript&logoColor=white)
