@@ -5,9 +5,10 @@
 
 ---
 
-## personDetector (関数)
+## hairDetector (関数)
 - 概要
-> MediaPipeのObject Detectionモデルで、単数または複数の人物を検出し、そのまま返す。
+> MediaPipeのImage Segmenterモデルで、人物の髪の領域を検出する。
+> さらにピクセル単位で領域を細分化し、結果を返す。
 
 - 引数
 > 第1引数: 検出する画像

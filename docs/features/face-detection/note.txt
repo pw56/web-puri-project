@@ -1,4 +1,5 @@
 実装メモ:
+🌟当初、人物のROI処理や立ち上げるワーカーの数の見積もりのためなどでそれぞれにモデルを用意する仕様だったが、実行環境のリソース節約のためモデルの数を絞った
 🌟座標データはメモリの節約のためFloat32Arrayで保持し、ユーザーはクラスのメソッドのみから取得できる
 🌟顔ごとのインスタンスには主に座標データを破棄して配列を初期化してメモリを節約するための廃棄メソッドがある
 🌟画像ごとのインスタンスの廃棄メソッドは、主に顔ごとのインスタンスの廃棄メソッドの呼び出しと、その顔ごとのインスタンスの廃棄をする
@@ -8,16 +9,19 @@
   face-detection-class.ts # メインのクラス(faceDetection)の所在
   detected-face-class.ts # 検出された顔ごとに生成されるクラス
   model-manager.ts # モデルマネージャー
-  models # モデルの実体が含まれるフォルダ
-
-    selfie-segmentation # 各モデルのフォルダ (MediaPipe Selfie Segmentation)
+  pipelines # モデルやアルゴリズムを含む抽出処理の核心部が含まれるディレクトリ
+    count-people # モデルのワーカーの数を見積もるための人数のカウント (MediaPipe Face Landmarker使い回し)
       index.ts # モデルを利用するメソッドが含まれる
       predict.ts # 実際の処理(推論)
-      
-    person-detector # 各モデルのフォルダ (MediaPipe Object Detection)
+    
+    selfie-segmentation # 背景の切り抜き (MediaPipe Selfie Segmentation)
       index.ts # モデルを利用するメソッドが含まれる
       predict.ts # 実際の処理(推論)
         
-    face-landmarker # 各モデルのフォルダ (MediaPipe Face Landmarker)
+    face-landmarker # 顔ごとのパーツの抽出 (MediaPipe Face Landmarker)
+      index.ts # モデルを利用するメソッドが含まれる
+      predict.ts # 実際の処理(推論)
+      
+    hair-segmentation # 顔の付近から髪の領域を抽出 (MediaPipe Image Segmenter)
       index.ts # モデルを利用するメソッドが含まれる
       predict.ts # 実際の処理(推論)

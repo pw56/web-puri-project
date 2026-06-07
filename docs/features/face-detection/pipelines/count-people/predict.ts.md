@@ -7,7 +7,7 @@
 
 ## countPeople (関数)
 - 概要
-> MediaPipe BlazeFaceモデルで、入力画像から背景を除去して返す。
+> MediaPipe Face Landmarkerモデルで、入力画像から人物の人数を検出して返す。
 
 - 引数
 > 第1引数: 処理する画像またはそのURL(`string`型, `ImageData`型, `Blob`型)

@@ -7,7 +7,7 @@
 
 ## faceLandmarker (関数)
 - 概要
-> MediaPipe Selfie Segmentationモデルで、入力画像から背景を除去して返す。
+> MediaPipe Face Landmarkerモデルで、入力画像から顔のパーツを検出して返す。
 
 - 引数
 > 第1引数: 処理する画像
