@@ -11,7 +11,7 @@
 機械学習の使用モデル
 - BlazeFace (MediaPipe)
 - Selfie Segmentation (MediaPipe)
-- COCO-SSD (TensorFlow.js)
+- Object Detection (MediaPipe)
 - Face Landmarker (MediaPipe)
 -->
 ![React](https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=black)

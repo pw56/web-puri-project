@@ -14,10 +14,10 @@
       index.ts # モデルを利用するメソッドが含まれる
       predict.ts # 実際の処理(推論)
       
-    person-detector # 各モデルのフォルダ (COCO-SSD)
+    person-detector # 各モデルのフォルダ (MediaPipe Object Detection)
       index.ts # モデルを利用するメソッドが含まれる
       predict.ts # 実際の処理(推論)
         
-    face-landmarker # 各モデルのフォルダ (Face Landmark Detection)
+    face-landmarker # 各モデルのフォルダ (MediaPipe Face Landmarker)
       index.ts # モデルを利用するメソッドが含まれる
       predict.ts # 実際の処理(推論)

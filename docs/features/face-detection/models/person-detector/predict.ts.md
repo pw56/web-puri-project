@@ -7,7 +7,7 @@
 
 ## personDetector (関数)
 - 概要
-> TensorFlow.jsのCOCO-SSDモデルで、単数または複数の人物を検出し、そのまま返す。
+> MediaPipeのObject Detectionモデルで、単数または複数の人物を検出し、そのまま返す。
 
 - 引数
 > 第1引数: 検出する画像
