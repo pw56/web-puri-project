@@ -8,6 +8,6 @@
     "shx": "^0.4.0"
   },
   "scripts": {
-    "copy-assets": "shx mkdir -p ./public && shx cp -r ../../assets ./public/assets"
+    "copy-assets": "shx mkdir -p ./public/assets && shx cp -r ../../assets ./public/assets"
   }
 }
