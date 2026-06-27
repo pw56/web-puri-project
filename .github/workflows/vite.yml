@@ -24,6 +24,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Change directory to the workspace
+        run: cd apps/app
+      
       - name: Vite bundle
         run: |
           if [ "${{ inputs.mode }}" = "release" ]; then
