@@ -34,7 +34,6 @@
     "vite-tsconfig-paths": "^6.1.0"
   },
   "scripts": {
-    "copy-assets": "shx mkdir -p ./public && shx cp -r ../../assets ./public/assets",
     "build:dev": "npm run copy-assets && vite build --mode development",
     "build:release": "npm run copy-assets && vite build --mode production"
   }
