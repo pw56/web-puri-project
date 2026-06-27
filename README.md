@@ -39,4 +39,3 @@
 ## 🧩 使用素材  
 [![Google Fonts](https://img.shields.io/badge/Google%20Fonts-4285F4?style=flat&logo=googlefonts&logoColor=white)](https://fonts.google.com)
 [![OtoLogic](https://img.shields.io/badge/OtoLogic-000000?style=flat&logo=music&logoColor=white)](https://otologic.jp)
-
