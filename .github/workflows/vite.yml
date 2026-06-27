@@ -31,3 +31,9 @@ jobs:
           else
             npm run build:dev
           fi
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: pwa-dist-${{ inputs.mode }}
+          path: ./apps/app/dist/
