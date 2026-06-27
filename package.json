@@ -2,8 +2,7 @@
   "name": "web-puri-project",
   "private": true,
   "workspaces": [
-    "pwa",
-    "landing"
+    "apps/pwa"
   ],
   "devDependencies": {
     "shx": "^0.4.0"

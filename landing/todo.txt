@@ -1,5 +1,0 @@
-TODO:
-🟥生のHTML, CSSをNext.js(React)移行
-🟥Actionsのワークフロー作り直し
-  🟨プッシュ時に、developmentモードでビルド & Next.js経由でVercelにデプロイ
-  🟨リリースノート時に、releaseモードでビルド & Next.js経由でCloudflare Pagesにデプロイ
