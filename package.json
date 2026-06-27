@@ -8,6 +8,9 @@
     "shx": "^0.4.0"
   },
   "scripts": {
-    "copy-assets": "shx mkdir -p ./apps/app/public/assets && shx cp -r ./assets ./apps/app/public/assets"
+    "copy-assets": "shx mkdir -p ./apps/app/public/assets && shx cp -r ./assets ./apps/app/public/assets",
+    "build:dev": "npm run copy-assets && npm run build:dev --workspace=pwa",
+    "build:release": "npm run copy-assets && npm run build:release --workspace=pwa",
+    "build": "npm run build:dev"
   }
 }
