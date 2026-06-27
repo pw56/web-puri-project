@@ -26,7 +26,7 @@ jobs:
           curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
 
       - name: Build Rust Wasm
-        working-directory: ./pwa/features/face-editing/wasm
+        working-directory: ./apps/app/features/face-editing/wasm
         run: |
           if [ "${{ inputs.mode }}" = "release" ]; then
             wasm-pack build --release --target web
