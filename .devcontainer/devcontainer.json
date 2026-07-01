@@ -1,19 +1,28 @@
 {
   "name": "Rust WASM Development Environment",
   // Microsoft公式のRust開発用ベースイメージを指定（Cargoが同梱されている）
-  "image": "://microsoft.com",
+  "image": "mcr.microsoft.com/devcontainers/rust:1-1-bookworm",
 
-  // 拡張機能（Features）を使って追加のツールを自動インストール
+  // 拡張機能（Features）を使ってNode.jsをインストール
   "features": {
-    // Node.jsとnpmをインストールする公式Feature
     "ghcr.io/devcontainers/features/node:1": {
       "version": "lts"
     }
   },
 
-  // コンテナ作成後に実行するコマンドでwasm-packをインストール
-  "postCreateCommand": "cargo install wasm-pack",
+  // wasm-packをビルドをスキップしてインストール
+  "postCreateCommand": "curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh",
 
-  // コンテナ実行時の一般ユーザー（root権限でのファイル書き換えトラブルを防ぐ）
-  "remoteUser": "vscode"
+  // コンテナ実行時の一般ユーザーを指定
+  "remoteUser": "vscode",
+
+  // VS Code起動時に自動で入れておくと便利な拡張機能
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "rust-lang.rust-analyzer", // Rustの強力な入力補完
+        "serayuzgur.crates"        // Cargo.tomlの依存関係のバージョンチェック
+      ]
+    }
+  }
 }
