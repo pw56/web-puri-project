@@ -21,7 +21,7 @@
     "vscode": {
       "extensions": [
         "rust-lang.rust-analyzer", // Rustの強力な入力補完
-        "serayuzgur.crates"        // Cargo.tomlの依存関係のバージョンチェック
+        "fill-labs.dependi"        // Cargo.tomlの依存関係のバージョンチェック
       ]
     }
   }
