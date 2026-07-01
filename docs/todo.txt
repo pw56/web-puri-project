@@ -19,6 +19,7 @@ UIデザイン:
 🔳Reactコード変換(GitHub CopilotのGPT-5 or Cursor)
 
 素材:
+🟥落書き素材の翻訳ファイル作成 or 移行
 🟦合成の背景画像収集(ツール作成, AI生成, PNG)
 🟦スタンプの画像収集(AI生成, SVG, PNG)
 🟦プリモードのポーズの画像収集
