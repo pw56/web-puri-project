@@ -1,47 +1,47 @@
 - name: "normal"
-  image: "normal.svg"
+  path: "./normal"
   i18n_key: "normal"
 
 - name: "white_border"
-  image: "white_border.svg"
+  path: "./white-border"
   i18n_key: "white_border"
 
 - name: "black_border"
-  image: "black_border.svg"
+  path: "./black-border"
   i18n_key: "black_border"
 
 - name: "loose"
-  image: "loose.svg"
+  path: "./loose"
   i18n_key: "loose"
 
 - name: "white_neon"
-  image: "white_neon.svg"
+  path: "./white-neon"
   i18n_key: "white_neon"
 
 - name: "black_neon"
-  image: "black_neon.svg"
+  path: "./black-neon"
   i18n_key: "black_neon"
 
 - name: "plump"
-  image: "plump.svg"
+  path: "./plump"
   i18n_key: "plump"
 
 - name: "plump_shadow"
-  image: "plump_shadow.svg"
+  path: "./plump-shadow"
   i18n_key: "plump_shadow"
 
 - name: "crayon"
-  image: "crayon.svg"
+  path: "./crayon"
   i18n_key: "crayon"
 
 - name: "translucent"
-  image: "translucent.svg"
+  path: "./translucent"
   i18n_key: "translucent"
 
 - name: "translucent_shadow"
-  image: "translucent_shadow.svg"
+  path: "./translucent-shadow"
   i18n_key: "translucent_shadow"
 
 - name: "blur"
-  image: "blur.svg"
+  path: "./blur"
   i18n_key: "blur"
