@@ -3,16 +3,17 @@ name: Release Build
 on:
   release:
     types: [published]
+  workflow_dispatch:
 
 jobs:
   build-release:
     uses:
-      ./.github/workflows/development.yml
+      ./.github/workflows/build.yml
     with:
       mode: "release"
 
   cloudflare-deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
 
     steps:
       # Cloudflare Pages デプロイ

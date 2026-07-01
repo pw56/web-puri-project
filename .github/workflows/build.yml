@@ -1,4 +1,4 @@
-name: Vite Build (PWA)
+name: Build PWA
 
 on:
   workflow_call:
@@ -9,7 +9,7 @@ on:
         default: "dev"
 
 jobs:
-  build-vite:
+  build-npm:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,7 +23,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Vite bundle
+      - name: npm Build
         working-directory: ./apps/app
         run: |
           if [ "${{ inputs.mode }}" = "release" ]; then

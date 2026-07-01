@@ -34,7 +34,11 @@
     "vite-tsconfig-paths": "^6.1.0"
   },
   "scripts": {
-    "build:dev": "vite build --mode development",
-    "build:release": "vite build --mode production"
+    "wasm-build:dev": "cd ./features/face-editing/wasm && wasm-pack build --dev --target web",
+    "wasm-build:release": "cd ./features/face-editing/wasm && wasm-pack build --release --target web",
+    "vite-build:dev": "vite build --mode development",
+    "vite-build:release": "vite build --mode production",
+    "build:dev": "npm run wasm-build:dev && npm run vite-build:dev",
+    "build:release": "npm run wasm-build:release && npm run vite-build:release"
   }
 }
