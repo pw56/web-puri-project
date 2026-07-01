@@ -1,0 +1,19 @@
+{
+  "name": "Rust WASM Development Environment",
+  // Microsoft公式のRust開発用ベースイメージを指定（Cargoが同梱されている）
+  "image": "://microsoft.com",
+
+  // 拡張機能（Features）を使って追加のツールを自動インストール
+  "features": {
+    // Node.jsとnpmをインストールする公式Feature
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts"
+    }
+  },
+
+  // コンテナ作成後に実行するコマンドでwasm-packをインストール
+  "postCreateCommand": "cargo install wasm-pack",
+
+  // コンテナ実行時の一般ユーザー（root権限でのファイル書き換えトラブルを防ぐ）
+  "remoteUser": "vscode"
+}
