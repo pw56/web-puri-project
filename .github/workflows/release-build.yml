@@ -6,21 +6,23 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-release:
-    uses:
-      ./.github/workflows/build-pwa.yml
-    with:
-      mode: "release"
-
-  cloudflare-deploy:
+  release-build:
     runs-on: ubuntu-slim
 
     steps:
-      # Cloudflare Pages デプロイ
-      - name: Deploy to Cloudflare Pages
-        run: |
-          curl -X POST \
-            -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
-            -H "Content-Type: application/json" \
-            -d '{"deployment_trigger": {"type": "api"}}' \
-            https://api.cloudflare.com/client/v4/accounts/${{ secrets.CLOUDFLARE_ACCOUNT_ID }}/pages/projects/${{ secrets.CLOUDFLARE_PROJECT_NAME }}/deployments
+      - name: Build PWA
+        uses:
+          ./.github/workflows/build-pwa.yml
+        with:
+          mode: "release"
+
+      - name: Download artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: pwa-dist-release
+
+      - name: Cloudflare deploy
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          workingDirectory: "dist"
