@@ -7,7 +7,24 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    uses: ./.github/workflows/build-pwa.yml
-    with:
-      mode: "dev"
+  dev:
+    runs-on: ubuntu-slim
+
+    steps:
+      - name: Build PWA
+        uses: ./.github/workflows/build-pwa.yml
+        with:
+          mode: "dev"
+
+      - name: Download artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: pwa-dist-release
+
+      - name: Vercel deploy
+        uses: amondnet/vercel-action@v25
+        working-directory: ./apps
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
