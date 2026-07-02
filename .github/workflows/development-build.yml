@@ -7,7 +7,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  # 1. 最初にPWAのビルドを行うジョブ（再利用可能ワークフローの呼び出し）
   build-pwa:
     uses: ./.github/workflows/build-pwa.yml
     with:
