@@ -1,4 +1,4 @@
-name: Development Build
+name: PWA Dev Build
 
 on:  
   push:    
