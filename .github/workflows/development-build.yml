@@ -1,28 +1,28 @@
 name: Development Build
 
-on:
-  push:
-    branches:
-      - main
+on:  
+  push:    
+    branches:      
+      - main  
   workflow_dispatch:
 
 jobs:
-  dev:
+  # 1. 最初にPWAのビルドを行うジョブ（再利用可能ワークフローの呼び出し）
+  build-pwa:
+    uses: ./.github/workflows/build-pwa.yml
+    with:
+      mode: "dev"
+
+  deploy:
+    needs: build-pwa
     runs-on: ubuntu-slim
-
+    
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v7
-
-      - name: Build PWA
-        uses: ./.github/workflows/build-pwa.yml
-        with:
-          mode: "dev"
-
       - name: Download artifact
         uses: actions/download-artifact@v8
         with:
           name: pwa-dist-release
+          path: ./apps
 
       - name: Vercel deploy
         uses: amondnet/vercel-action@v25
