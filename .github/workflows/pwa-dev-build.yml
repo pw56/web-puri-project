@@ -3,7 +3,9 @@ name: PWA Dev Build
 on:  
   push:    
     branches:      
-      - main  
+      - main
+    paths:
+      - 'apps/app/**'  
   workflow_dispatch:
 
 jobs:
