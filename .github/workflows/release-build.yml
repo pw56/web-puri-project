@@ -6,18 +6,16 @@ on:
   workflow_dispatch:
 
 jobs:
-  release:
+  build-pwa:
+    uses: ./.github/workflows/build-pwa.yml
+    with:
+      mode: "release"
+
+  deploy:
+    needs: build-pwa
     runs-on: ubuntu-slim
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v7
-
-      - name: Build PWA
-        uses: ./.github/workflows/build-pwa.yml
-        with:
-          mode: "release"
-
       - name: Download artifact
         uses: actions/download-artifact@v8
         with:
