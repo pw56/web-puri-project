@@ -9,8 +9,9 @@
   },
   "scripts": {
     "copy-assets": "shx mkdir -p ./apps/app/public && shx cp -r ./assets ./apps/app/public",
-    "build:dev": "npm run copy-assets && npm run build:dev --workspace=pwa",
-    "build:release": "npm run copy-assets && npm run build:release --workspace=pwa",
+    "bundle": "shx mkdir -p ./dist && shx cp -r ./apps/* ./dist && shx rm ./dist/app && shx mkdir -p ./dist/app && shx cp -r ./apps/app/dist/* ./dist/app",
+    "build:dev": "npm run copy-assets && npm run build:dev --workspace=pwa && npm run bundle",
+    "build:release": "npm run copy-assets && npm run build:release --workspace=pwa && npm run bundle",
     "build": "npm run build:dev"
   }
 }
