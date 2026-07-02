@@ -23,7 +23,7 @@ jobs:
 
       - name: Vercel deploy
         uses: amondnet/vercel-action@v25
-        working-directory: ./apps
+        workingDirectory: ./apps
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
