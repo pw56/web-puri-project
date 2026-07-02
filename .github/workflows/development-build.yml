@@ -21,12 +21,12 @@ jobs:
         uses: actions/download-artifact@v8
         with:
           name: pwa-dist-release
-          path: ./apps
+          path: ./app
 
       - name: Vercel deploy
         uses: amondnet/vercel-action@v25
         with:
-          working-directory: ./apps
+          working-directory: ./app
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}

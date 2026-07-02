@@ -1,4 +1,4 @@
-name: Build PWA
+name: Build Project
 
 on:
   workflow_call:
@@ -29,16 +29,16 @@ jobs:
         run: npm ci
 
       - name: npm build
-        working-directory: ./apps/app
+        working-directory: ./apps
         run: |
           if [ "${{ inputs.mode }}" = "release" ]; then
-            npm run build:release
+            npm run build-project:release
           else
-            npm run build:dev
+            npm run build-project:dev
           fi
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v7
         with:
-          name: pwa-dist-${{ inputs.mode }}
-          path: ./apps/app/dist/
+          name: project-dist-${{ inputs.mode }}
+          path: ./dist/

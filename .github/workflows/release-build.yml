@@ -6,20 +6,20 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-pwa:
-    uses: ./.github/workflows/build-pwa.yml
+  build-project:
+    uses: ./.github/workflows/build-project.yml
     with:
       mode: "release"
 
   deploy:
-    needs: build-pwa
+    needs: build-project
     runs-on: ubuntu-slim
 
     steps:
       - name: Download artifact
         uses: actions/download-artifact@v8
         with:
-          name: pwa-dist-release
+          name: project-dist-release
 
       - name: Cloudflare deploy
         uses: cloudflare/wrangler-action@v4
