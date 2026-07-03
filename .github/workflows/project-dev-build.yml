@@ -22,13 +22,12 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v8
         with:
-          name: project-dist-release
+          name: project-dist-dev
           path: ./dist
 
-      - name: Vercel deploy
-        uses: amondnet/vercel-action@v25
+      - name: Cloudflare deploy
+        uses: cloudflare/wrangler-action@v4
         with:
-          working-directory: ./dist
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          workingDirectory: "dist"
+          command: pages deploy ./ --project-name=${{ vars.CLOUDFLARE_PROJECT_NAME }} --branch=${{ vars.CLOUDFLARE_PREVIEW_BRANCH }}
