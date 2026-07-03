@@ -1,34 +1,34 @@
-name: PWA Dev Build
+name: Project Dev Build
 
 on:  
   push:    
-    branches:      
+    branches:
       - main
     paths:
-      - 'apps/app/**'  
+      - 'apps/**'  
   workflow_dispatch:
 
 jobs:
-  build-pwa:
-    uses: ./.github/workflows/build-pwa.yml
+  build-project:
+    uses: ./.github/workflows/build-project.yml
     with:
       mode: "dev"
 
   deploy:
-    needs: build-pwa
+    needs: build-project
     runs-on: ubuntu-slim
     
     steps:
       - name: Download artifact
         uses: actions/download-artifact@v8
         with:
-          name: pwa-dist-release
-          path: ./app
+          name: project-dist-release
+          path: ./dist
 
       - name: Vercel deploy
         uses: amondnet/vercel-action@v25
         with:
-          working-directory: ./app
+          working-directory: ./dist
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
