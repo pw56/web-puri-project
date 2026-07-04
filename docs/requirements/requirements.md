@@ -5,8 +5,8 @@
 
 ## UX (ユーザー体験)
 このアプリに求められるUX(ユーザー体験)はローカルに保存されている写真や、その場で撮影した写真をクライアントサイドで処理・加工し、出力することである。処理の流れは以下のようになっている。
-![flow-shoot](flow-shoot.png)
-![flow-puri-shoot](flow-puri-shoot.png)
+![flow-selfie](flow-selfie.png)
+![flow-auto-shoot](flow-auto-shoot.png)
 ![flow-upload](flow-upload.png)
 
 ## 主な機能
