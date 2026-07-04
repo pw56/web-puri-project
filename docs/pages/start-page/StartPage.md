@@ -54,17 +54,17 @@
 | Behavior  | メニューボタンをそれぞれ0.5秒かけてフェードイン。  |
 | Notes  | フェードインは各ページの`opacity`を`0`から`1`へ、`duration`は仕様書通り。  |
 
-#### SelfShootButton
+#### SelfieButton
 | 項目  | 説明  |
 | ------------ | ------------ |
-| Overview  | セルフ撮影モードを選択。  |
-| Behavior  | `setAppMode()`で、`FlowMode`を`SELF`にして、`QuantitySlectPage`に遷移。  |
+| Overview  | 自撮りモードを選択。  |
+| Behavior  | `setAppMode()`で、`FlowMode`を`SELFIE`にして、`QuantitySlectPage`に遷移。  |
 
-#### PuriShootButton
+#### AutoShootButton
 | 項目  | 説明  |
 | ------------ | ------------ |
-| Overview  | プリ撮影モードを選択。  |
-| Behavior  | `setAppMode()`で、`FlowMode`を`PURI`にして、`QuantitySlectPage`に遷移。  |
+| Overview  | 自動撮影モードを選択。  |
+| Behavior  | `setAppMode()`で、`FlowMode`を`AUTO`にして、`QuantitySlectPage`に遷移。  |
 
 #### UploadButton
 | 項目  | 説明  |
