@@ -10,22 +10,21 @@ on:
 
 jobs:
   build-project:
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v7
-
-      - name: Build project
-        uses: ./.github/actions/build-project
-        with:
-          mode: "dev"
+    uses: ./.github/workflows/build-project.yml
+    with:
+      mode: "dev"
 
   deploy:
     needs: build-project
     runs-on: ubuntu-slim
     
     steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: project-dist-dev
+          path: ./dist
+
       - name: Cloudflare deploy
         uses: cloudflare/wrangler-action@v4
         with:
