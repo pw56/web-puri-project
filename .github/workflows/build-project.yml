@@ -43,7 +43,7 @@ jobs:
 
       # キャッシュがない（またはCargo.lockが更新された）場合のみインストール
       - name: Install wasm-pack
-        if: steps.cache-wasm-packcache-wasm-pack.outputs.cache-hit != 'true'
+        if: steps.cache-wasm-pack.outputs.cache-hit != 'true'
         run: |
           if ! command -v wasm-pack &> /dev/null; then
             curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
