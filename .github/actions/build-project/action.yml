@@ -1,0 +1,57 @@
+name: Build Project
+description: 'Build project.'
+inputs:
+  mode:
+    description: 'Build mode'
+    required: false
+    default: 'dev'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v7
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v6
+      with:
+        cache: 'npm'
+
+    - name: Install dependencies
+      shell: bash
+      run: npm ci
+
+    - name: Setup Rust toolchain
+      uses: actions-rust-lang/setup-rust-toolchain@v1
+      with:
+        cache: true
+        targets: wasm32-unknown-unknown
+
+    - name: Cache wasm-pack & pkg
+      id: cache-wasm-pack
+      uses: actions/cache@v6
+      with:
+        path: |
+          ~/.cargo/bin/wasm-pack
+          **/pkg/
+        key: ${{ runner.os }}-wasm-pack-${{ hashFiles('**/Cargo.lock', '**/Cargo.toml') }}
+        restore-keys: |
+          ${{ runner.os }}-wasm-pack-
+
+    # キャッシュがない（またはCargo.lockが更新された）場合のみインストール
+    - name: Install wasm-pack
+      if: steps.cache-wasm-pack.outputs.cache-hit != 'true'
+      shell: bash
+      run: |
+        if ! command -v wasm-pack &> /dev/null; then
+          curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+        fi
+
+    - name: Build project
+      shell: bash
+      run: |
+        if [ "${{ inputs.mode }}" = "release" ]; then
+          npm run build-project:release
+        else
+          npm run build-project:dev
+        fi
