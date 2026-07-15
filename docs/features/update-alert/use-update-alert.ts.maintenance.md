@@ -20,7 +20,7 @@
 > なし
 
 - 処理内容  
-> - `/assets/release/version.yml` を読み込む。  
+> - `/release-info/version.yml` を読み込む。  
 > - YAML をパースし、`app_version` キーの値を取得する。  
 > - 値が存在しない場合は `'1.0.0'` を返す。  
 > - 読み込みエラー時は例外を投げる。
@@ -63,7 +63,7 @@
 - 処理内容  
 > - `useAlert()` を呼び出し、アラート表示機能を取得する。  
 > - `openVersionManager()` を実行し、バージョン管理を初期化する。  
-> - `useEffect` 内で非同期処理を行い、更新がある場合に `/assets/release/message.md` を表示する。
+> - `useEffect` 内で非同期処理を行い、更新がある場合に `/release-info/message.md` を表示する。
 
 - 返り値  
 > なし  
