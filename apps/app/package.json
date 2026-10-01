@@ -7,20 +7,14 @@
   "type": "module",
   "main": "index.js",
   "dependencies": {
-    "@mediapipe/tasks-vision": "^1.0.1",
-    "@tensorflow-models/coco-ssd": "^2.2.3",
+    "typescript": "^7.0.2",
     "@tensorflow/tfjs": "^4.22.0",
-    "dexie": "^4.4.6",
     "fabric": "^7.4.0",
     "file-saver": "^2.0.5",
-    "jszip": "^3.10.2",
-    "marked": "^18.0.14",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "react-router-dom": "^7.18.4",
-    "typescript": "^7.0.2",
     "vite-plugin-pwa": "^1.3.0",
-    "yaml": "^2.9.1",
     "zustand": "^5.0.15"
   },
   "devDependencies": {
