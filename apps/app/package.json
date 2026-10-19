@@ -11,7 +11,7 @@
     "@tensorflow/tfjs": "^4.22.0",
     "fabric": "^7.4.0",
     "file-saver": "^2.0.5",
-    "react": "^19.3.0",
+    "react": "^19.3.1",
     "react-dom": "^19.3.0",
     "react-router-dom": "^7.18.4",
     "vite-plugin-pwa": "^2.0.0",
