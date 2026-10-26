@@ -15,7 +15,7 @@
     "react-dom": "^19.3.0",
     "react-router-dom": "^7.18.4",
     "vite-plugin-pwa": "^2.0.0",
-    "zustand": "^5.0.15"
+    "zustand": "^5.0.16"
   },
   "devDependencies": {
     "@fontsource/hachi-maru-pop": "^5.3.0",
